@@ -1,0 +1,17 @@
+	* 29/06:
+	- Added tab renaming feature with double click
+	* 26/06:
+	- Created settings window and configuration class
+	- Get text from clipboard automatically and clear it
+	- Copy text to clipboard when translation is finished
+	- Set the current viewing page to the new created one instead of staying on
+	the current one
+	- You can now start freespeak from other directories
+	- Added accelerator to the translation button
+	- Fixed displaying for languages like italian, spanish, dutch, french and 
+	german
+	* 24/06:
+	- Page close button with question
+	* 23/06:
+	- Automatic module loading
+	- Error message dialog
