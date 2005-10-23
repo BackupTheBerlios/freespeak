@@ -1,0 +1,17 @@
+FreeSpeak Installation
+~~~~~~~~~~~~~~~~~~~~~~
+
+To install the package, run the following command:
+
+	# python setup.py install
+
+SYSTRAY ICON
+To get tre trayicon working you must have installed gnome-python bindings, by
+the way, if you don't want to install that bindings (because you don't have
+gnome, for example), you can install the "standalone" trayicon module:
+
+  # python setup.py build_trayicon
+
+Then repeat the installation:
+	
+	# python setup.py install

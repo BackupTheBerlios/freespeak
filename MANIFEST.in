@@ -1,0 +1,10 @@
+include AUTHORS
+include COPYING
+include ChangeLog
+include INSTALL
+include lang/*
+include icons/*
+include trayicon/*.h
+include freespeak/*.py
+include freespeak/src/*.py
+include *.desktop

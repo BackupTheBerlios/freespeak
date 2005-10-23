@@ -1,0 +1,16 @@
+[Desktop Entry]
+Version=1.0
+Encoding=UTF-8
+Name=FreeSpeak
+Categories=Application;Utility;
+Exec=freespeak.py
+Icon=freespeak-64x64.svg
+StartupNotify=true
+Terminal=false
+Type=Application
+Name[it]=FreeSpeak
+GenericName=A free frontend to online translator engines
+GenericName[it]=Una libera interfaccia ai traduttori online
+Comment=A free frontend to online translator engines
+Comment[it]=Una libera interfaccia ai traduttori online
+GenericName[en_US]=A free frontend to online translator engines

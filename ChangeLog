@@ -1,15 +1,104 @@
+	* 23/10:
+	- New dutch translation
+	* 23/09:
+	- View in browser for web page translation
+	* 21/09:
+	- Repainted icons
+	* 19/09:
+	- Translate web page also for google
+	* 11/09:
+	- Implementing translate web page feature (only for altavista)
+	* 10/09:
+	- Managed focus out event on tab renaming
+	* 07/09:
+	- Toolbar style in settings
+	- Created keyboard shortcut for close tab's page button
+	- Created acces key for each checkbutton and combobox
+	- Fixed borders
+	- Use GNOME style frame (src.utils.Frame)
+	- Word wrap for text view
+	* 04/09:
+	- Created progressbar
+	- Created keyboard shortcut 
+== 15/08/05 - FreeSpeak 0.1.1 Released ==
+	* 15/08:
+	- Fixed MANIFEST.in
+== 14/08/05 - FreeSpeak 0.1 Released ==
+	* 05/08:
+	- Created message dialog to inform to restart freespeak to apply
+	the change of the language
+	* 03/08:
+	- Setting uid-based PID e SOCK files
+	- No SVG icons anymore
+	- Dutch localization
+	* 01/08:
+	- Select interface's language in settings
+	- Created FreeDesktop.org .desktop launcher
+	* 31/07:
+	- Created setup.py for system installation
+	- [IPC] Fixed new client data transmission
+		* 27/07:
+	- Introducing localization
+	* 16/07:
+	- Created About Dialog
+	- Select preferred module when translation module is not specified
+	in IPC
+	* 15/07:
+	- Auto select first combo item, if there's only an item in
+	- [Minimalist] Text to be translated is now shown
+	* 12/07:
+	- Added popup menu over tabs
+	- Tooltips for trayicon
+	- Sensible trayicon for enable/disable setting
+	- A little fix for IPC
+	* 10/07:
+	- Added "standalone" trayicon module
+	- [Main] Set the tab label color to blue on successful translation 
+	- [Google] Use of mechanoid instead of mechanize
+	- IPC between new and original processes
+	* 09/07:
+	- Translator engine's icon in tab caption
+	* 08/07:
+	- [Minimalist] Fixed trayicon support 
+	- [Settings] Use (or not use) trayicon
+	- Start minimized in tray icon with "-q", "--quiet" option
+	* 07/07:
+	- Modularized source code
+	- [Minimalist] Now the popup window is resizable
+	- Set the exception hook which displays the tracebaick into a window
+	- [Minimalist] Fixed translated text in the popup window
+	- [Minimalist] Set the preferred module when showing the window
+	* 06/07:
+	- [Minimalist] Fixed clipboard operations on translation
+	- [Minimalist] Popup translated text
+	- [Settings] Added popup option on minimalist translation
+	* 05/07:
+	- Created freetranslation.com translator engine
+	* 03/07:
+	- Created trayicon, with popup menu
+	* 02/07:
+	- [Fix] Extend try/except block to the whole language table parser
+	- [Settings] Keep window always on top
+	- [Feature] Added minimalist window
+	- [Fix] Refresh button has been fixed
+	* 01/07:
+	- Preferred Translator in settings window
+	- Cached language table then load new tab faster
+	- Added refresh button to refresh the language table of each page
+	* 30/06:
+	- Created google translator
 	* 29/06:
 	- Added tab renaming feature with double click
 	* 26/06:
 	- Created settings window and configuration class
 	- Get text from clipboard automatically and clear it
 	- Copy text to clipboard when translation is finished
-	- Set the current viewing page to the new created one instead of staying on
-	the current one
+	- Set the current viewing page to the new created one instead of
+	staying on the current one
 	- You can now start freespeak from other directories
 	- Added accelerator to the translation button
-	- Fixed displaying for languages like italian, spanish, dutch, french and 
-	german
+	- Fixed displaying for languages like italian, spanish, dutch,
+	french and german
 	* 24/06:
 	- Page close button with question
 	* 23/06:

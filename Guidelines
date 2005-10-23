@@ -1,0 +1,12 @@
+Window:
+- 4-pixel border 
+
+Frames:
+- Frames with spacing and bold headers
+
+Control's Label:
+- 6-pixel horizontal gap between a control and its label
+- Access key for each control's label
+
+Commands:
+- Create a keyboard shortcut for each primary command
