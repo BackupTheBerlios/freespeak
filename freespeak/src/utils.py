@@ -30,8 +30,18 @@ class Combo(gtk.ComboBox):
 
     def set_model(self, model):
         gtk.ComboBox.set_model(self, model)
+        if not model:
+            return
         if len(model) == 1:
             self.set_active(0)
+
+    def connect(self, signal, callback):
+        gtk.ComboBox.connect(self, signal, callback)
+        model = self.get_model()
+        if not model:
+            return
+        self.set_model(None)
+        self.set_model(model)
     
 def make_text(widget):
     """

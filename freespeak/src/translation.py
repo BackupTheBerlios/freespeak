@@ -282,6 +282,22 @@ class Translation(Frame):
         self.accel_group = self._parent.accel_group
         self.translating = 0
         self.alignment.set_padding(0, 0, 6, 6)
+        
+        self.tab_name = 'Unnamed'
+        self.custom_tab_name = 0
+        self.tab = gtk.HBox(spacing=3)
+        self.tab_event = gtk.EventBox()
+        self.tab_event.connect('button-press-event', self.on_tab_pressed)
+        self.tab_label = gtk.Label()
+        self.tab_entry = gtk.Entry()
+        self.tab_entry.connect('activate', self.on_tab_renamed)
+        self.entry_handler = self.tab_entry.connect("focus-out-event",
+                                                    self.on_tab_focusout)
+        self.tab_event.add(self.tab_label)
+        self.set_label_tab()
+        self.tab_image = gtk.Image()
+        self.tab.pack_start(self.tab_image)
+        self.tab.pack_start(self.tab_event)
 
         if kind == "New":
             self.page = Text(self, preferred)
@@ -308,22 +324,6 @@ class Translation(Frame):
                                               gtk.ACCEL_VISIBLE)
         
         self.add(self.page)
-        
-        self.tab_name = 'Unnamed'
-        self.custom_tab_name = 0
-        self.tab = gtk.HBox(spacing=3)
-        self.tab_event = gtk.EventBox()
-        self.tab_event.connect('button-press-event', self.on_tab_pressed)
-        self.tab_label = gtk.Label()
-        self.tab_entry = gtk.Entry()
-        self.tab_entry.connect('activate', self.on_tab_renamed)
-        self.entry_handler = self.tab_entry.connect("focus-out-event",
-                                                    self.on_tab_focusout)
-        self.tab_event.add(self.tab_label)
-        self.set_label_tab()
-        self.tab_image = gtk.Image()
-        self.tab.pack_start(self.tab_image)
-        self.tab.pack_start(self.tab_event)
 
         self.tab_menu = gtk.Menu()
         
