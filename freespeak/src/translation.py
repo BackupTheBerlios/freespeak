@@ -41,16 +41,12 @@ class TranslationBase:
         if self.translator.language_table:
             self.w_from.set_model(from_model)
             self.w_from.set_sensitive(1)
-        try:
-            if not self._parent.custom_tab_name:
-                self._parent.tab_name = widget.get_active_text()
-                self._parent.set_label_tab()
-            if self._parent.translator.icon_file:
-                self._parent.tab_image.set_from_file(os.path.join(
-                    self._parent._parent.icons,
-                    self._parent.translator.icon_file)) 
-        except: pass
-
+        if not self._parent.custom_tab_name:
+            self._parent.tab_name = widget.get_active_text()
+            self._parent.set_label_tab()
+        self._parent.tab_image.set_from_file(os.path.join(
+            self._parent._parent.icons,
+            self.translator.icon_file))
     
     def on_from(self, widget):
         """
@@ -278,6 +274,7 @@ class Translation(Frame):
         """
         Frame.__init__(self)
         self._parent = parent
+        self.page = None
         self.kind = kind
         self.accel_group = self._parent.accel_group
         self.translating = 0
