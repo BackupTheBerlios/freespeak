@@ -1,3 +1,5 @@
+	* 31/10:
+	- Moved translation engine in translation/ directory and removed translation.py
 	* 28/10:
 	- Re-enabled modules icons
 	* 23/10:
