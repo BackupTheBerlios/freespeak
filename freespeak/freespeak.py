@@ -124,6 +124,9 @@ if __name__ == '__main__':
                                                                'alwaysontop'))
                 except: pass
                 self.load_modules()
+                import __builtin__
+                __builtin__.error_dialog = self.error
+                
                 self.set_title('FreeSpeak 0.1.1')
                 self.set_border_width(4)
                 self.resize(500, 400)

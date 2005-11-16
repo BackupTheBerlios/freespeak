@@ -55,7 +55,7 @@ class Translator:
             rows=result.split("</option>")
             rows=rows[2:]
         except:
-            self.parent.error(_('Error during language table loading')+
+            error_dialog(_('Error during language table loading')+
                               '\n\n'+str(sys.exc_value)) 
             return
         for row in rows:
@@ -69,9 +69,10 @@ class Translator:
                 pass
 
     def set_step(self, step):
-        gtk.threads_enter()
-        self.progress.set_step(step)
-        gtk.threads_leave()
+        if self.progress:
+            gtk.threads_enter()
+            self.progress.set_step(step)
+            gtk.threads_leave()
 
     def translate(self, text, kind, progress):
         self.progress = progress
@@ -97,7 +98,7 @@ class Translator:
         try: result = urlopen(url) 
         except:
             gtk.threads_enter()
-            self.parent.error(_('Error during translation')+'\n\n'+str(sys.exc_value))
+            error_dialog(_('Error during translation')+'\n\n'+str(sys.exc_value))
             gtk.threads_leave()
             return
 

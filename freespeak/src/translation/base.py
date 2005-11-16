@@ -18,12 +18,13 @@ class BaseTranslation:
         if self.translator.language_table:
             self.w_from.set_model(from_model)
             self.w_from.set_sensitive(1)
-        if not self._parent.custom_tab_name:
-            self._parent.tab_name = widget.get_active_text()
-            self._parent.set_label_tab()
-        self._parent.tab_image.set_from_file(os.path.join(
-            self._parent._parent.icons,
-            self.translator.icon_file))
+        if self.tabbed:
+            if self._parent.custom_tab_name == False:
+                self._parent.tab_name = widget.get_active_text()
+                self._parent.set_label_tab()
+            self._parent.tab_image.set_from_file(os.path.join(
+                self._parent._parent.icons,
+                self.translator.icon_file))
     
     def on_from(self, widget):
         """

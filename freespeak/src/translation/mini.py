@@ -41,6 +41,7 @@ class MiniTranslation(gtk.Window, BaseTranslation):
             
     def __init__(self, parent):
         gtk.Window.__init__(self)
+        self.tabbed = False
         self.set_title('FreeSpeak')
         
         self.connect('show', self.on_show)
@@ -116,7 +117,7 @@ class MiniTranslation(gtk.Window, BaseTranslation):
             gtk.threads_enter()
             widget.set_sensitive(0)
             gtk.threads_leave()
-        translated = self.translator.translate(text)
+        translated = self.translator.translate(text, "text", None)
         for widget in widgets:
             gtk.threads_enter()
             widget.set_sensitive(1)

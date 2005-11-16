@@ -7,6 +7,7 @@ class TextTranslation(gtk.VBox, BaseTranslation):
     def __init__(self, parent, preferred):
         gtk.VBox.__init__(self)
         self._parent = parent
+        self.tabbed = True
         self.set_spacing(6)
 
         hbox = gtk.HBox(spacing=8)
