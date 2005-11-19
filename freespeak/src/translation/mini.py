@@ -117,7 +117,7 @@ class MiniTranslation(gtk.Window, BaseTranslation):
             gtk.threads_enter()
             widget.set_sensitive(0)
             gtk.threads_leave()
-        translated = self.translator.translate(text, "text", None)
+        translated = self.translator.translate(text, "Text", None)
         for widget in widgets:
             gtk.threads_enter()
             widget.set_sensitive(1)

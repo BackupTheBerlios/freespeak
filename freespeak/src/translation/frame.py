@@ -34,7 +34,7 @@ class Translation(Frame):
         self.tab.pack_start(self.tab_image)
         self.tab.pack_start(self.tab_event)
 
-        if kind == "New":
+        if kind == "Text":
             self.page = TextTranslation(self, preferred)
         else:
             self.page = WebTranslation(self, preferred)

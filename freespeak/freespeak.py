@@ -92,7 +92,7 @@ if __name__ == '__main__':
         
         ui_string = """<ui>
         <toolbar>
-            <toolitem action="New" />
+            <toolitem action="Text" />
             <toolitem action="Web" />
             <toolitem action="Refresh" />
             <toolitem action="Reduce" />
@@ -102,7 +102,7 @@ if __name__ == '__main__':
             <toolitem action="About" />
             <separator />
         </toolbar>
-        <accelerator action="New" />
+        <accelerator action="Text" />
         <accelerator action="Web" />
         <accelerator action="Refresh" />
         <accelerator action="Reduce" />
@@ -140,7 +140,7 @@ if __name__ == '__main__':
                 vbox = gtk.VBox(spacing=6)
                 ag = gtk.ActionGroup('WindowActions')
                 actions = (
-                    ('New', gtk.STOCK_NEW, _('New'), "<Control>n",
+                    ('Text', gtk.STOCK_NEW, _('Text'), "<Control>n",
                      _('New translation'), self.on_new),
                     ('Web', gtk.STOCK_NETWORK, _('Web'), "<Control>e",
                      _('New web page translation'), self.on_new),
@@ -296,10 +296,12 @@ if __name__ == '__main__':
                         translation = ''
                         while 1:
                             data = client.recv(1)
-                            if data == '\x02': break
+                            if data == '\x02' or not data:
+                                break
                             translation += data
                         translation = filter(lambda x: len(x) > 0,
                                              translation.split('\x01'))
+
                         be_translated = ''
                         while 1:
                             try:
@@ -307,18 +309,21 @@ if __name__ == '__main__':
                                 if not data: break
                                 be_translated += data
                             except: break
-    
+                        if not be_translated:
+                            continue
+
                         def set_combo(combo, data):
                             for row in combo.get_model():
                                 if row[0].lower() == data.lower():
                                     gtk.threads_enter()
                                     combo.set_active_iter(row.iter)
                                     gtk.threads_leave()
+                                    
                         gtk.threads_enter()
-                        self.on_new(None, 0)
+                        self.on_new("Text", False)
                         gtk.threads_leave()
                         translator = self.nb.get_nth_page(
-                            self.nb.get_current_page())
+                            self.nb.get_current_page()).page
                         if len(translation) > 0:
                             set_combo(translator.w_module, translation[0])
                             if len(translation) > 1:
@@ -331,10 +336,10 @@ if __name__ == '__main__':
                             gtk.threads_enter()
                             self.preferred_combo_module(translator.w_module)
                             gtk.threads_leave()
-                        translator.w_textfrom.get_buffer().set_text(
+                        translator.w_source.get_buffer().set_text(
                             be_translated)
                         client.close()
-                    except: print sys.exc_value
+                    except: print 'IPC Client Error:', sys.exc_value
                     
             def ipc_server(self):
                 sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
@@ -342,7 +347,8 @@ if __name__ == '__main__':
                 except: pass
                 sock.bind(SOCK)
                 sock.listen(1)
-                while 1: self.queue.put(sock.accept()[0])
+                while 1:
+                    self.queue.put(sock.accept()[0])
             
             # Events
         
@@ -350,7 +356,11 @@ if __name__ == '__main__':
                 """
                 Open a new tab in the notebook and start a new translation
                 """
-                translator = Translation(self, w.get_name(), preferred)
+                if isinstance(w, str):
+                    translation_type = w
+                else:
+                    translation_type = w.get_name()
+                translator = Translation(self, translation_type, preferred)
                 self.nb.append_page(translator, translator.tab)
                 self.nb.set_current_page(self.nb.get_n_pages()-1)
                 
@@ -449,7 +459,8 @@ if __name__ == '__main__':
                     be_translated += data
             sock.send(be_translated)
             sock.close()
-        except: pass
+        except:
+            print sys.exc_value
         
     try:
         sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)

@@ -86,7 +86,7 @@ class Translator:
 
         self.set_step(2)
         try:
-            if kind == "New":
+            if kind == "Text":
                 query = urllib.urlopen(url)
             else:
                 opener = urllib.FancyURLopener()
@@ -100,7 +100,7 @@ class Translator:
 
         self.set_step(3)
         result = query.read()
-        if kind == "New":
+        if kind == "Text":
             result = result[result.index("<form action=\"http://www.altavista"\
                                          ".com/web/results\""):]
             result = result[result.index("<tr>"):]
