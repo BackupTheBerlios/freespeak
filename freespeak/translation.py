@@ -1,6 +1,6 @@
 import threading
 
-class Translation (threading.Thread):
+class BaseTranslation (threading.Thread):
     STATUS_STARTED = 0
     STATUS_PROGRESS = 1
     STATUS_COMPLETE = 2
@@ -38,25 +38,10 @@ class Translation (threading.Thread):
             self.update_status (Translation.STATUS_PROGRESS, status)
         self.update_status (Translation.STATUS_COMPLETE, _("Translation complete"))
 
-class TextTranslation (Translation):
+class BaseTextTranslation (BaseTranslation):
     pass
 
-class WebTranslation (Translation):
+class BaseWebTranslation (BaseTranslation):
     pass
 
-class TranslationFactory (object):
-    TEXT = 0
-    WEB = 0
-
-    translation_classes = { TEXT: TextTranslation,
-                            WEB: WebTranslation }
-
-    def __init__ (self, application):
-        self.application = application
-
-    def __call__ (self, type=Factory.TEXT, module=None):
-        if not module:
-            module = self.application.config.get ('translator', 'preferred')
-
-        klass = self.translation_classes[type]
-        return klass (self.application)
+__all__ = ['BaseTextTranslation', 'BaseWebTranslation']

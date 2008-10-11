@@ -1,7 +1,8 @@
 import gtk
 import os
 
-from freespeak.ui.manager import Manager
+from freespeak.ui.manager import *
+from freespeak.ui.translation import *
 
 class MainWindow (gtk.Window):
     ui_string = """<ui>
@@ -224,7 +225,10 @@ class MainWindow (gtk.Window):
         Open a new tab in the notebook and start a new translation
         """
         type = w.get_name()
-        translation = self.application.factory (type=type)
+        if type == 'Text':
+            translation = TextTranslation (self.application)
+        else:
+            translation = WebTranslation (self.application)
         self.manager.add (translation)
                 
             def on_refresh(self, w):

@@ -1,3 +1,10 @@
+2008-10-08  Luca Bruno  <lethalman88@gmail.com>
+
+	* freespeak/ui/translation.py (TextTranslation, WebTranslation): added
+
+	* freespeak/translation.py (TranslationFactory): removed
+	(Translation, TextTranslation, WebTranslation): renamed with Base prefix
+
 2008-10-07  Luca Bruno  <lethalman88@gmail.com>
 
 	* freespeak/translation.py (Translation): fill in the basic methods
