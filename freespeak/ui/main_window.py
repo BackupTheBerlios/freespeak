@@ -105,18 +105,6 @@ class MainWindow (object):
                 self.queue = Queue()
                 thread.start_new_thread(self.ipc_client, ())
                 thread.start_new_thread(self.ipc_server, ())
-                
-            # Tools
-            def set_toolbar_style(self, style):
-                if style == 0:
-                    self.w_toolbar.unset_style()
-                elif style == 1:
-                    self.w_toolbar.set_style(gtk.TOOLBAR_BOTH)
-                elif style == 2:
-                    self.w_toolbar.set_style(gtk.TOOLBAR_ICONS)
-                elif style == 3:
-                    self.w_toolbar.set_style(gtk.TOOLBAR_TEXT)
-
             
             def error(self, message, parent=None):
                 """

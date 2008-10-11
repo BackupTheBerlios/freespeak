@@ -7,6 +7,7 @@
 	* freespeak/ui/main_window.py (MainWindow.setup_layout): added
 	(MainWindow.setup_toolbar): added and don't use toolbar config
 	(MainWindow.setup_manager): added
+	(MainWindow.set_toolbar_style): removed
 
 	* freespeak/application.py (Application): gtk.main() threaded
 	Comment old regions
