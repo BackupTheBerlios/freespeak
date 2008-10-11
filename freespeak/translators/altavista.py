@@ -21,16 +21,15 @@
 
 import urllib, re, sys, gtk
 
-name = 'Altavista'
+from freespeak.translator import BaseTranslator
 
-class Translator:
+class Translator (BaseTranslator):
+    name = 'Altavista'
     web = True
     language_table = []
     icon_file = "altavista-16x16.png"
     
-    def __init__(self, parent):
-        self.parent = parent
-        self.build_language_table()
+    def __init__(self):
         self.from_lang="Italian"
         self.to_lang="English"
     

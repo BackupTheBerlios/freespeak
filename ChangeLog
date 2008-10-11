@@ -8,6 +8,7 @@
 	* freespeak/translator.py (TranslatorsManager): added
 	(TranslatorsManager.load_translator_from_file, TranslatorsManager.load_translator): added
 	(TranslatorsManager.get_default): added
+	(BaseTranslator): added
 
 	* freespeak/application.py (Application.start): 
 

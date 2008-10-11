@@ -2,7 +2,11 @@ import glob
 import os
 import imp
 
-import freespeak.translators
+class BaseTranslator (object):
+    name = ""
+    
+    def get_name (self):
+        return self.name
 
 class TranslatorsManager (set):
     def __init__ (self, application):
@@ -25,7 +29,7 @@ class TranslatorsManager (set):
         info = imp.find_module (mname, [self.application.translators_path])
         module = imp.load_module (mname, *info)
         if not module in self:
-            self.add (module)
+            self.add (module.Translator ())
             return module
 
     def get_default (self):
@@ -34,3 +38,5 @@ class TranslatorsManager (set):
             for translator in self:
                 if translator.name == name:
                     return translator
+
+__all__ = ['BaseTranslator', 'TranslatorsManager']

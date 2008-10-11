@@ -20,17 +20,16 @@
 """
 
 import re, sys, gtk, urllib
-name = 'Free Translation'
 
+from freespeak.translator import BaseTranslator
 
-class Translator:
+class Translator (BaseTranslator):
+    name = 'Free Translation'
     web = False
     language_table = []
     icon_file = "freetranslation-16x16.png"
     
-    def __init__(self, parent):
-        self.parent = parent
-        self.build_language_table()
+    def __init__(self):
         self.from_lang="English"
         self.to_lang="Russian"
     

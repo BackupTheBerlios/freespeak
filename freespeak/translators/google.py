@@ -21,7 +21,8 @@
 
 import re, sys, gtk, urllib
 #from mechanoid.mechanoid import Browser
-name = 'Google'
+
+from freespeak.translator import BaseTranslator
 
 def urlopen(url):
     b = Browser()
@@ -32,14 +33,13 @@ def urlopen(url):
     #b.viewing_html()
     return query.read()
     
-class Translator:
+class Translator (BaseTranslator):
+    name = 'Google'
     web = True
     language_table = []
     icon_file = "google-16x16.png"
     
-    def __init__(self, parent):
-        self.parent = parent
-        self.build_language_table()
+    def __init__(self):
         self.from_lang="Italian"
         self.to_lang="English"
     
