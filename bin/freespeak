@@ -30,9 +30,6 @@ parser = OptionParser(usage='%prog [-c] [-q] [ module [ from [ to ] ] ]',
 parser.add_option('-c', '--clipboard',
                   action='store_true', dest='clipboard', default=False,
                   help=_('use clipboard instead of stdin'))
-parser.add_option("-q", "--quiet",
-                  action="store_false",dest="show_window", default=True,
-                  help=_("start minimized in tray icon"))
 
 options, args = parser.parse_args()
 
