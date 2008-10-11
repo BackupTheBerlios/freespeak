@@ -163,7 +163,7 @@ class MainWindow (gtk.Window):
             translation = TextTranslation (self.application)
         else:
             translation = WebTranslation (self.application)
-        self.manager.add (translation)
+        self.manager.add_translation (translation)
                 
     def on_settings(self, w):
         """

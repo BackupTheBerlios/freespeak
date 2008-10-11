@@ -11,7 +11,7 @@ class TranslationBox (gtk.HBox):
     COL_TO_LANG = 1
 
     def __init__ (self, application, translation):
-        gtk.HBox.__init__ (self, 6)
+        gtk.HBox.__init__ (self, spacing=12)
         self.application = application
         self.translation = translation
 

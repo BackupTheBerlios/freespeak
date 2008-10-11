@@ -1,5 +1,7 @@
 2008-10-11  Luca Bruno  <lethalman88@gmail.com>
 
+	* freespeak/ui/manager.py (Manager.add_translation): added
+
 	* freespeak/config.py (Config.__init__): rename preferred to default; remove interface language, just use system default
 	(DuplicateSectionError): import the right way
 
@@ -30,6 +32,7 @@
 	* bin/freespeak: removed -q option
 
 	* freespeak/ui/translation.py (BaseUITranslation): added
+	(TextTranslation.setup_ui): added
 
 	* freespeak/ui/translation_box.py (TranslationBox): added
 

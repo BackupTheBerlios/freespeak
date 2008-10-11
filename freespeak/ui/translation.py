@@ -5,8 +5,8 @@ from translation_box import *
 
 class BaseUITranslation (gtk.VBox, BaseTranslation):
     def __init__ (self, *args):
+        gtk.VBox.__init__ (self, spacing=6)
         BaseTranslation.__init__ (self, *args)
-        gtk.VBox.__init__ (self, 6)
 
     def setup (self):
         self.setup_translation_box ()
@@ -14,12 +14,17 @@ class BaseUITranslation (gtk.VBox, BaseTranslation):
 
     def setup_translation_box (self):
         self.translation_box = TranslationBox (self.application, self)
+        self.translation_box.show ()
 
     def setup_ui (self):
         pass
 
 class TextTranslation (BaseUITranslation):
-    pass
+    def setup_ui (self):
+        self.pack_start (self.translation_box, False)
+        label = gtk.Label ("Translation")
+        label.show ()
+        self.pack_start (label)
 
 class WebTranslation (BaseUITranslation):
     pass
