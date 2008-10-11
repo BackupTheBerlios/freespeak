@@ -1,5 +1,10 @@
 2008-10-05  Luca Bruno  <lethalman88@gmail.com>
 
+	* freespeak/ui/exception_dialog.py: added
+
+	* freespeak/application.py (Application): created class, started refactoring
+	(Crash): moving to ExceptionDialog
+
 	* freespeak/src: moved all files to the parent dir
 
 	* bin/freespeak: moved here and cut the .py extension
