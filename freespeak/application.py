@@ -47,7 +47,7 @@ class Application (object):
         self.setup_ipc ()
         self.setup_paths ()
 
-    def setup_exception_dialog ():
+    def setup_exception_dialog (self):
         sys.excepthook = ExceptionDialog
 
     def setup_l10n (self):

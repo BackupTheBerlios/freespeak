@@ -1,5 +1,7 @@
 import traceback
 
+import gtk
+
 from freespeak import ui
 
 class ExceptionDialog (gtk.Dialog):
