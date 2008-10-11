@@ -44,18 +44,25 @@ class Config(ConfigParser):
     
     def save(self):
         self.write(file(self.file, 'w'))
-        
-    def get(self, section, option):
-        try: return ConfigParser.get(self, section, option)
-        except:
-            try: ConfigParser.add_section(self, section)
-            except: pass
-            self.set(section, option, '')
-            return ''
-            
-    def getboolean(self, section, option):
+
+    def _do_get (self, attrname, section, option):
         try:
-            return ConfigParser.getboolean(self, section, option)
+            func = getattr (ConfigParser, attrname)
+            return func (self, section, option)
         except:
-            self.set (section, option, 'no')
-            return False
+            self.set (section, option, '')
+            return ''
+
+    def set (self, section, option, value):
+        try:
+            ConfigParser.add_section (self, section)
+        except ConfigParser.DuplicateSectionError:
+            pass
+        ConfigParser.set (self, section, option, '')
+
+    def get (self, section, option):
+        try:
+            return ConfigParser.get (self, section, option)
+        except:
+            self.set (section, option, '')
+            return ''
