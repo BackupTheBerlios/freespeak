@@ -1,5 +1,7 @@
 2008-10-05  Luca Bruno  <lethalman88@gmail.com>
 
+	* freespeak/src: moved all files to the parent dir
+
 	* bin/freespeak: moved here and cut the .py extension
 
 	Updated copyright and authors.
