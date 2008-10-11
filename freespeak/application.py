@@ -26,6 +26,8 @@ __homepage__ = "http://home.gna.org/freespeak"
 import gettext
 import tempfile
 import sys
+import os
+from optparse import OptionParser
 
 import gtk
 from gtk import gdk
@@ -69,10 +71,10 @@ class Application (object):
         
         self.options, self.args = parser.parse_args()
 
+    # FIXME:
     def setup_ipc (self):
         self.pid_file = os.path.join(tempfile.gettempdir(), 'freespeak'+str(os.getuid())+'.pid')
         self.sock_file = os.path.join(tempfile.gettempdir(), 'freespeak'+str(os.getuid())+'.sock')
-        self.ipc_server
 
     def setup_paths (self):
         self.icons_path = os.path.join(sys.prefix, 'share', 'freespeak', 'icons')
@@ -95,7 +97,7 @@ class Application (object):
         #    self.ipc_server = IpcServer (self)
 
         gtk.threads_init()
-        self.main_window = MainWindow ()
+        self.main_window = MainWindow (self)
         self.main_window.show ()
 
         file(PID, 'w').write(str (os.getpid()))

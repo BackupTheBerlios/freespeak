@@ -1,4 +1,5 @@
 import gtk
+import os
 
 from freespeak.ui.manager import Manager
 
@@ -39,7 +40,7 @@ class MainWindow (gtk.Window):
     def setup_window (self):
         self.set_title ('FreeSpeak '+self.application.version)
         self.set_border_width (6)
-        self.default_size (500, 400)
+        self.set_default_size (500, 400)
        
         icon = os.path.join (self.application.icons_path, "freespeak-16x16.png")
         if os.path.isfile (icon):
