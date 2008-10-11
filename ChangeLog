@@ -1,3 +1,7 @@
+2008-10-07  Luca Bruno  <lethalman88@gmail.com>
+
+	* freespeak/translation.py (Translation): fill in the basic methods
+
 2008-10-06  Luca Bruno  <lethalman88@gmail.com>
 
 	* Guidelines: 
