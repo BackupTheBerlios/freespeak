@@ -15,7 +15,7 @@ class BaseTranslation (threading.Thread):
     def set_translator (self, translator):
         self.translator = translator
         self.language_table = self.translator.get_language_table ()
-        self.update_from_langs (self.language_table.keys ())
+        self.update_from_langs (self.language_table.keys().sort ())
 
     def set_from_lang (self, lang):
         self.from_lang = lang
