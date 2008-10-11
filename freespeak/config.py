@@ -19,7 +19,7 @@
     Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 """
 
-from ConfigParser import ConfigParser
+from ConfigParser import ConfigParser, DuplicateSectionError
 import os
 
 class Config (ConfigParser):
@@ -54,7 +54,7 @@ class Config (ConfigParser):
     def set (self, section, option, value):
         try:
             ConfigParser.add_section (self, section)
-        except ConfigParser.DuplicateSectionError:
+        except DuplicateSectionError:
             pass
         ConfigParser.set (self, section, option, '')
 

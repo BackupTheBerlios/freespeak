@@ -1,6 +1,7 @@
 2008-10-11  Luca Bruno  <lethalman88@gmail.com>
 
 	* freespeak/config.py (Config.__init__): rename preferred to default; remove interface language, just use system default
+	(DuplicateSectionError): import the right way
 
 	* freespeak/translators/google.py: actually comment mechanoid
 
