@@ -140,15 +140,15 @@ class install_locale(cmd.Command):
 def capture(cmd): return os.popen(cmd).read().strip()
 
 setup(name='FreeSpeak',
-    version='0.1.1',
-    description='Frontend to already existing translation engines',
-    author='Luca Bruno <lethalman88@gmail.com>',
-    author_email='lethalman88@gmail.com',
-    url='http://www.gna.org/projects/freespeak',
-    license='GNU General Public License v2',
-    packages=['freespeak', 'freespeak.src', 'freespeak.src.translation',
-              'freespeak.modules'],
-    data_files=[
+      version='0.1.1',
+      description='Frontend to already existing translation engines',
+      author='Luca Bruno <lethalman88@gmail.com>',
+      author_email='lethalman88@gmail.com',
+      url='http://www.gna.org/projects/freespeak',
+      license='GNU General Public License v2',
+      packages=['freespeak', 'freespeak.src', 'freespeak.src.translation',
+                'freespeak.modules'],
+      data_files=[
         ('share/freespeak/icons', ['icons/altavista-16x16.png',
                                    'icons/freespeak-16x16.png',
                                    'icons/freespeak-64x64.png',
@@ -159,24 +159,24 @@ setup(name='FreeSpeak',
                                    "icons/System Default.png"]),
         ("share/applications", ["freespeak.desktop"]),
         ("share/pixmaps", ["icons/freespeak-64x64.png"]),
-    ],
-    scripts=['freespeak.py'],
-    ext_modules=[
-            Extension("trayicon",
-                    ["trayicon/trayicon.c", "trayicon/trayiconmodule.c", "trayicon/eggtrayicon.c"],
-                    extra_compile_args = capture("pkg-config --cflags gtk+-2.0 pygtk-2.0").split(),
-                    extra_link_args = capture("pkg-config --libs gtk+-2.0 pygtk-2.0").split()
-        ),
-    ],
-    cmdclass={
-            'build': build,
-            'build_locale': build_locale,
-            'build_trayicon': build_trayicon,
-            'build_ext': build_ext,
-            'clean': clean,
-            'clean_locale': clean_locale,
-            'install': install,
-            'install_locale': install_locale,
-    },
-)
+        ],
+      scripts=['freespeak.py'],
+      ext_modules=[
+        Extension("trayicon",
+                  ["trayicon/trayicon.c", "trayicon/trayiconmodule.c", "trayicon/eggtrayicon.c"],
+                  extra_compile_args = capture("pkg-config --cflags gtk+-2.0 pygtk-2.0").split(),
+                  extra_link_args = capture("pkg-config --libs gtk+-2.0 pygtk-2.0").split()
+                  ),
+        ],
+      cmdclass={
+        'build': build,
+        'build_locale': build_locale,
+        'build_trayicon': build_trayicon,
+        'build_ext': build_ext,
+        'clean': clean,
+        'clean_locale': clean_locale,
+        'install': install,
+        'install_locale': install_locale,
+        },
+      )
 

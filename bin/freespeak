@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 """
-    freespeak.py
-    Fri Jun 14 13:41:56 2004
+FreeSpeak - a simple frontend to already existing online translators
+freespeak
+
     Copyright (C) 2005-2006-2007-2008  Luca Bruno <lethalman88@gmail.com>
-    http://www.italianpug.org
    
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -21,6 +21,5 @@
 """
 
 import os, sys
-sys.path.pop(0)
 from freespeak import freespeak
 os.execl(sys.executable, 'freespeak', freespeak.__file__[:-1], *sys.argv)
