@@ -1,5 +1,7 @@
 2008-10-05  Luca Bruno  <lethalman88@gmail.com>
 
+	* freespeak/ui/__init__.py (ScrolledWindow): added
+
 	* freespeak/ui/exception_dialog.py: added
 
 	* freespeak/application.py (Application): created class, started refactoring
