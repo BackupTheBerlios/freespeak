@@ -87,26 +87,13 @@ class MainWindow (gtk.Window):
         self.manager = Manager (self.application)
         self.manager.show ()
         self.layout.pack_start (self.manager)
-
-                self.tray = None
-                try:
-                    if self.config.getboolean("miscellaneous", "trayicon"):
-                        self.create_trayicon()
-                    else:
-                        self.h_destroy = self.connect('destroy',
-                                                      self.on_quit)  
-                except:
-                    self.h_destroy = self.connect('destroy',
-                                                  self.on_quit) 
-                    
-                self.reduced = MiniTranslation(self)
                 
                 # FIXME: IPC operations
-                from Queue import Queue
-                import thread
-                self.queue = Queue()
-                thread.start_new_thread(self.ipc_client, ())
-                thread.start_new_thread(self.ipc_server, ())
+#                 from Queue import Queue
+#                 import thread
+#                 self.queue = Queue()
+#                 thread.start_new_thread(self.ipc_client, ())
+#                 thread.start_new_thread(self.ipc_server, ())
             
             def error(self, message, parent=None):
                 """
