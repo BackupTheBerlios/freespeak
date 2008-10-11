@@ -1,3 +1,8 @@
+2008-10-05  Luca Bruno  <lethalman88@gmail.com>
+
+	Updated copyright and authors.
+	New changelog style.
+
 	* 31/10:
 	- Moved translation engine in translation/ directory and removed translation.py
 	* 28/10:
