@@ -86,15 +86,15 @@ class Application (object):
         #except:
         #    self.ipc_server = IpcServer (self)
 
-        gtk.threads_init()
+        gtk.gdk.threads_init()
         self.main_window = MainWindow (self)
         self.main_window.show ()
 
-        file(PID, 'w').write(str (os.getpid()))
+        file(self.pid_file, 'w').write(str (os.getpid()))
 
-        gtk.threads_enter()
+        gtk.gdk.threads_enter()
         gtk.main ()
-        gtk.threads_leave()
+        gtk.gdk.threads_leave()
 
 # FIXME
 #     if not options.show_window:

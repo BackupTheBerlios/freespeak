@@ -1,5 +1,7 @@
 2008-10-11  Luca Bruno  <lethalman88@gmail.com>
 
+	* freespeak/application.py (Application.start): 
+
 	* freespeak/ui/exception_dialog.py (ExceptionDialog): set the default response and make the text not editable
 
 	* freespeak/ui/main_window.py (MainWindow): commented regions and removed obsolete methods
@@ -9,7 +11,8 @@
 
 	* freespeak/translation/*: removed
 
-	* freespeak/application.py: do not create a factory
+	* freespeak/application.py (Application.start): fix typo and drop obsolete calls
+	(Application.setup_factory): removed, do not create a factory anymore
 
 	* freespeak/utils.py (label_new_with_mnemonic): renamed from make_label
 
