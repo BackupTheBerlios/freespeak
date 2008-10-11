@@ -1,5 +1,8 @@
 2008-10-06  Luca Bruno  <lethalman88@gmail.com>
 
+	* freespeak/ui/main_window.py (MainWindow.setup_layout): added
+	(MainWindow.setup_toolbar): added
+
 	* freespeak/application.py (Application): gtk.main() threaded
 	Comment old regions
 

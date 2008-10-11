@@ -28,48 +28,53 @@ class MainWindow (object):
 
         self.setup_clipboard ()
         self.setup_window ()
+        self.setup_layout ()
 
     def setup_clipboard (self):
         self.clipboard = gtk.Clipboard()
         self.cur_clipboard = ''
 
     def setup_window (self):
-        self.set_title('FreeSpeak '+self.application.version)
-        self.set_border_width(4)
-        self.default_size(500, 400)
-
+        self.set_title ('FreeSpeak '+self.application.version)
+        self.set_border_width (6)
+        self.default_size (500, 400)
+       
         icon = os.path.join (self.application.icons_path, "freespeak-16x16.png")
         if os.path.isfile (icon):
             self.set_icon_from_stock (icon)
-                          
-                vbox = gtk.VBox(spacing=6)
-                ag = gtk.ActionGroup('WindowActions')
-                actions = (
-                    ('Text', gtk.STOCK_NEW, _('Text'), "<Control>n",
-                     _('New translation'), self.on_new),
-                    ('Web', gtk.STOCK_NETWORK, _('Web'), "<Control>e",
-                     _('New web page translation'), self.on_new),
-                    ('Refresh', gtk.STOCK_REFRESH, _('Refresh'), "<Control>f",
-                     _('Refresh module list'), self.on_refresh),
-                    ('Reduce', gtk.STOCK_CONVERT, _('Reduce'), "<Control>r",
-                     _('Reduce translation window'), self.on_reduce),
-                    ('Settings', gtk.STOCK_PREFERENCES, _('Settings'),
-                     "<Control>s", _('FreeSpeak settings'), self.on_settings),
-                    ('Quit', gtk.STOCK_QUIT, _('Quit'), "<Control>q",
-                     _('Quit FreeSpeak'), self.on_quit),
-                    ('About', gtk.STOCK_ABOUT, _('About'), "<Control>a",
-                     _('About FreeSpeak'), self.on_about),
-                )
-                ag.add_actions(actions)
-                ui = gtk.UIManager()
-                ui.insert_action_group(ag, 0)
-                ui.add_ui_from_string(ui_string)
-                self.accel_group = ui.get_accel_group()
-                self.add_accel_group(self.accel_group)
-                self.w_toolbar = ui.get_widget("/toolbar")
-                self.set_toolbar_style(
-                    int(self.config.get("interface", "toolbar")))
-                vbox.pack_start(self.w_toolbar, 0)
+
+    def setup_layout (self):
+        self.layout = gtk.VBox ()
+
+        ag = gtk.ActionGroup ('WindowActions')
+        actions = (
+            ('Text', gtk.STOCK_NEW, _('Text'), "<Control>n",
+             _('New translation'), self.on_new),
+            ('Web', gtk.STOCK_NETWORK, _('Web'), "<Control>e",
+             _('New web page translation'), self.on_new),
+            ('Refresh', gtk.STOCK_REFRESH, _('Refresh'), "<Control>f",
+             _('Refresh module list'), self.on_refresh),
+            ('Reduce', gtk.STOCK_CONVERT, _('Reduce'), "<Control>r",
+             _('Reduce translation window'), self.on_reduce),
+            ('Settings', gtk.STOCK_PREFERENCES, _('Settings'),
+             "<Control>s", _('FreeSpeak settings'), self.on_settings),
+            ('Quit', gtk.STOCK_QUIT, _('Quit'), "<Control>q",
+             _('Quit FreeSpeak'), self.on_quit),
+            ('About', gtk.STOCK_ABOUT, _('About'), "<Control>a",
+             _('About FreeSpeak'), self.on_about),
+            )
+        ag.add_actions (actions)
+        self.ui = gtk.UIManager ()
+        self.ui.insert_action_group (ag, 0)
+        self.ui.add_ui_from_string (ui_string)
+        self.accel_group = ui.get_accel_group ()
+        self.add_accel_group (self.accel_group)
+
+    def setup_toolbar (self):
+        self.toolbar = self.ui.get_widget ("/toolbar")
+        self.toolbar.set_toolbar_style (self.config.getint ("interface", "toolbar"))
+        self.layout.pack_start (self.w_toolbar, FALSE)
+
                 self.nb = gtk.Notebook()
                 self.nb.set_scrollable(1)
                 vbox.pack_start(self.nb)
