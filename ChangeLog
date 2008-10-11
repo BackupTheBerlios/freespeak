@@ -1,11 +1,11 @@
 2008-10-06  Luca Bruno  <lethalman88@gmail.com>
 
-	* freespeak/settings.py (Settings.__init__): removed toolbar config
+	* freespeak/settings.py (Settings.__init__): removed toolbar and trayicon config
 
-	* freespeak/config.py (Config.__init__): removed toolbar config
+	* freespeak/config.py (Config.__init__): removed toolbar and trayicon config
 
 	* freespeak/ui/main_window.py (MainWindow.setup_layout): added
-	(MainWindow.setup_toolbar): added and don't use toolbar config
+	(MainWindow.setup_toolbar): added and don't use toolbar and trayicon config
 	(MainWindow.setup_manager): added
 	(MainWindow.set_toolbar_style): removed
 

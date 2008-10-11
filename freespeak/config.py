@@ -40,8 +40,6 @@ class Config(ConfigParser):
             self.set("translator", "preferred", "")
             self.add_section("interface")
             self.set("interface", "language", "System Default")
-            self.add_section('miscellaneous')
-            self.set('miscellaneous', 'trayicon', 'yes')
             self.save()
     
     def save(self):

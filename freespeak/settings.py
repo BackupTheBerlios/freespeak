@@ -121,20 +121,6 @@ class Settings(gtk.Dialog):
         frame.show_all()
         self.vbox.pack_start(frame)
 
-
-        frame = Frame(_('Miscellaneous preferences'))
-        vbox = gtk.VBox(spacing=6)
-        
-        self.w_trayicon = make_checkbutton(_('Use Tray <u>I</u>con'))
-        self.w_trayicon.set_active(config.getboolean('miscellaneous',
-                                                     'trayicon'))
-        self.add_accelerator(self.w_trayicon, _('Use Tray <u>I</u>con'))
-        vbox.pack_start(self.w_trayicon)
-      
-        frame.add(vbox)
-        frame.show_all()
-        self.vbox.pack_start(frame)
-
     def load_icon(self, celllayout, cell, model, iter, user_data=None):
         try:
             icon = "%s%s%s.png" % (self._parent.icons, os.path.sep,
