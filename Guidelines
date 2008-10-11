@@ -1,3 +1,9 @@
+The project:
+- Application. Holds all the necessary information for the application to run, and for other applications to make use of FreeSpeak as a library.
+- A Translation factory, to create pages in the notebook. Mostly, it decides which one to choose if it's a text translation, a web translation or whatelse.
+- The main window holds a Manager, which is the notebook managing the translations. It has only a GUI relevance.
+- Each translation has a translator, which can either be a text or web one. It holds information on the possible "From" and "To" options. Its role is final but fundamental as it translates the text/web.
+
 Window:
 - 4-pixel border 
 

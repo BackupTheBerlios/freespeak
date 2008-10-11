@@ -1,5 +1,9 @@
 2008-10-06  Luca Bruno  <lethalman88@gmail.com>
 
+	* Guidelines: 
+
+	* TODO: 
+
 	* freespeak/translation.py: added
 
 	* freespeak/config.py (Config): refactored to be more fault tollerant

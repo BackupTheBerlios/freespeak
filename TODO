@@ -1,2 +1,5 @@
+* Replace the reduced form with a featured systray
+
 - Fix combo boxes size
 - Integrate a session manager
+- Allow to duplicate translations
