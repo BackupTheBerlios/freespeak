@@ -1,11 +1,11 @@
 2008-10-05  Luca Bruno  <lethalman88@gmail.com>
 
-	* freespeak/config.py (Config.__init__): remove alwaysontop
+	* freespeak/config.py (Config.__init__): remove alwaysontop and minimalist
 
-	* freespeak/settings.py (Settings.__init__): remove alwaysontop
+	* freespeak/settings.py (Settings.__init__): remove alwaysontop and minimalist
 
 	* freespeak/ui/main_window.py: added
-	(MainWindow.__init__): remove alwaysontop
+	(MainWindow.__init__): remove alwaysontop and minimalist
 
 	* freespeak/ui/__init__.py (ScrolledWindow): added
 

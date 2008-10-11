@@ -83,36 +83,6 @@ class Settings(gtk.Dialog):
         frame.add(vbox)
         frame.show_all()
         self.vbox.pack_start(frame)
-        
-        frame = Frame(_('Minimalist translator preferences'))
-        vbox = gtk.VBox(spacing=6)
-        
-        self.w_mini_startup = make_checkbutton(
-            _('Startup with <u>M</u>inimalist Translator Window'))
-        self.w_mini_startup.set_active(config.getboolean('minimalist',
-                                                         'startup'))
-        self.add_accelerator(self.w_mini_startup,
-                        _('Startup with <u>M</u>inimalist Translator Window'))
-        vbox.pack_start(self.w_mini_startup)
-        
-        self.w_mini_popup = make_checkbutton(
-            _('Show translated text in a <u>P</u>opup Window'))
-        self.w_mini_popup.set_active(config.getboolean('minimalist', 'popup'))
-        self.w_clipboard_set.connect('toggled', self.on_sensitive,
-                                     self.w_mini_popup, 'minimalist', 'popup')
-        if not self.w_clipboard_set.get_active():
-            self.w_mini_popup.set_active(1)
-            self.w_mini_popup.set_sensitive(0)
-        else:
-            self.w_mini_popup.set_active(config.getboolean('minimalist',
-                                                           'popup'))
-        self.add_accelerator(self.w_mini_popup,
-                             _('Show translated text in a <u>P</u>opup Window'))
-        vbox.pack_start(self.w_mini_popup)
-        
-        frame.add(vbox)
-        frame.show_all()
-        self.vbox.pack_start(frame)
 
 
         frame = Frame(_('Interface preferences'))

@@ -287,14 +287,6 @@ class MainWindow (object):
                             break
                     self.preferred_combo_module(w_module)
                 
-            def on_reduce(self, *w):
-                """
-                Minimalize the translation window
-                """
-                self.hide()
-                self.reduced.show_all()
-                self.is_reduced = 1
-                
             def on_settings(self, w):
                 """
                 FreeSpeak preferences
