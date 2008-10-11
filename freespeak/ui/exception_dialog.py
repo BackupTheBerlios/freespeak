@@ -24,6 +24,8 @@ class ExceptionDialog (gtk.Dialog):
         self.set_resizable (1)
         self.set_default_size (400, 300)
         self.set_border_width (6)
+        self.set_default_response (gtk.RESPONSE_CLOSE)
+
         self.vbox.set_spacing (6)
         
         label = gtk.Label()
@@ -33,9 +35,10 @@ class ExceptionDialog (gtk.Dialog):
         text = gtk.TextView()
         text.show ()
         text.get_buffer().set_text (error_string)
+        text.set_editable (False)
         scroll = utils.ScrolledWindow (text)
         scroll.show ()
         self.vbox.pack_start (scroll)
         self.vbox.show ()
-        
+
         self.run ()
