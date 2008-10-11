@@ -1,5 +1,7 @@
 2008-10-11  Luca Bruno  <lethalman88@gmail.com>
 
+	* freespeak/translators/google.py: actually comment mechanoid
+
 	* freespeak/translator.py (TranslatorsManager): added
 
 	* freespeak/application.py (Application.start): 

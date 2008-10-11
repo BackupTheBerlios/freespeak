@@ -34,6 +34,7 @@ from gtk import gdk
 
 from freespeak.config import Config
 from freespeak.translator import TranslatorsManager
+import freespeak.translators
 from freespeak.ui.main_window import MainWindow
 from freespeak.ui.exception_dialog import ExceptionDialog
 #from freespeak.ipc import IpcServer, IpcClient
@@ -70,7 +71,8 @@ class Application (object):
         self.sock_file = os.path.join(tempfile.gettempdir(), 'freespeak'+str(os.getuid())+'.sock')
 
     def setup_paths (self):
-        self.icons_path = os.path.join(sys.prefix, 'share', 'freespeak', 'icons')
+        self.icons_path = os.path.join (sys.prefix, 'share', 'freespeak', 'icons')
+        self.translators_path = os.path.dirname (freespeak.translators.__file__)
 
     def setup_icons (self):
         self.icon_factory = gtk.IconFactory ()
@@ -82,7 +84,7 @@ class Application (object):
         self.icon_factory.add_default ()
 
     def setup_translators_manager (self):
-        self.translators_manager = TranslatorsManager ()
+        self.translators_manager = TranslatorsManager (self)
 
     def start (self):
         #client = IpcClient (self)
