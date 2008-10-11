@@ -1,5 +1,7 @@
 2008-10-06  Luca Bruno  <lethalman88@gmail.com>
 
+	* freespeak/translation.py: added
+
 	* freespeak/config.py (Config): refactored to be more fault tollerant
 
 	* freespeak/ui/utils.py (ScrolledWindow): added file, moved classes from __init__.py
@@ -19,11 +21,12 @@
 	(MainWindow.setup_manager): added
 	(MainWindow.set_toolbar_style): removed
 	(MainWindow.setup_cmdline): move to bin/freespeak, act as a library
-	(MainWindow.on_new): added
+	(MainWindow.on_new): added, use the application factory
 	(MainWindow.__init__): be a window
 	Missed some imports, fixed some typos
 
 	* freespeak/application.py (Application): gtk.main() threaded
+	(Application.setup_factory): added
 	Missed some imports, fixed some typos
 
 	* bin/freespeak: use the application

@@ -217,19 +217,15 @@ class MainWindow (gtk.Window):
 #                 while 1:
 #                     self.queue.put(sock.accept()[0])
             
-            # Events
+    # Events
         
-            def on_new(self, w, preferred=True):
-                """
-                Open a new tab in the notebook and start a new translation
-                """
-                if isinstance(w, str):
-                    translation_type = w
-                else:
-                    translation_type = w.get_name()
-                translator = Translation(self, translation_type, preferred)
-                self.nb.append_page(translator, translator.tab)
-                self.nb.set_current_page(self.nb.get_n_pages()-1)
+    def on_new(self, w):
+        """
+        Open a new tab in the notebook and start a new translation
+        """
+        type = w.get_name()
+        translation = self.application.factory (type=type)
+        self.manager.add (translation)
                 
             def on_refresh(self, w):
                 """
