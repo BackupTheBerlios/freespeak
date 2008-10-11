@@ -231,47 +231,47 @@ class MainWindow (gtk.Window):
             translation = WebTranslation (self.application)
         self.manager.add (translation)
                 
-            def on_refresh(self, w):
-                """
-                Refresh translation module list
-                """
-                self.load_modules()
-                combo = self.make_combo_modules()
-                for i in range(self.nb.get_n_pages()):
-                    translator = self.nb.get_nth_page(i)
-                    w_module = translator.w_module
-                    current = w_module.get_active_text()
-                    w_module.set_model(combo.get_model())
-                    for module in w_module.get_model():
-                        if module[0] == current:
-                            w_module.set_active_iter(module.iter)
-                            break
-                    self.preferred_combo_module(w_module)
+#             def on_refresh(self, w):
+#                 """
+#                 Refresh translation module list
+#                 """
+#                 self.load_modules()
+#                 combo = self.make_combo_modules()
+#                 for i in range(self.nb.get_n_pages()):
+#                     translator = self.nb.get_nth_page(i)
+#                     w_module = translator.w_module
+#                     current = w_module.get_active_text()
+#                     w_module.set_model(combo.get_model())
+#                     for module in w_module.get_model():
+#                         if module[0] == current:
+#                             w_module.set_active_iter(module.iter)
+#                             break
+#                     self.preferred_combo_module(w_module)
                 
-            def on_settings(self, w):
-                """
-                FreeSpeak preferences
-                """
-                Settings(self).start()
+#             def on_settings(self, w):
+#                 """
+#                 FreeSpeak preferences
+#                 """
+#                 Settings(self).start()
                 
-            def on_about(self, w):
-                """
-                Open an AboutDialog for this software
-                """
-                About(self)
+#             def on_about(self, w):
+#                 """
+#                 Open an AboutDialog for this software
+#                 """
+#                 About(self)
                 
-            def on_delete(self, w, Data=None):
-                """
-                Put myself in the system tray
-                """
-                self.tray.wnd_hide()
-                return True
+#             def on_delete(self, w, Data=None):
+#                 """
+#                 Put myself in the system tray
+#                 """
+#                 self.tray.wnd_hide()
+#                 return True
             
-            def on_quit(self, *w):
-                """
-                Quit and remove pid file
-                """
-                try: os.unlink(PID)
-                except: pass
-                gtk.main_quit()
+#             def on_quit(self, *w):
+#                 """
+#                 Quit and remove pid file
+#                 """
+#                 try: os.unlink(PID)
+#                 except: pass
+#                 gtk.main_quit()
                 

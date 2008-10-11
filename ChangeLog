@@ -1,5 +1,11 @@
 2008-10-11  Luca Bruno  <lethalman88@gmail.com>
 
+	* freespeak/ui/main_window.py (MainWindow): commented regions
+
+	* freespeak/translation/*: removed
+
+	* freespeak/application.py: do not create a factory
+
 	* freespeak/utils.py (label_new_with_mnemonic): renamed from make_label
 
 	* bin/freespeak: removed -q option
