@@ -80,14 +80,6 @@ class Settings(gtk.Dialog):
         hbox.pack_start(self.w_preferred_translator, 1 ,1)
         vbox.pack_start(hbox)
         
-        self.w_always_top = make_checkbutton(
-            _('<u>K</u>eep translator always on top'))
-        self.w_always_top.set_active(config.getboolean('translator',
-                                                       'alwaysontop'))
-        self.add_accelerator(self.w_always_top,
-                             _('<u>K</u>eep translator always on top'))
-        vbox.pack_start(self.w_always_top)
-        
         frame.add(vbox)
         frame.show_all()
         self.vbox.pack_start(frame)

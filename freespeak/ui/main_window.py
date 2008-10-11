@@ -28,11 +28,7 @@ class MainWindow (object):
         self.clipboard = gtk.Clipboard()
         self.cur_clipboard = ''
         self.is_reduced = 0
-        try:
-            self.set_keep_above(self.config.getboolean('translator',
-                                                       'alwaysontop'))
-        except:
-            pass
+
         self.load_modules()
         import __builtin__
         __builtin__.error_dialog = self.error

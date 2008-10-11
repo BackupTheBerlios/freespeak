@@ -38,7 +38,6 @@ class Config(ConfigParser):
             self.set('clipboard', 'set', 'no')
             self.add_section("translator")
             self.set("translator", "preferred", "")
-            self.set('translator', 'alwaysontop', 'no')
             self.add_section('minimalist')
             self.set('minimalist', 'startup', 'no')
             self.set('minimalist', 'popup', 'yes')
@@ -61,7 +60,8 @@ class Config(ConfigParser):
             return ''
             
     def getboolean(self, section, option):
-        try: return ConfigParser.getboolean(self, section, option)
+        try:
+            return ConfigParser.getboolean(self, section, option)
         except:
-            self.set(section, option, 'no')
+            self.set (section, option, 'no')
             return False

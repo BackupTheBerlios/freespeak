@@ -79,6 +79,7 @@ class Application (object):
         #except:
         #    self.ipc_server = IpcServer (self)
 
+        gtk.threads_init()
         self.main_window = MainWindow ()
         self.main_window.show ()
         file(PID, 'w').write(str (os.getpid()))
@@ -88,22 +89,6 @@ if __name__ == '__main__':
     app = Application ()
     app.start ()
 
-    import gtk, gtk.gdk
-    from src.settings import Settings
-    from src.translation import Translation, MiniTranslation
-    from src.utils import *
-    from src.about import About
-        
-        gtk.threads_init()
-        sys.excepthook = Crash
-        locale.use(config.get("interface", "language"))
-        main = Main(config, locale)
-        
-        if config.getboolean('minimalist', 'startup'):
-            main.on_reduce()
-        else:
-            main.show_all()
-        
         if not options.show_window:
             try:
                 main.tray.hide()
