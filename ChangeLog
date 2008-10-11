@@ -3,6 +3,7 @@
 	* freespeak/translators/google.py: actually comment mechanoid
 
 	* freespeak/translator.py (TranslatorsManager): added
+	(TranslatorsManager.load_translator_from_file, TranslatorsManager.load_translator): added
 
 	* freespeak/application.py (Application.start): 
 
