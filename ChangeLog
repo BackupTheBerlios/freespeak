@@ -1,6 +1,6 @@
 2008-10-11  Luca Bruno  <lethalman88@gmail.com>
 
-	* freespeak/ui/main_window.py (MainWindow): commented regions
+	* freespeak/ui/main_window.py (MainWindow): commented regions and removed obsolete methods
 
 	* freespeak/translation/*: removed
 

@@ -97,65 +97,6 @@ class MainWindow (gtk.Window):
 #                 thread.start_new_thread(self.ipc_client, ())
 #                 thread.start_new_thread(self.ipc_server, ())
         
-            def load_modules(self):
-                """
-                Re-Load translation module list
-                """
-                self.modules = []
-                for module in os.listdir('modules'):
-                    if module == '__init__.py' or module[-3:] == 'pyc': continue
-                    try:
-                        imported_module = reload(getattr(__import__('modules.'+module[:-3]), module[:-3]))
-                        
-                        imported_module.name
-                        translator = imported_module.Translator
-                        translator.build_language_table, translator.translate
-                        self.modules.append((imported_module.name, translator))
-                    except: pass
-                
-            def make_combo_modules(self, kind="text"):
-                """
-                Return a combobox with all modules
-                """
-                combo =  Combo()
-                combo_model = gtk.ListStore(str, object)
-                for module in self.modules:
-                    if kind == "web" and not module[1].web:
-                        continue
-                    combo_model.append(list(module))
-                combo.set_model(combo_model)
-                return combo
-            
-            def preferred_combo_module(self, combo):
-                """
-                Set the active seletion of the combo to the preferred
-                translation module
-                """
-                preferred_translator = self.config.get("translator",
-                                                       "preferred")
-                for row in combo.get_model():
-                    if row[0] == preferred_translator:
-                        combo.set_active_iter(row.iter)
-    
-            def create_trayicon(self):
-                if not self.tray:
-                    try:
-                        self.disconnect(self.h_destroy)
-                    except:
-                        pass
-                    from src.tray import Trayicon
-                    self.tray = Trayicon(self)
-                    self.h_delete = self.connect('delete-event', self.on_delete)
-    
-            def remove_trayicon(self):
-                if self.tray:
-                    self.disconnect(self.h_delete)
-                    self.h_destroy = self.connect('destroy',
-                                                  lambda *w:gtk.main_quit()) 
-                    self.tray.destroy()
-                    self.tray = None
-    
-
 # FIXME                
 #             def ipc_client(self):
 #                 while 1:
