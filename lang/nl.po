@@ -1,7 +1,7 @@
 # translation of nl.po to
 # Translation of nl.po to Dutch
 # FreeSpeak 0.1 translation - Dutch
-# Copyright (C) 2005 Italian Python User Group http://www.italianpug.org
+# Copyright (C) 2005 Luca Bruno <lethalman88@gmail.com> http://www.italianpug.org
 #
 # Vertaald Door Sphinx <sphinx@egypt.nl>, 2005.
 msgid ""

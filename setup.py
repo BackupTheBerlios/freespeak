@@ -1,15 +1,15 @@
 #!/usr/bin/env python
 """
-    setup.py
-    Fri Jun 14 13:41:56 2004
-    Copyright  2005 Italian Python User Group
-    http://www.italianpug.org
-   
+FreeSpeak - a simple frontend to already existing online translators
+setup.py
+
+    Copyright (C) 2005-2006-2007-2008  Luca Bruno <lethalman88@gmail.com>
+
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation; either version 2 of the License, or
     (at your option) any later version.
-    
+
     This program is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -142,7 +142,7 @@ def capture(cmd): return os.popen(cmd).read().strip()
 setup(name='FreeSpeak',
     version='0.1.1',
     description='Frontend to already existing translation engines',
-    author='Italian Python User Group',
+    author='Luca Bruno <lethalman88@gmail.com>',
     author_email='lethalman88@gmail.com',
     url='http://www.gna.org/projects/freespeak',
     license='GNU General Public License v2',

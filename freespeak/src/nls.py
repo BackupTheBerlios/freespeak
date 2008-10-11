@@ -1,7 +1,7 @@
 """
     nls.py
     Mon Aug 01 11:36:56 2005
-    Copyright  2005 Italian Python User Group
+    Copyright (C) 2005-2006-2007-2008  Luca Bruno <lethalman88@gmail.com>
     http://www.italianpug.org
    
     This program is free software; you can redistribute it and/or modify

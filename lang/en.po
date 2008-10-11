@@ -1,6 +1,6 @@
 # Translation of en.po to English
 # FreeSpeak 0.1 tramslation - English
-# Copyright (C) 2005 Italian Python User Group http://www.italianpug.org
+# Copyright (C) 2005 Luca Bruno <lethalman88@gmail.com> http://www.italianpug.org
 # Coviello Giuseppe <immigrant@email.it>, 2005
 #
 #, fuzzy
