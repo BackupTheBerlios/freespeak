@@ -33,7 +33,7 @@ import gtk
 from gtk import gdk
 
 from freespeak.config import Config
-from freespeak.translators_manager import TranslatorsManager
+from freespeak.translator import TranslatorsManager
 from freespeak.ui.main_window import MainWindow
 from freespeak.ui.exception_dialog import ExceptionDialog
 #from freespeak.ipc import IpcServer, IpcClient
