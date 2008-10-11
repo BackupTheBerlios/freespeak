@@ -89,7 +89,7 @@ class MainWindow (gtk.Window):
         self.manager.show ()
         self.layout.pack_start (self.manager)
                 
-                # FIXME: IPC operations
+        # FIXME: IPC operations
 #                 from Queue import Queue
 #                 import thread
 #                 self.queue = Queue()

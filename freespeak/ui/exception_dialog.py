@@ -3,7 +3,7 @@ import sys
 
 import gtk
 
-from freespeak import ui
+from freespeak.ui import utils
 
 # FIXME:
 # 1. Needs HIG pixel fixes
@@ -33,7 +33,7 @@ class ExceptionDialog (gtk.Dialog):
         text = gtk.TextView()
         text.show ()
         text.get_buffer().set_text (error_string)
-        scroll = ui.ScrolledWindow (text)
+        scroll = utils.ScrolledWindow (text)
         scroll.show ()
         self.vbox.pack_start (scroll)
         self.vbox.show ()

@@ -1,5 +1,7 @@
 2008-10-06  Luca Bruno  <lethalman88@gmail.com>
 
+	* freespeak/ui/utils.py (ScrolledWindow): added file, moved classes from __init__.py
+
 	* freespeak/ui/exception_dialog.py (ExceptionDialog.__init__): fixed, first print error to stderr
 
 	* freespeak/ui/manager.py (Manager): added
