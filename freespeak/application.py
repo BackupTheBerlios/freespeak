@@ -36,6 +36,8 @@ from freespeak.ui.exception_dialog import ExceptionDialog
 #from freespeak.ipc import IpcServer, IpcClient
 
 class Application (object):
+    version = __version__
+
     def __init__ (self):
         self.domain = 'freespeak'
         self.setup_l10n ()
@@ -43,6 +45,7 @@ class Application (object):
         self.setup_config ()
         self.setup_cmdline ()
         self.setup_ipc ()
+        self.setup_paths ()
 
     def setup_exception_dialog ():
         sys.excepthook = ExceptionDialog
@@ -70,6 +73,18 @@ class Application (object):
         self.pid_file = os.path.join(tempfile.gettempdir(), 'freespeak'+str(os.getuid())+'.pid')
         self.sock_file = os.path.join(tempfile.gettempdir(), 'freespeak'+str(os.getuid())+'.sock')
         self.ipc_server
+
+    def setup_paths (self):
+        self.icons_path = os.path.join(sys.prefix, 'share', 'freespeak', 'icons')
+
+    def setup_icons (self):
+        self.icon_factory = gtk.IconFactory ()
+        for stock, src in {'freespeak-icon': "freespeak-16x16.png"}.iteritems ():
+            file = os.path.join (self.icons_path, src)
+            if os.path.isfile (file):
+                self.icon_factory.add (stock,
+                                       gtk.IconSet (gdk.pixbuf_from_file (file)))
+        self.icon_factory.add_default ()
 
     def start (self):
         #client = IpcClient (self)

@@ -25,23 +25,22 @@ class MainWindow (object):
     def __init__(self, application):
         self.application = application
         gtk.Window.__init__ (self)
+
+        self.setup_clipboard ()
+        self.setup_window ()
+
+    def setup_clipboard (self):
         self.clipboard = gtk.Clipboard()
         self.cur_clipboard = ''
-        self.is_reduced = 0
 
-        self.load_modules()
-        import __builtin__
-        __builtin__.error_dialog = self.error
-        
-                self.set_title('FreeSpeak 0.1.1')
-                self.set_border_width(4)
-                self.resize(500, 400)
-                self.icons = os.path.join(sys.prefix, 'share', 'freespeak',
-                                          'icons')
-                if(os.path.isfile(os.path.join(self.icons,
-                                               "freespeak-16x16.png"))):
-                    self.set_icon_from_file(os.path.join(self.icons,
-                                                         'freespeak-16x16.png'))
+    def setup_window (self):
+        self.set_title('FreeSpeak '+self.application.version)
+        self.set_border_width(4)
+        self.default_size(500, 400)
+
+        icon = os.path.join (self.application.icons_path, "freespeak-16x16.png")
+        if os.path.isfile (icon):
+            self.set_icon_from_stock (icon)
                           
                 vbox = gtk.VBox(spacing=6)
                 ag = gtk.ActionGroup('WindowActions')
