@@ -1,5 +1,7 @@
 2008-10-11  Luca Bruno  <lethalman88@gmail.com>
 
+	* freespeak/translators_manager.py (TranslatorsManager): added
+
 	* freespeak/application.py (Application.start): 
 
 	* freespeak/ui/exception_dialog.py (ExceptionDialog): set the default response; make the text not editable; destroy self
@@ -13,6 +15,7 @@
 
 	* freespeak/application.py (Application.start): fix typo and drop obsolete calls
 	(Application.setup_factory): removed, do not create a factory anymore
+	(Application.setup_translators_manager): added
 
 	* freespeak/utils.py (label_new_with_mnemonic): renamed from make_label
 

@@ -33,6 +33,7 @@ import gtk
 from gtk import gdk
 
 from freespeak.config import Config
+from freespeak.translators_manager import TranslatorsManager
 from freespeak.ui.main_window import MainWindow
 from freespeak.ui.exception_dialog import ExceptionDialog
 #from freespeak.ipc import IpcServer, IpcClient
@@ -50,6 +51,8 @@ class Application (object):
         self.setup_config ()
         self.setup_ipc ()
         self.setup_paths ()
+        self.setup_icons ()
+        self.setup_translators_manager ()
 
     def setup_exception_dialog (self):
         sys.excepthook = ExceptionDialog
@@ -77,6 +80,9 @@ class Application (object):
                 self.icon_factory.add (stock,
                                        gtk.IconSet (gdk.pixbuf_from_file (file)))
         self.icon_factory.add_default ()
+
+    def setup_translators_manager (self):
+        self.translators_manager = TranslatorsManager ()
 
     def start (self):
         #client = IpcClient (self)
