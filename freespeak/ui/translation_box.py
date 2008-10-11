@@ -29,7 +29,7 @@ class TranslationBox (gtk.HBox):
         default_translator = self.application.translators_manager.get_default ()
         default_iter = None
 
-        for translator in self.application.translators_manager.get_translators ():
+        for translator in self.application.translators_manager:
             iter = model.append ([translator.get_name (), translator])
             if translator == default_translator:
                 default_iter = iter

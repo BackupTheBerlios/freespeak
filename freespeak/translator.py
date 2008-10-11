@@ -4,13 +4,14 @@ import imp
 
 import freespeak.translators
 
-class TranslatorsManager (list):
+class TranslatorsManager (set):
     def __init__ (self, application):
+        set.__init__ (self)
         self.application = application
 
         files = glob.glob (os.path.join (self.application.translators_path, "*.py"))
         for fname in files:
-            module = self.load_translator_from_file (fname)
+            self.load_translator_from_file (fname)
             if not module:
                 continue
 
@@ -24,5 +25,7 @@ class TranslatorsManager (list):
         if mname == '__init__':
             return
         info = imp.find_module (mname, [self.application.translators_path])
-        print imp.load_module (mname, *info)
-
+        module = imp.load_module (mname, *info)
+        if not module in self:
+            self.add (module)
+            return module
