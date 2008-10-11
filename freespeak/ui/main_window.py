@@ -2,7 +2,7 @@ import gtk
 
 from freespeak.ui.manager import Manager
 
-class MainWindow (object):
+class MainWindow (gtk.Window):
     ui_string = """<ui>
         <toolbar>
             <toolitem action="Text" />
@@ -25,8 +25,8 @@ class MainWindow (object):
         </ui>"""
                 
     def __init__(self, application):
-        self.application = application
         gtk.Window.__init__ (self)
+        self.application = application
 
         self.setup_clipboard ()
         self.setup_window ()
@@ -84,7 +84,7 @@ class MainWindow (object):
         self.layout.pack_start (self.toolbar, FALSE)
 
     def setup_manager (self):
-        self.manager = Manager ()
+        self.manager = Manager (self.application)
         self.manager.show ()
         self.layout.pack_start (self.manager)
 

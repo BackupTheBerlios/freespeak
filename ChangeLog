@@ -10,9 +10,9 @@
 	(MainWindow.setup_toolbar): added and don't use toolbar and trayicon config
 	(MainWindow.setup_manager): added
 	(MainWindow.set_toolbar_style): removed
+	(MainWindow.__init__): be a window
 
 	* freespeak/application.py (Application): gtk.main() threaded
-	Comment old regions
 
 	* bin/freespeak: use the application
 
