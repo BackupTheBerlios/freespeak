@@ -1,5 +1,7 @@
 2008-10-11  Luca Bruno  <lethalman88@gmail.com>
 
+	* freespeak/utils.py (label_new_with_mnemonic): renamed from make_label
+
 	* bin/freespeak: removed -q option
 
 	* freespeak/ui/translation.py (BaseUITranslation): added

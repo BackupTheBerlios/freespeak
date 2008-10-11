@@ -77,9 +77,9 @@ def make_button(text, stock):
     btn.add(align)
     return btn
 
-def make_label(text):
+def label_new_with_mnemonic (text):
     label = gtk.Label()
-    label.set_markup(text)
+    label.set_text_with_mnemonic (text)
     return label
 
 def accel_key(text):
