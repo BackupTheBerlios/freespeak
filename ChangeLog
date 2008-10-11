@@ -3,6 +3,9 @@
 	* freespeak/ui/exception_dialog.py (ExceptionDialog): set the default response and make the text not editable
 
 	* freespeak/ui/main_window.py (MainWindow): commented regions and removed obsolete methods
+	(MainWindow.setup_layout, MainWindow.setup_toolbar): fix typos
+	Remove refresh and reduce buttons.
+	Uncommented some regions to make it run at least once during the refactoring.
 
 	* freespeak/translation/*: removed
 

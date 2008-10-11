@@ -9,8 +9,7 @@ class MainWindow (gtk.Window):
         <toolbar>
             <toolitem action="Text" />
             <toolitem action="Web" />
-            <toolitem action="Refresh" />
-            <toolitem action="Reduce" />
+            <separator />
             <toolitem action="Settings" />
             <separator />
             <toolitem action="Quit" />
@@ -19,8 +18,6 @@ class MainWindow (gtk.Window):
         </toolbar>
         <accelerator action="Text" />
         <accelerator action="Web" />
-        <accelerator action="Refresh" />
-        <accelerator action="Reduce" />
         <accelerator action="Settings" />
         <accelerator action="Quit" />
         <accelerator action="About" />
@@ -56,10 +53,6 @@ class MainWindow (gtk.Window):
              _('New translation'), self.on_new),
             ('Web', gtk.STOCK_NETWORK, _('Web'), "<Control>e",
              _('New web page translation'), self.on_new),
-            ('Refresh', gtk.STOCK_REFRESH, _('Refresh'), "<Control>f",
-             _('Refresh module list'), self.on_refresh),
-            ('Reduce', gtk.STOCK_CONVERT, _('Reduce'), "<Control>r",
-             _('Reduce translation window'), self.on_reduce),
             ('Settings', gtk.STOCK_PREFERENCES, _('Settings'),
              "<Control>s", _('FreeSpeak settings'), self.on_settings),
             ('Quit', gtk.STOCK_QUIT, _('Quit'), "<Control>q",
@@ -70,8 +63,8 @@ class MainWindow (gtk.Window):
         ag.add_actions (actions)
         self.ui = gtk.UIManager ()
         self.ui.insert_action_group (ag, 0)
-        self.ui.add_ui_from_string (ui_string)
-        self.accel_group = ui.get_accel_group ()
+        self.ui.add_ui_from_string (self.ui_string)
+        self.accel_group = self.ui.get_accel_group ()
         self.add_accel_group (self.accel_group)
 
         self.setup_toolbar ()
@@ -83,7 +76,7 @@ class MainWindow (gtk.Window):
     def setup_toolbar (self):
         self.toolbar = self.ui.get_widget ("/toolbar")
         self.toolbar.show ()
-        self.layout.pack_start (self.toolbar, FALSE)
+        self.layout.pack_start (self.toolbar, False)
 
     def setup_manager (self):
         self.manager = Manager (self.application)
@@ -172,47 +165,30 @@ class MainWindow (gtk.Window):
             translation = WebTranslation (self.application)
         self.manager.add (translation)
                 
-#             def on_refresh(self, w):
-#                 """
-#                 Refresh translation module list
-#                 """
-#                 self.load_modules()
-#                 combo = self.make_combo_modules()
-#                 for i in range(self.nb.get_n_pages()):
-#                     translator = self.nb.get_nth_page(i)
-#                     w_module = translator.w_module
-#                     current = w_module.get_active_text()
-#                     w_module.set_model(combo.get_model())
-#                     for module in w_module.get_model():
-#                         if module[0] == current:
-#                             w_module.set_active_iter(module.iter)
-#                             break
-#                     self.preferred_combo_module(w_module)
+    def on_settings(self, w):
+        """
+        FreeSpeak preferences
+        """
+        Settings(self).start()
                 
-#             def on_settings(self, w):
-#                 """
-#                 FreeSpeak preferences
-#                 """
-#                 Settings(self).start()
+    def on_about(self, w):
+        """
+        Open an AboutDialog for this software
+        """
+        About(self)
                 
-#             def on_about(self, w):
-#                 """
-#                 Open an AboutDialog for this software
-#                 """
-#                 About(self)
-                
-#             def on_delete(self, w, Data=None):
-#                 """
-#                 Put myself in the system tray
-#                 """
-#                 self.tray.wnd_hide()
-#                 return True
+    def on_delete(self, w, Data=None):
+        """
+        Put myself in the system tray
+        """
+        self.tray.wnd_hide()
+        return True
             
-#             def on_quit(self, *w):
-#                 """
-#                 Quit and remove pid file
-#                 """
-#                 try: os.unlink(PID)
-#                 except: pass
-#                 gtk.main_quit()
+    def on_quit(self, *w):
+        """
+        Quit and remove pid file
+        """
+        try: os.unlink(PID)
+        except: pass
+        gtk.main_quit()
                 
