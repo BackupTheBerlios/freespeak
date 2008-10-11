@@ -1,5 +1,7 @@
 import gtk
 
+from freespeak.ui.manager import Manager
+
 class MainWindow (object):
     ui_string = """<ui>
         <toolbar>
