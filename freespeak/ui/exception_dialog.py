@@ -42,3 +42,4 @@ class ExceptionDialog (gtk.Dialog):
         self.vbox.show ()
 
         self.run ()
+        self.destroy ()

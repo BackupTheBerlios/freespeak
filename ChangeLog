@@ -2,7 +2,7 @@
 
 	* freespeak/application.py (Application.start): 
 
-	* freespeak/ui/exception_dialog.py (ExceptionDialog): set the default response and make the text not editable
+	* freespeak/ui/exception_dialog.py (ExceptionDialog): set the default response; make the text not editable; destroy self
 
 	* freespeak/ui/main_window.py (MainWindow): commented regions and removed obsolete methods
 	(MainWindow.setup_layout, MainWindow.setup_toolbar): fix typos
