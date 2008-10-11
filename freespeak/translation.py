@@ -10,6 +10,7 @@ class BaseTranslation (threading.Thread):
         self.translator = None
         self.status = None
         self.status_text = None
+        self.setup ()
 
     def set_translator (self, translator):
         self.translator = translator
@@ -23,6 +24,17 @@ class BaseTranslation (threading.Thread):
     def set_to_lang (self, lang):
         self.to_lang = lang
 
+    def run (self, data):
+        self.update_status (Translation.STATUS_STARTED, _("Translation started"))
+        for status in self.translator.translate (self.from_lang, self.to_lang, data):
+            self.update_status (Translation.STATUS_PROGRESS, status)
+        self.update_status (Translation.STATUS_COMPLETE, _("Translation complete"))
+
+    # Virtual methods
+
+    def setup (self):
+        pass
+
     def update_from_langs (self, langs):
         raise NotImplementedError ()
 
@@ -32,16 +44,4 @@ class BaseTranslation (threading.Thread):
     def update_status (self, status, status_text):
         raise NotImplementedError ()
 
-    def run (self, data):
-        self.update_status (Translation.STATUS_STARTED, _("Translation started"))
-        for status in self.translator.translate (self.from_lang, self.to_lang, data):
-            self.update_status (Translation.STATUS_PROGRESS, status)
-        self.update_status (Translation.STATUS_COMPLETE, _("Translation complete"))
-
-class BaseTextTranslation (BaseTranslation):
-    pass
-
-class BaseWebTranslation (BaseTranslation):
-    pass
-
-__all__ = ['BaseTextTranslation', 'BaseWebTranslation']
+__all__ = ['BaseTranslation']

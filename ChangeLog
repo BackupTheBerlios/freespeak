@@ -2,6 +2,12 @@
 
 	* bin/freespeak: removed -q option
 
+	* freespeak/ui/translation.py (BaseUITranslation): added
+
+	* freespeak/ui/translation_box.py (TranslationBox): added
+
+	* freespeak/translation.py (BaseTextTranslation, BaseWebTranslation): removed
+
 2008-10-08  Luca Bruno  <lethalman88@gmail.com>
 
 	* freespeak/ui/translation.py (TextTranslation, WebTranslation): added
