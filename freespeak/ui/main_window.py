@@ -70,15 +70,22 @@ class MainWindow (object):
         self.accel_group = ui.get_accel_group ()
         self.add_accel_group (self.accel_group)
 
+        self.setup_toolbar ()
+        self.setup_manager ()
+
+        self.layout.show ()
+        self.add (self.layout)
+
     def setup_toolbar (self):
         self.toolbar = self.ui.get_widget ("/toolbar")
-        self.toolbar.set_toolbar_style (self.config.getint ("interface", "toolbar"))
-        self.layout.pack_start (self.w_toolbar, FALSE)
+        self.toolbar.show ()
+        self.layout.pack_start (self.toolbar, FALSE)
 
-                self.nb = gtk.Notebook()
-                self.nb.set_scrollable(1)
-                vbox.pack_start(self.nb)
-                self.add(vbox)
+    def setup_manager (self):
+        self.manager = Manager ()
+        self.manager.show ()
+        self.layout.pack_start (self.manager)
+
                 self.tray = None
                 try:
                     if self.config.getboolean("miscellaneous", "trayicon"):

@@ -117,25 +117,6 @@ class Settings(gtk.Dialog):
         self.add_accelerator(self.w_language, _("<u>L</u>anguage"))
         table.attach(self.w_language, 1, 2, 0, 1)
 
-        label = make_label(_("Toolbar <u>b</u>utton labels"))
-        table.attach(label, 0, 1, 1, 2, gtk.FILL, 0)
-        label.set_alignment(0, 0.5)
-        self.w_toolbar = gtk.ComboBox()
-        text = gtk.CellRendererText()
-        self.w_toolbar.pack_start(text)
-        self.w_toolbar.add_attribute(text, 'text', 0)
-        model = gtk.ListStore(str)
-        model.append([_("System Default")])
-        model.append([_("Text and Icons")])
-        model.append([_("Icons only")])
-        model.append([_("Text only")])
-        self.w_toolbar.set_model(model)
-        self.w_toolbar.set_active(
-            int(self._parent.config.get("interface", "toolbar")))
-
-        self.add_accelerator(self.w_toolbar, _("Toolbar <u>b</u>utton labels"))
-        table.attach(self.w_toolbar, 1, 2, 1, 2)
-
         frame.add(table)
         frame.show_all()
         self.vbox.pack_start(frame)
