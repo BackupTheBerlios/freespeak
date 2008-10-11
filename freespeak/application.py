@@ -97,56 +97,56 @@ class Application (object):
         gtk.threads_init()
         self.main_window = MainWindow ()
         self.main_window.show ()
+
         file(PID, 'w').write(str (os.getpid()))
+
+        gtk.threads_enter()
         gtk.main ()
+        gtk.threads_leave()
 
 if __name__ == '__main__':
     app = Application ()
     app.start ()
 
-        if not options.show_window:
-            try:
-                main.tray.hide()
-            except:
-                print "I wasn't able to create the tray icon"
+#     if not options.show_window:
+#         try:
+#             main.tray.hide()
+#         except:
+#             print "I wasn't able to create the tray icon"
+
+#     def SubStart():
+#         try:
+#             sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+#             sock.connect(SOCK)
+#             sock.send('\x01'.join(args[1:4])+'\x02')
+#             if options.clipboard:
+#                 clipboard = gtk.Clipboard()
+#                 try:
+#                     if clipboard.wait_is_text_available():
+#                         be_translated = clipboard.wait_for_text()
+#                         if not be_translated: raise
+#                     else: raise
+#                 except:
+#                     print >> sys.stderr, 'Clipboard contains no text'
+#                     return
+#             else:
+#                 be_translated = ''
+#                 while 1:
+#                     data = raw_input().strip()
+#                     if data == 'EOF': break
+#                     be_translated += data
+#             sock.send(be_translated)
+#             sock.close()
+#         except:
+#             print sys.exc_value
         
-        gtk.threads_enter()
-        gtk.main()
-        gtk.threads_leave()
-    
-    def SubStart():
-        try:
-            sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
-            sock.connect(SOCK)
-            sock.send('\x01'.join(args[1:4])+'\x02')
-            if options.clipboard:
-                clipboard = gtk.Clipboard()
-                try:
-                    if clipboard.wait_is_text_available():
-                        be_translated = clipboard.wait_for_text()
-                        if not be_translated: raise
-                    else: raise
-                except:
-                    print >> sys.stderr, 'Clipboard contains no text'
-                    return
-            else:
-                be_translated = ''
-                while 1:
-                    data = raw_input().strip()
-                    if data == 'EOF': break
-                    be_translated += data
-            sock.send(be_translated)
-            sock.close()
-        except:
-            print sys.exc_value
-        
-    try:
-        sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
-        sock.connect(SOCK)           
-        sock.close()
-        pid = int(file(PID).read())
-        import signal
-        os.kill(pid, signal.SIGCHLD)
-        SubStart()
-    except:
-        Start(config, locale)
+#     try:
+#         sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+#         sock.connect(SOCK)           
+#         sock.close()
+#         pid = int(file(PID).read())
+#         import signal
+#         os.kill(pid, signal.SIGCHLD)
+#         SubStart()
+#     except:
+#         Start(config, locale)

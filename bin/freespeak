@@ -21,5 +21,7 @@ freespeak
 """
 
 import os, sys
-from freespeak import freespeak
-os.execl(sys.executable, 'freespeak', freespeak.__file__[:-1], *sys.argv)
+from freespeak.application import Application
+app = Application ()
+app.start ()
+
