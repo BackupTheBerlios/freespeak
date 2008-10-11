@@ -2,7 +2,7 @@ include AUTHORS
 include COPYING
 include ChangeLog
 include INSTALL
-include lang/*
+include po/*
 include icons/*
 include trayicon/*.h
 include freespeak/*.py

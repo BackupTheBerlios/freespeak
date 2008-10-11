@@ -48,7 +48,7 @@ class build_locale(cmd.Command):
     def initialize_options(self):
         self.build_dir = 'locale'
         self.build_base = None
-        self.po_dir = 'lang'
+        self.po_dir = 'po'
 
     def finalize_options (self):
         self.set_undefined_options('build',
