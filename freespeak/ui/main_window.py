@@ -99,7 +99,7 @@ class MainWindow (object):
                     
                 self.reduced = MiniTranslation(self)
                 
-                # IPC operations
+                # FIXME: IPC operations
                 from Queue import Queue
                 import thread
                 self.queue = Queue()

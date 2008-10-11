@@ -108,6 +108,7 @@ if __name__ == '__main__':
     app = Application ()
     app.start ()
 
+# FIXME
 #     if not options.show_window:
 #         try:
 #             main.tray.hide()
