@@ -40,12 +40,14 @@ from freespeak.ui.exception_dialog import ExceptionDialog
 class Application (object):
     version = __version__
 
-    def __init__ (self):
+    def __init__ (self, options={}, args=[]):
         self.domain = 'freespeak'
+        self.options = options
+        self.args = args
+
         self.setup_l10n ()
         self.setup_exception_dialog ()
         self.setup_config ()
-        self.setup_cmdline ()
         self.setup_ipc ()
         self.setup_paths ()
 
@@ -58,18 +60,6 @@ class Application (object):
 
     def setup_config (self):
         self.config = Config ()
-
-    def setup_cmdline (self):
-        parser = OptionParser(usage='%prog [-c] [-q] [ module [ from [ to ] ] ]',
-                              version='FreeSpeak %s' % __version__) 
-        parser.add_option('-c', '--clipboard',
-                          action='store_true', dest='clipboard', default=False,
-                          help=_('use clipboard instead of stdin'))
-        parser.add_option("-q", "--quiet",
-                          action="store_false",dest="show_window", default=True,
-                          help=_("start minimized in tray icon"))
-        
-        self.options, self.args = parser.parse_args()
 
     # FIXME:
     def setup_ipc (self):
@@ -105,10 +95,6 @@ class Application (object):
         gtk.threads_enter()
         gtk.main ()
         gtk.threads_leave()
-
-if __name__ == '__main__':
-    app = Application ()
-    app.start ()
 
 # FIXME
 #     if not options.show_window:
