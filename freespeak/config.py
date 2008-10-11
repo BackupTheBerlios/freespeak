@@ -22,28 +22,26 @@
 from ConfigParser import ConfigParser
 import os
 
-class Config(ConfigParser):
+class Config (ConfigParser):
     def __init__(self):
         """
         Open existing config file or create one in the user home directory.
         """
         ConfigParser.__init__(self)
         import user
-        self.file = user.home+os.sep+'.freespeak'
+        self.file = os.path.join (user.home, '.freespeak')
         try:
-            self.readfp(file(self.file))
+            self.readfp (file (self.file))
         except:
             self.add_section('clipboard')
             self.set('clipboard', 'get', 'no')
             self.set('clipboard', 'set', 'no')
             self.add_section("translator")
-            self.set("translator", "preferred", "")
-            self.add_section("interface")
-            self.set("interface", "language", "System Default")
+            self.set("translator", "default", "")
             self.save()
     
     def save(self):
-        self.write(file(self.file, 'w'))
+        self.write (file (self.file, 'w'))
 
     def _do_get (self, attrname, section, option):
         try:

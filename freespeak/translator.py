@@ -12,8 +12,6 @@ class TranslatorsManager (set):
         files = glob.glob (os.path.join (self.application.translators_path, "*.py"))
         for fname in files:
             self.load_translator_from_file (fname)
-            if not module:
-                continue
 
     def load_translator_from_file (self, fname):
         # 1. Split the path and get the latest part of it
@@ -29,3 +27,10 @@ class TranslatorsManager (set):
         if not module in self:
             self.add (module)
             return module
+
+    def get_default (self):
+        name = self.application.config.get ("translator", "default")
+        if name:
+            for translator in self:
+                if translator.name == name:
+                    return translator

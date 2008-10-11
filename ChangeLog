@@ -1,9 +1,12 @@
 2008-10-11  Luca Bruno  <lethalman88@gmail.com>
 
+	* freespeak/config.py (Config.__init__): rename preferred to default; remove interface language, just use system default
+
 	* freespeak/translators/google.py: actually comment mechanoid
 
 	* freespeak/translator.py (TranslatorsManager): added
 	(TranslatorsManager.load_translator_from_file, TranslatorsManager.load_translator): added
+	(TranslatorsManager.get_default): added
 
 	* freespeak/application.py (Application.start): 
 
