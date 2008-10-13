@@ -19,7 +19,7 @@
 	* freespeak/ui/translation.py (TranslationLabel): added
 	(BaseUITranslation.get_label): added
 	(BaseUITranslation.setup_label): added
-	(BaseUITranslation.setup_translation_box): create Translate button
+	(BaseUITranslation.setup_translation_box): create Translate button and make it insensitive
 	(TextTranslation.setup_ui): create text views
 
 2008-10-11  Luca Bruno  <lethalman88@gmail.com>

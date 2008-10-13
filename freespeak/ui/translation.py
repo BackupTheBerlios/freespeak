@@ -108,6 +108,7 @@ class BaseUITranslation (gtk.VBox, BaseTranslation):
         self.translation_box.show ()
 
         button = gtk.Button ("_Translate")
+        button.set_sensitive (False)
         button.set_use_underline (True)
         image = gtk.image_new_from_stock (gtk.STOCK_REFRESH, gtk.ICON_SIZE_BUTTON)
         button.set_image (image)
