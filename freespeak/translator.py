@@ -20,8 +20,7 @@ class BaseTranslator (object):
         else:
             raise RuntimeError ("Unknown translation request: %s" % str (request))
 
-    @classmethod
-    def get_language_table (cls):
+    def get_language_table (self):
         raise NotImplementedError ()
 
     def translate_text (self, request):

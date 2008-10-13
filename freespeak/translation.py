@@ -36,11 +36,11 @@ class BaseTranslation (threading.Thread):
     def set_translator (self, translator):
         self.translator = translator
         self.language_table = self.translator.get_language_table ()
-        self.update_from_langs (self.language_table.keys().sort ())
+        self.update_from_langs (sorted (self.language_table.keys()))
 
     def set_from_lang (self, lang):
         self.from_lang = lang
-        self.update_to_langs (self.language_table[self.from_lang])
+        self.update_to_langs (sorted (self.language_table[self.from_lang]))
 
     def set_to_lang (self, lang):
         self.to_lang = lang
@@ -71,4 +71,4 @@ class BaseTranslation (threading.Thread):
     def update_status (self, status, status_text):
         raise NotImplementedError ()
 
-__all__ = ['BaseTranslation']
+__all__ = ['BaseTranslation', 'TranslationRequest', 'TextTranslationRequest', 'WebTranslationRequest']

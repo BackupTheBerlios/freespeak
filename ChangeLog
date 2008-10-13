@@ -1,6 +1,11 @@
 2008-10-12  Luca Bruno  <lethalman88@gmail.com>
 
+	* freespeak/translators/google.py (Language): added
+	(Translator.capabilities, Translator.get_language_table): added
+
 	* freespeak/ui/translation_box.py (TranslationBox): VBox is not suitable for mnemonic activation
+	(TranslationBox.setup_to): typo when packing cell renderer
+	(TranslationBox.on_translator_changed, on_from_changed, on_to_changed): fix retrieving the value from the iter
 
 	* freespeak/utils.py (label_new_with_mnemonic): removed
 
@@ -13,6 +18,8 @@
 	(TranslationRequest, TextTranslationRequest, WebTranslationRequest): added
 	(BaseTranslation.run): use the request
 	(BaseTranslation.update_can_translate): added
+	(BaseTranslation.set_translator): use sorted ()
+	(BaseTranslation.set_from_lang): use sorted ()
 
 	* freespeak/ui/manager.py (Manager.remove_translation): added
 
@@ -21,6 +28,7 @@
 	(BaseUITranslation.setup_label): added
 	(BaseUITranslation.setup_translation_box): create Translate button and make it insensitive
 	(TextTranslation.setup_ui): create text views
+	(BaseUITranslation.update_from_langs, update_to_langs, update_can_translate): added
 
 2008-10-11  Luca Bruno  <lethalman88@gmail.com>
 

@@ -19,10 +19,12 @@
     Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 """
 
-import re, sys, gtk, urllib
+import urllib
+import lxml.html
 #from mechanoid.mechanoid import Browser
 
 from freespeak.translator import BaseTranslator
+from freespeak.translation import *
 
 def urlopen(url):
     b = Browser()
@@ -32,41 +34,54 @@ def urlopen(url):
     query = b.open(url)
     #b.viewing_html()
     return query.read()
-    
+
+class Language (object):
+    def __init__ (self, cc, name):
+        self.cc = cc # Country Code
+        self.name = name
+
+    def __cmp__ (self, other):
+        if self.name < other.name:
+            return -1
+        elif self.name > other.name:
+            return 1
+        return 0
+
+    def __str__ (self):
+        return self.name
+
 class Translator (BaseTranslator):
     name = 'Google'
-    web = True
-    language_table = []
+    capabilities = [TextTranslationRequest, WebTranslationRequest]
     icon_file = "google-16x16.png"
     
     def __init__(self):
-        self.from_lang="Italian"
-        self.to_lang="English"
-    
-    def build_language_table(self):
-        if Translator.language_table: return
-        url = 'http://translate.google.com/translate_t'
-        try: 
-            result = urlopen(url)
-            result = result[result.index("<select name=langpair>"):]
-            result = result[result.index("<option"):]
-            result = result[:result.index("</select>")]
-            result = result.replace("&", " ")
-            rows=result.split("</option>")
-            rows=rows[2:]
-        except:
-            error_dialog(_('Error during language table loading')+
-                              '\n\n'+str(sys.exc_value)) 
-            return
-        for row in rows:
-            try:
-                abb=row[row.index("\"")+1:row.rindex("\"")]
-                from_lang=row[row.index(">")+1:row.index(" to")].split()[0]
-                to_lang=row[row.index("to")+3:].split()[0]
-                Translator.language_table.append({"from":from_lang,
-                                                  "to":to_lang, "abb":abb})
-            except:
-                pass
+        self.language_table = {}
+
+    def get_language_table(self):
+        # Google can handle all language combos
+        if self.language_table:
+            return self.language_table
+
+        url = 'http://www.google.it/language_tools'
+        tree = lxml.html.parse (url)
+
+        to_languages = []
+        elements = tree.xpath ('//form[@action="http://translate.google.it/translate_t"]//select[@name="tl"]/option')
+        for element in elements:
+            cc = element.get("value")
+            name = element.text
+            language = Language (cc, name)
+            to_languages.append (language)
+
+        elements = tree.xpath ('//form[@action="http://translate.google.it/translate_t"]//select[@name="sl"]/option')
+        for element in elements:
+            cc = element.get("value")
+            name = element.text
+            language = Language (cc, name)
+            self.language_table [language] = to_languages
+
+        return self.language_table
 
     def set_step(self, step):
         if self.progress:

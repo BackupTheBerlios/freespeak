@@ -67,8 +67,8 @@ class TranslationBox (gtk.HBox):
         self.to_combo = gtk.ComboBox ()
         self.to_combo.set_sensitive (False)
         cell = gtk.CellRendererText ()
-        self.from_combo.pack_start (cell)
-        self.from_combo.add_attribute (cell, 'text', self.COL_TO_TEXT)
+        self.to_combo.pack_start (cell)
+        self.to_combo.add_attribute (cell, 'text', self.COL_TO_TEXT)
         self.to_combo.connect ('changed', self.on_to_changed)
         self.pack_start (self.to_combo)
         self.to_combo.show ()
@@ -99,17 +99,17 @@ class TranslationBox (gtk.HBox):
 
     def on_translator_changed (self, combo):
         iter = combo.get_active_iter ()
-        translator = iter[self.COL_TRANSLATOR_TRANSLATOR]
+        translator = combo.get_model().get_value (iter, self.COL_TRANSLATOR_TRANSLATOR)
         self.translation.set_translator (translator)
 
     def on_from_changed (self, combo):
         iter = combo.get_active_iter ()
-        lang = iter[self.COL_FROM_LANG]
+        lang = combo.get_model().get_value (iter, self.COL_FROM_LANG)
         self.translation.set_from_lang (lang)
 
     def on_to_changed (self, combo):
         iter = combo.get_active_iter ()
-        lang = iter[self.COL_TO_LANG]
+        lang = combo.get_model().get_value (iter, self.COL_TO_LANG)
         self.translation.set_to_lang (lang)
 
 __all__ = ['TranslationBox']
