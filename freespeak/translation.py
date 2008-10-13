@@ -44,6 +44,7 @@ class BaseTranslation (threading.Thread):
 
     def set_to_lang (self, lang):
         self.to_lang = lang
+        self.update_can_translate (True)
 
     def run (self, request):
         request.from_lang = self.from_lang
@@ -62,6 +63,9 @@ class BaseTranslation (threading.Thread):
         raise NotImplementedError ()
 
     def update_to_langs (self, langs):
+        raise NotImplementedError ()
+
+    def update_can_translate (self, can_translate):
         raise NotImplementedError ()
 
     def update_status (self, status, status_text):

@@ -8,12 +8,14 @@
 	(BaseTranslation.__init__): needs the manager for auto adding itself; all calls have been updated
 	(TranslationRequest, TextTranslationRequest, WebTranslationRequest): added
 	(BaseTranslation.run): use the request
+	(BaseTranslation.update_can_translate): added
 
 	* freespeak/ui/manager.py (Manager.remove_translation): added
 
 	* freespeak/ui/translation.py (TranslationLabel): added
 	(BaseUITranslation.get_label): added
 	(BaseUITranslation.setup_label): added
+	(BaseUITranslation.setup_translation_box): create Translate button
 
 2008-10-11  Luca Bruno  <lethalman88@gmail.com>
 

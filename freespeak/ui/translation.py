@@ -106,6 +106,15 @@ class BaseUITranslation (gtk.VBox, BaseTranslation):
         self.translation_box = TranslationBox (self.application, self)
         self.translation_box.show ()
 
+        button = gtk.Button ("_Translate")
+        button.set_use_underline (True)
+        image = gtk.image_new_from_stock (gtk.STOCK_REFRESH, gtk.ICON_SIZE_BUTTON)
+        button.set_image (image)
+        button.show ()
+
+        self.translation_box.pack_start (button, False)
+        self.pack_start (self.translation_box, False)
+
     def setup_ui (self):
         pass
 
@@ -113,11 +122,7 @@ class BaseUITranslation (gtk.VBox, BaseTranslation):
         return self.label
 
 class TextTranslation (BaseUITranslation):
-    def setup_ui (self):
-        self.pack_start (self.translation_box, False)
-        label = gtk.Label ("Translation")
-        label.show ()
-        self.pack_start (label)
+    pass
 
 class WebTranslation (BaseUITranslation):
     pass
