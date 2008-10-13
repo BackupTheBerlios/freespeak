@@ -5,12 +5,18 @@ class BaseTranslation (threading.Thread):
     STATUS_PROGRESS = 1
     STATUS_COMPLETE = 2
 
-    def __init__ (self, application):
+    def __init__ (self, application, manager):
         self.application = application
+        self.manager = manager
         self.translator = None
         self.status = None
         self.status_text = None
         self.setup ()
+
+        self.manager.add_translation (self)
+
+    def close (self):
+        self.manager.remove_translation (self)
 
     def set_translator (self, translator):
         self.translator = translator

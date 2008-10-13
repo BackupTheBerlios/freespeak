@@ -160,10 +160,9 @@ class MainWindow (gtk.Window):
         """
         type = w.get_name()
         if type == 'Text':
-            translation = TextTranslation (self.application)
+            translation = TextTranslation (self.application, self.manager)
         else:
-            translation = WebTranslation (self.application)
-        self.manager.add_translation (translation)
+            translation = WebTranslation (self.application, self.manager)
                 
     def on_settings(self, w):
         """
