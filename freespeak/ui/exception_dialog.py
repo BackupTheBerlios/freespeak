@@ -3,7 +3,8 @@ import sys
 
 import gtk
 
-from freespeak.ui import utils
+from freespeak.ui import utils as uiutils
+from freespeak import utils
 
 # FIXME:
 # 1. Needs HIG pixel fixes
@@ -14,6 +15,7 @@ class ExceptionDialog (gtk.Dialog):
     """
     Show non-catched exception in a window
     """
+    @utils.syncronized
     def __init__(self, *tb):
         error_string = ''.join (traceback.format_exception (*tb))
         print >> sys.stderr, error_string
@@ -36,10 +38,13 @@ class ExceptionDialog (gtk.Dialog):
         text.show ()
         text.get_buffer().set_text (error_string)
         text.set_editable (False)
-        scroll = utils.ScrolledWindow (text)
+        scroll = uiutils.ScrolledWindow (text)
         scroll.show ()
         self.vbox.pack_start (scroll)
         self.vbox.show ()
 
-        self.run ()
+        self.connect ('response', self.on_response)
+        self.show_all ()
+
+    def on_response (self, *args):
         self.destroy ()

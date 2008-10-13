@@ -1,17 +1,17 @@
 class Status (object):
     def __init__ (self, description):
-        self.description
+        self.description = description
 
-class StatusStarted (object):
+class StatusStarted (Status):
     def __init__ (self, description=None):
         if not description:
             description = _("Translation started")
         Status.__init__ (self, description)
 
-class StatusComplete (object):
+class StatusComplete (Status):
     def __init__ (self, result, description=None):
         if not description:
-            description = _("Translation started")
+            description = _("Translation complete")
         Status.__init__ (self, description)
         self.result = result
 

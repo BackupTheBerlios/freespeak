@@ -1,4 +1,5 @@
-import threading
+import thread
+import gtk
 
 from freespeak.status import *
 
@@ -7,7 +8,7 @@ class TranslationRequest (object):
         self.from_lang = None
         self.to_lang = None
 
-class TextTranslationRequest (object):
+class TextTranslationRequest (TranslationRequest):
     def __init__ (self, text):
         TranslationRequest.__init__ (self)
         self.text = text
@@ -17,7 +18,7 @@ class WebTranslationRequest (TranslationRequest):
         TranslationRequest.__init__ (self)
         self.url = url
 
-class BaseTranslation (threading.Thread):
+class BaseTranslation (object):
     STATUS_STARTED = 0
     STATUS_PROGRESS = 1
     STATUS_COMPLETE = 2
@@ -48,12 +49,17 @@ class BaseTranslation (threading.Thread):
         self.to_lang = lang
         self.update_can_translate (True)
 
-    def run (self, request):
+    def translate (self, request):
+        self.update_can_translate (False)
+        thread.start_new_thread (self._run, (request,))
+
+    def _run (self, request):
         request.from_lang = self.from_lang
         request.to_lang = self.to_lang
         self.update_status (StatusStarted ())
         for status in self.translator.translate (request):
             self.update_status (status)
+        self.update_can_translate (True)
         
     # Virtual methods
 

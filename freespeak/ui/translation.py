@@ -1,7 +1,9 @@
 import gtk
 
+import freespeak.utils as utils
 import freespeak.ui.utils as uiutils
 from freespeak.translation import *
+from freespeak.status import *
 from translation_box import *
 
 class TranslationLabel (gtk.HBox):
@@ -107,6 +109,7 @@ class BaseUITranslation (gtk.VBox, BaseTranslation):
         self.translate_button.set_use_underline (True)
         image = gtk.image_new_from_stock (gtk.STOCK_REFRESH, gtk.ICON_SIZE_BUTTON)
         self.translate_button.set_image (image)
+        self.translate_button.connect ('clicked', self.on_translate_clicked)
         self.translate_button.show ()
 
         self.translation_box.pack_start (self.translate_button, False)
@@ -117,6 +120,12 @@ class BaseUITranslation (gtk.VBox, BaseTranslation):
 
     def get_label (self):
         return self.label
+
+    # Events
+
+    def on_translate_clicked (self, button):
+        request = self.create_request ()
+        self.translate (request)
 
     # Overrided methods
 
@@ -131,8 +140,19 @@ class BaseUITranslation (gtk.VBox, BaseTranslation):
     def update_to_langs (self, langs):
         self.translation_box.update_to_langs (langs)
 
+    @utils.syncronized
     def update_can_translate (self, can_translate):
         self.translate_button.set_sensitive (can_translate)
+
+    @utils.syncronized
+    def update_status (self, status):
+        if isinstance (status, StatusComplete):
+            self.dest_buffer.set_text (status.result)
+
+    # Virtual methods
+
+    def create_request (self):
+        raise NotImplementedError ()
 
 class TextTranslation (BaseUITranslation):
     def setup_ui (self):
@@ -156,6 +176,10 @@ class TextTranslation (BaseUITranslation):
         frame.add (scrolled)
         frame.show ()
         self.pack_start (frame)
+
+    def create_request (self):
+        return TextTranslationRequest (self.source_buffer.get_text (self.source_buffer.get_start_iter (),
+                                                                    self.source_buffer.get_end_iter ()))
 
 class WebTranslation (BaseUITranslation):
     pass

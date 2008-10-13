@@ -19,21 +19,13 @@
     Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 """
 
+import httplib
 import urllib
 import lxml.html
-#from mechanoid.mechanoid import Browser
 
 from freespeak.translator import BaseTranslator
 from freespeak.translation import *
-
-def urlopen(url):
-    b = Browser()
-    b.addheaders = [ ("User-Agent",
-                      "Mozilla/4.7 [en] (X11; U; Linux 2.6.12 i686)")] 
-    b.set_handle_robots(0)
-    query = b.open(url)
-    #b.viewing_html()
-    return query.read()
+from freespeak.status import *
 
 class Language (object):
     def __init__ (self, cc, name):
@@ -83,56 +75,21 @@ class Translator (BaseTranslator):
 
         return self.language_table
 
-    def set_step(self, step):
-        if self.progress:
-            gtk.threads_enter()
-            self.progress.set_step(step)
-            gtk.threads_leave()
+    def translate_text (self, request):
+        headers = {'Content-Type': 'application/x-www-form-urlencoded',
+                   'Accept': 'text/plain'}
+        params = urllib.urlencode ({'hl': request.from_lang.cc,
+                                    'tl': request.to_lang.cc,
+                                    'text': request.text})
 
-    def translate(self, text, kind, progress):
-        self.progress = progress
+        yield Status ("Connecting to translate.google.it")
+        conn = httplib.HTTPConnection ('translate.google.it')
+        conn.request ('POST', '/translate_t', params, headers)
+        result = conn.getresponse().read ()
 
-        self.set_step(1)
-        abb=""
-        for lang in Translator.language_table:
-            if lang["from"] == self.from_lang and lang["to"] == self.to_lang:
-                abb=lang["abb"]
+        yield Status ("Parsing result")
+        tree = lxml.html.fromstring (result)
+        result = tree.get_element_by_id("result_box").text_content()
 
-        source = "text"
-        url = "http://translate.google.com/translate_t"
-
-        if kind == "Web":
-            source = "u"
-            url = "http://translate.google.com/translate_p"
-        
-        params = urllib.urlencode({source:text, "langpair":abb, "hl":"it", "ie":
-                                   "UTF-8", "oe":"UTF-8"})
-        url = "%s?%s" % (url, params)
-
-        self.set_step(2)
-        try: result = urlopen(url) 
-        except:
-            gtk.threads_enter()
-            error_dialog(_('Error during translation')+'\n\n'+str(sys.exc_value))
-            gtk.threads_leave()
-            return
-
-        if kind == "Web":
-            self.set_step(3)
-            url = result[result.index("0;"):]
-            url = url[url.index("=")+1:]
-            url = url[:url.index('>')-1]
-            url = url.replace("&amp;", "&")
-            result = urlopen(url)
-            return (result, url)
-
-        self.set_step(3)
-        result = result[result.index("<textarea"):]
-        result = result[:result.index("</textarea")]
-        result = re.sub("\<[^<]*\>", "", result).strip()
-
-        self.set_step(4)
-        result = result.encode("utf-8")
-        
-        return result
+        yield StatusComplete (result)
 

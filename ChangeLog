@@ -1,3 +1,23 @@
+2008-10-13  Luca Bruno  <lethalman88@gmail.com>
+
+	* freespeak/status.py: fix inheritance
+
+	* freespeak/translation.py (TextTranslationRequest): fix inheritance
+	(BaseTranslation): don't be a Thread object, but still spawn a thread
+	(BaseTranslation._run): was run()
+
+	* freespeak/translators/google.py (Translator.translate_text): added
+
+	* freespeak/utils.py (syncronized): added this decoration to run functions in the main thread, to avoid gdk locking troubles
+	All functions that runs in a thread have been updated
+
+	* freespeak/ui/exception_dialog.py (ExceptionDialog.on_response): added, don't run() anymore, be asyncronous
+
+	* freespeak/ui/translation.py (BaseUITranslation.on_translate_clicked): added
+	(BaseUITranslation.update_status): added
+	(BaseUITranslation.create_request): added virtual function
+	(TextTranslation.create_request): added
+
 2008-10-12  Luca Bruno  <lethalman88@gmail.com>
 
 	* freespeak/status.py: added

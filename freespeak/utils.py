@@ -19,7 +19,17 @@
     Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 """
 
-import gtk, string
+import gobject
+import gtk
+import string
+
+def syncronized (func):
+    def closure (*args, **kwargs):
+        def idle (*aargs, **kkwargs):
+            func (*aargs, **kkwargs)
+            return False
+        gobject.idle_add (idle, *args, **kwargs)
+    return closure
 
 class Combo(gtk.ComboBox):
     def __init__(self):
