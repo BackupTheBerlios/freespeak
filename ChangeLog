@@ -1,6 +1,6 @@
 2008-10-12  Luca Bruno  <lethalman88@gmail.com>
 
-	* freespeak/utils.py (error_message): added
+	* freespeak/ui/utils.py (ScrolledWindow.__init__): set automatic policy
 
 	* freespeak/translator.py (BaseTranslator.get_language_table, BaseTranslator.translate_text, BaseTranslator.translate_web): added
 
@@ -16,6 +16,7 @@
 	(BaseUITranslation.get_label): added
 	(BaseUITranslation.setup_label): added
 	(BaseUITranslation.setup_translation_box): create Translate button
+	(TextTranslation.setup_ui): create text views
 
 2008-10-11  Luca Bruno  <lethalman88@gmail.com>
 

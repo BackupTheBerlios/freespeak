@@ -1,5 +1,6 @@
 import gtk
 
+import freespeak.ui.utils as uiutils
 from freespeak.translation import *
 from translation_box import *
 
@@ -122,7 +123,27 @@ class BaseUITranslation (gtk.VBox, BaseTranslation):
         return self.label
 
 class TextTranslation (BaseUITranslation):
-    pass
+    def setup_ui (self):
+        self.source_buffer = gtk.TextBuffer ()
+        view = gtk.TextView (self.source_buffer)
+        view.show ()
+        scrolled = uiutils.ScrolledWindow (view)
+        scrolled.show ()
+        frame = gtk.Frame (_("Text to translate"))
+        frame.add (scrolled)
+        frame.show ()
+        self.pack_start (frame)
+
+        self.dest_buffer = gtk.TextBuffer ()
+        view = gtk.TextView (self.dest_buffer)
+        view.set_editable (False)
+        view.show ()
+        scrolled = uiutils.ScrolledWindow (view)
+        scrolled.show ()
+        frame = gtk.Frame (_("Translated text"))
+        frame.add (scrolled)
+        frame.show ()
+        self.pack_start (frame)
 
 class WebTranslation (BaseUITranslation):
     pass
