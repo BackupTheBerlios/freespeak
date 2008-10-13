@@ -1,5 +1,9 @@
 2008-10-12  Luca Bruno  <lethalman88@gmail.com>
 
+	* freespeak/ui/translation_box.py (TranslationBox): VBox is not suitable for mnemonic activation
+
+	* freespeak/utils.py (label_new_with_mnemonic): removed
+
 	* freespeak/ui/utils.py (ScrolledWindow.__init__): set automatic policy
 
 	* freespeak/translator.py (BaseTranslator.get_language_table, BaseTranslator.translate_text, BaseTranslator.translate_web): added

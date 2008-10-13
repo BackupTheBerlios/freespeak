@@ -20,7 +20,7 @@ class TranslationBox (gtk.HBox):
         self.setup_to ()
 
     def setup_translator (self):
-        label = utils.label_new_with_mnemonic (_("T_ranslator:"))
+        label = gtk.Label ("Translator:")
         label.show ()
         self.pack_start (label, False)
         
@@ -46,7 +46,7 @@ class TranslationBox (gtk.HBox):
         combo.show ()
 
     def setup_from (self):
-        label = utils.label_new_with_mnemonic (_("_From:"))
+        label = gtk.Label ("From:")
         label.show ()
         self.pack_start (label, False)
         
@@ -60,7 +60,7 @@ class TranslationBox (gtk.HBox):
         self.from_combo.show ()
 
     def setup_to (self):
-        label = utils.label_new_with_mnemonic (_("_To:"))
+        label = gtk.Label ("To:")
         label.show ()
         self.pack_start (label, False)
         
