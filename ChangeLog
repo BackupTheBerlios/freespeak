@@ -1,5 +1,7 @@
 2008-10-12  Luca Bruno  <lethalman88@gmail.com>
 
+	* freespeak/status.py: added
+	
 	* freespeak/translators/google.py (Language): added
 	(Translator.capabilities, Translator.get_language_table): added
 
@@ -16,7 +18,7 @@
 	* freespeak/translation.py (BaseTranslation.close): added
 	(BaseTranslation.__init__): needs the manager for auto adding itself; all calls have been updated
 	(TranslationRequest, TextTranslationRequest, WebTranslationRequest): added
-	(BaseTranslation.run): use the request
+	(BaseTranslation.run): use the request and the status
 	(BaseTranslation.update_can_translate): added
 	(BaseTranslation.set_translator): use sorted ()
 	(BaseTranslation.set_from_lang): use sorted ()

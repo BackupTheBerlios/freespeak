@@ -91,13 +91,8 @@ class TranslationLabel (gtk.HBox):
 
 class BaseUITranslation (gtk.VBox, BaseTranslation):
     def __init__ (self, *args):
-        gtk.VBox.__init__ (self, spacing=6)
+        gtk.VBox.__init__ (self, spacing=12)
         BaseTranslation.__init__ (self, *args)
-
-    def setup (self):
-        self.setup_translation_box ()
-        self.setup_label ()
-        self.setup_ui ()
 
     def setup_label (self):
         self.label = TranslationLabel (self)
@@ -123,7 +118,12 @@ class BaseUITranslation (gtk.VBox, BaseTranslation):
     def get_label (self):
         return self.label
 
-    # Events
+    # Overrided methods
+
+    def setup (self):
+        self.setup_translation_box ()
+        self.setup_label ()
+        self.setup_ui ()
 
     def update_from_langs (self, langs):
         self.translation_box.update_from_langs (langs)

@@ -1,5 +1,7 @@
 import threading
 
+from freespeak.status import *
+
 class TranslationRequest (object):
     def __init__ (self):
         self.from_lang = None
@@ -49,11 +51,10 @@ class BaseTranslation (threading.Thread):
     def run (self, request):
         request.from_lang = self.from_lang
         request.to_lang = self.to_lang
-        self.update_status (Translation.STATUS_STARTED, _("Translation started"))
+        self.update_status (StatusStarted ())
         for status in self.translator.translate (request):
-            self.update_status (Translation.STATUS_PROGRESS, status)
-        self.update_status (Translation.STATUS_COMPLETE, _("Translation complete"))
-
+            self.update_status (status)
+        
     # Virtual methods
 
     def setup (self):
