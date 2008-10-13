@@ -2,11 +2,33 @@ import glob
 import os
 import imp
 
+from freespeak import utils
+from freespeak.translation import TextTranslationRequest, WebTranslationRequest
+
 class BaseTranslator (object):
     name = ""
-    
+    capabilities = ()
+
     def get_name (self):
         return self.name
+
+    def translate (self, request):
+        if isinstance (request, TextTranslationRequest):
+            return self.translate_text (request)
+        elif isinstance (request, WebTranslationRequest):
+            return self.translate
+        else:
+            raise RuntimeError ("Unknown translation request: %s" % str (request))
+
+    @classmethod
+    def get_language_table (cls):
+        raise NotImplementedError ()
+
+    def translate_text (self, request):
+        raise NotImplementedError ()
+
+    def translate_web (self, request):
+        raise NotImplementedError ()
 
 class TranslatorsManager (set):
     def __init__ (self, application):

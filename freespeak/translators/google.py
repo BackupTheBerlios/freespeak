@@ -20,7 +20,7 @@
 """
 
 import re, sys, gtk, urllib
-#from mechanoid.mechanoid import Browser
+from mechanoid.mechanoid import Browser
 
 from freespeak.translator import BaseTranslator
 

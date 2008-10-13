@@ -1,5 +1,20 @@
 import threading
 
+class TranslationRequest (object):
+    def __init__ (self):
+        self.from_lang = None
+        self.to_lang = None
+
+class TextTranslationRequest (object):
+    def __init__ (self, text):
+        TranslationRequest.__init__ (self)
+        self.text = text
+
+class WebTranslationRequest (TranslationRequest):
+    def __init__ (self, url):
+        TranslationRequest.__init__ (self)
+        self.url = url
+
 class BaseTranslation (threading.Thread):
     STATUS_STARTED = 0
     STATUS_PROGRESS = 1
@@ -30,9 +45,11 @@ class BaseTranslation (threading.Thread):
     def set_to_lang (self, lang):
         self.to_lang = lang
 
-    def run (self, data):
+    def run (self, request):
+        request.from_lang = self.from_lang
+        request.to_lang = self.to_lang
         self.update_status (Translation.STATUS_STARTED, _("Translation started"))
-        for status in self.translator.translate (self.from_lang, self.to_lang, data):
+        for status in self.translator.translate (request):
             self.update_status (Translation.STATUS_PROGRESS, status)
         self.update_status (Translation.STATUS_COMPLETE, _("Translation complete"))
 

@@ -110,3 +110,12 @@ class Frame(gtk.Frame):
     def add(self, w):
         self.alignment.add(w)
    
+# Dialogs
+
+default_flags = gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT
+
+def error_message (parent, message):
+    dialog = gtk.MessageDialog (parent, default_flags, gtk.MESSAGE_ERROR, gtk.BUTTONS_OK)
+    dialog.set_markup (message)
+    dialog.run ()
+    dialog.destroy ()
