@@ -49,13 +49,13 @@ class MainWindow (gtk.Window):
 
         ag = gtk.ActionGroup ('WindowActions')
         actions = (
-            ('Text', gtk.STOCK_NEW, _('Text'), "<Control>n",
+            ('Text', gtk.STOCK_NEW, _('_Text'), "<Control>t",
              _('New translation'), self.on_new),
-            ('Web', gtk.STOCK_NETWORK, _('Web'), "<Control>e",
+            ('Web', gtk.STOCK_NETWORK, _('_Web'), "<Control>w",
              _('New web page translation'), self.on_new),
-            ('Settings', gtk.STOCK_PREFERENCES, _('Settings'),
+            ('Settings', gtk.STOCK_PREFERENCES, _('_Settings'),
              "<Control>s", _('FreeSpeak settings'), self.on_settings),
-            ('Quit', gtk.STOCK_QUIT, _('Quit'), "<Control>q",
+            ('Quit', gtk.STOCK_QUIT, _('_Quit'), "<Control>q",
              _('Quit FreeSpeak'), self.on_quit),
             ('About', gtk.STOCK_ABOUT, _('About'), "<Control>a",
              _('About FreeSpeak'), self.on_about),

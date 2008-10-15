@@ -1,5 +1,7 @@
 2008-10-14  Luca Bruno  <lethalman88@gmail.com>
 
+	* freespeak/ui/main_window.py (MainWindow.setup_layout): fixed some accelerators
+
 	* freespeak/ui/translation_box.py (TranslationBox.setup_translator): sort translators
 
 	* freespeak/translators/google.py (Language.__cmp__): fixed
