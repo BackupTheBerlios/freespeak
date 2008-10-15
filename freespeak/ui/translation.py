@@ -177,7 +177,6 @@ class TextTranslation (BaseUITranslation):
     def create_request (self):
         return TextTranslationRequest (self.source_buffer.get_text (self.source_buffer.get_start_iter (),
                                                                     self.source_buffer.get_end_iter ()))
-
     @utils.syncronized
     def update_status (self, status):
         if isinstance (status, StatusComplete):
@@ -191,6 +190,8 @@ class WebTranslation (BaseUITranslation):
         hbox.pack_start (label, False)
 
         self.url = gtk.Entry ()
+        self.url.set_sensitive (False)
+        self.url.connect ('changed', self.on_url_changed)
         self.url.show ()
         hbox.pack_start (self.url)
         
@@ -202,11 +203,25 @@ class WebTranslation (BaseUITranslation):
         self.pack_start (self.browser)
 
     def create_request (self):
-        return WebTranslationRequest (self.url.get_text ())
+        url = self.url.get_text ()
+        if not url:
+            uiutils.warning (_("Please insert an URL"))
+        else:
+            return WebTranslationRequest (self.url.get_text ())
+
+    @utils.syncronized
+    def update_can_translate (self, can_translate):
+        self.url.set_sensitive (can_translate)
+        self.translate_button.set_sensitive (can_translate and bool (self.url.get_text ()))
 
     @utils.syncronized
     def update_status (self, status):
         if isinstance (status, StatusComplete):
             self.browser.load_url (status.result)
+
+    # Events
+
+    def on_url_changed (self, entry):
+        self.translate_button.set_sensitive (bool (entry.get_text ()))
 
 __all__ = ['BaseUITranslation', 'TextTranslation', 'WebTranslation']

@@ -15,6 +15,16 @@ def error (message, parent=None):
                                gtk.MESSAGE_ERROR, gtk.BUTTONS_OK, message)
     dialog.run ()
     dialog.destroy()
+
+def warning (message, parent=None):
+    """
+    Run an message dialog for a warning
+    """
+    dialog = gtk.MessageDialog(parent,
+                               gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT,
+                               gtk.MESSAGE_WARNING, gtk.BUTTONS_OK, message)
+    dialog.run ()
+    dialog.destroy()
             
 def question(self, message, parent=None):
     """

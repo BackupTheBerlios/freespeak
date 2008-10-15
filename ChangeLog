@@ -12,6 +12,7 @@
 	* freespeak/ui/translation.py (WebTranslation.setup_ui, create_request, update_status): added
 	(TextTranslation.update_status): added
 	(BaseUITranslation.update_status): removed, moved to subclasses
+	(WebTranslation.on_url_changed): added, extend validation to url
 
 2008-10-13  Luca Bruno  <lethalman88@gmail.com>
 
