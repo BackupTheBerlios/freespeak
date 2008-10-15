@@ -1,4 +1,5 @@
 import gtk
+import gtkmozembed
 
 import freespeak.utils as utils
 import freespeak.ui.utils as uiutils
@@ -125,7 +126,8 @@ class BaseUITranslation (gtk.VBox, BaseTranslation):
 
     def on_translate_clicked (self, button):
         request = self.create_request ()
-        self.translate (request)
+        if request:
+            self.translate (request)
 
     # Overrided methods
 
@@ -143,11 +145,6 @@ class BaseUITranslation (gtk.VBox, BaseTranslation):
     @utils.syncronized
     def update_can_translate (self, can_translate):
         self.translate_button.set_sensitive (can_translate)
-
-    @utils.syncronized
-    def update_status (self, status):
-        if isinstance (status, StatusComplete):
-            self.dest_buffer.set_text (status.result)
 
     # Virtual methods
 
@@ -181,7 +178,35 @@ class TextTranslation (BaseUITranslation):
         return TextTranslationRequest (self.source_buffer.get_text (self.source_buffer.get_start_iter (),
                                                                     self.source_buffer.get_end_iter ()))
 
+    @utils.syncronized
+    def update_status (self, status):
+        if isinstance (status, StatusComplete):
+            self.dest_buffer.set_text (status.result)
+
 class WebTranslation (BaseUITranslation):
-    pass
+    def setup_ui (self):
+        hbox = gtk.HBox (spacing=6)
+        label = gtk.Label ("URL:")
+        label.show ()
+        hbox.pack_start (label, False)
+
+        self.url = gtk.Entry ()
+        self.url.show ()
+        hbox.pack_start (self.url)
+        
+        hbox.show ()
+        self.pack_start (hbox, False)
+
+        self.browser = gtkmozembed.MozEmbed ()
+        self.browser.show ()
+        self.pack_start (self.browser)
+
+    def create_request (self):
+        return WebTranslationRequest (self.url.get_text ())
+
+    @utils.syncronized
+    def update_status (self, status):
+        if isinstance (status, StatusComplete):
+            self.browser.load_url (status.result)
 
 __all__ = ['BaseUITranslation', 'TextTranslation', 'WebTranslation']

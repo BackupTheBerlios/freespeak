@@ -33,7 +33,7 @@ class Language (object):
         self.name = name
 
     def __cmp__ (self, other):
-        if self.name < other.name:
+        if not other or self.name < other.name:
             return -1
         elif self.name > other.name:
             return 1
@@ -78,7 +78,7 @@ class Translator (BaseTranslator):
     def translate_text (self, request):
         headers = {'Content-Type': 'application/x-www-form-urlencoded',
                    'Accept': 'text/plain'}
-        params = urllib.urlencode ({'hl': request.from_lang.cc,
+        params = urllib.urlencode ({'sl': request.from_lang.cc,
                                     'tl': request.to_lang.cc,
                                     'text': request.text})
 
@@ -93,3 +93,9 @@ class Translator (BaseTranslator):
 
         yield StatusComplete (result)
 
+    def translate_web (self, request):
+        params = urllib.urlencode ({'sl': request.from_lang.cc,
+                                    'tl': request.to_lang.cc,
+                                    'u': request.url})
+        yield StatusComplete ('http://translate.google.com/translate?'+params)
+        

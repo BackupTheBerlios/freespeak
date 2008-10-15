@@ -1,3 +1,18 @@
+2008-10-14  Luca Bruno  <lethalman88@gmail.com>
+
+	* freespeak/ui/translation_box.py (TranslationBox.setup_translator): sort translators
+
+	* freespeak/translators/google.py (Language.__cmp__): fixed
+	(Language.translate_web): added
+
+	* freespeak/translator.py (BaseTranslator.__cmp__): added
+
+	* freespeak/ui/exception_dialog.py (exception_hook): added as wrapper to the dialog
+
+	* freespeak/ui/translation.py (WebTranslation.setup_ui, create_request, update_status): added
+	(TextTranslation.update_status): added
+	(BaseUITranslation.update_status): removed, moved to subclasses
+
 2008-10-13  Luca Bruno  <lethalman88@gmail.com>
 
 	* freespeak/status.py: fix inheritance

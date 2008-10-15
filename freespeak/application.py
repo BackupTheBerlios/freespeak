@@ -36,7 +36,7 @@ from freespeak.config import Config
 from freespeak.translator import TranslatorsManager
 import freespeak.translators
 from freespeak.ui.main_window import MainWindow
-from freespeak.ui.exception_dialog import ExceptionDialog
+from freespeak.ui import exception_dialog
 #from freespeak.ipc import IpcServer, IpcClient
 
 class Application (object):
@@ -56,7 +56,7 @@ class Application (object):
         self.setup_translators_manager ()
 
     def setup_exception_dialog (self):
-        sys.excepthook = ExceptionDialog
+        sys.excepthook = exception_dialog.exception_hook
 
     def setup_l10n (self):
         gettext.NullTranslations()

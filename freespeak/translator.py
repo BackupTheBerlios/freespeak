@@ -16,7 +16,7 @@ class BaseTranslator (object):
         if isinstance (request, TextTranslationRequest):
             return self.translate_text (request)
         elif isinstance (request, WebTranslationRequest):
-            return self.translate
+            return self.translate_web (request)
         else:
             raise RuntimeError ("Unknown translation request: %s" % str (request))
 
@@ -28,6 +28,13 @@ class BaseTranslator (object):
 
     def translate_web (self, request):
         raise NotImplementedError ()
+
+    def __cmp__ (self, other):
+        if not other or self.name < other.name:
+            return -1
+        elif self.name > other.name:
+            return 1
+        return 0
 
 class TranslatorsManager (set):
     def __init__ (self, application):

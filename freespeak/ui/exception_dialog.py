@@ -16,10 +16,7 @@ class ExceptionDialog (gtk.Dialog):
     Show non-catched exception in a window
     """
     @utils.syncronized
-    def __init__(self, *tb):
-        error_string = ''.join (traceback.format_exception (*tb))
-        print >> sys.stderr, error_string
-
+    def __init__(self, error_string):
         gtk.Dialog.__init__ (self, 'FreeSpeak - '+_('Exception'), None, 0,
                              (gtk.STOCK_CLOSE, gtk.RESPONSE_CLOSE))
         self.set_keep_above (1)
@@ -48,3 +45,9 @@ class ExceptionDialog (gtk.Dialog):
 
     def on_response (self, *args):
         self.destroy ()
+
+def exception_hook (*tb):
+    error_string = ''.join (traceback.format_exception (*tb))
+    print >> sys.stderr, error_string
+    ExceptionDialog (error_string)
+
