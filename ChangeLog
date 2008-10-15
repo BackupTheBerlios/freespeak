@@ -1,3 +1,9 @@
+2008-10-15  Luca Bruno  <lethalman88@gmail.com>
+
+	* freespeak/ui/translation.py (TranslationLabel.setup_progress): added, update other methods
+
+	* freespeak/ui/utils.py (Progress): added
+
 2008-10-14  Luca Bruno  <lethalman88@gmail.com>
 
 	* freespeak/ui/main_window.py (MainWindow.setup_layout): fixed some accelerators

@@ -116,6 +116,10 @@ class BaseUITranslation (gtk.VBox, BaseTranslation):
         self.translation_box.pack_start (self.translate_button, False)
         self.pack_start (self.translation_box, False)
 
+    def setup_progress (self):
+        self.progress = uiutils.Progress ()
+        self.pack_start (self.progress, False)
+
     def setup_ui (self):
         pass
 
@@ -135,6 +139,7 @@ class BaseUITranslation (gtk.VBox, BaseTranslation):
         self.setup_translation_box ()
         self.setup_label ()
         self.setup_ui ()
+        self.setup_progress()
 
     def update_from_langs (self, langs):
         self.translation_box.update_from_langs (langs)
@@ -145,6 +150,16 @@ class BaseUITranslation (gtk.VBox, BaseTranslation):
     @utils.syncronized
     def update_can_translate (self, can_translate):
         self.translate_button.set_sensitive (can_translate)
+
+    @utils.syncronized
+    def update_status (self, status):
+        if isinstance (status, StatusStarted):
+            self.progress.show ()
+            self.progress.start ()
+        elif isinstance (status, StatusComplete):
+            self.progress.hide ()
+            self.progress.stop ()
+        self.progress.set_text (status.description)
 
     # Virtual methods
 
@@ -179,6 +194,7 @@ class TextTranslation (BaseUITranslation):
                                                                     self.source_buffer.get_end_iter ()))
     @utils.syncronized
     def update_status (self, status):
+        BaseUITranslation.update_status (self, status)
         if isinstance (status, StatusComplete):
             self.dest_buffer.set_text (status.result)
 
@@ -216,6 +232,7 @@ class WebTranslation (BaseUITranslation):
 
     @utils.syncronized
     def update_status (self, status):
+        BaseUITranslation.update_status (self, status)
         if isinstance (status, StatusComplete):
             self.browser.load_url (status.result)
 

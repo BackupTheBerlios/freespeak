@@ -1,10 +1,29 @@
 import gtk
+import gobject
 
 class ScrolledWindow (gtk.ScrolledWindow):
     def __init__ (self, child):
         gtk.ScrolledWindow.__init__ (self)
         self.set_policy (gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
         self.add (child)
+
+class Progress (gtk.ProgressBar):
+    def __init__ (self):
+        gtk.ProgressBar.__init__ (self)
+        self.running = False
+        self.set_pulse_step (0.01)
+
+    def pulse_idle (self):
+        self.pulse ()
+        return self.running
+
+    def start (self):
+        assert not self.running
+        self.running = True
+        gobject.timeout_add (10, self.pulse_idle)
+
+    def stop (self):
+        self.running = False
 
 def error (message, parent=None):
     """
