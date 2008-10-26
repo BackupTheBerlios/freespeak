@@ -53,10 +53,10 @@ class Translator (BaseTranslator):
     capabilities = [TextTranslationRequest, WebTranslationRequest]
     icon_file = "altavista-16x16.png"
     
-    def __init__(self):
+    def __init__ (self):
         self.language_table = {}
     
-    def get_language_table(self):
+    def get_language_table (self):
         if self.language_table:
             return self.language_table
 
