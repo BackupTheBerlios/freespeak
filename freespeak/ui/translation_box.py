@@ -30,9 +30,10 @@ class TranslationBox (gtk.HBox):
         default_iter = None
 
         for translator in sorted (self.application.translators_manager):
-            iter = model.append ([translator.get_name (), translator])
-            if translator == default_translator:
-                default_iter = iter
+            if self.translation.capability in translator.capabilities:
+                iter = model.append ([translator.get_name (), translator])
+                if translator == default_translator:
+                    default_iter = iter
 
         combo.set_model (model)
         if default_iter:

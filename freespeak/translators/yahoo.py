@@ -56,7 +56,7 @@ class Translator (BaseTranslator):
     def __init__ (self):
         self.language_table = {}
     
-    def get_language_table (self):
+    def get_language_table (self, capability):
         if self.language_table:
             return self.language_table
 

@@ -1,5 +1,7 @@
 2008-10-26  Luca Bruno  <lethalman88@gmail.com>
 
+	* freespeak/translators/freetranslation.py: completed
+
 	* freespeak/translators/opentran.py: work started
 
 	* freespeak/translators/yahoo.py: refactoring complete (was altavista)

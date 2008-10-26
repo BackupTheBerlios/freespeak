@@ -169,6 +169,8 @@ class BaseUITranslation (gtk.VBox, BaseTranslation):
         raise NotImplementedError ()
 
 class TextTranslation (BaseUITranslation):
+    capability = TextTranslationRequest
+
     def setup_ui (self):
         self.source_buffer = gtk.TextBuffer ()
         view = gtk.TextView (self.source_buffer)
@@ -201,6 +203,8 @@ class TextTranslation (BaseUITranslation):
             self.dest_buffer.set_text (status.result)
 
 class WebTranslation (BaseUITranslation):
+    capability = WebTranslationRequest
+
     def setup_ui (self):
         hbox = gtk.HBox (spacing=6)
         label = gtk.Label ("URL:")

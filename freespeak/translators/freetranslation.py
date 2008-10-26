@@ -19,103 +19,69 @@
     Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 """
 
-import re, sys, gtk, urllib
+import httplib
+import urllib
+import lxml.html
 
 from freespeak.translator import BaseTranslator
+from freespeak.translation import *
+from freespeak.status import *
 
 class Translator (BaseTranslator):
-    name = 'Free Translation'
-    web = False
-    language_table = []
+    name = 'FreeTranslation'
+    capabilities = [TextTranslationRequest, WebTranslationRequest]
     icon_file = "freetranslation-16x16.png"
     
-    def __init__(self):
-        self.from_lang="English"
-        self.to_lang="Russian"
+    def __init__ (self):
+        self.text_language_table = {}
+        self.web_language_table = {}
     
-    def build_language_table(self):
-        if Translator.language_table: return
+    def get_language_table (self, capability):
+        if capability == TextTranslationRequest:
+            return self._get_language_table (self.text_language_table, 'frmTextTranslator')
+        else:
+            return self._get_language_table (self.web_language_table, 'frmWebTranslator')
+
+    def _get_language_table (self, language_table, formid):
+        if language_table:
+            return language_table
+
         url = 'http://www.freetranslation.com/'
-        try:
-            query = urllib.urlopen(url)
-            result = query.read()
-            result = result[result.index('<select name="language"'):]
-            result = result[result.index("<option"):]
-            result = result[:result.index("</select>")]
-            result = result.replace("&", " ")
-            rows=result.split("</option>")
-            rows=rows[2:]
-        except:
-            error_dialog(_('Error during language table loading')+
-                         '\n\n'+str(sys.exc_value)) 
-            return
-        for row in rows:
-            try:
-                abb=row[row.index("\"")+1:row.rindex("\"")]
-                from_lang=row[row.index(">")+1:row.index(" to")].split()[0]
-                to_lang=row[row.index("to")+3:] #.split()[0]
-                Translator.language_table.append({"from":from_lang,
-                                                  "to":to_lang, "abb":abb})
-            except:
-                pass
+        tree = lxml.html.parse (url)
 
-    def set_step(self, step):
-        if self.progress:
-            gtk.threads_enter()
-            self.progress.set_step(step)
-            gtk.threads_leave()
-        
-    def translate(self, text, kind, progress):
-        self.progress = progress
+        elements = tree.xpath ('//form[@id="%s"]//select[@name="language"]/option' % formid)
 
-        self.set_step(1)
-        abb=""
-        for lang in Translator.language_table:
-            if lang["from"] == self.from_lang and lang["to"] == self.to_lang:
-                abb=lang["abb"]
-
-        if "Russian" in self.from_lang:
-            text = text.encode("koi8-r")
-        elif "Simplified" in self.from_lang:
-            text = text.encode("gb2312")
-        elif "Traditional" in self.from_lang:
-            text = text.encode("big5hkscs")
-        else:
-            text = text.encode("latin-1")
+        for element in elements:
+            name_to_name = element.text
+            fromlang, tolang = name_to_name.split (' to ')
             
-        params = urllib.urlencode({"sequence":"core", "mode":"html",
-                                   "template":"results_en-us.htm",
-                                   "language":abb,"srctext":text})
-        if "Russian" in abb or "Chinese" in abb:
-            url = "http://ets6.freetranslation.com/?%s" % params
-        else:
-            url = "http://ets.freetranslation.com/?%s" % params
+            if not fromlang in language_table:
+                language_table[fromlang] = []
+            language_table[fromlang].append (tolang)
 
-        self.set_step(2)
-        try:
-            query = urllib.urlopen(url)
-            result = query.read()
-        except:
-            gtk.threads_enter()
-            error_dialog(_('Error during translation')+'\n\n'+str(sys.exc_value))
-            gtk.threads_leave()
-            return
+        return language_table
 
-        self.set_step(3)
-        result = result[result.index("<textarea"):]
-        result = result[:result.index("</textarea")]
-        result = re.sub("\<[^<]*\>", "", result).strip()
+    def translate_text (self, request):
+        headers = {'Content-Type': 'application/x-www-form-urlencoded',
+                   'Accept': 'text/plain'}
+        trans = "%s/%s" % (request.from_lang, request.to_lang)
+        params = urllib.urlencode ({'sequence': 'core',
+                                    'mode': 'text',
+                                    'charset': 'UTF-8',
+                                    
+                                    'language': trans,
+                                    'srctext': request.text})
 
-        self.set_step(4)
-        if "Russian" in self.to_lang:
-            result = unicode(result, "koi8-r")
-        elif "Simplified" in self.to_lang:
-            result = unicode(result, "gb2312")
-        elif "Traditional" in self.to_lang:
-            result = unicode(result, "big5hkscs")
-        else:
-            result = unicode(result, "latin-1")
-        result = result.encode("utf-8")
+        yield Status (_("Connecting to")+" ets.freetranslation.com")
+        conn = httplib.HTTPConnection ('ets.freetranslation.com')
+        conn.request ('POST', '/', params, headers)
+        result = conn.getresponse().read ()
 
-        return result
+        yield StatusComplete (result)
 
+    def translate_web (self, request):
+        trans = "%s/%s" % (request.from_lang, request.to_lang)
+        params = urllib.urlencode ({'sequence': 'core',
+                                    'language': trans,
+                                    'url': request.url})
+        yield StatusComplete ('http://fets5.freetranslation.com/?'+params)

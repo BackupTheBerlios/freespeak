@@ -19,9 +19,7 @@ class WebTranslationRequest (TranslationRequest):
         self.url = url
 
 class BaseTranslation (object):
-    STATUS_STARTED = 0
-    STATUS_PROGRESS = 1
-    STATUS_COMPLETE = 2
+    capability = None
 
     def __init__ (self, application, manager):
         self.application = application
@@ -38,7 +36,7 @@ class BaseTranslation (object):
 
     def set_translator (self, translator):
         self.translator = translator
-        self.language_table = self.translator.get_language_table ()
+        self.language_table = self.translator.get_language_table (self.capability)
         self.update_from_langs (sorted (self.language_table.keys()))
 
     def set_from_lang (self, lang):
