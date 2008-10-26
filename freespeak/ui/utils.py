@@ -7,6 +7,26 @@ class ScrolledWindow (gtk.ScrolledWindow):
         self.set_policy (gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
         self.add (child)
 
+class Frame (gtk.Frame):
+    def __init__ (self, label_text):
+        gtk.Frame.__init__ (self)
+        label = gtk.Label ()
+        label.set_markup ("<b>"+label_text+"</b>")
+        label.show ()
+        self.set_property ('label-xalign', 0)
+        self.set_label_widget (label)
+        self.set_shadow_type (gtk.SHADOW_NONE)
+
+    def add (self, widget):
+        alignment = gtk.Alignment ()
+        alignment.set_property ('top-padding', 6)
+        alignment.set_property ('left-padding', 12)
+        alignment.set_property ('xscale', 1)
+        alignment.set_property ('yscale', 1)
+        alignment.add (widget)
+        alignment.show ()
+        return gtk.Frame.add (self, alignment)
+
 class Progress (gtk.ProgressBar):
     def __init__ (self):
         gtk.ProgressBar.__init__ (self)
