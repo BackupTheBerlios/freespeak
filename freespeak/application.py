@@ -36,6 +36,7 @@ from freespeak.config import Config
 from freespeak.translator import TranslatorsManager
 import freespeak.translators
 from freespeak.ui.main_window import MainWindow
+from freespeak.ui.status_icon import StatusIcon
 from freespeak.ui import exception_dialog
 #from freespeak.ipc import IpcServer, IpcClient
 
@@ -97,6 +98,7 @@ class Application (object):
         gtk.gdk.threads_init()
         self.main_window = MainWindow (self)
         self.main_window.show ()
+        self.status_icon = StatusIcon (self)
 
         file(self.pid_file, 'w').write(str (os.getpid()))
 
