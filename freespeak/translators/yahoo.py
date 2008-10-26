@@ -1,6 +1,6 @@
 """
-    google.py
-    Sun Jun 26 16:42:52 2005
+    yahoo.py
+    Fri Jun 14 13:44:32 2005
     Copyright (C) 2005-2006-2007-2008  Luca Bruno <lethalman88@gmail.com>
     http://www.italianpug.org
    
@@ -39,63 +39,77 @@ class Language (object):
             return 1
         return 0
 
+    def __eq__ (self, other):
+        return self.name == other.name and self.cc == other.cc
+
+    def __hash__ (self):
+        return hash (self.cc + self.name)
+
     def __str__ (self):
         return self.name
 
 class Translator (BaseTranslator):
-    name = 'Google'
+    name = 'Yahoo!'
     capabilities = [TextTranslationRequest, WebTranslationRequest]
-    icon_file = "google-16x16.png"
+    icon_file = "altavista-16x16.png"
     
     def __init__(self):
         self.language_table = {}
-
+    
     def get_language_table(self):
-        # Google can handle all language combos
         if self.language_table:
             return self.language_table
 
-        url = 'http://www.google.it/language_tools'
+        url = 'http://babelfish.yahoo.com/'
         tree = lxml.html.parse (url)
 
-        to_languages = []
-        elements = tree.xpath ('//form[@action="http://translate.google.it/translate_t"]//select[@name="tl"]/option')
-        for element in elements:
-            cc = element.get("value")
-            name = element.text
-            language = Language (cc, name)
-            to_languages.append (language)
+        elements = tree.xpath ('//form[@name="frmTrText"]//select[@name="lp"]/option[@value!=""]')
 
-        elements = tree.xpath ('//form[@action="http://translate.google.it/translate_t"]//select[@name="sl"]/option')
         for element in elements:
-            cc = element.get("value")
-            name = element.text
-            language = Language (cc, name)
-            self.language_table [language] = to_languages
+            cc_to_cc = element.get ('value')
+            fromcc, tocc = cc_to_cc.split ('_')
+            name_to_name = element.text
+            fromname, toname = name_to_name.split (' to ')
+            fromlang = Language (fromcc, fromname)
+            tolang = Language (tocc, toname)
+            
+            if not fromlang in self.language_table:
+                self.language_table[fromlang] = []
+            self.language_table[fromlang].append (tolang)
 
         return self.language_table
 
     def translate_text (self, request):
         headers = {'Content-Type': 'application/x-www-form-urlencoded',
                    'Accept': 'text/plain'}
-        params = urllib.urlencode ({'sl': request.from_lang.cc,
-                                    'tl': request.to_lang.cc,
-                                    'text': request.text})
+        lp = request.from_lang.cc+'_'+request.to_lang.cc
+        params = urllib.urlencode ({'ei': 'UTF-8',
+                                    'doit': 'done',
+                                    'fr': 'bf-home',
+                                    'intl': '1',
+                                    'tt': 'urltext',
 
-        yield Status (_("Connecting to")+" translate.google.it")
-        conn = httplib.HTTPConnection ('translate.google.it')
-        conn.request ('POST', '/translate_t', params, headers)
+                                    'trtext': request.text,
+                                    'lp': lp})
+
+        yield Status (_("Connecting to")+" babelfish.yahoo.com")
+        conn = httplib.HTTPConnection ('babelfish.yahoo.com')
+        conn.request ('POST', '/translate_txt', params, headers)
         result = conn.getresponse().read ()
 
         yield Status (_("Parsing result"))
         tree = lxml.html.fromstring (result)
-        result = tree.get_element_by_id("result_box").text_content()
+        result = tree.get_element_by_id("result").text_content()
 
         yield StatusComplete (result)
 
     def translate_web (self, request):
-        params = urllib.urlencode ({'sl': request.from_lang.cc,
-                                    'tl': request.to_lang.cc,
-                                    'u': request.url})
-        yield StatusComplete ('http://translate.google.com/translate?'+params)
-        
+        lp = request.from_lang.cc+'_'+request.to_lang.cc
+        params = urllib.urlencode ({'doit': 'done',
+                                    'tt': 'url',
+                                    'intl': '1',
+                                    'fr': 'bf-res',
+
+                                    'lp': lp,
+                                    'trurl': request.url})
+        yield StatusComplete ('http://babelfish.yahoo.com/translate_url?'+params)
