@@ -2,9 +2,33 @@ import gtk
 
 from freespeak import utils
 
-class TranslationBox (gtk.HBox):
+class TranslatorCombo (gtk.ComboBox):
     COL_TRANSLATOR_TEXT = 0
     COL_TRANSLATOR_TRANSLATOR = 1
+
+    def __init__ (self, application, capability=None):
+        gtk.ComboBox.__init__ (self)
+        self.application = application
+
+        model = gtk.ListStore (str, object)
+        default_translator = self.application.translators_manager.get_default ()
+        default_iter = None
+
+        for translator in sorted (self.application.translators_manager):
+            if not capability or capability in translator.capabilities:
+                iter = model.append ([translator.get_name (), translator])
+                if translator == default_translator:
+                    default_iter = iter
+
+        self.set_model (model)
+        if default_iter:
+            self.set_active_iter (default_iter)
+
+        cell = gtk.CellRendererText ()
+        self.pack_start (cell)
+        self.add_attribute (cell, 'text', self.COL_TRANSLATOR_TEXT)
+
+class TranslationBox (gtk.HBox):
     COL_FROM_TEXT = 0
     COL_FROM_LANG = 1
     COL_TO_TEXT = 0
@@ -24,27 +48,10 @@ class TranslationBox (gtk.HBox):
         label.show ()
         self.pack_start (label, False)
         
-        combo = gtk.ComboBox ()
-        model = gtk.ListStore (str, object)
-        default_translator = self.application.translators_manager.get_default ()
-        default_iter = None
-
-        for translator in sorted (self.application.translators_manager):
-            if self.translation.capability in translator.capabilities:
-                iter = model.append ([translator.get_name (), translator])
-                if translator == default_translator:
-                    default_iter = iter
-
-        combo.set_model (model)
-        if default_iter:
-            combo.set_active_iter (default_iter)
-
-        cell = gtk.CellRendererText ()
-        combo.pack_start (cell)
-        combo.add_attribute (cell, 'text', self.COL_TRANSLATOR_TEXT)
+        combo = TranslatorCombo (self.application, self.translation.capability)
         combo.connect ('changed', self.on_translator_changed)
-        self.pack_start (combo)
         combo.show ()
+        self.pack_start (combo)
 
     def setup_from (self):
         label = gtk.Label ("From:")

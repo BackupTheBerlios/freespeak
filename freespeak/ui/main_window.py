@@ -3,6 +3,7 @@ import os
 
 from freespeak.ui.manager import *
 from freespeak.ui.translation import *
+from freespeak.ui.settings import *
 
 class MainWindow (gtk.Window):
     ui_string = """<ui>
@@ -10,7 +11,7 @@ class MainWindow (gtk.Window):
             <toolitem action="Text" />
             <toolitem action="Web" />
             <separator />
-            <toolitem action="Settings" />
+            <toolitem action="Preferences" />
             <separator />
             <toolitem action="Quit" />
             <toolitem action="About" />
@@ -18,7 +19,7 @@ class MainWindow (gtk.Window):
         </toolbar>
         <accelerator action="Text" />
         <accelerator action="Web" />
-        <accelerator action="Settings" />
+        <accelerator action="Preferences" />
         <accelerator action="Quit" />
         <accelerator action="About" />
         </ui>"""
@@ -52,11 +53,11 @@ class MainWindow (gtk.Window):
              _('New translation'), self.on_new),
             ('Web', gtk.STOCK_NETWORK, _('_Web'), "<Control>w",
              _('New web page translation'), self.on_new),
-            ('Settings', gtk.STOCK_PREFERENCES, _('_Settings'),
-             "<Control>s", _('FreeSpeak settings'), self.on_settings),
-            ('Quit', gtk.STOCK_QUIT, _('_Quit'), "<Control>q",
+            ('Preferences', gtk.STOCK_PREFERENCES, None,
+             "<Control>p", _('FreeSpeak preferences'), self.on_settings),
+            ('Quit', gtk.STOCK_QUIT, None, "<Control>q",
              _('Quit FreeSpeak'), self.on_quit),
-            ('About', gtk.STOCK_ABOUT, _('About'), "<Control>a",
+            ('About', gtk.STOCK_ABOUT, None, "<Control>a",
              _('About FreeSpeak'), self.on_about),
             )
         ag.add_actions (actions)
@@ -98,7 +99,7 @@ class MainWindow (gtk.Window):
         """
         FreeSpeak preferences
         """
-        Settings(self).start()
+        Settings (self.application)
                 
     def on_about(self, w):
         """

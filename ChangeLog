@@ -1,5 +1,11 @@
 2008-10-26  Luca Bruno  <lethalman88@gmail.com>
 
+	* freespeak/config.py (Config): fixed some issues
+
+	* freespeak/ui/settings.py: moved here, completed
+
+	* freespeak/ui/translation_box.py (TranslatorCombo): added, detached from TranslationBox
+
 	* freespeak/ui/status_icon.py: added
 
 	* freespeak/translators/freetranslation.py: completed

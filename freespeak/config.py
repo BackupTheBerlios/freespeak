@@ -33,11 +33,11 @@ class Config (ConfigParser):
         try:
             self.readfp (file (self.file))
         except:
-            self.add_section('clipboard')
-            self.set('clipboard', 'get', 'no')
-            self.set('clipboard', 'set', 'no')
-            self.add_section("translator")
-            self.set("translator", "default", "")
+            self.add_section ('clipboard')
+            self.set ('clipboard', 'get', False)
+            self.set ('clipboard', 'set', False)
+            self.add_section ("translator")
+            self.set ("translator", "default", "")
             self.save()
     
     def save(self):
@@ -56,7 +56,7 @@ class Config (ConfigParser):
             ConfigParser.add_section (self, section)
         except DuplicateSectionError:
             pass
-        ConfigParser.set (self, section, option, '')
+        ConfigParser.set (self, section, option, str (value))
 
     def get (self, section, option):
         try:
