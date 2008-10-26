@@ -36,14 +36,16 @@ class TranslationLabel (gtk.HBox):
 
     def setup_event_box (self):
         self.event_box = gtk.EventBox ()
+        self.event_box.set_visible_window (False)
         self.event_box.connect ('button-press-event', self.on_event_box_button_press_event)
         self.event_box.connect ('key-press-event', self.on_event_box_key_press_event)
         self.event_box.show ()
 
     def setup_close (self):
         self.close = gtk.Button ()
-        image = gtk.image_new_from_stock (gtk.STOCK_CLOSE, gtk.ICON_SIZE_BUTTON)
+        image = gtk.image_new_from_stock (gtk.STOCK_CLOSE, gtk.ICON_SIZE_MENU)
         self.close.set_image (image)
+        self.close.set_relief (gtk.RELIEF_NONE)
         self.close.connect ('clicked', self.on_close)
         self.close.show ()
 
