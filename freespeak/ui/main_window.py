@@ -4,6 +4,7 @@ import os
 from freespeak.ui.manager import *
 from freespeak.ui.translation import *
 from freespeak.ui.settings import *
+from freespeak.ui.status_icon import StatusIcon
 
 class MainWindow (gtk.Window):
     ui_string = """<ui>
@@ -31,12 +32,17 @@ class MainWindow (gtk.Window):
         self.setup_clipboard ()
         self.setup_window ()
         self.setup_layout ()
+        self.setup_status_icon ()
+
+    def setup_status_icon (self):
+        self.status_icon = StatusIcon (self)
 
     def setup_clipboard (self):
         self.clipboard = gtk.Clipboard()
         self.cur_clipboard = ''
 
     def setup_window (self):
+        self.connect ('delete-event', self.on_delete_event)
         self.set_title ('FreeSpeak '+self.application.version)
         self.set_default_size (500, 400)
        
@@ -82,6 +88,10 @@ class MainWindow (gtk.Window):
         self.manager = Manager (self.application)
         self.manager.show ()
         self.layout.pack_start (self.manager)
+
+    def quit (self):
+        self.destroy ()
+        self.application.stop ()
             
     # Events
         
@@ -106,19 +116,16 @@ class MainWindow (gtk.Window):
         Open an AboutDialog for this software
         """
         About(self)
-                
-    def on_delete(self, w, Data=None):
+                          
+    def on_quit (self, *w):
+        """
+        Quit the application
+        """
+        self.quit ()
+
+    def on_delete_event (self, *w):
         """
         Put myself in the system tray
         """
-        self.tray.wnd_hide()
+        self.status_icon.tray ()
         return True
-            
-    def on_quit(self, *w):
-        """
-        Quit and remove pid file
-        """
-        try: os.unlink(PID)
-        except: pass
-        gtk.main_quit()
-                

@@ -36,9 +36,7 @@ from freespeak.config import Config
 from freespeak.translator import TranslatorsManager
 import freespeak.translators
 from freespeak.ui.main_window import MainWindow
-from freespeak.ui.status_icon import StatusIcon
 from freespeak.ui import exception_dialog
-#from freespeak.ipc import IpcServer, IpcClient
 
 class Application (object):
     version = __version__
@@ -51,25 +49,21 @@ class Application (object):
         self.setup_l10n ()
         self.setup_exception_dialog ()
         self.setup_config ()
-        self.setup_ipc ()
         self.setup_paths ()
         self.setup_icons ()
         self.setup_translators_manager ()
+
+        self.started = False
 
     def setup_exception_dialog (self):
         sys.excepthook = exception_dialog.exception_hook
 
     def setup_l10n (self):
-        gettext.NullTranslations()
-        gettext.install(self.domain)
+        gettext.NullTranslations ()
+        gettext.install (self.domain)
 
     def setup_config (self):
         self.config = Config ()
-
-    # FIXME:
-    def setup_ipc (self):
-        self.pid_file = os.path.join(tempfile.gettempdir(), 'freespeak'+str(os.getuid())+'.pid')
-        self.sock_file = os.path.join(tempfile.gettempdir(), 'freespeak'+str(os.getuid())+'.sock')
 
     def setup_paths (self):
         self.icons_path = os.path.join (sys.prefix, 'share', 'freespeak', 'icons')
@@ -88,64 +82,16 @@ class Application (object):
         self.translators_manager = TranslatorsManager (self)
 
     def start (self):
-        #client = IpcClient (self)
-        #try:
-        #    client.execute_start ()
-        #    return
-        #except:
-        #    self.ipc_server = IpcServer (self)
-
         gtk.gdk.threads_init()
         self.main_window = MainWindow (self)
         self.main_window.show ()
-        self.status_icon = StatusIcon (self)
 
-        file(self.pid_file, 'w').write(str (os.getpid()))
+        self.started = True
 
         gtk.gdk.threads_enter()
         gtk.main ()
         gtk.gdk.threads_leave()
 
-# FIXME
-#     if not options.show_window:
-#         try:
-#             main.tray.hide()
-#         except:
-#             print "I wasn't able to create the tray icon"
-
-#     def SubStart():
-#         try:
-#             sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
-#             sock.connect(SOCK)
-#             sock.send('\x01'.join(args[1:4])+'\x02')
-#             if options.clipboard:
-#                 clipboard = gtk.Clipboard()
-#                 try:
-#                     if clipboard.wait_is_text_available():
-#                         be_translated = clipboard.wait_for_text()
-#                         if not be_translated: raise
-#                     else: raise
-#                 except:
-#                     print >> sys.stderr, 'Clipboard contains no text'
-#                     return
-#             else:
-#                 be_translated = ''
-#                 while 1:
-#                     data = raw_input().strip()
-#                     if data == 'EOF': break
-#                     be_translated += data
-#             sock.send(be_translated)
-#             sock.close()
-#         except:
-#             print sys.exc_value
-        
-#     try:
-#         sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
-#         sock.connect(SOCK)           
-#         sock.close()
-#         pid = int(file(PID).read())
-#         import signal
-#         os.kill(pid, signal.SIGCHLD)
-#         SubStart()
-#     except:
-#         Start(config, locale)
+    def stop (self):
+        if self.started:
+            gtk.main_quit ()
