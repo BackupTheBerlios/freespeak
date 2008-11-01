@@ -31,8 +31,7 @@ class Settings(gtk.Dialog):
         FreeSpeak user preferences
         """
         gtk.Dialog.__init__ (self, _('Preferences'), application.main_window, 0,
-                             (gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
-                              gtk.STOCK_OK, gtk.RESPONSE_OK))
+                             (gtk.STOCK_CLOSE, gtk.RESPONSE_CLOSE))
         self.application = application
 
         self.set_border_width (6)
@@ -91,10 +90,9 @@ class Settings(gtk.Dialog):
         self.vbox.pack_start (frame)
 
     def on_response (self, dialog, response):
-        self.destroy()
-        if response != gtk.RESPONSE_OK:
-            return
         self.application.config.set ('clipboard', 'get', self.w_clipboard_get.get_active ())
         self.application.config.set ('clipboard', 'set', self.w_clipboard_set.get_active ())
         self.application.config.set ('translator', 'default', self.w_preferred_translator.get_active_text ())
         self.application.config.save ()
+        self.destroy()
+
