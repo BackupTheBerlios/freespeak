@@ -27,12 +27,18 @@ class BaseTranslation (object):
         self.translator = None
         self.status = None
         self.status_text = None
-        self.setup ()
 
+        self.setup ()
         self.manager.add_translation (self)
+        self.set_default_translator ()
 
     def close (self):
         self.manager.remove_translation (self)
+
+    def set_default_translator (self):
+        default_translator = self.application.translators_manager.get_default ()
+        if default_translator:
+            self.set_translator (default_translator)
 
     def set_translator (self, translator):
         self.translator = translator

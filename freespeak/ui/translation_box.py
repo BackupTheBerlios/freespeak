@@ -28,6 +28,11 @@ class TranslatorCombo (gtk.ComboBox):
         self.pack_start (cell)
         self.add_attribute (cell, 'text', self.COL_TRANSLATOR_TEXT)
 
+    def get_active_translator (self):
+        iter = self.get_active_iter ()
+        translator = self.get_model().get_value (iter, self.COL_TRANSLATOR_TRANSLATOR)
+        return translator
+
 class TranslationBox (gtk.HBox):
     COL_FROM_TEXT = 0
     COL_FROM_LANG = 1
@@ -106,8 +111,7 @@ class TranslationBox (gtk.HBox):
     # Events
 
     def on_translator_changed (self, combo):
-        iter = combo.get_active_iter ()
-        translator = combo.get_model().get_value (iter, self.COL_TRANSLATOR_TRANSLATOR)
+        translator = combo.get_active_translator ()
         self.translation.set_translator (translator)
 
     def on_from_changed (self, combo):

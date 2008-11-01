@@ -57,14 +57,16 @@ class TranslatorsManager (set):
         info = imp.find_module (mname, [self.application.translators_path])
         module = imp.load_module (mname, *info)
         if not module in self:
-            self.add (module.Translator ())
+            translator = module.Translator ()
+            translator.module_name = mname
+            self.add (translator)
             return module
 
     def get_default (self):
         name = self.application.config.get ("translator", "default")
         if name:
             for translator in self:
-                if translator.name == name:
+                if translator.module_name == name:
                     return translator
 
 __all__ = ['BaseTranslator', 'TranslatorsManager']

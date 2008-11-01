@@ -1,3 +1,15 @@
+2008-11-01  Luca Bruno  <lethalman88@gmail.com>
+
+	* freespeak/ui/translation_box.py (TranslatorCombo.get_active_translator): added
+	(TranslationBox.on_translator_changed): 
+
+	* freespeak/ui/settings.py (Settings.on_response): save the python module name
+
+	* freespeak/translator.py (TranslatorsManager.get_default): obtain from module name
+	(TranslatorsManager.load_translator): set python module name for translator
+
+	* freespeak/translation.py (BaseTranslation.set_default_translator): added
+
 2008-10-26  Luca Bruno  <lethalman88@gmail.com>
 
 	* freespeak/config.py (Config): fixed some issues

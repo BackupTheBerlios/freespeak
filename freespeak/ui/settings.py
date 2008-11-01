@@ -92,7 +92,8 @@ class Settings(gtk.Dialog):
     def on_response (self, dialog, response):
         self.application.config.set ('clipboard', 'get', self.w_clipboard_get.get_active ())
         self.application.config.set ('clipboard', 'set', self.w_clipboard_set.get_active ())
-        self.application.config.set ('translator', 'default', self.w_preferred_translator.get_active_text ())
+        translator = self.w_preferred_translator.get_active_translator ()
+        self.application.config.set ('translator', 'default', translator.module_name)
         self.application.config.save ()
         self.destroy()
 
