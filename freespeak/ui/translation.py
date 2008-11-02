@@ -8,21 +8,34 @@ from freespeak.status import *
 from translation_box import *
 
 class TranslationLabel (gtk.HBox):
-    def __init__ (self, translation):
-        gtk.HBox.__init__ (self, spacing=6)
+    def __init__ (self, application, translation):
+        gtk.HBox.__init__ (self)
+        self.application = application
         self.translation = translation
 
         self.title = 'Unnamed'
         self.is_custom = False
 
+        self.setup_icon ()
         self.setup_label ()
         self.setup_entry ()
         self.setup_event_box ()
         self.setup_close ()
         self.be_label ()
+        self.stop_loading ()
 
+        self.pack_start (self.image)
         self.pack_start (self.event_box)
-        self.pack_start (self.close, False)
+        self.pack_start (self.close, False, padding=6)
+
+    def setup_icon (self):
+        icon_theme = self.application.icon_theme
+        self.static_pixbuf = icon_theme.load_icon ("process-idle", gtk.ICON_SIZE_DIALOG, 0)
+        animated_info = icon_theme.lookup_icon ("process-working", gtk.ICON_SIZE_DIALOG, 0)
+        self.animated_pixbuf = gtk.gdk.PixbufAnimation (animated_info.get_filename ())
+
+        self.image = gtk.Image ()
+        self.image.show ()
 
     def setup_label (self):
         self.label = gtk.Label ()
@@ -69,6 +82,12 @@ class TranslationLabel (gtk.HBox):
             self.title = title
             self.label.set_text (title)
 
+    def start_loading (self):
+        self.image.set_from_animation (self.animated_pixbuf)
+
+    def stop_loading (self):
+        self.image.set_from_pixbuf (self.static_pixbuf)
+
     # Events
 
     def on_event_box_button_press_event (self, event_box, event):
@@ -100,7 +119,7 @@ class BaseUITranslation (gtk.VBox, BaseTranslation):
         BaseTranslation.__init__ (self, *args)
 
     def setup_label (self):
-        self.label = TranslationLabel (self)
+        self.label = TranslationLabel (self.application, self)
         self.label.show ()
 
     def setup_translation_box (self):
@@ -158,9 +177,11 @@ class BaseUITranslation (gtk.VBox, BaseTranslation):
         if isinstance (status, StatusStarted):
             self.progress.show ()
             self.progress.start ()
+            self.label.start_loading ()
         elif isinstance (status, StatusComplete):
             self.progress.hide ()
             self.progress.stop ()
+            self.label.stop_loading ()
         self.progress.set_text (status.description)
 
     # Virtual methods

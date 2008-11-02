@@ -70,6 +70,7 @@ class Application (object):
         self.translators_path = os.path.dirname (freespeak.translators.__file__)
 
     def setup_icons (self):
+        self.icon_theme = gtk.icon_theme_get_default ()
         self.icon_factory = gtk.IconFactory ()
         for stock, src in {'freespeak-icon': "freespeak-16x16.png"}.iteritems ():
             file = os.path.join (self.icons_path, src)
