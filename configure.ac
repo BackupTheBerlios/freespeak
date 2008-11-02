@@ -1,7 +1,5 @@
-AC_INIT(freespeak, 0.1.2,
-    [https://gna.org/bugs/?group=freespeak])
+AC_INIT(freespeak, 0.1.2, [https://gna.org/bugs/?group=freespeak])
 AC_CONFIG_SRCDIR(freespeak/__init__.py)
-AC_CONFIG_HEADERS(config.h)
 AC_CONFIG_MACRO_DIR([m4])
 
 AM_INIT_AUTOMAKE
@@ -29,6 +27,7 @@ GETTEXT_PACKAGE="freespeak"
 IT_PROG_INTLTOOL([0.35.0])
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", [The gettext package])
+ALL_LINGUAS="it"
 AM_GLIB_GNU_GETTEXT
 
 dnl ****************************************************************************
@@ -79,8 +78,6 @@ dnl ******************
 dnl * Python modules
 dnl ******************
 AM_CHECK_PYMOD(gconf)
-AM_CHECK_PYMOD(gio)
-AM_CHECK_PYMOD(glib)
 AM_CHECK_PYMOD(gnome.ui)
 AM_CHECK_PYMOD(gobject)
 AM_CHECK_PYMOD(gtk)
@@ -105,7 +102,4 @@ po/Makefile.in
 
 echo
 echo $PACKAGE v$VERSION
-echo
-
-echo Prefix............... : $prefix
 echo
