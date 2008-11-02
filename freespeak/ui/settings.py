@@ -54,12 +54,12 @@ class Settings(gtk.Dialog):
         vbox.show ()
 
         self.w_clipboard_get = gtk.CheckButton (_("_Get text from clipboard automatically"))
-        self.w_clipboard_get.set_active (self.application.config.getboolean ('clipboard', 'get'))
+        self.w_clipboard_get.set_active (self.application.config.get ('get_clipboard'))
         self.w_clipboard_get.show ()
         vbox.pack_start(self.w_clipboard_get, False)
 
         self.w_clipboard_set = gtk.CheckButton (_("_Save translated text to clipboard"))
-        self.w_clipboard_set.set_active (self.application.config.getboolean ('clipboard', 'set'))
+        self.w_clipboard_set.set_active (self.application.config.get ('set_clipboard'))
         self.w_clipboard_set.show ()
         vbox.pack_start(self.w_clipboard_set, False)
         
@@ -90,10 +90,9 @@ class Settings(gtk.Dialog):
         self.vbox.pack_start (frame)
 
     def on_response (self, dialog, response):
-        self.application.config.set ('clipboard', 'get', self.w_clipboard_get.get_active ())
-        self.application.config.set ('clipboard', 'set', self.w_clipboard_set.get_active ())
+        self.application.config.set ('get_clipboard', self.w_clipboard_get.get_active ())
+        self.application.config.set ('set_clipboard', self.w_clipboard_set.get_active ())
         translator = self.w_preferred_translator.get_active_translator ()
-        self.application.config.set ('translator', 'default', translator.module_name)
-        self.application.config.save ()
+        self.application.config.set ('default_translator', translator.module_name)
         self.destroy()
 

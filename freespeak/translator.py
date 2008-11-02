@@ -63,7 +63,7 @@ class TranslatorsManager (set):
             return module
 
     def get_default (self):
-        name = self.application.config.get ("translator", "default")
+        name = self.application.config.get ("default_translator")
         if name:
             for translator in self:
                 if translator.module_name == name:
