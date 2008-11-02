@@ -77,11 +77,11 @@ class Translator (BaseTranslator):
         conn.request ('POST', '/', params, headers)
         result = conn.getresponse().read ()
 
-        yield StatusComplete (result)
+        yield StatusTextComplete (result)
 
     def translate_web (self, request):
         trans = "%s/%s" % (request.from_lang, request.to_lang)
         params = urllib.urlencode ({'sequence': 'core',
                                     'language': trans,
                                     'url': request.url})
-        yield StatusComplete ('http://fets5.freetranslation.com/?'+params)
+        yield StatusWebComplete ('http://fets5.freetranslation.com/?'+params)

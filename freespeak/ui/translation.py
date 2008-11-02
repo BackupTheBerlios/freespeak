@@ -199,7 +199,7 @@ class TextTranslation (BaseUITranslation):
     @utils.syncronized
     def update_status (self, status):
         BaseUITranslation.update_status (self, status)
-        if isinstance (status, StatusComplete):
+        if isinstance (status, StatusTextComplete):
             self.dest_buffer.set_text (status.result)
 
 class WebTranslation (BaseUITranslation):
@@ -239,7 +239,7 @@ class WebTranslation (BaseUITranslation):
     @utils.syncronized
     def update_status (self, status):
         BaseUITranslation.update_status (self, status)
-        if isinstance (status, StatusComplete):
+        if isinstance (status, StatusWebComplete):
             self.browser.load_url (status.result)
 
     # Events

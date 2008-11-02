@@ -90,4 +90,4 @@ class Translator (BaseTranslator):
         result = tree.xpath ("dl/di/dt/strong")
         print result
 
-        yield StatusComplete (result)
+        yield StatusTextComplete (result)

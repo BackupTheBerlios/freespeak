@@ -101,7 +101,7 @@ class Translator (BaseTranslator):
         tree = lxml.html.fromstring (result)
         result = tree.get_element_by_id("result").text_content()
 
-        yield StatusComplete (result)
+        yield StatusTextComplete (result)
 
     def translate_web (self, request):
         lp = request.from_lang.cc+'_'+request.to_lang.cc
@@ -112,4 +112,4 @@ class Translator (BaseTranslator):
 
                                     'lp': lp,
                                     'trurl': request.url})
-        yield StatusComplete ('http://babelfish.yahoo.com/translate_url?'+params)
+        yield StatusWebComplete ('http://babelfish.yahoo.com/translate_url?'+params)

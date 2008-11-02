@@ -91,11 +91,11 @@ class Translator (BaseTranslator):
         tree = lxml.html.fromstring (result)
         result = tree.get_element_by_id("result_box").text_content()
 
-        yield StatusComplete (result)
+        yield StatusTextComplete (result)
 
     def translate_web (self, request):
         params = urllib.urlencode ({'sl': request.from_lang.cc,
                                     'tl': request.to_lang.cc,
                                     'u': request.url})
-        yield StatusComplete ('http://translate.google.com/translate?'+params)
+        yield StatusWebComplete ('http://translate.google.com/translate?'+params)
         

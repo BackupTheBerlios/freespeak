@@ -15,4 +15,10 @@ class StatusComplete (Status):
         Status.__init__ (self, description)
         self.result = result
 
-__all__ = ['Status', 'StatusStarted', 'StatusComplete']
+class StatusTextComplete (StatusComplete):
+    pass
+
+class StatusWebComplete (StatusComplete):
+    pass
+
+__all__ = ['Status', 'StatusStarted', 'StatusComplete', 'StatusTextComplete', 'StatusWebComplete']

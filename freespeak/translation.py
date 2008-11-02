@@ -42,8 +42,7 @@ class BaseTranslation (object):
 
     def set_translator (self, translator):
         self.translator = translator
-        self.language_table = self.translator.get_language_table (self.capability)
-        self.update_from_langs (sorted (self.language_table.keys()))
+        thread.start_new_thread (self._run_language_table, ())
 
     def set_from_lang (self, lang):
         self.from_lang = lang
@@ -56,6 +55,13 @@ class BaseTranslation (object):
     def translate (self, request):
         self.update_can_translate (False)
         thread.start_new_thread (self._run, (request,))
+
+    def _run_language_table (self):
+        self.update_status (StatusStarted (_("Retrieving languages from %s") % self.translator.get_name ()))
+        self.language_table = self.translator.get_language_table (self.capability)
+        self.update_status (Status (_("Updating the list")))
+        self.update_from_langs (sorted (self.language_table.keys ()))
+        self.update_status (StatusComplete (None))
 
     def _run (self, request):
         request.from_lang = self.from_lang
