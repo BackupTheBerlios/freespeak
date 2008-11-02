@@ -1,5 +1,7 @@
 2008-11-02  Luca Bruno  <lethalman88@gmail.com>
 
+	* freespeak/translators/*.py: all use urllib.urlopen for parsing html, this fixes unicode errors
+
 	* freespeak/defs.py.in: added GETTEXT_PACKAGE
 
 	* freespeak/application.py: use defs.py

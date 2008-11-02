@@ -47,7 +47,7 @@ class Translator (BaseTranslator):
             return language_table
 
         url = 'http://www.freetranslation.com/'
-        tree = lxml.html.parse (url)
+        tree = lxml.html.parse (urllib.urlopen (url))
 
         elements = tree.xpath ('//form[@id="%s"]//select[@name="language"]/option' % formid)
 

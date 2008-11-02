@@ -56,7 +56,7 @@ class Translator (BaseTranslator):
             return self.language_table
 
         url = 'http://www.google.it/language_tools'
-        tree = lxml.html.parse (url)
+        tree = lxml.html.parse (urllib.urlopen (url))
 
         to_languages = []
         elements = tree.xpath ('//form[@action="http://translate.google.it/translate_t"]//select[@name="tl"]/option')

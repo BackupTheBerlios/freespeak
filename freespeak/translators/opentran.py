@@ -40,6 +40,9 @@ class Language (object):
             return 1
         return 0
 
+    def __eq__ (self, other):
+        return self.name == other.name and self.cc == other.cc
+
     def __str__ (self):
         return self.name
 
@@ -56,7 +59,7 @@ class Translator (BaseTranslator):
             return self.language_table
 
         url = 'http://open-tran.eu/'
-        tree = lxml.html.parse (url)
+        tree = lxml.html.parse (urllib.urlopen (url))
 
         to_languages = []
         elements = tree.xpath ("//select[@id='form_lang_src']/option")

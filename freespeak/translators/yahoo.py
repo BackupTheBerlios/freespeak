@@ -61,7 +61,7 @@ class Translator (BaseTranslator):
             return self.language_table
 
         url = 'http://babelfish.yahoo.com/'
-        tree = lxml.html.parse (url)
+        tree = lxml.html.parse (urllib.urlopen (url))
 
         elements = tree.xpath ('//form[@name="frmTrText"]//select[@name="lp"]/option[@value!=""]')
 
