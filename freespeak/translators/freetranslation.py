@@ -28,7 +28,7 @@ from freespeak.status import *
 class Translator (BaseTranslator):
     name = 'FreeTranslation'
     capabilities = [TextTranslationRequest, WebTranslationRequest]
-    icon_file = "freetranslation-16x16.png"
+    icon = "freetranslation"
     
     def __init__ (self):
         self.text_language_table = {}

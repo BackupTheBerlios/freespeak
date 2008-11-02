@@ -32,6 +32,7 @@ from optparse import OptionParser
 import gtk
 from gtk import gdk
 
+from freespeak import defs
 from freespeak.config import Config
 from freespeak.translator import TranslatorsManager
 import freespeak.translators
@@ -59,25 +60,19 @@ class Application (object):
         sys.excepthook = exception_dialog.exception_hook
 
     def setup_l10n (self):
-        gettext.NullTranslations ()
         gettext.install (self.domain, unicode=True)
 
     def setup_config (self):
         self.config = Config ()
 
     def setup_paths (self):
-        self.icons_path = os.path.join (sys.prefix, 'share', 'freespeak', 'icons')
+        self.icons_path = os.path.join (defs.DATA_DIR, defs.PACKAGE, 'art')
         self.translators_path = os.path.dirname (freespeak.translators.__file__)
 
     def setup_icons (self):
         self.icon_theme = gtk.icon_theme_get_default ()
-        self.icon_factory = gtk.IconFactory ()
-        for stock, src in {'freespeak-icon': "freespeak-16x16.png"}.iteritems ():
-            file = os.path.join (self.icons_path, src)
-            if os.path.isfile (file):
-                self.icon_factory.add (stock,
-                                       gtk.IconSet (gdk.pixbuf_from_file (file)))
-        self.icon_factory.add_default ()
+        self.icon_theme.append_search_path (self.icons_path)
+        gtk.window_set_default_icon (self.icon_theme.load_icon (defs.PACKAGE, 64, 0))
 
     def setup_translators_manager (self):
         self.translators_manager = TranslatorsManager (self)

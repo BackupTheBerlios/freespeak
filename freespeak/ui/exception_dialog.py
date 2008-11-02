@@ -60,8 +60,8 @@ class ExceptionDialog (gtk.Dialog):
         self.connect ('response', self.on_response)
         self.show_all ()
 
-    def on_response (self, *args):
-        self.destroy ()
+    def on_response (self, dialog, *args):
+        dialog.destroy ()
 
 def exception_hook (*tb):
     error_string = ''.join (traceback.format_exception (*tb))

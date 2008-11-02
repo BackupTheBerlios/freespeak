@@ -47,6 +47,7 @@ class Language (object):
 class Translator (BaseTranslator):
     name = "OpenTran"
     capabilities = [TextTranslationRequest]
+    icon = "opentran"
     
     def __init__ (self):
         self.language_table = {}

@@ -43,7 +43,7 @@ class Language (object):
 class Translator (BaseTranslator):
     name = 'Google'
     capabilities = [TextTranslationRequest, WebTranslationRequest]
-    icon_file = "google-16x16.png"
+    icon = "google"
     
     def __init__ (self):
         self.language_table = {}

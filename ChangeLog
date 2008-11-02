@@ -1,5 +1,19 @@
 2008-11-02  Luca Bruno  <lethalman88@gmail.com>
 
+	* freespeak/application.py (Application.setup_icons): remove icon factory, setup default icon for windows, add search path for translator icons
+
+	* freespeak/ui/spinner.py (Spinner.set_idle): added, set the icon on idle
+
+	* freespeak/translation.py (BaseTranslation.update_translator): added whenever the translator changes
+
+	* freespeak/ui/translation.py (BaseUITranslation.update_translator): added
+
+	* freespeak/translators/*.py: specify the icon
+
+	* data/art/Makefile.am (update-icon-cache): missed macro, added art files for translators
+
+	* freespeak/ui/exception_dialog.py (ExceptionDialog.on_response): use the given dialog (pygtk bug?)
+
 	* freespeak/ui/about.py (About): refactored
 
 	* freespeak/ui/main_window.py (MainWindow.setup_window): change the icon pixels to 64

@@ -46,6 +46,7 @@ class BaseTranslation (object):
             self.update_from_langs (None)
         else:
             thread.start_new_thread (self._run_language_table, ())
+        self.update_translator (translator)
 
     def set_from_lang (self, lang):
         self.from_lang = lang
@@ -78,6 +79,9 @@ class BaseTranslation (object):
 
     def setup (self):
         pass
+
+    def update_translator (self, translator):
+        raise NotImplementedError ()
 
     def update_from_langs (self, langs):
         raise NotImplementedError ()

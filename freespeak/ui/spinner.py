@@ -44,6 +44,7 @@ class Spinner (gtk.Image):
         gtk.Image.__init__ (self)
         self.application = application
 
+        self.source = None
         self.idle_pixbuf = idle_pixbuf
         self.setup_animation (application)
         self.set_from_pixbuf (self.idle_pixbuf)
@@ -56,6 +57,11 @@ class Spinner (gtk.Image):
             self.icon_num += 1
         return True
 
+    def set_idle (self, pixbuf):
+        self.idle_pixbuf = pixbuf
+        if self.source:
+            self.set_from_pixbuf (pixbuf)
+
     @utils.syncronized
     def start (self):
         self.icon_num = 0
@@ -64,4 +70,5 @@ class Spinner (gtk.Image):
     @utils.syncronized
     def stop (self):
         gobject.source_remove (self.source)
+        self.source = None
         self.set_from_pixbuf (self.idle_pixbuf)
