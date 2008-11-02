@@ -4,7 +4,7 @@
 srcdir=`dirname $0`
 test -z "$srcdir" && srcdir=.
 
-PKG_NAME="deskbar-applet"
+PKG_NAME="freespeak"
 ACLOCAL_FLAGS="$ACLOCAL_FLAGS -I m4"
 REQUIRED_AUTOCONF_VERSION=2.60
 REQUIRED_AUTOMAKE_VERSION=1.9.2

@@ -66,7 +66,7 @@ AC_SUBST(PYTHONDIR)
 dnl ****************************************************************************
 dnl * PyGTK & co for Gnome Streamer
 dnl ****************************************************************************
-PKG_CHECK_MODULES(DESKBAR,
+PKG_CHECK_MODULES(FREESPEAK,
 	gtk+-2.0                	>= 2.12
 	pygtk-2.0			>= 2.12
 	pygobject-2.0			>= 2.12
@@ -108,7 +108,4 @@ echo $PACKAGE v$VERSION
 echo
 
 echo Prefix............... : $prefix
-
-echo "Now type make to compile"
-echo "Then su to root and type: make install"
 echo
