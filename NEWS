@@ -1,0 +1,1927 @@
+=====================
+deskbar-applet 2.24.1
+=====================
+
+This release features only translation updates.
+
+Translations:
+	- Updated ar: Anas Afif Emad
+	- Updated be@latin: Ihar Hrachyshka
+	- Updated da: Kenneth Nielsen
+	- Updated de: Hendrik Brandt
+	- Updated pt_BR: Vladimir Melo
+
+=====================
+deskbar-applet 2.24.0
+=====================
+
+This the first release of the stable 2.24 series
+and only compares small bug fixes compared to 2.23.92
+
+Changes:
+	- Fixed bug #551166: Cannot enable Templates module. Stop monitoring directory when module is stopped. Throw exception when something went wrong and use constants defined in C
+	- Fixed: Wikipedia suggest doesn't respect proxy settings
+
+Translations:
+	- Updated af: Friedel Wolff
+	- Updated ar: Anas Afif Emad, Youssef Chahibi
+	- Updated bn_IN: Runa Bhattacharjee
+	- Updated ca: Gil Forcada
+	- Updated cs: Pavel Sefranek, Petr Kovar
+	- Updated da: Kenneth Nielsen
+	- Updated de: Hendrik Brandt, Hendrik Richter
+	- Updated es: Jorge González
+	- Updated et: Ivar Smolin
+	- Updated fi: Ilkka Tuohela
+	- Updated gu: Sweta Kothari
+	- Updated hi: Rajesh Ranjan
+	- Updated hu: Gabor Kelemen
+	- Updated it: Milo Casagrande
+	- Updated ja: Takeshi AIHANA
+	- Updated ko: Changwoo Ryu
+	- Updated lt: Gintautas Miliauskas, Žygimantas Beručka
+	- Updated mk: Arangel Angov
+	- Updated mr: Sandeep Shedmake
+	- Updated or: Manoj Kumar Giri
+	- Updated ru: Nickolay V. Shmyrev, Alexandre Prokoudine
+	- Updated sv: Daniel Nylander
+	- Updated ta: I. Felix
+
+Help Manual Translations:
+	- Updated fr: Robert-André Mauchin
+	- Updated it: Milo Casagrande
+
+======================
+deskbar-applet 2.23.92
+======================
+
+This is the last release before the
+before the stable 2.24 version is released.
+It only contains bug fixes.
+
+Changes:
+	- Add support for embedding an extra widget into AccountDialog (Mikkel Kamstrup Erlandsen)
+	- Fixed #550297, Identi.ca module does not support OpenId causes confussion (Mikkel Kamstrup Erlandsen)
+	- Changed default UI "Button" (Sebastian Pölsterl)
+    - Added RecentHandler, CalculatorModule, GdmHandler and TemplateHandler to default list of enabled modules. Removed MozillaBookmarksHandler and MozillaSearchHandler from default list of enabled modules (Sebastian Pölsterl)
+
+Translations:
+	- Updated bg: Alexander Shopov
+	- Updated en_GB: Philip Withnall, David Lodge
+	- Updated es: Jorge González
+	- Updated et: Ivar Smolin
+	- Updated fr: Robert-André Mauchin
+	- Updated gu: Sweta Kothari
+	- Updated hi: Rajesh Ranjan
+	- Updated hr: Robert Sedak, young
+	- Updated nb: Kjartan Maraas
+	- Updated nl: Reinout van Schouwen
+	- Updated pl: Tomasz Dominikowski
+	- Updated pt: Duarte Loreto
+	- Updated pt_BR: Leonardo Ferreira Fontenelle, Enrico Nicoletto
+	- Updated sq: Laurent Dhima
+	- Updated sv: Daniel Nylander
+	- Updated th: Theppitak Karoonboonyanan
+	- Updated vi: Nguyễn Thái Ngọc Duy, Clytie Siddall
+	- Updated zh_CN: Funda Wang, 甘露(Lu Gan)
+
+======================
+deskbar-applet 2.23.91
+======================
+
+This release mainly features bug fixes.
+In addition, history items can be deleted
+in tray mode pressing delete key now.
+
+Changes:
+	- Fixed #548867, Cannot iterate over gtk.ListStore (Sebastian Pölsterl)
+	- Fixed #548422, Invalid tooltip formatting in twitter module (Mikkel Kamstrup Erlandsen)
+	- Fixed #542997, Mozilla modules ask for Firefox between 2.0.0.0 and 3.0.0.0, so FF 3.0.1 doesn't work! (Sebastian Pölsterl)
+	- Fixed #549203, Superfluous strings for localisation [I18N] (Sebastian Pölsterl)
+	- Fixed #549206, Please add comments along with strings for localisation [I18] (Mikkel Kamstrup Erlandsen)
+	- Fixed #549375, deskbar-applet 2.23.90 history dropdown doesn't dismiss after selection (Sebastian Pölsterl)
+	- Fixed #549432, Fix g_strjoin() call in evolution module () (Vincent Untz)
+	- Set the 'source' parameter on updates to 'deskbar'. This should put a small 'from deskbar' links after Twitter posts. (Mikkel Kamstrup Erlandsen)
+	- Pressing the delete key will remove the selected item from history in tray mode, too. (Sebastian Pölsterl)
+	- Fix a bug in the way the new core.Web module handled updating of account info. Before this fix we leaked accounts each time editing of credentials took place, and we failed to look up the right one if there where multiple. (Mikkel Kamstrup Erlandsen)
+
+Translations:
+	- Updated LINGUAS, sr@latin.po, sr@Latn: Goran Rakic
+	- Updated bg: Alexander Shopov
+	- Updated dz: Pema Geyleg, Dawa pemo
+	- Updated es: Jorge González
+	- Updated fi: Ilkka Tuohela
+	- Updated fr: Robert-André Mauchin
+	- Updated ja: Takeshi AIHANA
+	- Updated mk: Jovan Naumovski
+	- Updated pl: Tomasz Dominikowski
+	- Updated sq: Laurent Dhima
+	- Updated ta: Tirumurthi Vasudevan, Dr.T.Vasudevan
+	- Updated te: Sunil Mohan Adapa, Krishna Babu K
+	- Updated zh_HK: Chao-Hsiung Liao
+	- Updated zh_TW: Chao-Hsiung Liao
+
+Help Manual Translations:
+	- Updated pt_BR: Leonardo, Rodrigo Flores, Leonardo Gregianin
+
+======================
+deskbar-applet 2.23.90
+======================
+
+This release comes with new twitter and identi.ca
+micro blogging modules.
+Developers can make use of the new deskbar.core.Web module
+which provides an easy way to store account credentials in
+gnome keyring, a dialog for managing an account, an
+asynchronous url opener that hooks into the account
+framework mentioned above to ask for credentials.
+Last but not least, items from history can now be deleted
+one by one when pressing the delete key. However, this
+doesn't work in tray mode, yet.
+
+Changes:
+    - Add method load_base64_icon to deskbar.core.Utils. Handy for inlining icons inside modules for easier distribution
+    - Introduced a new utility package deskbar.core.Web with tools for dealing with online services.
+    - Introduced a Twitter and identi.ca micro blogging module
+    - Set entry width to 10 when the value is smaller than 10 in CuemuiacAlignedView
+    - Fixed bug #538558: Check for directories in $PATH if they are actual directories and if they exist, are readable and executable.
+
+Translations:
+    - Updated ar: Youssef Chahibi
+    - Updated be@latin: Ihar Hrachyshka
+    - Updated bn_IN: Runa Bhattacharjee
+    - Updated es: Jorge González
+    - Updated et: Ivar Smolin
+    - Updated eu: Iñaki Larrañaga Murgoitio
+    - Updated fi: Ilkka Tuohela
+    - Updated he: Yair Hershkovitz, Mark Krapivner
+    - Updated kn: Shankar Prasad
+    - Updated nb: Kjartan Maraas
+    - Updated th: Theppitak Karoonboonyanan
+    
+Help Manual Translations:
+    - Updated ca: Joan Duran
+    - Updated zh_CN: Gil Forcada
+
+=====================
+deskbar-applet 2.23.6
+=====================
+
+This release includes a new Google module
+that will display search results from Google
+as you type. In addition, you can now configure
+the entry width in preferences when the
+stick-to-panel UI is used.
+
+Changes:
+	- When retrieving tomboy version wait until the process exited to avoid zombie process.
+	- Added get_locale_lang function to Utils.py.
+	- Fixed bug #544587: unknown locale
+	- GconfStore.py: Added sanity checks when setting values and emitting signals (fixes bug #486549)
+	- Added Google search module. Written by Helton Doria. Requires simplejson Python module. Fixes bug #535360
+	- desklicious.py: Fixed bug #545791: local variable 'dom' referenced before assignment
+	- Removed built-in gnomedesktop module an use gnome-python-desktop's instead
+	- Added option to change entry width when Button UI is used
+	- desklicious.py: Adjusted url to RSS feeds. Check if content is formatted properly before parsing it. Fixes bug #544645
+
+Contributors to this release: Sebastian Pölsterl, Goran Rakic, Helton Doria
+
+Updated Translations:
+	- Updated ar: Khaled Hosny
+	- Updated es: Jorge González
+	- Updated gl: Ignacio Casal Quinteiro
+	- Updated nb: Kjartan Maraas
+	- Updated pl: Tomasz Dominikowski
+	- Updated pt: Duarte Loreto
+	- Updated pt_BR: Vladimir Melo, Fabrício Godoy
+
+=====================
+deskbar-applet 2.23.5
+=====================
+
+This release stores files according to FreeDesktop's
+XDG basedir spec. In addition, history can be accessed
+as in the 2.18 version. An arrow is displayed next to
+the Deskbar icon which open's a list of recently used
+actions.   
+
+Changes:
+    * Fixed bug #378755: Use contact's name, not their email address, when writing new mails (patch by Oleg Andreev)
+    * Fixed bug #535236: the dialog location change every time it's displayed
+    * Set top/up/down/bottom buttons insensitive by default (patch by Goran Rakic)
+    * Added check if iter != None when one of the above buttons is pressed (fixes bug #490981)
+    * Set default log level to WARNING. Added -d/--debug options to display debug messages
+    * Place user's modules in $XDG_DATA_HOME/deskbar-applet/modules-2.20-compatible and history file together with modules' configuration data into $XDG_CONFIG_HOME/deskbar-applet
+    * Fixed bug #542638: Don't put dict keys in gettext call parameter (patch by Claude Paroz)
+    * Check if display name is not None (fixes bug #500087)
+    * Fixed bug #516142: Should use plural for strings
+    * Access history like in 2.18. Added arrow beside the Deskbar icon. Clicking on it will show the a list of previously activated actions.
+    * Display history in tray mode as a sub-menu.
+    * Catch OSError when calling os.listdir. (Fixes bug #494922)
+    
+Contributors to this release: Sebastian Pölsterl, Oleg Andreev, Goran Rakic, Claude Paroz
+
+Updated Translations:
+    * Updated es: Jorge González
+    * Updated et: Ivar Smolin
+    * Updated fr: Pierre Lemaire and Bruno Brouard, Claude Paroz
+    * Updated gl: Ignacio Casal Quinteiro
+    * Updated nb: Kjartan Maraas
+    * Updated oc: Yannig Marchegay
+    * Updated ps: Zabeeh Khan
+    * Updated sv: Daniel Nylander
+    * Updated th: Theppitak Karoonboonyanan
+    * Updated zh_HK: Chao-Hsiung Liao
+    * Updated zh_TW: Chao-Hsiung Liao
+
+=====================
+deskbar-applet 2.23.4
+=====================
+
+Changes:
+    * Fixed bug #536752: Applet not transparent
+    * Set TomboyNotesModule.tomboy to None when	module is stopped
+    * Fixed bug #537694: Search history broken
+    * Made OpenBeagleFileAction backwards compatible
+    * Fixed bug #538425: local variable 'stream' referenced before assignment
+    * wikipedia-suggest.py: Only add match when the result contains the expected number of columns
+    * Utils.py: Don't import deskbar.core.Categories to solve cyclic dependency
+    * Added calculator module with permission from the original authors
+    
+Contributors to this release: Sebastian Pölsterl, Callum McKenzie, Michael Hofmann, Johannes Buchner
+
+Updated Translations:
+	* Arabic
+	* Simplified Chinese
+	* Estonian
+    * Hebrew
+    * Norwegian bokmål
+
+Contributors to the translations: Khaled Hosny, Funda Wang, Ivar Smolin, Yair Hershkovitz, Kjartan Maraas
+
+=====================
+deskbar-applet 2.23.3
+=====================
+
+Besides bug fixes this release comes with
+a new module. The Wikipedia Suggest module
+suggest Wikipedia articles as you type.
+You can configure which Wikipedia you want
+to use (English, German, French, ...), but it
+should detect it from your locale automatically.
+If not you can change it in preferences.
+
+Changes:
+	* Use subprocess module instead of os.popen. Catch OSError when retrieving version (fixes bug #533842)
+	* Escape url for tooltip in ShowUrlAction.py
+	* Added Wikipedia Suggest module (fixes bug #530002)
+	
+Contributors to this release: Sebastian Pölsterl
+
+Updated Translations:
+    * Arabic
+    * Simplified Chinese
+    * Dutch
+    * Galician
+    * Hebrew
+    * Spanish
+    * Vietnamese
+
+Contributors to the translations: Djihed Afifi, Lu Gan, Tino Meinen, Ignacio Casal Quinteiro, Yair Hershkovitz, Jorge Gonzalez, Clytie Siddall
+
+=======================
+deskbar-applet 2.23.2
+=======================
+
+In this release the get_tooltip method
+has been added to the Action class.
+Sub-classes can override this method
+and return a string that will be displayed
+in a tooltip when the user hovers over its
+description (this requires PyGTK >= 2.12).
+In addition, beagle-live can now distinguish
+between e-mails from thunderbird and evolution.
+
+Changes:
+    * Set snippet correctly for feeds, web history and E-Mails in beagle-live. Changed displayed text slightly for those actions.
+    * Show tooltip when hovering over the arrow if more than one action is available.
+    * Added get_tooltip method to Action interface. Override this method to display a tooltip when the user hovers over the match (the default action's tooltip is displayed) or over an action in the list of additional actions.
+    * Fixed bug #522585: Crash when changing default browser
+    * Added support for iceweasel browser. When the default browser is changed mozilla and iceweasel are supported, too. When Firefox is used and the command must contain firefox	instead of being exactly	firefox 
+    * Added OpenThunderbirdMailMessageAction. Mail messages are now opened in either evolution or thunderbird (fixes #420475). Display e-mail address as author when no	name is available
+	
+Contributors to this release: Sebastian Pölsterl
+
+Updated Translations:
+    * British English
+    * Norwegian bokmål
+    * Spanish
+
+Contributors to the translations: Philip Withnall, Kjartan Maraas, Jorge Gonzalez
+
+=======================
+deskbar-applet 2.23.1
+=======================
+
+This is the first release of the unstable series
+that will lead to 2.24. It features two new modules
+Yahoo! Suggestions and Google Code Search, experimental
+Capuchin support, the possibility to run Deskbar-Applet
+in the system tray and much much more.
+
+Changes:
+    * Fixed bug #474496: Files that are in archives will appear as "Open <archive> containing <file>"
+    * Mark history ComboBox and Clear History button insensitive when no items are in history (fixes bug #486072)
+    * Only store window position when window UI is used
+    * Find programs in $PATH that start with the search term
+    * Added Capuchin support
+    * Fixed: Error dialog appears when installing a valid module after an invalid one has been installed.
+    * Added (set|get)_snippet methods to Match interface. If a snippet is set it will displayed in a new line under the matche's get_verb value
+    * Added the possibility to run Deskbar as a tray icon instead of an applet with the -t option from the commandline. It only works with Window UI.
+    * Fixed exception when changing default browser while preferences window is open
+    * load_icon returns None if fall back icon 'stock_unknown' is not present in the theme (fixes bug #506379)
+    * The size of the icon in the panel is no longer based on applet's size hint, but the allocation width and height. (fixes bug #526536)
+    * When checking firefox version. Wait until the process terminated to avoid zombie processes.
+    * Use gtk-clear icon instead of gtk-empty for "Clear history" item in popup menu
+    * Show match that opens beagle-search when more than the maximum results have been found. It will only be searched for this particular category.
+    * Fixed bug #520278: Window in sticky mode too small
+    * Added support to change the language the search results should be in to Yahoo module (configurable in preferences).
+    * Added possibility to search for specific formats only. If the query contains format:<format> only those files are searched (where <format> is one of html, msword, pdf, ppt, rss, txt, xls).
+    * Added new YahooSuggestHandler module. It suggests alternative queries based on the given query.
+    * Added new Google Code Search module
+    * Adjust layout when applet is moved from one panel to another
+    
+Contributors to this release: Sebastian Pölsterl
+
+Updated Translations:
+    * Bulgarian
+    * Estonian
+    * Greek
+    * Hebrew
+    * Russian
+    * Spanish
+    * Swedish
+    * Telugu
+
+Contributors to the translations: Yavor Doganov, Ivar Smolin, Simos Xenitellis, Yair Hershkovitz, Yuri Kozlov, Jorge Gonzalez, Daniel Nylander, Krishna Babu K
+
+=======================
+deskbar-applet 2.22.0
+=======================
+
+Changes:
+    * Fixed: Detect tomboy version correctly
+    
+Contributors to this release: Sebastian Pölsterl
+
+=======================
+deskbar-applet 2.22.0
+=======================
+
+This is the first release of the stable 2.22 series
+and just includes bug fixes compared to version 2.21.92.
+
+Changes:
+    * Provided better fix for bug #510769: list index out of range in CuemiacModel
+    * Fixed bug #513076: Entry doesn't get focus in sticky mode
+    * Fixed bug #518941: 'bool' object has no attribute 'find'
+    * When the default browser changes only stop those modules that have been enabled before. (fixes bug #513402)
+    * Fixed bug #518984: Pressing reload button more than once causes an exception.
+
+Contributors to this release: Sebastian Pölsterl
+
+Updated Translations:
+    * Albanian
+    * Assamese
+    * Bengali India
+    * British English
+    * Traditional Chinese translation(Hong Kong)
+    * Traditional Chinese translation(Taiwan)
+    * Danish
+    * Estonian
+    * Gujarati
+    * Hungarian
+    * Italian
+    * Lithuanian
+    * Malayalam
+    * Marathi
+    * Norwegian Nynorsk
+    * Korean
+    * Spanish
+    * Swedish
+    * Ukrainian
+
+Contributors to the translations: Laurent Dhima, Amitakhya Phukan, Runa Bhattacharjee, Philip Withnall, Chao-Hsiung Liao, Kenneth Nielsen, Ivar Smolin, Ankit Patel, Gabor Kelemen, Milo Casagrande, Gintautas Miliauskas, Ani Peter, Sandeep Shedmake, Åsmund Skjæveland, Changwoo Ryu, Jorge Gonzalez, Daniel Nylander, Maxim Dziumanenko
+
+=======================
+deskbar-applet 2.21.92
+=======================
+
+Changes:
+    * Check that Firefox is between 2.0.0 and 3.0.0 since FF 3.0 stores
+      everything in an sqlite db we cannot read
+    * Show lingering window when activating actions with the keyboard 
+
+Contributors to this release: Sebastian Pölsterl, Mikkel Kamstrup Erlandsen
+
+No Updated Translations
+
+
+=======================
+deskbar-applet 2.21.91
+=======================
+
+Changes:
+    * Added section about new UI to documentation (patch by Phil Bull)
+    * Fixed bug #510769: list index out of range in CuemiacModel
+    * Fixed bug #450960: Exception in epiphany module
+    * Fixed bug #506927: Ignore applications that have None as command
+
+Contributors to this release: Sebastian Pölsterl, Phil Bull
+
+Updated Translations:
+    * Arabic
+    * Assamese
+    * Basque
+    * Belarusian Latin
+    * Czech
+    * Finnish
+    * German
+    * Greek
+    * Hebrew
+    * Macedonian
+    * Norwegian bokmål
+    * Occitan
+    * Polish
+    * Portuguese
+    * Spanish
+    * Swedish
+    * Thai
+    * Turkish
+    * Traditional Chinese translation(Hong Kong)
+    * Traditional Chinese translation(Taiwan)
+
+Contributors to the translations: Djihed Afifi, Amitakhya Phukan, Inaki Larranaga Murgoitio, Ihar Hrachyshka, Petr Kovar, Tommi Vainikainen, Andre Klapper, Giannis Katsampiris, Yair Hershkovitz, Arangel Angov, Kjartan Maraas, Tommi VainikainenYannig Marchegay, Artur Flinta, Duarte Loreto, Jorge Gonzalez, Daniel Nylander, Theppitak Karoonboonyanan, Baris Cicek, Chao-Hsiung Liao
+
+=======================
+deskbar-applet 2.21.90.1
+=======================
+
+Changes:
+    * Fixed AttributeError in remove_module method in ModuleList.
+
+Contributors to this release: Sebastian Pölsterl
+
+Updated Translations:
+    * Spanish
+    
+Contributors to the translations: Jorge Gonzalez
+
+=======================
+deskbar-applet 2.21.90
+=======================
+
+Most notable, this release contains the Button UI that was already
+part of Deskbar-Applet before 2.20. When you use this UI the results
+will be attached to the panel where you added the applet.
+In addition, Deskbar-Applet now recognizes when you change your peferred
+browser and activates the appropriate modules for you. E.g. when
+you were using Web History and Web Bookmarks for Mozilla before
+changing the preferred browser to Epiphany, Web History and Web Bookmarks
+for Epiphany will be enabled and the Mozilla modules disabled.
+Last but not least, when beagle returns more than 20 results a match
+will appear that opens beagle-search to display all available results.
+
+Changes:
+    * Re-Introduced the old Button UI. (work partly by Andreas Kühntopf)
+    * Fixed bug #509126: Show hint that more beagle results are available (patch by JcRazo)
+    * Fixed bug #452205: Deskbar does not notice when preferred browser changed for web searches (patch by aantny)
+    * Added section about installing modules to documentation. (thanks to Qing Gan)
+
+Contributors to this release: Sebastian Pölsterl, Qing Gan, aantny, JcRazo, Andreas Kühntopf
+
+Updated Translations:
+    * Basque
+    * Galician
+    * Macedonian
+    * Norwegian bokmål
+    * Spanish
+    * Swedish
+    * Ukrainian
+
+Contributors to the translations: Inaki Larranaga Murgoitio, Ignacio Casal Quinteiro, Jovan Naumovski, Kjartan Maraas, Jorge Gonzalez, Daniel Nylander, Maxim Dziumanenko
+
+=======================
+deskbar-applet 2.21.5
+=======================
+
+Like the last release, a new module is
+introduced in this release. With the Tomboy
+module you can search your notes, add new tasks
+and delete tasks. In addition, you can now reload
+all modules in preferences. That way you don't have
+to restart Deskbar-Applet to re-check if a particular
+module has all the requirements.
+
+Changes:
+    * Added tomboy module (written by archengule at gmail.com)
+    * Fixed bug #504875: cannot concatenate 'str' and 'NoneType' objects in beagle-live.py
+    * Fixed bug #382127: devhelp handler is broken (patch by Michael Lester)
+    * Fixed bug #350597: "Send a mail" to a contact list adds only the first contact to "To:" (patch by Michael Lester)
+    * Added button to preference to reload all modules. Fixes bug #356008: a 'reload all scripts' button on the deskbar applet. (patch by Jc Razo)
+    * Re-added LingeringSelectionWindow for CuemiacTreeView	and CuemiacActionsTreeView
+    * Catching RuntimeException in OpenFileAction.is_valid and return False if it occurs
+    * Fixed bug #508326: The window title is not translatable
+    * Catch Exception when loading history to prevent that bugzilla pops up when history file is corrupted (fixes bug #504916)
+    * Fixed bug #507414: AttributeError in del.ico.us module
+    * Be compatible with older versions of OpenDesktopFileAction.py that had no attribute '_prog' (fixes bug #500846)
+    * Fixed bug #509058: list index out of range in tomboy.py
+    * Fixed bug #509127: Execute previous search (patch by Andreas Kühntopf). When you cycle through previous searches with up/down keys pressing enter will re-run the search.
+
+Contributors to this release: Sebastian Pölsterl, archengule at gmail.com, Michael Lester, Jc Razo, Andreas Kühntopf
+
+Updated Translations:
+    * Basque
+    * Belarusian Latin
+    * Brazilian Portuguese
+    * Estonian
+    * Korean
+    * Norwegian bokmål
+    * Occitan
+    * Spanish
+    * Swedish
+    * Vietnamese
+
+Contributors to the translations: Inaki Larranaga Murgoitio, Ihar Hrachyshka, Leonardo Ferreira Fontenelle, Priit Laes, Changwoo Ryu, Kjartan Maraas, Yannig Marchegay, Jorge Gonzalez, Daniel Nylander, Clytie Siddall
+
+=======================
+deskbar-applet 2.21.4
+=======================
+
+In this release a new module is introduced.
+With the Templates module you can create files from
+your templates stored in the Templates directory.
+
+Changes:
+	* Fixed: Doesn't load modules from one file when only one of them has missing requirements
+	* load_icon returns "stock_unknown" icon if given icon is not available
+	* Fixed bug #351817: Adding gnome templates to deskbar applet (patch by Denis Washington)
+	* Mark action as invalid if no default application is registered to open the file. However, Deskbar-Applet does not respect invalid actions, yet. (patch by Denis Washington)
+	* Fixed bug #490297: Window role for search window. Window role set to "deskbar-search-window"
+
+Contributors to this release: Sebastian Pölsterl, Denis Washington
+
+Updated Translations:
+	* Belarusian
+	* Galician
+	* Norwegian bokmål
+	* Norwegian nynorsk
+	* Slovenian
+	* Spanish
+	* Swedish
+
+Contributors to the translations: Ihar Hrachyshka, Ignacio Casal Quinteiro, Kjartan Maraas, Matej Urbančič, Jorge Gonzalez, Daniel Nylander
+
+=======================
+deskbar-applet 2.21.3
+=======================
+
+This release adds a new action that allows you to open evolution contacts for editing.
+In addition, user's module dir is searched for icons, too.
+Therefore, 3rd-party modules can put their icons in the user's
+module dir, as well.
+
+Changes:
+    * Added action to edit evolution contacts
+    * Changed icon for category people to stock_people
+    * Added icons for matches of gdmactions module
+    * Added has_requirements method for GnomeDictHandler, GnomeSearchHandler and DevhelpHandler
+    * Load icons from user's modules dir, too
+    * Fixed bug #479091: KeyError in _on_snippet_closed
+    * Fixed bug #471672: 'NoneType' object has no attribute 'get_actions'
+    * Fixed bug #499706: add iceweasel as firefox equivalent
+    * Fixed bug #406100: Deskbar "Computer Actions" could ask for confirmation
+
+Contributors to this release: Sebastian Pölsterl, Sebastien Bacher, Denis Washington
+
+Updated Translations:
+    * Belarusian
+    * Estonian
+    * Galician
+    * Slovenian
+    * Spanish
+
+Contributors to the translations: Ihar Hrachyshka, Ivar Smolin, Ignacio Casal Quinteiro, Matej Urbančič, Jorge Gonzalez
+
+=======================
+deskbar-applet 2.21.2
+=======================
+
+This release contains mostly bug fixes and a new action
+that allows you to run a command in the terminal.
+In addition, the search results are always presented as a
+description of a action now.
+
+Changes:
+    * Fixed: Layout is destroyed when changing font size. Used relative values instead of absolutes.
+    * Fixed bug #488047: Propagate the return value on CuemiacEntry::key-press-event back to the entry so that 'handled' is properly detected and ::key-press-event doesn't get emitted twice.
+    * Fixed bug #488066: deskbar applet should use complete vertical panel space
+    * Fixed: Doesn't unbind keybinding when it changes.
+    * Fixed bug #490981: Buttons aren't insensitive when no module is selected
+    * Fixed bug #472568: Deskbar launches file texts as programs
+    * Fixed: Cannot browse history when pressing up/down key. Show blank entry when no newer history items are available. Skip ChooseFromHistoryAction when browsing history. Show deskbar icon if history item has no icon
+    * Fixed bug #489312: action list didn't show binary names
+    * Remove on_key_press method of ProgramsHandler class and add new action "Execute in terminal"
+    * Replaced Match's get_hash(self, text=None) with get_hash(self), because second argument is never provided
+    * Always show description (get_verb() % get_name()) of default action
+    
+Contributors to this release: Sebastian Pölsterl
+
+Updated Translations:
+    * Arabic
+    * Belarusian Latin
+    * Catalan
+    * Estonian
+    * Galician
+    * Hungarian
+    * Norwegian
+    * Spanish
+    * Swedish
+
+Contributors to the translations: Djihed Afifi, Ihar Hrachyshka, Gil Forcada, Ivar Smolin, Ignacio Casal Quinteiro, Gabor Kelemen, Kjartan Maraas, Jorge Gonzalez, Daniel Nylander
+
+=======================
+deskbar-applet 2.20.1
+=======================
+
+This release fixes some really annoying bugs
+that has been discovered since the last release.
+
+Changes:
+    * Fixed bug #470985: EOFError when loading history
+    * Fixed bug #474179: ImportError when loading history
+    * Fixed bug #478223: Error in beagle-live handler when retrieving snippet
+    * Fixed bug in MozillaBookmarksHandler concerning smart bookmarks
+    * Fixed bug #481029: deskbar-applet.py missing final newline
+    * Fixed bug #478067: gconf schema problem.
+    * Fixed bug #475630: No module named dbus. Added dbus-python >= 0.80.2 as dependency
+    * Fixed bug #483985 and bug #482379: Catch IOErrors and print exception using logging.error
+    * Fixed bug #474627: global name 'DEFAULT_KEYBINDING' is not defined
+    * Fixed bug #483544: Search directories recursive for .desktop files
+	* Fixed bug: Don't replace OpenPathProgramAction in history when arguments differ
+	* Fixed bug #486337: Make sure that results will displayed in alphabetical order
+	* Fixed bug #486550: Set icon of OpenPathProgramAction to gtk-execute.	Don't display an icon in history, if none is set.
+
+Contributors to this release: Sebastian Pölsterl
+
+Updated Translations:
+    * Belarusian latin
+    * Bulgarian
+    * Danish
+    * Dutch
+    * Estonian
+    * French
+    * Gujarati
+    * Italian
+    * Korean
+    * Macedonian
+    * Portuguese
+    * Slovenian
+    * Spanish
+
+Contributors to the translations: Ihar Hrachyshka, Alexander Shopov, Kenneth Nielsen, Tino Meinen, Ivar Smolin, Claude Paroz, Ankit Patel, Luca Ferretti, Changwoo Ryu, Jovan Naumovski, Duarte Loreto, Urbančič Matej, Jorge Gonzalez
+
+=======================
+deskbar-applet 2.20.0
+=======================
+
+This release is a stable release. Its main focus are bug fixes.
+In addition, you can now move the window wherever you want and
+the position will be restored each time you open Deskbar-Applet.
+
+Changes:
+    * Fixed exception when creating VolumeMatch in files handler
+    * Added type check for set_icon method to Match class
+    * Fixed bug #473295: Contacts with image cause exception
+    * Fixed bug #473445: GdmRebootAction instance has no attribute 'request_logout'
+    * Save and restore window height when results are visible correctly
+    * Make pressing escape and alt-f4 behave the same way
+    * Fixed bug #473375: BrowserSmartMatch instance has no attribute 'name'
+    * Fixed: "Show only primary search engines" with Mozilla handler has no effect
+    * Reverted revision 1545: Display windows always in the middle of the screen and keep it above. Removed storing/setting window position.
+    * Changed default implementation of get_hash to return id of class in Match class
+    * Fixed bug #470848: One-line hits displayed with a second line
+    * Fixed bug #474364: Evolution contact hits are uncategorized
+    * Added: Check if path exists and is readable in get_actions_for_uri
+    * Fixed bug #474496: Files inside archives
+    * Retrieve snippets without causing exceptions in beagled
+    * Fixed bug when "inside_archive" key is not in result (beagle-live)
+    * Fix crasher when the returned action's hash is None by wrapping it in a str()
+    * Fixed bug #470838: 'DeskbarApplet' object has no attribute '_DeskbarApplet__view'
+    
+Contributors to this release: Sebastian Pölsterl, Mikkel Kamstrup Elandsen, Tom Parker
+
+Updated Translations:
+    * Albanian
+    * Arabic
+    * Basque
+    * British English
+    * Catalan
+    * Danish
+    * Dutch
+    * French
+    * Galician
+    * Hungarian
+    * Lithuanian
+    * Macedonian
+    * Norwegian bokmål
+    * Occitan
+    * Portuguese
+    * Russian
+    * Serbian
+    * Slovak
+    * Turkish
+    * Ukrainian
+
+Contributors to the translations: Laurent Dhima, Youssef Chahibi, Inaki Larranaga Murgoitio, David Lodge, Sílvia Miranda, Kenneth Nielsen, Wouter Bolsterlee, Stéphane Raimbault, Ignacio Casal Quinteiro, Gabor Kelemen, Gintautas Miliauskas, Jovan Naumovski, Kjartan Maraas, Yannig Marchegay, Duarte Loreto, Alexandre Prokoudine, Goran Rakić, Peter Tuharsky, Deniz Kocak, Maxim Dziumanenko
+
+=======================
+deskbar-applet 2.19.92
+=======================
+
+This is mostly a bug fix release.
+The minimum version of GTK+, PyGTK and PyGObject has been increased to 2.10.
+If you don't have at least version 2.10 please use Deskbar-Applet 2.18.x.
+The directory where modules are stored changed to modules-2.20-compatible to
+point out what API the modules have to use.
+
+Changes:
+	* Only clear entry, matches and actions when pressing escape if clear_entry is TRUE
+	* Only activate first item when pressing Enter in entry	if results are already available
+	* Fixed: Exception when activating match pressing Enter
+	* Matches of history handler have icon of action
+	* Bump minimum version of gtk+, pygtk and pygobject to 2.10
+	* OpenSmartBoomarkAction has "web-search" icon
+	* Fixed bug #472069: crash in Web Bookmarks (Mozilla) entering search terms or scrolling
+	* Fixed bug #472449: Opening a volume causes an exception
+	* Fixed: Throw exception if keybinding is already in use
+	* Changed modules folder to modules-2.20-compatible
+	* Changed history file to history-2.20-compatible
+	* Replace gnome-searchtool icon with system-search icon	because it got removed from gnome-icon-theme
+	* Fixed bug #473107: Deskbar opens all last searched words when searching in dictionary
+	* Fixed bug #472930: del.icio.us Tango icon (thanks to Rodney Dawes)
+	* Added type checks for icon and pixbuf
+
+Contributors to this release: Sebastian Pölsterl, Rodney Dawes
+
+Updated Translations:
+	* Brazilian Portuguese
+	* Bulgarian
+	* Estonian
+	* Finnish
+	* Galician
+	* German
+	* Gujarati
+	* Japanese
+	* Malayalam
+	* Polish
+	* Spanish
+	* Swedish
+	* Tamil
+	* Thai
+	* Vietnamese
+
+Contributors to the translations: Raphael Higino, Alexander Shopov, Ivar Smolin, Ilkka Tuohela, Ignacio Casal Quinteiro, Johannes Schmid, Ankit Patel, Takeshi AIHANA, Ani Peter, Artur Flinta, Jorge Gonzalez, Daniel Nylander, Tirumurthi Vasudevan, Theppitak Karoonboonyanan, Clytie Siddall
+
+=======================
+deskbar-applet 2.19.91
+=======================
+
+This release contains numerous bug fixes. Navigation has been improved
+to better fit the navigation in previous Deskbar releases. The GUI
+will be displayed in the center of the screen. You can also switch to the
+list of actions when you click in the '>' on the right of a match and
+go back from the list of actions when clicking the new "Back to Matches"
+button. Furthermore, developers that want to write their own modules
+can make use of the new ActionFactory that returns a list of actions
+depending on a file's MIME-type.
+
+Changes:
+	* Resolved some displaying issues with OpenFileAction, OpenWithApplicationAction and SendFileViaEmailAction actions
+	* Added GoToLocationAction.
+	* Added Factory to easily get actions for given file.
+	* Refactored beagle-live module.
+	* Fixed bug #466541: deskbar-applet crashed with AttributeError	in on_disabled_module_changed()
+	* Fixed: Disabled modules get still queried and return results
+	* Select last match when up is pressed in entry.
+	* Select entry on CuemiacTreeView's "pressed-up-at-top"	and "pressed-down-at-bottom" signals.
+	* Only restore small window if it has been saved before.
+	* Removed "show_history" from GConf schema.
+	* Removed obsolote code to show/hide history
+	* Fixed: Missing transparency
+	* Fixed: Doesn't close window after history action has been selected
+	* Fixed: Navigation issues if one or more categories where collapsed
+	* Fixed bug #413097: wierd text-string in deskbar-applet
+	* Fixed: Execute actions twice
+	* Fixed: GtkBookmarkMatch throws exception
+	* Removed 'handlersdir' from deskbar-applet.pc and added 'modulesdir'
+	* Implemented is_valid method properly and checking	is_valid before restoring history and activating an action
+	* Fixed bug #467825: Beagle VS Beagle-Live plugin
+	* Display windows always in the middle of the screen
+	* Removed storing/setting window position.
+	* Removed galeon handler because galeon isn't maintained anymore
+	* Changed default value from "clear_entry" to TRUE in GConf
+	* Set More button sensitive when callback (module's	show_config method) is callable and don't depend on value of INSTRUCTIONS attribute
+	* Removed config dialog of beagle-live handler
+	* Clear list of matches and actions not until first new match arrives
+	* Fixed: Match is labeled wrong if match has 2 actions
+	* Install bug buddy exception hook.	Removed dialog that displays stack trace. If an exception is raised in a module	only bring up bug buddy if its filename is contained in a whitelist. That way we want to prevent that exceptions in 3rd-party handlers land in bugzilla.
+	* Display "Choose action" after history item has been selected and history has been cleared.
+	* Clear entry, matches and actions list if "clear_entry" is True. Otherwise, navigation in the TreeView is still possible and	would cause trouble.
+	* Changed icon of button to clear history to gtk.STOCK_CLEAR (patch by Michael Monreal)
+	* Changed icon for GnomeDictHandler to 'accessories-dictionary'	because gdict isn't included in gnome-icon-theme anymore.(patch by Michael Monreal)
+	* Changed icon of RecentHandler to 'document-open-recent' (patch by Michael Monreal)
+	* Changed icon of email category to 'emblem-mail' (patch by Michael Monreal)
+	* Fixed bug #468452: History widget size. Only the first line of text will be displayed	in the history combobox.
+	* Added new epiphany-history icon (thanks to Michael Monreal)
+	* Changed default icon for category history to "document-open-recent"
+	* Added web-search icon
+	* Changed icon of MozillaSearchHandler, EpiphanySearchHandler and websearch category to web-search
+	* Fixed bug #468813: Yahoo Extension Icon (thanks to Michael Monreal)
+	* Fixed: When moving modules with buttons the view didn't follow the selected module
+	* Fixed: Exception when using epiphany handler
+	* Removed description that matches can be activated	with Alt+LETTER, because this feature isn't available anymore.
+	* Add "Back to Matches" button under the list of actions.
+	* Make the '>' beneath matches that have more than one action clickable to go the list of actions. This replaces that you have to press ctrl while clicking on a match to display its actions.
+
+Contributors to this release: Sebastian Pölsterl, Michael Monreal
+
+Updated Translations:
+	* Brazilian Portuguese
+	* Canadian English
+	* Estonian
+	* Finnish
+	* Gujarati
+	* Hungarian
+	* Japanese
+	* Korean
+	* Lithuanian
+	* Polish
+	* Portuguese
+	* Macedonian
+	* Spanish
+	* Swedish
+	* Thai
+
+Contributors to the translations: Vladimir Melo, Adam Weinberger, Ivar Smolin, Ilkka Tuohela, Ankit Patel, Gabor Kelemen, Takeshi AIHANA, Young-Ho Cha, Žygimantas Beručka, Artur Flinta, Duarte Loreto, Jovan Naumovski, Jorge Gonzalez, Daniel Nylander, Theppitak Karoonboonyanan
+
+=======================
+deskbar-applet 2.19.90.1
+=======================
+
+Changes:
+	* Pressing enter executes default action. Pressing right displays actions.
+	* Only alter label on duplicate matches if more than one action is available
+
+Updated Translations:
+	* Norwegian
+
+Contributors to the translations: Kjartan Maraas
+
+=======================
+deskbar-applet 2.19.90
+=======================
+
+This release features a completely new GUI and supports
+better navigation with the keyboard.
+If you type a search term you can jump to the results when pressing
+the down key. Pressing the right key while a match is selected
+displays its actions. In the actions panel, you can go back when
+you press the left key.
+Clicking on a match will no activate the default action.
+Pressing Ctrl at the same time will show you a list of actions.
+A match has more actions available if '>' is displayed on the right.
+Modules are now stored in "modules" directory to avoid confusions
+with previous versions.
+
+Changes:
+	* Clear actions TreeView if query changed, too
+	* Wrap messages in the info area if they are too long
+	* Clear actions TreeView if selection has changed
+	* Added version to description of module
+	* Fixed: Save and restore OpenDesktopFileAction correctly
+	* Set correct icon for ISwitchWindowHandler
+	* Fixed small error in web_address.py handler
+	* Fixed bug #464732: Import subprocess before using it. (patch by Colin Watson)
+	* Fixed bug #464735: NotImplementedError misspelled (patch by Colin Watson)
+	* Fixed bug #464736: "loggin" typo in get_url_host exception handler (patch by Colin Watson)
+	* Fixed bug #464739: on_install_handler says module when it meant mod_id (patch by Colin Watson)
+	* Fixed bug #464768: pygtk < 2.8.0 compat code refers to obsolete DeskbarAppletButton name (patch by Colin Watson)
+	* Fixed couple of bugs in beagle and history handlers. Fixes bug #465212: 'BeagleLiveHandler' object has no	attribute 'set_delay'
+	* Fixed bug #388508: web_address.py", line 32: startswith on None
+	* Added action that sends file via e-mail as attachment
+	* Adjusted default values in GConf
+	* Mark applet icon insensitive when loading/initializing
+	* Removed geek options from preferences dialog
+	* Fixed: Module order won't be saved if reordered with Drag & Drop
+	* Remake of the GUI. History is now in ComboBox. Menu and statusbar is gone. Matches and actions treeview is only visible	if search entry has	been entered.
+	* Added button besides combobox to clear history
+	* Added mnemonic to focus history combobox
+	* Only show either matches treeview or actions treeview
+	* Save and restore window position.
+	* Moved handlers to modules directory
+	* Honor "clear_entry" setting
+	* Mark UI sensitive if modules have been loaded	and before they have been initialized
+	* Connect to keybinding-activated signal after modules have been loaded
+	* Added application name to epiphany, galeon and mozilla handlers
+	* If two matches with same hash get merged alter the label
+	* Pressing down on last item selects first item. Pressing up on first item selects last item.
+	* Categories will be skipped when navigating with up/down keys
+	* Added possibility to start Deskbar unininstalled out of the box (patch by Mikkel kamstrup Erlandsen)
+	* Set skip-taskbar-hint to True
+	* Pressing escape always clears the entry and treeviews	and closes the window
+	* Mouse click executes default action. Ctrl+click displays list of actions.
+
+Contributors to this release: Sebastian Pölsterl, Colin Watson, Mikkel kamstrup Erlandsen
+
+Updated Translations:
+	* Finnish
+	* Gujarati
+	* Spanish
+	* Swedish
+	* Tamil
+	* Thai
+
+Contributors to the translations: Ilkka Tuohela, Ankit Patel, Jorge Gonzalez, Daniel Nylander,
+Tirumurthi Vasudevan, Theppitak Karoonboonyanan
+
+=======================
+deskbar-applet 2.19.6.1
+=======================
+
+Fixed compile error in evolution module.
+
+Changes:
+	* Fixed bug #463974: 2.19.6 evolution handler does not build
+
+Updated Translations:
+	* Gujarati
+	* Spanish
+	* Swedish
+	* Thai
+	
+Contributors to the translations: Ankit Patel, Jorge Gonzalez, Daniel Nylander,
+Theppitak Karoonboonyanan
+
+=====================
+deskbar-applet 2.19.6
+=====================
+
+This release contains all the work merged from the Google Summer of Code branch.
+The most notable features are actions. Each match can now contain one or more actions.
+If only one action is available Deskbar-Applet behaves the same way as before. If more
+than one action is available the user can choose from a list of actions.
+
+Changes:
+	* Added actions
+	* Fixed bug #461627: Change the amount of items in history
+	* Always show count in category header
+	* Fixed evolution address book search with evo-ldap (patch by Karl Relton)
+	* Removed obsolete definitions from GConf and preferences and added new controls to preferences for previously unsupported options
+	* Set process name to deskbar-applet
+	* Cell containing the icon of a match doesn't expand anymore
+	* Print tracebacks if module failed to load
+	* Renamed gsoc_deskbar.py to deskbar-applet.py
+	* Made sure that all icons are included in gnome-icon-theme
+	* Added default icons for each category
+	* Show window always in the foreground if triggered
+	* Adjusted schema file so that intltool-merge works fast
+	* Fixed: Pressing icon in panel didn't raise window
+	* Don't show matches from a previous search if entry has been cleared by hand (i.e. not by hitting escape)
+	* Fixed errors in epiphany and gdmactions module (Insted of printing error set INSTRUCION attribute)
+	* Fixed bugs in BrowserMatch.py (fixes bug #438080)
+	* Added: Check for duplicates
+	* Make return value of get_hash() hashable for all modules
+	* Only paste selection if keybinding has been activated
+	* Each category has its own default icon
+	* Fixed bug #456969: Desklicious plugin uses non-existent deskbar.Utils
+	* Fixed bug #456968: Find /usr/lib*/firefox*/searchplugins
+	* Fixed bug #456971: desklicious plugin improperly passess category to DeliciousMatch
+	* Fixed bug #457133: DeliciousMatch has no 'name' and only default icon
+	* Fixed bug #445145: Deskbar doesn't show up localized in the applet list
+	* Fixed bug #456417: Poorly written schema descriptions
+
+Contributors to this release: Sebastian Pölsterl, Luke Macken, Karl Relton
+
+Updated Translations:
+	* Basque
+	* Bengali
+	* Dutch
+	* Estonian
+	* Finnish
+	* French
+	* German
+	* Japanese
+	* Norwegian
+	* Slovenian
+	* Spanish
+	* Thai
+	* Vietnamese
+
+Contributors to the translations: Inaki Larranaga Murgoitio, Runa Bhattacharjee,
+Wouter Bolsterlee, Priit Laes, Ilkka Tuohela, Stéphane Raimbault, Johannes Schmid,
+Takeshi AIHANA, Kjartan Maraas, Matic Žgur, Jorge Gonzalez, Theppitak Karoonboonyanan,
+Nguyễn Thái Ngọc Duy
+
+=====================
+deskbar-applet 2.19.5
+=====================
+
+First release of the Google Summer of Code branch maintained by Sebastian Pölsterl.
+This release features major refactoring including a new GUI and Modules API.
+Therefore, old modules won't work with this version. No new big features are
+included, but this release should contain almost all the features that Deskbar
+had before refactoring.
+
+=====================
+deskbar-applet 2.18.1
+=====================
+
+Updated Translations:
+        * Albanian
+        * Basque
+        * Danish
+        * Galacian
+        * Greek
+        * Italian
+        * Portuguese
+        * Simplified Chinese
+        * Spanish
+        * Turkish
+
+Contributors to the translations: Alessio Frusciante, Baris Cicek, Claudio
+Saavedra, Dimitris Glezos, Duarte Loreto, Funda Wang, Ignacio Casal Quinteiro,
+Inaki Larranaga Murgoitio, Jorge Gonzalez, Laurent Dhima, Milo Casagrande,
+Peter Bach
+
+
+=====================
+deskbar-applet 2.18.0
+=====================
+
+Changes:
+        * Bugfix 354391: bump autoconf required to 2.60, fixes empty DATA_DIR.
+        * Bugfix 386495: Include abstract in documentation, fixing build break.
+        * Bugfix 389984: Stale env-vars after login, logout, login.
+        * Bugfix 394302: only searches the first word in the query.
+        * Bugfix 394461: some handlers don't handle whitespace correctly.
+        * Bugfix 394734: Invalid Util.get_proxy() call.
+        * Bugfix 397838: history matches now sorted by last use.
+        * Bugfix 398255: .gtk-bookmarks should be a file and not a directory.
+        * Bugfix 399217: Crash when dragging a handler already in its directory.
+        * Bugfix 399853: fixed deprecated D-Bus usage.
+        * Bugfix 399855: use pygtk_version, not gtk_version.
+        * Bugfix 402274: don't delete categories on unload.
+        * Bugfix 408103: typo in the proxy detection code.
+        * Bugfix 409088: importing gnomeapplet in configure can break the build.
+        * Bugfix 410586: crash in Deskbar: Opening a file through it.
+        * Bugfix 411209: filenames with spaces in not opened.
+        * Fixed deskbar disappearing every now and then.
+        * Fixed Entry UI not disappearing when clicking outside the popup.
+        * Fixed Window-Switch when the workspace has no 'activate' attribute.
+        * Fixed X-grab bug in the entriac view.
+        * Remove elementtree dependency, we don't use it.
+        * Update the website, authors and stuff in the about section.
+
+Contributors to this release: Elijah Newren, Kjartan Maraas, Mikkel Kamstrup
+Erlandsen, Nigel Tao, Raphael Slinckx, Sebastian Polsterl, Tom Parker.
+
+Updated Translations:
+        * Arabic
+        * Belarusian
+        * Bengali India
+        * Brazilian Portuguese
+        * Bulgarian
+        * Catalan
+        * Danish
+        * Dutch
+        * Dzongkha
+        * Estonian
+        * Finnish
+        * French
+        * German
+        * Gujarati
+        * Hebrew
+        * Hungarian
+        * Japanese
+        * Korean
+        * Lithuanian
+        * Macedonian
+        * Norwegian
+        * Polish
+        * Portuguese
+        * Russian
+        * Serbian
+        * Slovenian
+        * Swedish
+        * Thai
+        * Traditional Chinese (Hong Kong)
+        * Traditional Chinese (Taiwan)
+        * Turkish
+        * Ukrainian
+        * Vietnamese
+
+Contributors to the translations: Alexander Shopov, Alexandre Prokoudine, Ankit
+Patel, Artur Flinta, Baris Cicek, Changwoo Ryu, Chao-Hsiung Liao, Clytie
+Siddall, Daniel Nylander, Djihed Afifi, Duarte Loreto, Gabor Kelemen, Gil
+Forcada, Gintautas Miliauskas, Goran Rakic, Hendrik Richter, Ihar Hrachyshka,
+Ilkka Tuohela, Ivar Smolin, Jonathan Ernst, Josep Puigdemont i Casamajo, Jovan
+Naumovski, Kjartan Maraas, Leonardo Ferreira Fontenelle, Matic Zgur, Maxim
+Dziumanenko, Nguyen Thai Ngoc Duy, Og Maciel, Pema Geyleg, Peter Bach, Pham
+Thanh Long, Priit Laes, Robert-Andre Mauchin, Runa Bhattacharjee, Stephane
+Raimbault, Takeshi Aihana, Theppitak Karoonboonyanan, Wouter Bolsterlee, Yair
+Hershkovitz.
+
+=====================
+deskbar-applet 2.17.5
+=====================
+
+Changes:
+        * Build fixes
+        * Improve the accelerator entry. Patch by Sebastian Polsterl.
+        * Remove google-live from the Makefile.am
+        * Resurrect the new-stuff-manager support. It is optional, and nothing changes if the new-stuff-manager isn't available to the user.
+        * Prevents binding of keys a-z and shit-a-z.
+        * Fixes hotkey unbinding. Patch by Manuel Muradas <manuel_muradas@speedy.com.ar>. Fixes bug #346749 and a huge number of issues related to hotkey unbinding.
+        * Add opened files to recent manager in GTK 2.10. Patch by Robert Bradford <robster@debian.org>. Closes bug #383051.
+        * Fixes bug #382125.
+        * close the popup when the focus is taken away (see #367632)
+        * Fixes bug #364602. Patch by Glynn Foster <glynn.foster@sun.com>
+        * Fixes bug #358854. Patch by Martin Schanzenbach <mschanzenbach@gmail.com>
+        * Removed unused galago plugins
+        * Fix bug #390358. The watcher attribute is checked before being called
+        * Refresh some of the env variables
+        * Fixe bug #388802 . Add a trycatch before parsing ephy history file
+        * Remove google-live.py from the translatable files. Fix bug #388422 and any other bug related gnome.url_show, by showing an error box.
+        * Remove the google live handler since they do not offer the api key anymore. fixes bug #385258
+        * Don't return non-executable files found in PATH in is_program_in_path(). This closes bugs #390369 and #385087.
+        * Fix multiple iterations over same bookmark sets (not user visible).
+        * Add support for Firefox 2.0 search engines.
+        * Add an optional  named parameter "pixbuf" to the Match base class constructor
+        * Bump to 2.17.5
+
+Contributors to this release: Raphael Slinckx, Rob Bradford, Mikkel Kamstrup Erlandsen, Sebastian Polsterl, Manuel Muradas, Glynn Foster, Martin Schanzenbach
+
+=====================
+deskbar-applet 2.17.3
+=====================
+
+Changes:
+	* Fix opening file that have been deleted by opening parent dir
+	* added missing header files to pass code check tests.
+	* Close bug #368576, add encoding description to About.py
+	* Add translation for categories. the gettext call was missing
+	* Workaround bug #366973, if opening a file fails because it is executable or for any other reason, open the parent directory instead
+	* Fixes bug #375987 missing translated file
+	* Fixes #355278 Making strings to appear translated.
+
+Contributors to this release: Raphael Slinckx, Francisco Javier F. Serrador, Rodrigo Moya
+
+=====================
+deskbar-applet 2.17.2
+=====================
+Released 2006-11-07.
+
+Changes:
+	Fix the closing of popup window with f4 causing a lot of errors.
+	Merge Sebastian Pölsterl's Drag-and-Drop work.
+	bug #353428, fails to open a file with national characters in its name.
+	ModuleInstaller.install returns a value when installing a local .py.
+	bug #339426, New recent files handler.
+	Fix typo in google-live handler
+	bug #353691, disable high-CPU handlers for the default settings
+	bug #354953, crash when parsing a non-standard accelerator string
+	bug #355573, crash on self.ui when gconf has a weird value in it
+	bug #355947, crash on parsing malformed mozilla bookamrks
+	bug #356893, crash when a pixmap is None instead of an actual image
+	bug #358298, markup in url cause web_address to crash
+	bug #359522, crash when gconf isn't used for browser detection code
+	bug #359568, crash when dealing with gnomevfs drives==none
+	bug #355687, crashing on buggy middle clicks
+	bug #353081, crash in Deskbar: Enabling beagle live plugin
+
+Contributors to this release: Raphael Slinckx, Mikkel Kamstrup Erlandsen,
+Sebastian Pölsterl, Callum McKenzie.
+
+Updated Translations:
+	Bulgarian
+	Chinese (Hong Kong)
+	Chinese (Taiwan)
+	Dutch
+	Dzongkha
+	English (British)
+	Estonian
+	Gujarati
+	Hungarian
+	Finnish
+	French
+	Georgian
+	Japanese
+	Korean
+	Macedonian
+	Malaylam
+	Nepali
+	Persian
+	Spanish
+	Swedish
+	Thai
+	Vietnamese
+
+Contributors to the translations: Abel Cheung, Alexander Shopov, Ani Peter,
+Ankit Patel, Changwoo Ryu, Christophe Merlet, Clytie Siddall, Daniel Nylander,
+David Lodge, Francisco Javier F. Serrador, Gabor Kelemen, Ilkka Tuohela, Ivar
+Smolin, Jovan Naumovski, Meelad Zakaria, Pawan Chitrakar, Pema Geyleg, Priit
+Laes, Roozbeh Pournader, Satoru Satoh, Theppitak Karoonboonyanan, Vladimer
+Sichinava, Wouter Bolsterlee
+
+=====================
+deskbar-applet 2.16.0
+=====================
+
+Changes:
+	* Fix gdmactions' dbus method calls to not throw errors when returning
+	* Fix positioning bug when the applet is on the right side, by recomputing the position and size of the popup window after a resize-event
+	* Fix the confusion between a method called self.clear_entry and an attribute miscalled self.clear_entry 
+	* Attempt to fix the color of the result list by changing the wm hint.
+	* Fix a critical warning happening when displaying result list or pressing enter on an empty entry
+	* Trivial fix to warning from the button ui. History view was added twice to the history-popup.
+	* Fix bug #352541 beagle-live handler having trouble finding escaped_uri in the result dictionary caused an exception to be thrown
+	* Fix the width_units problem in bug #352874
+	* Fixify the preferences dialog, to be prettier
+	* In beagle-live, check if we can find beagled in $PATH before offering to launch the daemon by ourselves.
+
+Contributors to this release: Raphael Slinckx, Mikkel Kamstrup Erlandsen
+
+Contributors to the translations: Kostas Papadimas, Vladimer Sichinava, Kjartan Maraas, Rajesh Ranjan, Tommi Vainikainen, Ilkka Tuohela, Artur Flinta, Priit Laes, Žygimantas Beručka, Duarte Loreto, Theppitak Karoonboonyanan, Inaki Larranaga, Øivind Hoel, Runa Bhattacharjee, Gintautas Miliauskas, Gabor Kelemen, Ankit Patel, Rhys Jones, Jovan Naumovski, Amanpreet Singh Alam, ChaoHsiung Liao, Guntupalli Karunakar, Ignacio Casal Quinteiro, Rahul Bhalerao, Takeshi AIHANA, Lukas Novotny, Funda Wang, Thierry Randrianiriana, Josep Puigdemont i Casamajó, Erdal Ronahi, Alessio Frusciante, Satoru SATOH, Christophe Merlet, Danilo Šegan, Yair Hershkovitz, Changwoo Ryu, Ahmad Riza H Nst, Hendrik Richter, Benoît Dejean, Khandakar Mujahidul Islam, Laurent Dhima, Sanlig Badral, Wouter Bolsterlee, Pawan Chitrakar, Daniel Nylander, Vincent van Adrighem, Clytie Siddall, Ales Nyakhaychyk, Kang JeongHee, Leonid Kanter, Raphael Higino, Christian Rose, Josep Puigdemont Casamajó, Francisco Javier F. Serrador, Marcel Telka, Raivis Dejus, Miloslav Trmac, Maxim Dziumanenko, Subhransu Behera, Hendirk Brandt, Alexander Shopov, Baris Cicek, I. Felix, Adam Weinberger, Matic Zgur, Hendrik Brandt, Ole Laursen, Stanislav Brabec, Pema Geyleg, Slobodan D. Sredojevic, Nickolay V. Shmyrev, Nikos Charonitakis
+
+========================
+deskbar-applet 2.15.92.1
+========================
+
+Changes:
+	* Fixed crasher with Beagle-Live extension - #352595.
+	* Entriac pastes primary selection only on keyboard shortcut.
+	  This fixes #346348 and #352595.
+	* Fix #352593 – AccelEntry doesn't set old value if it loses focus.
+	* Resolved conflict with po/LINGUAS.
+
+Contributors to this release: Raphael Slinckx, Mikkel Kamstrup Erlandsen,
+Sebastian Pölsterl
+
+Updated Translations:
+	* Basque (new)
+	* Bengali
+	* French
+	* Hindi
+	* Latvian
+	* Oriya (new)
+	* Portuguese
+	* Simplified Chinese
+	* Slovenian (new)
+
+Contributors to the translations: Subhransu Behera, Inaki Larranaga, Funda Wang,
+Raivis Dejus, Damien Durand, Christophe Merlet, Duarte Loreto, Khandakar
+Mujahidul Islam, Matic Zgur, Rajesh Ranjan
+
+======================
+deskbar-applet 2.15.92
+======================
+
+Changes:
+	* Fixes bug #352007, add a hidden gconf pref to clear the entry after a match has been selected. Patch by Sebastian Pölsterl <marduk@k-d-w.org>
+	* Add support for new bug-buddy in server file and in the exception hook show both bug buddy, and our normal error dialog. Patch by Rob Bradford <robster@debian.org>
+	* Fix bug #352005, less than two characters won't trigger the action with enter Add trace framework with -t to trace the program execution
+	* Fix #351504 "Applet background having different gray than panel". set_visible_window(False) on the event box of the button. Fix courtesy Sebastian Pölsterl.
+	* Close the About dialog when clicking on close
+	* Add new tango-style icons at various sizes made by Lapo Calamandrei <calamandrei@gmail.com>
+	* Fix the non-detection of gtk bookmarks starting like file:///something
+	* Bump requirements for libebook to 1.7.91 since changes have been made to EContactPhoto
+	* Selecting a two-line match (fx. a beagle news item) caused the lingering selection window two stay at the two-line size. Fix this - so that it resizes to fit the match.
+
+Contributors to this release: Nigel Tao, Raphael Slinckx, Mikkel Kamstrup Erlandsen, Sebastian Pölsterl
+
+Contributors to the translations: Kostas Papadimas, Vladimer Sichinava, Kjartan Maraas, Thierry Randrianiriana, Tommi Vainikainen, Hendrik Richter, Artur Flinta, Priit Laes, Žygimantas Beručka, Duarte Loreto, Theppitak Karoonboonyanan, Josep Puigdemont Casamajó, Øivind Hoel, Runa Bhattacharjee, Ilkka Tuohela, Gabor Kelemen, Ankit Patel, Rhys Jones, Jovan Naumovski, Amanpreet Singh Alam, Raphael Higino, ChaoHsiung Liao, Guntupalli Karunakar, Ignacio Casal Quinteiro, Rahul Bhalerao, Lukas Novotny, Nickolay V. Shmyrev, Rajesh Ranjan, Josep Puigdemont i Casamajó, Erdal Ronahi, Alessio Frusciante, Satoru SATOH, Christophe Merlet, Danilo Šegan, Yair Hershkovitz, Changwoo Ryu, Raivis Dejus, Ahmad Riza H Nst, Benoît Dejean, Marcel Telka, Leonid Kanter, Sanlig Badral, Wouter Bolsterlee, Pawan Chitrakar, Daniel Nylander, Vincent van Adrighem, Francisco Javier F. Serrador, Ales Nyakhaychyk, Funda Wang, Christian Rose, Takeshi AIHANA, Laurent Dhima, Clytie Siddall, Miloslav Trmac, Maxim Dziumanenko, Hendirk Brandt, Alexander Shopov, Baris Cicek, I. Felix, Adam Weinberger, Hendrik Brandt, Ole Laursen, Stanislav Brabec, Pema Geyleg, Slobodan D. Sredojevic, Kang JeongHee, Nikos Charonitakis
+
+======================
+deskbar-applet 2.15.91
+======================
+
+Changes
+        * Removed new-stuff-manager (and hence the dependency on elementtree).
+        * First preferences tab changed from "Searches" to "Extensions"
+        * Fix #338776, respecting themes in the result view.
+        * Fix #338828, improving the window-switcher extension.
+	* Fix #348154, "More button in preferences isn't set insensitive".
+
+Contributors to this release: Mikkel Kamstrup Erlandsen, Nigel Tao
+
+Translations:
+	* Updated Dutch translation.
+	* Updated Finnish translation.
+	* Updated German translation.
+	* Updated Gujarati translation.
+	* Updated Lithuanian translation.
+	* Updated Macedonian translation.
+	* Updated Nepali translation
+	* Updated Norwegian bokmål translation.
+	* Updated Slovak translation.
+	* Updated Spanish translation.
+	* Updated Thai translation.
+	* Updated Ukrainian translation.
+
+Contributors to the translations: Francisco Javier F. Serrador, Jovan Naumovski,
+Theppitak Karoonboonyanan, Ankit Patel, Hendrik Brandt, Kjartan Maraas,
+Maxim Dziumanenko, Hendrik Brandt, Vincent van Adrighem, Žygimantas Beručka,
+Pawan Chitrakar, Ilkka Tuohela, Jovan Naumovski, Marcel Telka, Tino Meinen.
+
+========================
+deskbar-applet 2.15.90.1
+========================
+
+Changes
+        * build with newest e-d-s
+
+Contributors to this release: Frederic Peters
+
+======================
+deskbar-applet 2.15.90
+======================
+
+Changes:
+        * Now checks for the elementtree Python package (as needed by the NewStuffManager).
+        * Add a check in ModuleLoader.initialize_module(context) to see if we meet the any
+          given requirements for the module before initializing. This should clean up a few
+          exceptions on start-up. In Beagle-Live properly check if beagled is running via
+          beagle.beagle_util_daemon_is_running(). If beagled is not running display an
+          option to start it (via a standard "more" button in the module list view).
+
+Contributors to this release: Raphael Slinckx, Mikkel Kamstrup Erlandsen.
+
+Translations:
+        * Added Belarusian translation.
+        * Added Malayalam (ml) translation.
+        * Updated Catalan translation.
+        * Updated Czech translation.
+        * Updated Dzongkha translation.
+        * Updated Finnish translation.
+        * Updated French translation.
+        * Updated Greek translation.
+        * Updated Gujarati translation.
+        * Updated Japanese translation.
+        * Updated Korean translation.
+        * Updated Simplified Chinese translation.
+        * Updated Spanish translation.
+        * Updated Swedish translation.
+        * Updated Thai translation.
+
+Contributors to the translations: Changwoo Ryu, Kostas Papadimas, Francisco
+Javier F. Serrador, Guntupalli Karunakar, Daniel Nylander, Lukas Novotny,
+Theppitak Karoonboonyanan, Josep Puigdemont i Casamajó, Ales Nyakhaychyk,
+Runa Bhattacharjee, Ilkka Tuohela, Satoru SATOH, Christophe Merlet, Ankit Patel,
+Funda Wang.
+
+=====================
+deskbar-applet 2.15.4
+=====================
+
+Changes:
+	* Add preference to paste seection when triggering hotkey (work in progress)
+	* Fix epiphany parsing of non-latin1 hrefs in bookmarks
+	* Tweak sorting of program handlers
+	* Correctly handle uri and identifier by not escaping them
+	* Highlight search string in beagle imlogviewer
+	* Add g-p-m and g-screensaver support in gdmactions.
+	* Add gdmactions handler
+	* Remove nesting for matches
+	* Correctly detect mozilla profile. Patch by Jonathan Doda <jdodo@sympatico.ca>
+	* Add a gconf key to set delay between writing something in search entry and performing the search.
+	* Fix #346760: "Text in text entry from previous use is not highlighted when entry is brought up".
+	* Patch by Travis B. Hartwell <nafai@travishartwell.net> for bug #346813 – "All handlers don't explicitly import deskbar.Match".
+	* Keep the window above others when /apps/metacity/general/disable_workarounds is False. (it only worked for True).
+	* Add window mode. You can launch it with -p or --popup. You need to regenerate deskbar/deskbar-applet. This work is mostly due to Sebastian Pölsterl. Things that obviously needs fixing: - Cannot gain focus on shortcut after first show. - UI polish.
+	* Fix middle-click paste.
+	* Do proper popup positioning when the gconf key /apps/metacity/general/disable_workarounds is TRUE. This required setting the gtk.gdk.WINDOW_TYPE_HINT_MENU on the popup. This fixes bug #335243. Re-enable + and ' for expand collapse in the tree. Only recalculate the popup postion when the window is hidden, and don't update_position() on resize events in CuemiacAlignedWindow (see fixme on line 34). Make the history popup of the button ui behave as a normal popup with regards to focus loss. Normal result popup is still toggle-style.
+	* Make popup sticky in button mode. This closes #333371. This can easily be backported to 2.14. We just need to call gtk.Window.stick() and gtk.Window.unstick() just before we show/hide the popup.
+	* Introduce CuemiacHeader and make button ui use it. Basically it is just a colored frame around the search entry.
+	* SignallingHandler did not remove the gobject source on stop_query(). It does now. This should close #344049 and #344045. Make sure entriac emits a "stop-query" when the popup is hidden. CuemiacUIManager did not set proper path and column for the "row-acivated" signal on the treeview, in on_entry_activated, this caused trouble for the LingeringSelection. Fix this.
+	* Make CuemiacHistory.CuemiacHistoryPopup use xgrab logic for focus handling. Let CuemiacEntryUI use this new history popup. NOTE: Keyboard navigation is broken in the history popup. This is related to the old #326254 bug. I think we have to add a a keyboard navigation model our selves as we did for CuemiacTreeView. Rip focus logic out of CuemiacUIManager and CuemiacLayoutProvider - it was broken and no widgets where using it anyway. Remove realization of the view from CuemiacPopupEntry.popup().
+
+Contributors to this release: Raphael Slinckx, Mikkel Kamstrup Erlandsen, Sebastian Pölsterl
+
+Translations:
+	* Updated Traditional Chinese translation(Hong Kong).
+	* Updated Traditional Chinese translation(Taiwan).
+	* Updated Brazilian Portuguese translation.
+	* Added Malagasy translation
+	* Updated Bulgarian translation by Rostislav Raykov <zbrox@i-space.org>
+	* Added Bengali India Translation.
+	* Updated Spanish translation.
+	* Updated French translation.
+	* Updated Finnish translation.
+	* Updated nepali translation
+	* Added Tamil Translation
+	* Added 'ta'
+	* Updated Hindi Translation.
+	* Updated Dzongkha translation by Dzongkhalinux Team, DIT.
+	* Updated Macedonian Translation.
+	* Added Hebrew translation.
+	* Updated Russian translation by Alexandre Prokoudine <alexandre.prokoudine@gmail.com>
+	* Added Latvian Translation.
+	* Updated Galician Translation.
+	* Updated Swedish translation.
+	* Updated German translation.
+	* Updated Thai translation.
+	* Updated Gujarati Translation.
+
+Contributors to the translations: Kostas Papadimas, Vladimer Sichinava, Kjartan Maraas, Thierry Randrianiriana, Hendrik Richter, Artur Flinta, Josep Puigdemont Casamajó, Žygimantas Beručka, Duarte Loreto, Theppitak Karoonboonyanan, Øivind Hoel, Runa Bhattacharjee, Ilkka Tuohela, Gabor Kelemen, Ankit Patel, Funda Wang, Jovan Naumovski, Amanpreet Singh Alam, Clytie Siddall, ChaoHsiung Liao, Guntupalli Karunakar, Ignacio Casal Quinteiro, Tommi Vainikainen, Lukas Novotny, Nickolay V. Shmyrev, Rajesh Ranjan, Danilo Šegan, Josep Puigdemont i Casamajó, Erdal Ronahi, Alessio Frusciante, Satoru SATOH, I. Felix, Rhys Jones, Yair Hershkovitz, Ahmad Riza H Nst, Benoît Dejean, Marcel Telka, Leonid Kanter, Pawan Chitrakar, Daniel Nylander, Vincent van Adrighem, Slobodan D. Sredojevic, Raivis Dejus, Raphael Higino, Christian Rose, Takeshi AIHANA, Laurent Dhima, Francisco Javier F. Serrador, Miloslav Trmac, Maxim Dziumanenko, Alexander Shopov, Adam Weinberger, Hendrik Brandt, Ole Laursen, Stanislav Brabec, Pema Geyleg, Priit Laes, Kang JeongHee, Nikos Charonitakis
+
+=====================
+deskbar-applet 2.15.3
+=====================
+
+Changes:
+	* Fix CuemiacPopupEntry navigation with an evil hack. The hack is encapsulated in the method CuemiacTreeView.move_cursor_up_down. Loads of general polish to the cuemiac stack. I think the history popup is still broken a bit. I plan to make it use some xgrab magic (like the popupentry). Don't popup a lingering selection when we activate something that has children in the treeview.
+	* Introduction of the plugin updater/downloader, so it will be possible to update and download new plugins from internet, right in deskbar. Current commit includes build system patches (with dbus dependency, if someone can't build because of that, it can be made optional, but no updater) Also included is first raw patch for updates to work in the preference panel. The plugin updater is generic and can be hopefully made useful in some ways for other applications using python or non-compiled files, like gedit, rhythmbox, epiphany, gnumeric, the theme/icons/metacity dialog, etc
+	* Moved web-repository to the official website repository, added testing modules to the remote repository. Allow the downloader to handle compressed tarballs as well as single-file python scripts. 
+	* There is a second tab presenting available handlers that you don't have already installed, you can choose one of them, and install it. It will be downloaded and unpacked in the deskbar user directory. Normally every action should require no restart or anything, the buttons should be sensitive when possible, the plugins should be unloaded/reloaded without problems, etc. Anything else is a big. This needs heavy love, and probably an UI discussion..
+	* WARNING: Breakage introduced as agreed on IRC. Mainly in entriac ui. Merge the Cuemiac rework. Highlights: - Introduce a CuemiacUIManager to handle the common tasks for uis using the C. - Introduce a CuemiacLayoutProvider abstract class to provide hooks for the common layout tasks. - Introductory work on a CuemiacPopupEntry in the style of gtk.EntryCompletion, problems in the navigational model relating to bug #326254 breaks entriac ui. - Add a LingeringSelectionWindow that leaves a "shadow" behind when a match is selected. See fixme in CuemiacTreeView.__on_button_press.
+	* Add a hidden gconf setting to set the minimal number of chars to type before deskbar starts to react. Defaults to 1 as previsouly used. Patch by Maxime Henrion <mux@FreeBSD.org>
+	* Import the gdmclient module from gimmie. It will be used for the shutdown/restart actions handler
+	* Fix the hashing of programs so they won't show pathprograms and programs duplicate
+
+Contributors to this release: Raphael Slinckx, Mikkel Kamstrup Erlandsen, Sebastian Pölsterl
+
+Translations:
+	* Updated Spanish translation.
+	* Updated Galician Translation.
+	* Updated Catalan translation by Gil Forcada <gilforcada@guifi.net>
+	* Updated Thai translation.
+	* Added Dzongkha Translation.
+	* Updated Spanish translation.
+	* Updated Vietnamese translation.
+	* Added nepali translation
+	* Updated Gujarati Translation.
+	* Updated Brazilian Portuguese translation.
+	* Updated Bulgarian translation by Alexander Shopov <ash@contact.bg>
+	* Updated Traditional Chinese translation(Hong Kong).
+	* Updated Traditional Chinese translation(Taiwan).
+	* Added Indonesian Translation.
+	* Updated Norwegian bokmål translation.
+
+Contributors to the translations: Kostas Papadimas, Vladimer Sichinava, Kjartan Maraas, Rajesh Ranjan, Artur Flinta, Josep Puigdemont Casamajó, Žygimantas Beručka, Duarte Loreto, Theppitak Karoonboonyanan, Øivind Hoel, Runa Bhattacharjee, Ilkka Tuohela, Gabor Kelemen, Ankit Patel, Funda Wang, Amanpreet Singh Alam, Raphael Higino, ChaoHsiung Liao, Ignacio Casal Quinteiro, Tommi Vainikainen, Lukas Novotny, Rhys Jones, Josep Puigdemont i Casamajó, Erdal Ronahi, Alessio Frusciante, Satoru SATOH, Danilo Šegan, Ahmad Riza H Nst, Benoît Dejean, Marcel Telka, Leonid Kanter, Pawan Chitrakar, Daniel Nylander, Vincent van Adrighem, Clytie Siddall, Priit Laes, Christian Rose, Takeshi AIHANA, Laurent Dhima, Francisco Javier F. Serrador, Miloslav Trmac, Nickolay V. Shmyrev, Maxim Dziumanenko, Pema Geyleg, Adam Weinberger, Hendrik Brandt, Ole Laursen, Stanislav Brabec, Alexander Shopov, Slobodan D. Sredojevic, Kang JeongHee, Nikos Charonitakis
+
+=====================
+deskbar-applet 2.15.1
+=====================
+
+Changes:
+	* Implement a new widget to select the accelerator, providing also validation in real time. Patch by Sebastian Pölsterl <marduk@k-d-w.org>
+	* Fix some errors in desklicious, add a html entities decoder
+	* Tidy up the yahoo handler
+	* Add the del.icio.us handler merged from two sources. Thanks to Stuart Langridge and Francisco Jesús Jordano Jiménez
+	* New handler by Travis B. Hartwell <nafai@travishartwell.net>
+	* dd the skip_history() method to matches API, and allow None to be returned from serialize. This handler allows to switch between windows by typing part of their name/titles
+	* Correctly handle multiple profiles in mozilla/ff. Patch by Michael Hofmann <mh21@piware.de>
+	* Added artdir to the pkgconfig file.
+	* Better detection of Beagle .desktop files (e.g. now works on Fedora).
+	* Refactoring the Cuemiac part 1, splitting of files
+	* Use the new icon theme specifications. Patch by Sebastian Pölsterl <marduk@k-d-w.org>
+	* Use po/LINGUAS instead of including all languages directly in this file. See the wiki for more information: http://live.gnome.org/GnomeGoals/PoLinguas
+	* Repair the no-history not appearing when history.pickle was not present
+	* Add devhelp handler 
+	* Add transparency to Cuemiac mode Patch by Joachim Breitner <mail@joachim-breitner.de>
+	* Implement galeon nicknames in the search handler. Patch by Joachim Breitner <mail@joachim-breitner.de>
+	* Fix the history order, and update order when switching form bottom to top panel
+	* Change the contact label to say what we really do, open the contact editor in evolution
+	* Implement a is_valid method to ask a match if it's still valid, to evaluate if it should be stored in history
+	* Follow symlinks to detect the browser
+	* Use the history icon when displaying history items and bookmark when displaying bookmarks
+	* Classify emails and conversations in separate categories. Patch by Alejandro Vera <alejandro.vera@gmail.com>
+	* Pass the preferences dialog to the "more" callback to allow info dialogs to be transient
+	* Correctly use imlogviewer passing client name to it
+	* Bump up the python required version to 2.4
+	* Fix bug #335367. Activate the bottom hit of the view when the cuem/entr-iac is at a bottom panel.
+	* Fix bug #335446 where deskbar crashes when the user hits up/down immediately after entering some text. This is done by adding a CuemiacView.is_ready() method that returns True when the view is ready for user interaction.
+	* Implement mozilla/firefox history search, only the url. Patch by Flavio Gargiulo <flagar@gmail.com>
+	* Get rid of completion UI, now we require Cairo with pygtk.
+	* Fixes the proxy detection code for google-live. Patch by Sebastian Dröge <mail@slomosnail.de>
+	* Fix entry in button mode placement for vertical panels Patch by Joachim Breitner <joachim@breitner.de> Fixes bug #334492
+	* Fix for people that haven't locale/gettext.bind_textdomain_codeset
+
+Contributors to this release: Raphael Slinckx, Nigel Tao, Rhys Jones, Brian Pepple, Runa Bhattacharjee, Ignacio VazquezAbrams, Mikkel Kamstrup Erlandsen
+
+Translations:
+	* Updated Finnish translation.
+	* Updated Gujarati Translation.
+	* Updated Galician Translation.
+	* Updated Vietnamese translation.
+	* Updated Simplified Chinese translation.
+	* Updated Czech translation.
+	* Updated Finnish translation.
+	* Updated Greek translation.
+	* Added Welsh translation.
+	* Added Bengali Translation by Mahay Alam Khan
+
+Contributors to the translations: Kostas Papadimas, Vladimer Sichinava, Rajesh Ranjan, Artur Flinta, Žygimantas Beručka, Duarte Loreto, Theppitak Karoonboonyanan, Øivind Hoel, Kjartan Maraas, Ilkka Tuohela, Gabor Kelemen, Ankit Patel, Funda Wang, Amanpreet Singh Alam, ChaoHsiung Liao, Ignacio Casal Quinteiro, Tommi Vainikainen, Lukas Novotny, Nickolay V. Shmyrev, Josep Puigdemont i Casamajó, Erdal Ronahi, Alessio Frusciante, Satoru SATOH, Danilo Šegan, Benoît Dejean, Marcel Telka, Leonid Kanter, Daniel Nylander, Vincent van Adrighem, Francisco Javier F. Serrador, Raphael Higino, Christian Rose, Takeshi AIHANA, Laurent Dhima, Clytie Siddall, Miloslav Trmac, Maxim Dziumanenko, Alexander Shopov, Adam Weinberger, Hendrik Brandt, Ole Laursen, Stanislav Brabec, Slobodan D. Sredojevic, Kang JeongHee
+
+======================
+deskbar-applet 2.13.92
+======================
+
+Changes:
+	* Fixes bug #332418, now we use Icons instead of buttons in the panel reducing the needed panel vertical space
+	* Don't import beagle each time we need it. Only when loading the module. This wastly increases beagle-live performance.
+	* Fixes the applet not remembering 'take all available space on panel' setting on startup
+	* API change: removed the 'max' argument to the Handler.query() method. The handlers can now return any number of mathes or use the hardwired deskbar.DEFAULT_RESULTS_PER_HANDLER variable to trim the results. Fixes bug #331884
+	* Fix bug #332080, empty history borking completion UI
+	* Really fix duplicate module loading Return URIS in file and folder handler to correctly detect duplicates
+	* Add a 'No History' item in the history dropdown when there is no history.
+	* Implement single-click selection for history and cuemiac dropdown.
+	* Add focus-follow-pointer for history dropdown
+	* Add a "Clear History" button in the applet menu
+	* Fix wrong exception raising in C code of set_process_name for people who don't have prctl
+
+Contributors to this release: Raphael Slinckx, Mikkel Kamstrup Erlandsen
+
+Translations:
+	* Updated Gujarati Translation.
+	* Updated Vietnamese translation.
+	* Updated Norwegian bokmål translation.
+	* Updated French translation.
+	* Updated Spanish translation.
+	* Updated Thai translation.
+	* Hungarian translation updated.
+	* Updated Japanese translation.
+	* Updated German translation.
+	* Updated Greek translation.
+	* Updated Polish translation.
+	* Korean translation added.
+	* Updated Traditional Chinese translation(Taiwan).
+	* Updated Traditional Chinese translation(Hong Kong).
+	* Added Georgian translation by Gia Shervashidze <giasher@telenet.ge>.
+	* Updated Finnish translation.
+	* Updated Galician Translation.
+	* Updated Serbian translation
+	* Updated Lithuanian translation.
+	* Updated Russian translations
+
+Contributors to the translations: Kostas Papadimas, Artur Flinta, Žygimantas Beručka, Theppitak Karoonboonyanan, Øivind Hoel, Kjartan Maraas, Ilkka Tuohela, Gabor Kelemen, Ankit Patel, Funda Wang, Amanpreet Singh Alam, ChaoHsiung Liao, Ignacio Casal Quinteiro, Tommi Vainikainen, Lukas Novotny, Nickolay V. Shmyrev, Josep Puigdemont i Casamajó, Erdal Ronahi, Satoru SATOH, Benoît Dejean, Marcel Telka, Vincent van Adrighem, Clytie Siddall, Raphael Higino, Christian Rose, Takeshi AIHANA, Leonid Kanter, Francisco Javier F. Serrador, Alexander Shopov, Adam Weinberger, Hendrik Brandt, Stanislav Brabec, Slobodan D. Sredojevic, Kang JeongHee
+
+======================
+deskbar-applet 2.13.91 -- I hate Mikkel release.
+======================
+
+Changes:
+	* Use hit.get_properties(key)[0] instead of hit.get_one_property(key). This works around the beagle-firefox-history-dc:title-bug mentioned in #330053
+	* Update default handler and order
+	* Allow firefox handler to select wether to display the primary or all search engines
+	* Beagle-live matches beautification
+	* Fix the history items multiplication when history was loaded. Fixes bug #330756
+	* Strip html tags from results of google and yahoo handlers. Fixes bug #330755
+	* Fix osutils by checking PR_SET_NAME declaration. Fixes bug #330707
+	* Xinerama fixes, partially untested. Courtesy of Davyd Madeley <davyd@madeley.id.au>
+	* Allow to 'killall deskbar-applet' without taking down other python processes. Courtesy of Davyd Madeley <davyd@madeley.id.au>
+	* Upgrade entry-in-panel mode to use the categorized dropdown. People without cairo will fallback on completion UI
+	* Display all websearches in the category (no nesting)
+	* Fix build when no X connection is available, fixes bug #330013
+	* Repair history mode and remove some hacks.
+	* Fix the applet resizing itself every time the icon in the entry is changed
+	* Fixes bug #330103 icon in entry clips after a query
+	* Fixes gnome-dictionary 2.13 launching
+	* Workaround problem with gnome-open not opening saved nautilus searches correctly
+	* Add yahoo plugin, similar to google live, but using yahoo
+
+Contributors to this release: Raphael Slinckx, Mikkel Kamstrup Erlandsen, Nigel Tao, Davyd Madeley
+
+Translations:
+	* Updated Spanish translation.
+	* Added Greek translation.
+	* Updated Bulgarian translation
+	* Updated Finnish translation.
+	* Updated Brazilian Portuguese translation.
+	* Updated Russian translation
+	* Updated Lithuanian translation.
+	* Updated Thai translation.
+	* Updated German translation.
+	* Updated Vietnamese translation.
+	* Updated Galician Translation.
+	* Updated Gujarati Translation.
+
+Contributors to the translations: Kostas Papadimas, Žygimantas Beručka, Theppitak Karoonboonyanan, Kjartan Maraas, Ilkka Tuohela, Marcel Telka, Ankit Patel, Funda Wang, Amanpreet Singh Alam, Gabor Kelemen, ChaoHsiung Liao, Ignacio Casal Quinteiro, Tommi Vainikainen, Lukas Novotny, Nickolay V. Shmyrev, Josep Puigdemont i Casamajó, Erdal Ronahi, Vincent van Adrighem, Clytie Siddall, Raphael Higino, Christian Rose, Takeshi AIHANA, Francisco Javier F. Serrador, Alexander Shopov, Adam Weinberger, Hendrik Brandt, Stanislav Brabec, Slobodan D. Sredojevic
+
+========================
+deskbar-applet 2.13.90.1
+========================
+
+Changes:
+	* Fix keyboard history navigation
+	* Fix enter in cuemiac in the entry should launch the first visible match
+	* Fix focus issues on keyboard shortcut for both ui modes
+	* Load handlers in the correct order, and if two same handlers are present in ~ and /usr, load the ~ one
+	* Fix beagle action spawning. Was not correctly generating the command line to spawn
+	* Added Yahoo handler, contributed by Laurent <laurent@gobio2.net>
+	* Ref/unref beagle hits and correctly return beagle matches
+	* Fix for #329373 by changing PYTHONPATH variable in PYTHONDIR
+	* Reintroduce the abandoned save-last-search feature of the Cuemiac.
+
+Contributors to this release: Raphael Slinckx, Mikkel Kamstrup Erlandsen
+
+Translations:
+	* Updated Gujarati Translation.
+	* Updated Vietnamese translation.
+	* Updated Canadian English translation.
+	* Updated Finnish translation.
+	* Updated Serbian translation
+	* Updated Spanish translation.
+	* Updated Thai translation.
+	* Updated Galician Translation.
+
+Contributors to the translations: Žygimantas Beručka, Theppitak Karoonboonyanan, Kjartan Maraas, Ilkka Tuohela, Nickolay V. Shmyrev, Ankit Patel, Funda Wang, Amanpreet Singh Alam, Gabor Kelemen, ChaoHsiung Liao, Ignacio Casal Quinteiro, Tommi Vainikainen, Lukas Novotny, Marcel Telka, Josep Puigdemont i Casamajó, Erdal Ronahi, Vincent van Adrighem, Francisco Javier F. Serrador, Raphael Higino, Christian Rose, Takeshi AIHANA, Clytie Siddall, Alexander Shopov, Adam Weinberger, Hendrik Brandt, Stanislav Brabec, Slobodan D. Sredojevic
+
+======================
+deskbar-applet 2.13.90
+======================
+
+Note: For some unknown reasons, it is not possible to focus the new UI with the
+keybinding in gnome 2.12's panel. Help is appreciated.
+
+Changes:
+	* Bump to 2.13.90 to match gnome version 
+	* Default to completion UI
+	* Change keyboard shortcuts triggering terminal or smart bookmarks to use Alt instead of Ctrl.
+	* beagle-live tries to use text snippets when available
+	* Categories are sorted according to the highest handler priority (as defined in the preferences) found in a match within the category. Matches insides a category are sorted according to their handler preference then relative priority. Finally alphabetic order is used.
+	* Remember collapsed categories in the cuemiac UI	
+	* Add proxy detection code in google-live
+	* More stock icons, so we get theming
+	* New Artwork
+	* History handler, previously hardcoded is now a regular handler (old commands appear as matches)
+	* Add a GTK exception handler dialog for easier debug
+	* Middle click on the cuemiac view to trigger a search with middle-click clipboard content
+	* Add an ui override for window mode: -wc for cuemiac, -w for completion ui
+	* Fix the indexer to return more matches
+	* New preferences UI with both completion and cuemic.
+	* OMG ! The CUEMIAC ! Merci Mikkel Kamstrup Erlandsen <kamstrup@daimi.au.dk> !
+	* Implement Serialization for matches, allows to speedup startup time, and not block on startup
+	  when a handler is blocking.
+	* API changes for the handlers, API is near-final.
+
+Contributors to this release: Raphael Slinckx, Mikkel Kamstrup Erlandsen, Nigel Tao
+
+Translations:
+	* Added Catalan translation by Gil Forcada <gilforcada@guifi.net>
+	* Updated Thai translation.
+	* Added Brazilian Portuguese translation.
+	* Added Serbian translation
+	* Added Traditional Chinese translation(Taiwan).
+	* Added Traditional Chinese translation(Hong Kong).
+	* Added Kurdish translation.
+	* Updated Canadian English translation.
+	* Updated Czech translation.
+	* Updated Bulgarian translation by Alexander Shopov <ash@contact.bg>
+	* Updated Russian translation by Alexandre Prokoudine <alexandre.prokoudine@gmail.com>
+	* Updated Galician Translation.
+	* Updated Vietnamese translation.
+	* Updated Spanish translation.
+	* Updated Norwegian bokmål translation.
+	* Updated Gujarati Translation.
+	* Added Russian translation by Alexandre Prokoudine <alexandre.prokoudine@gmail.com>
+	* Added Czech translation from Lukas Novotny.
+	* Updated German translation.
+	* Updated Finnish translation.
+	* Updated Bulgarian translation by Alexander Shopov <ash@contact.bg>
+	* Updated Japanese translation.
+
+Contributors to the translations: Žygimantas Beručka, Theppitak Karoonboonyanan,
+Kjartan Maraas, Ilkka Tuohela, Nickolay V. Shmyrev, Ankit Patel, Funda Wang,
+Amanpreet Singh Alam, Gabor Kelemen, ChaoHsiung Liao, Ignacio Casal Quinteiro,
+Tommi Vainikainen, Lukas Novotny, Marcel Telka, Josep Puigdemont i Casamajó,
+Erdal Ronahi, Vincent van Adrighem, Clytie Siddall, Raphael Higino, Christian Rose,
+Takeshi AIHANA, Francisco Javier F. Serrador, Alexander Shopov, Adam Weinberger,
+Hendrik Brandt, Stanislav Brabec, Slobodan D. Sredojevic
+
+====================
+deskbar-applet 0.8.8
+====================
+
+Changes:
+	* Fixes issues with history: Clicking in the menu will correctly make the clicked item go up in history, and history items activated are run with the correct string (the one saved, not the one in the entry)
+	* Fixes beagle handler returning an exception on get_hash
+	* Fixes running pygtk 2.6 with gtk 2.8 (class registration stuff) Add class registration in history.py for pygtk < 2.8
+
+Contributors to this release: Raphael Slinckx
+
+Translations:
+	* Updated Finnish translation.
+	* Updated Bulgarian translation by Alexander Shopov <ash@contact.bg>
+	* Updated Japanese translation.
+
+                                                                                                                        
+====================
+deskbar-applet 0.8.7
+====================
+
+Changes:
+	* Fixes the mozilla search plugins path for firefox 1.5 
+	* Add history persistance for deskbar applets. Works as a single shared history across multiple instances.
+	* Fix a problem preventing beagle (and other matches) from appearing when no hash is returned.
+
+Contributors to this release: Raphael Slinckx
+
+Translations:
+	* Updated Spanish translation.
+	* Updated Vietnamese translation.
+	* Updated Gujarati Translation.
+	* Updated Canadian English translation.
+	* Updated Thai translation.
+	* Updated Simplified Chinese translation.
+	* Updated Slovak translation.
+	* Updated Galician Translation.
+	* Updated Lithuanian translation.
+	* Added Vietnamese translation.
+	* Hungarian translation updated.
+
+Contributors to the translations: Amanpreet Singh Alam, Francisco Javier F. Serrador, Christian Rose, Takeshi AIHANA, Alexander Shopov, Ignacio Casal Quinteiro, Tommi Vainikainen, Hendrik Brandt, Adam Weinberger, Marcel Telka, Žygimantas Beručka, Theppitak Karoonboonyanan, Clytie Siddall, Kjartan Maraas, Gabor Kelemen, Ankit Patel, Funda Wang
+
+======================
+deskbar-applet 0.8.6.1
+======================
+
+Changes:
+	* Fix a problem preventing beagle plugin (and other plugins) from appearing when no hash is returned.
+
+Contributors to this release: Raphael Slinckx
+
+Translations:
+	* Updated Thai translation.
+	* Updated Japanese translation.
+	* Added Gujarati Translation.
+	* Updated Slovak translation.
+	* Updated Spanish translation.
+	* Updated Galician Translation.
+	* Updated Bulgarian translation by Alexander Shopov
+
+Contributors to the translations: Amanpreet Singh Alam, Francisco Javier F. Serrador, Christian Rose, Takeshi AIHANA, Alexander Shopov, Ignacio Casal Quinteiro, Tommi Vainikainen, Hendrik Brandt, Adam Weinberger, Marcel Telka, Žygimantas Beručka, Theppitak Karoonboonyanan, Kjartan Maraas, Gabor Kelemen, Ankit Patel, Funda Wang
+
+====================
+deskbar-applet 0.8.6
+====================
+
+Changes:
+	* Remove our own beagle python binding. This mean we require beagle 0.1.3 that ships with python bindings.
+	* New tango-ish artwork (because we're hype)
+	* Fix history behavior. Duplicate items in history are moved instead of being added multiple times. Fixes bug #322981: Duplicate items in history
+	* Builtin history completion as a regular match. 
+	* Web search bookmarks (aka "smart bookmarks") can now have shortcuts (aka "keywords") and keyboard shortcuts.
+	* Tidied up the preferences dialog. 
+	* Disabled handlers are now sorted by name alphabetically in the Preferences UI.
+	* Scale down those icons that are too large.
+	* Evolution handler is now sync rather than async. This will hopefully fix evolution handler bugs like bug #322119.
+	* Fixed crasher when user has more than one address book available for auto-completion. Possibly fixes bug #321975.
+	* 'Smart' history browsing, now it's possible to use shell-like up/down key to browse history, yet preserving (page) up/down navigation in the matches list.
+
+Contributors to this release: Raphael Slinckx, Nigel Tao.
+
+Translations:
+	* Updated Slovak translation.
+	* Updated Galician Translation.
+	* Updated Spanish translation.
+	* Updated Lithuanian translation.
+	* Updated Bulgarian translation by Alexander Shopov
+	* Updated Canadian English translation.
+	* Added Thai translation by Theppitak Karoonboonyanan
+	* Updated Simplified Chinese translation.
+	* Updated Canadian English translation.
+	* Updated Swedish translation.
+	* Updated Finnish translation.
+	* Hungarian translation updated.
+	* Added German translation.
+	* Add Punjabi Translation File
+	* Updated Japanese translation.
+
+Contributors to the translations: Amanpreet Singh Alam, Francisco Javier F. Serrador, Takeshi AIHANA, Alexander Shopov, Ignacio Casal Quinteiro, Tommi Vainikainen, Adam Weinberger, Marcel Telka, Žygimantas Beručka, Hendrik Brandt, Kjartan Maraas, Gabor Kelemen, Christian Rose, Funda Wang
+
+====================
+Deskbar Applet 0.8.5
+====================
+
+Changes:
+	* Fix bug #321236: always show file search and gnome dict even when the menu item is hidden by the user. 
+	* Fix bug #321115: deskbar does not like being installed into a different prefix to Python.
+	* Fix bug #320373: Fitt's law whackiness, correctly size the applet on startup.
+	* Correctly handle the handlers list preferences, changes are shared between different deskbar instances. 
+	* Revisit the firefox/mozilla smart engine parser, should be error free now.
+	* Add wrapper for lignome-dektop's GnomeDesktopItem to parse .desktop files
+	* Startup Notification support.
+	* New Duplication detection, duplicate items are checked in the order defined by handler priorities.
+	* Support for per-applet-instance width and expand settings
+	* Position the history menu correctly to the icon
+	* Limit history menu to last 25 items
+	* Register more classes with pygtk < 2.8 to fix crashes in file monitoring classes
+	* Fix missing gobject import in google-live
+
+Contributors to this release: Nigel Tao, Raphael Slinckx
+
+Changes:
+	* Added Swedish translation.
+
+Contributor to this release: Christian Rose
+
+====================
+Deskbar Applet 0.8.4 -- It seems stabilized.
+====================
+
+Changes:
+	* Use another threading init method which should fix the gnomevfs crash.
+	* Honor the --disable-gconf-install flag.
+	* Fix the gconf schemas installations, should fix some problems with applet size.
+	* Add support for XDG_DATA_DIR configured .desktop repositories
+	* Fixed bugs when iterating over empty sequence, as a result of not finding the .desktop file, and some misc bugs in handlers.
+
+Translations:
+	* Corrected Reinout van Schouwen name :)
+
+====================
+Deskbar Applet 0.8.3 -- Am I still alive ?
+====================
+
+Changes:
+	* No more zombification when we spawn processes.
+	* Add some exception catching for people who cannot watch files.
+	* Add the class registration code for pygtk < 2.8.0
+	* Restore mozilla requirements, removing duplicate bookmarks handlers
+
+Contributors to this release: Raphael Slinckx, Martin Grondin
+
+Translations:
+	* Added Finnish translation.
+	* Updated Dutch translation.
+
+Contributors to this release: Tommi Vainikainen, Reinout van Schouwen
+
+====================
+Deskbar Applet 0.8.1 -- The eye of Sauron is moving
+====================
+
+Changes:
+	* Some more beagle fixes, and release 0.8.1
+	* More beagle properties fixtures
+	* Fix the sender of the mails being None all the time
+	* Fix for bug #319549 gnome.ui segfault on certain filenames.
+	* Fix the history popupmenu to attach itself to the icon.
+	* Fix implicit http addresses parsing
+
+Contributors to this release: Raphael Slinckx, Nigel Tao, Mikkel Kamstrup
+
+====================
+Deskbar Applet 0.8.0 --  No, it's not /written/ in C!
+====================
+
+Changes:
+	* Improve the regexes for mail and location detection. It is now possible to have user@host but with the method specified, otherwise it's an email address. Add package config file to allow third parties to install handlers in the right place.
+	* Add gnomevfs monitoring for module loader. That means drag and dropped handlers in the user or system handlers directory will be loaded, and automagically show in the prefs dialog, unenabled by default. We do not do anything on modification, because it would only be useful for developpers, and then developpers don't want handlers to autoupdate.
+	* Add gnomevfs file monitoring to handlers that need it. Epiphany, Galeon, mozilla now reload on bookmark, history, search engines addition/removal. The gtkBookmarks are also reloaded when needed. Other handlers do not need this functionality
+	* Speed-up the loading of the module by not loading the list of executables. Executables are instead "probed" at each query. Side effect, is that we don't need to reindex the $PATH when a new program is installed
+	* Fix the previous fix to pass distcheck. Allow to use a development deskbar-applet with its own set of enabled handlers and priority, to not interfere with stable one. (Useful only for developpers)
+	* Change the location of deskbar-applet launcher script, using /usr/libexec is deprecated. Fixes bug #319354
+	* Cleanup the way we use icons. Whenever possible, use stock icons, removed duplicate icons we shipped in the tarball.
+	* Add libbeagle python binding, and the associated beagle-live.py handler allowing to search with beagle from within deskbar. Add optional support for evolution/beagle with --enable arguments
+	* Unify strings for browsers, use generic terms instead of applications names, all this is more user-friendly. Add a new string in applet.py
+	* The glorious return of evolution addressbook handler. Fixed little bugs and threading issues in glue code, implemented the handler itself, and enjoy.
+	* Add the Google Live Async handler, it has a little more requirements than other plugins and as such an UI to see error messages will be introduced, in the meantime it prints help file on stdout in the terminal, when an error occurs because of misconfiguration
+	* Mess around with The Big Sucking Python Lock, hopefully fixes all the problems in the world, universe, and everything
+	* Add timeout support for threaded async handlers
+	* GNOME HIG changes: fix typo; fix border width; rephrase and move handler comment; fix a broken mnemonic.
+	* Toggle sensitivity of the width label, spinner, and units when needed.
+	* Add new files for translation, and use caracters instead of pixels for entry width
+	* Handlers API rework, now a single file can have multiple handlers. HANDLER variable is exported containing the class name, and an info dictionary with name, description, and an optional requirements function, allowing to check if the handler can be loaded. As a side effect, browser handlers are now more fine grained, allowing to order independently bookmarks, history and search engines. The preference dialog is a bit bigger and has an extra blurb to hint the reordering prioritization.
+	* Fix mozilla smart bookmarks parser
+	* Add history parser for epiphany and galeon, in their respective handlers. Thanks to Crispin Flowerday <gnome@flowerday.cx>
+	* More generic replacement of network places module, allows to open network places and various drives/volumes on the system
+	* Fix the .desktop icon parsing
+	* Preference dialog, it shows the avilable modules, and allow to enable/disable/sort the modules
+	* Fixes bug #318869, add support for Galeon bookmarks.
+	* Fixes macro `AM_CHECK_PYTHON_HEADERS' not found in library
+	* Fixes bug #318720, mozilla smart bookmarks parser
+	* Fix history menu, the item was always the first displayed. Fixes bug #318627
+	* Fix case insensitive sorting
+
+Contributors to this release: Dennis Cranston, Raphael Slinckx, Philip Langdale, Nigel Tao, Funda Wang
+
+Translations:
+	* Updated Japanese translation.
+	* Added Simplified Chinese translation.
+	* Added Japanese translation.
+
+Contributors to this release: Takeshi AIHANA, Funda Wang
+
