@@ -90,7 +90,6 @@ class MainWindow (gtk.Window):
         self.layout.pack_start (self.manager)
 
     def quit (self):
-        self.destroy ()
         self.application.stop ()
             
     # Events

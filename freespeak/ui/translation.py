@@ -3,6 +3,7 @@ import gtkmozembed
 
 import freespeak.utils as utils
 import freespeak.ui.utils as uiutils
+from freespeak.ui.spinner import Spinner
 from freespeak.translation import *
 from freespeak.status import *
 from translation_box import *
@@ -22,20 +23,14 @@ class TranslationLabel (gtk.HBox):
         self.setup_event_box ()
         self.setup_close ()
         self.be_label ()
-        self.stop_loading ()
 
-        self.pack_start (self.image)
+        self.pack_start (self.icon)
         self.pack_start (self.event_box)
         self.pack_start (self.close, False, padding=6)
 
     def setup_icon (self):
-        icon_theme = self.application.icon_theme
-        self.static_pixbuf = icon_theme.load_icon ("process-idle", gtk.ICON_SIZE_DIALOG, 0)
-        animated_info = icon_theme.lookup_icon ("process-working", gtk.ICON_SIZE_DIALOG, 0)
-        self.animated_pixbuf = gtk.gdk.PixbufAnimation (animated_info.get_filename ())
-
-        self.image = gtk.Image ()
-        self.image.show ()
+        self.icon = Spinner (self.application, None)
+        self.icon.show ()
 
     def setup_label (self):
         self.label = gtk.Label ()
@@ -83,10 +78,10 @@ class TranslationLabel (gtk.HBox):
             self.label.set_text (title)
 
     def start_loading (self):
-        self.image.set_from_animation (self.animated_pixbuf)
+        self.icon.start ()
 
     def stop_loading (self):
-        self.image.set_from_pixbuf (self.static_pixbuf)
+        self.icon.stop ()
 
     # Events
 
