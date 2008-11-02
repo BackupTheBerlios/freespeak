@@ -20,12 +20,13 @@
 """
 
 import gtk, gtk.gdk, os, sys, os.path
+from freespeak import defs
 
 class About(gtk.AboutDialog):
     def __init__(self, parent):
         gtk.AboutDialog.__init__(self)
         self.set_name("FreeSpeak")
-        self.set_version("0.1.1")
+        self.set_version(defs.VERSION)
         self.set_comments(_("A free frontend to online translator engines")) 
         self.set_license("""
         This program is free software; you can redistribute it and/or modify

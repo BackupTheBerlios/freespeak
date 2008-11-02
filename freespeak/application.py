@@ -19,8 +19,10 @@ application.py
     Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 """
 
+from freespeak import defs
+
 __author__ = "Luca Bruno <lethalman88@gmail.com>"
-__version__ = "0.1.1"
+__version__ = defs.VERSION
 __homepage__ = "http://home.gna.org/freespeak"
 
 import gettext
@@ -42,7 +44,7 @@ class Application (object):
     version = __version__
 
     def __init__ (self, options={}, args=[]):
-        self.domain = 'freespeak'
+        self.domain = defs.GETTEXT_PACKAGE
         self.options = options
         self.args = args
 

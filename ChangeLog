@@ -1,5 +1,11 @@
 2008-11-02  Luca Bruno  <lethalman88@gmail.com>
 
+	* freespeak/defs.py.in: added GETTEXT_PACKAGE
+
+	* freespeak/application.py: use defs.py
+
+	* freespeak/about.py: use defs.py
+
 	* freespeak/config.py (Config): use GConf
 	All calls have been updated
 
