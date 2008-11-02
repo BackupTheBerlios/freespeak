@@ -173,10 +173,12 @@ class BaseUITranslation (gtk.VBox, BaseTranslation):
             self.progress.show ()
             self.progress.start ()
             self.label.start_loading ()
+            self.set_sensitive (False)
         elif isinstance (status, StatusComplete):
             self.progress.hide ()
             self.progress.stop ()
             self.label.stop_loading ()
+            self.set_sensitive (True)
         self.progress.set_text (status.description)
 
     # Virtual methods

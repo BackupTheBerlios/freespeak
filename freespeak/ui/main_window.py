@@ -53,7 +53,7 @@ class MainWindow (gtk.Window):
     def setup_layout (self):
         self.layout = gtk.VBox ()
 
-        ag = gtk.ActionGroup ('WindowActions')
+        self.action_group = gtk.ActionGroup ('WindowActions')
         actions = (
             ('Text', gtk.STOCK_NEW, _('_Text'), "<Control>t",
              _('New translation'), self.on_new),
@@ -66,9 +66,9 @@ class MainWindow (gtk.Window):
             ('About', gtk.STOCK_ABOUT, None, "<Control>a",
              _('About FreeSpeak'), self.on_about),
             )
-        ag.add_actions (actions)
+        self.action_group.add_actions (actions)
         self.ui = gtk.UIManager ()
-        self.ui.insert_action_group (ag, 0)
+        self.ui.insert_action_group (self.action_group, 0)
         self.ui.add_ui_from_string (self.ui_string)
         self.accel_group = self.ui.get_accel_group ()
         self.add_accel_group (self.accel_group)
