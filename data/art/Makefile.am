@@ -3,7 +3,7 @@ art_DATA = \
 	google.png \
 	yahoo.png \
 	freetranslation.png \
-	opentran.ico
+	opentran.png
 
 16icondir = $(datadir)/icons/hicolor/16x16/apps
 16icon_DATA = 16x16/freespeak.png

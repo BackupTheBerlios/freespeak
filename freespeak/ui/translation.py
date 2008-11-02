@@ -10,7 +10,7 @@ from translation_box import *
 
 class TranslationLabel (gtk.HBox):
     def __init__ (self, application, translation):
-        gtk.HBox.__init__ (self)
+        gtk.HBox.__init__ (self, spacing=2)
         self.application = application
         self.translation = translation
 
@@ -26,7 +26,7 @@ class TranslationLabel (gtk.HBox):
 
         self.pack_start (self.icon)
         self.pack_start (self.event_box)
-        self.pack_start (self.close, False, padding=6)
+        self.pack_start (self.close, False, padding=4)
 
     def setup_icon (self):
         self.icon = Spinner (self.application, None)
@@ -51,6 +51,7 @@ class TranslationLabel (gtk.HBox):
 
     def setup_close (self):
         self.close = gtk.Button ()
+        self.close.set_name ("close-button")
         image = gtk.image_new_from_stock (gtk.STOCK_CLOSE, gtk.ICON_SIZE_MENU)
         self.close.set_image (image)
         self.close.set_relief (gtk.RELIEF_NONE)

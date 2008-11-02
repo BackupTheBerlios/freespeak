@@ -1,5 +1,7 @@
 2008-11-02  Luca Bruno  <lethalman88@gmail.com>
 
+	* freespeak/ui/manager.py (Manager.__init__): set RC style for close button of each tab
+
 	* freespeak/application.py (Application.setup_icons): remove icon factory, setup default icon for windows, add search path for translator icons
 
 	* freespeak/ui/spinner.py (Spinner.set_idle): added, set the icon on idle
