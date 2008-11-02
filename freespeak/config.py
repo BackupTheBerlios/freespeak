@@ -19,48 +19,17 @@
     Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 """
 
-from ConfigParser import ConfigParser, DuplicateSectionError
-import os
+import gconf
 
-class Config (ConfigParser):
+class Config (object):
     def __init__(self):
-        """
-        Open existing config file or create one in the user home directory.
-        """
-        ConfigParser.__init__(self)
-        import user
-        self.file = os.path.join (user.home, '.freespeak')
-        try:
-            self.readfp (file (self.file))
-        except:
-            self.add_section ('clipboard')
-            self.set ('clipboard', 'get', False)
-            self.set ('clipboard', 'set', False)
-            self.add_section ("translator")
-            self.set ("translator", "default", "")
-            self.save()
-    
-    def save(self):
-        self.write (file (self.file, 'w'))
+        self.client = gconf.client_get_default ()
+        self.dir = "/apps/freespeak"
+        
+    def get (self, key):
+        print 'asd'
+        return self.client.
 
-    def _do_get (self, attrname, section, option):
-        try:
-            func = getattr (ConfigParser, attrname)
-            return func (self, section, option)
-        except:
-            self.set (section, option, '')
-            return ''
-
-    def set (self, section, option, value):
-        try:
-            ConfigParser.add_section (self, section)
-        except DuplicateSectionError:
-            pass
-        ConfigParser.set (self, section, option, str (value))
-
-    def get (self, section, option):
-        try:
-            return ConfigParser.get (self, section, option)
-        except:
-            self.set (section, option, '')
-            return ''
+    def set (self, key, value):
+        print 'asd'
+        return self.client.set

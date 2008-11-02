@@ -19,6 +19,14 @@ class StatusIcon (gtk.StatusIcon):
     def on_popup_menu (self, status_icon, button, activate_time):
         menu = gtk.Menu ()
         menu.set_accel_group (self.window.accel_group)
+
+        item = self.window.action_group.get_action("Text").create_menu_item ()
+        menu.append (item)
+        item = self.window.action_group.get_action("Web").create_menu_item ()
+        menu.append (item)
+        item = gtk.SeparatorMenuItem ()
+        item.show ()
+        menu.append (item)
         item = self.window.action_group.get_action("Preferences").create_menu_item ()
         menu.append (item)
         item = self.window.action_group.get_action("About").create_menu_item ()

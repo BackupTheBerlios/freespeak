@@ -1,0 +1,45 @@
+<gconfschemafile>
+  <schemalist>
+    <schema>
+      <key>/schemas/apps/freespeak/default_translator</key>
+      <applyto>/apps/freespeak/default_translator</applyto>
+      <owner>freespeak</owner>
+      <type>string</type>
+      <default></default>
+      <locale name="C">
+        <short>Default translator module</short>
+        <long>
+          The name of the translator Python module to use as default.
+        </long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/freespeak/get_clipboard</key>
+      <applyto>/apps/freespeak/get_clipboard</applyto>
+      <owner>freespeak</owner>
+      <type>bool</type>
+      <default>true</default>
+      <locale name="C">
+        <short>Get text/url from clipboard</short>
+        <long>
+          Obtain the data to translate from the clipboard.
+        </long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/apps/freespeak/set_clipboard</key>
+      <applyto>/apps/freespeak/set_clipboard</applyto>
+      <owner>freespeak</owner>
+      <type>bool</type>
+      <default>false</default>
+      <locale name="C">
+        <short>Set translated data to clipboard</short>
+        <long>
+          Save the translated text or url to the clipboard.
+        </long>
+      </locale>
+    </schema>
+  </schemalist>
+</gconfschemafile>
