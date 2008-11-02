@@ -31,7 +31,7 @@ class Spinner (gtk.Image):
 
     @classmethod
     def setup_animation (cls, application):
-        icons = application.icon_theme.load_icon ("process-working", gtk.ICON_SIZE_DIALOG, 0)
+        icons = application.icon_theme.load_icon ("process-working", cls.PIXELS, 0)
         for y in range (5):
             for x in range (7):
                 pixbuf = gtk.gdk.Pixbuf (gtk.gdk.COLORSPACE_RGB, True, 8, cls.PIXELS, cls.PIXELS)

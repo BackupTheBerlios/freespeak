@@ -42,7 +42,10 @@ class BaseTranslation (object):
 
     def set_translator (self, translator):
         self.translator = translator
-        thread.start_new_thread (self._run_language_table, ())
+        if not translator:
+            self.update_from_langs (None)
+        else:
+            thread.start_new_thread (self._run_language_table, ())
 
     def set_from_lang (self, lang):
         self.from_lang = lang

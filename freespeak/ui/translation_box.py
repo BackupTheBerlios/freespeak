@@ -11,16 +11,18 @@ class TranslatorCombo (gtk.ComboBox):
         self.application = application
 
         model = gtk.ListStore (str, object)
+        self.set_model (model)
         default_translator = self.application.translators_manager.get_default ()
         default_iter = None
 
+        iter = model.append (['(none)', None])
+        self.set_active_iter (iter)
         for translator in sorted (self.application.translators_manager):
             if not capability or capability in translator.capabilities:
                 iter = model.append ([translator.get_name (), translator])
                 if translator == default_translator:
                     default_iter = iter
 
-        self.set_model (model)
         if default_iter:
             self.set_active_iter (default_iter)
 

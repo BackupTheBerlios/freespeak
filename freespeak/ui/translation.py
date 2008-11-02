@@ -203,6 +203,7 @@ class TextTranslation (BaseUITranslation):
         self.dest_buffer = gtk.TextBuffer ()
         view = gtk.TextView (self.dest_buffer)
         view.set_editable (False)
+        view.modify_base (gtk.STATE_NORMAL, gtk.gdk.color_parse ("#fff8ae"))
         view.show ()
         scrolled = uiutils.ScrolledWindow (view)
         scrolled.show ()

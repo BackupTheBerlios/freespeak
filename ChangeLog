@@ -1,5 +1,15 @@
 2008-11-02  Luca Bruno  <lethalman88@gmail.com>
 
+	* freespeak/ui/about.py (About): refactored
+
+	* freespeak/ui/main_window.py (MainWindow.setup_window): change the icon pixels to 64
+
+	* freespeak/ui/translation.py (TextTranslation.setup_ui): change the color of the result
+
+	* freespeak/ui/translation_box.py (TranslatorCombo.__init__): add (none) to unset the translator
+
+	* freespeak/translation.py (BaseTranslation.set_translator): accept None to unset the translator
+
 	* freespeak/ui/main_window.py (MainWindow.setup_window): use the theme to set the window icon
 
 	* data/art: added some freespeak icons

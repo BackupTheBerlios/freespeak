@@ -25,6 +25,7 @@ from freespeak.ui.manager import *
 from freespeak.ui.translation import *
 from freespeak.ui.settings import *
 from freespeak.ui.status_icon import StatusIcon
+from freespeak.ui.about import About
 
 class MainWindow (gtk.Window):
     ui_string = """<ui>
@@ -63,7 +64,7 @@ class MainWindow (gtk.Window):
 
     def setup_window (self):
         self.connect ('delete-event', self.on_delete_event)
-        icon = self.application.icon_theme.load_icon ("freespeak", 16, 0)
+        icon = self.application.icon_theme.load_icon ("freespeak", 64, 0)
         self.set_icon (icon)
         self.set_title ('FreeSpeak '+self.application.version)
         self.set_default_size (500, 400)
@@ -133,7 +134,7 @@ class MainWindow (gtk.Window):
         """
         Open an AboutDialog for this software
         """
-        About(self)
+        About (self.application)
                           
     def on_quit (self, *w):
         """

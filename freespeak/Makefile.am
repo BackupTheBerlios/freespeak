@@ -4,7 +4,6 @@ freespeakdir = $(pythondir)/freespeak
 freespeak_PYTHON =	\
 	defs.py		\
 	__init__.py	\
-	about.py	\
 	application.py	\
 	config.py	\
 	status.py	\
