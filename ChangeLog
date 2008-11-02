@@ -1,5 +1,9 @@
 2008-11-02  Luca Bruno  <lethalman88@gmail.com>
 
+	* freespeak/ui/main_window.py (MainWindow.setup_window): use the theme to set the window icon
+
+	* data/art: added some freespeak icons
+
 	* freespeak/ui/settings.py (Settings.on_response): translator can be None
 
 	* freespeak/ui/translation_box.py (TranslatorCombo.get_active_translator): iter can be None

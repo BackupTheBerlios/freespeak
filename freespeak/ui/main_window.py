@@ -63,12 +63,10 @@ class MainWindow (gtk.Window):
 
     def setup_window (self):
         self.connect ('delete-event', self.on_delete_event)
+        icon = self.application.icon_theme.load_icon ("freespeak", 16, 0)
+        self.set_icon (icon)
         self.set_title ('FreeSpeak '+self.application.version)
         self.set_default_size (500, 400)
-       
-        icon = os.path.join (self.application.icons_path, "freespeak-16x16.png")
-        if os.path.isfile (icon):
-            self.set_icon_from_stock (icon)
 
     def setup_layout (self):
         self.layout = gtk.VBox ()
