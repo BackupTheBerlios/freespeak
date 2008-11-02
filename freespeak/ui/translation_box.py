@@ -30,8 +30,9 @@ class TranslatorCombo (gtk.ComboBox):
 
     def get_active_translator (self):
         iter = self.get_active_iter ()
-        translator = self.get_model().get_value (iter, self.COL_TRANSLATOR_TRANSLATOR)
-        return translator
+        if iter:
+            translator = self.get_model().get_value (iter, self.COL_TRANSLATOR_TRANSLATOR)
+            return translator
 
 class TranslationBox (gtk.HBox):
     COL_FROM_TEXT = 0

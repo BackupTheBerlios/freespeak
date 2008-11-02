@@ -7,8 +7,6 @@ freespeak_PYTHON =	\
 	about.py	\
 	application.py	\
 	config.py	\
-	nls.py		\
-	progress.py	\
 	status.py	\
 	translation.py	\
 	translator.py	\

@@ -60,7 +60,7 @@ class Application (object):
 
     def setup_l10n (self):
         gettext.NullTranslations ()
-        gettext.install (self.domain)
+        gettext.install (self.domain, unicode=True)
 
     def setup_config (self):
         self.config = Config ()

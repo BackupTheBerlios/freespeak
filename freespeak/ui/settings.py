@@ -88,6 +88,9 @@ class Settings(gtk.Dialog):
         self.application.config.set ('get_clipboard', self.w_clipboard_get.get_active ())
         self.application.config.set ('set_clipboard', self.w_clipboard_set.get_active ())
         translator = self.w_preferred_translator.get_active_translator ()
-        self.application.config.set ('default_translator', translator.module_name)
+        if translator:
+            self.application.config.set ('default_translator', translator.module_name)
+        else:
+            self.application.config.set ('default_translator', '')
         self.destroy()
 
