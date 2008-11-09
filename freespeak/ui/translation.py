@@ -6,7 +6,7 @@ import freespeak.ui.utils as uiutils
 from freespeak.ui.spinner import Spinner
 from freespeak.translation import *
 from freespeak.status import *
-from translation_box import *
+from translation_box import *             
 
 class TranslationLabel (gtk.HBox):
     def __init__ (self, application, translation):
@@ -140,6 +140,9 @@ class BaseUITranslation (gtk.VBox, BaseTranslation):
     def setup_ui (self):
         pass
 
+    def setup_clipboard (self):
+        raise NotImplementedError ()
+
     def get_label (self):
         return self.label
 
@@ -156,7 +159,8 @@ class BaseUITranslation (gtk.VBox, BaseTranslation):
         self.setup_translation_box ()
         self.setup_label ()
         self.setup_ui ()
-        self.setup_progress()
+        self.setup_progress ()
+        self.setup_clipboard ()
 
     def update_translator (self, translator):
         if translator:
@@ -218,6 +222,11 @@ class TextTranslation (BaseUITranslation):
         frame.show ()
         self.pack_start (frame)
 
+    def setup_clipboard (self):
+        contents = self.application.clipboard.get_contents ()
+        if contents is not None:
+            self.source_buffer.set_text (contents)
+
     def create_request (self):
         return TextTranslationRequest (self.source_buffer.get_text (self.source_buffer.get_start_iter (),
                                                                     self.source_buffer.get_end_iter ()))
@@ -226,6 +235,7 @@ class TextTranslation (BaseUITranslation):
         BaseUITranslation.update_status (self, status)
         if isinstance (status, StatusTextComplete):
             self.dest_buffer.set_text (status.result)
+            self.application.clipboard.set_contents (status.result)
 
 class WebTranslation (BaseUITranslation):
     capability = WebTranslationRequest
@@ -249,6 +259,11 @@ class WebTranslation (BaseUITranslation):
         self.browser.show ()
         self.pack_start (self.browser)
 
+    def setup_clipboard (self):
+        contents = self.application.clipboard.get_contents ()
+        if contents is not None:
+            self.url.set_text (contents)
+
     def create_request (self):
         url = self.url.get_text ()
         if not url:
@@ -266,6 +281,7 @@ class WebTranslation (BaseUITranslation):
         BaseUITranslation.update_status (self, status)
         if isinstance (status, StatusWebComplete):
             self.browser.load_url (status.result)
+            self.application.clipboard.set_contents (status.result)
 
     # Events
 

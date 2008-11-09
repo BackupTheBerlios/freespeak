@@ -39,6 +39,24 @@ import freespeak.translators
 from freespeak.ui.main_window import MainWindow
 from freespeak.ui import exception_dialog
 
+class ClipboardController (gtk.Clipboard):
+    def __init__ (self, application):
+        gtk.Clipboard.__init__ (self)
+        self.application = application
+        self.cur_contents = None
+
+    def get_contents (self):
+        if self.application.config.get ('get_clipboard') and self.wait_is_text_available ():
+            text = self.wait_for_text ()
+            if text != self.cur_contents:
+                self.cur_contents = text
+                return text
+
+    def set_contents (self, contents):
+        if self.application.config.get ('set_clipboard'):
+            self.cur_contents = contents
+            self.set_text (contents)
+
 class Application (object):
     version = __version__
 
@@ -53,6 +71,7 @@ class Application (object):
         self.setup_paths ()
         self.setup_icons ()
         self.setup_translators_manager ()
+        self.setup_clipboard ()
 
         self.started = False
 
@@ -76,6 +95,9 @@ class Application (object):
 
     def setup_translators_manager (self):
         self.translators_manager = TranslatorsManager (self)
+
+    def setup_clipboard (self):
+        self.clipboard = ClipboardController (self)
 
     def start (self):
         gtk.gdk.threads_init()
