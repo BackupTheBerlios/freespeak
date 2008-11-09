@@ -1,5 +1,8 @@
 2008-11-09  Luca Bruno  <lethalman88@gmail.com>
 
+	* freespeak/ui/spinner.py (Spinner._rotate): less verbose round robin code
+	(Spinner.setup_animation): remove the first frame, it's an idle status
+
 	* freespeak/ui/translation.py (BaseUITranslation.setup_clipboard): added
 	(TextTranslation.setup_clipboard, WebTranslation.setup_clipboard): implemented
 	(TextTranslation.update_status, WebTranslation.update_status): set result to the clipboard

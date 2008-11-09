@@ -40,6 +40,7 @@ class Spinner (gtk.Image):
                 icons.copy_area (x*cls.PIXELS, y*cls.PIXELS, cls.PIXELS, cls.PIXELS,
                                  pixbuf, 0, 0)
                 cls.animation.append (pixbuf)
+        del cls.animation[0]
         cls.animation_last = len (cls.animation) - 1
 
     def __init__ (self, application, idle_pixbuf):
@@ -53,10 +54,7 @@ class Spinner (gtk.Image):
 
     def _rotate (self):
         self.set_from_pixbuf (self.animation[self.icon_num])
-        if self.icon_num >= self.animation_last:
-            self.icon_num = 0
-        else:
-            self.icon_num += 1
+        self.icon_num = self.icon_num < self.animation_last and self.icon_num + 1 or 0
         return True
 
     def set_idle (self, pixbuf):
