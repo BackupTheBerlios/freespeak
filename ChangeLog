@@ -1,3 +1,7 @@
+2008-11-09  Luca Bruno  <lethalman88@gmail.com>
+
+	* freespeak/ui/spinner.py (Spinner.setup_animation): pixbuf has different number of icons among different themes
+
 2008-11-02  Luca Bruno  <lethalman88@gmail.com>
 
 	* freespeak/ui/manager.py (Manager.__init__): set RC style for close button of each tab

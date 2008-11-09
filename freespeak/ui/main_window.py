@@ -35,8 +35,8 @@ class MainWindow (gtk.Window):
             <separator />
             <toolitem action="Preferences" />
             <separator />
-            <toolitem action="Quit" />
             <toolitem action="About" />
+            <toolitem action="Quit" />
             <separator />
         </toolbar>
         <accelerator action="Text" />
