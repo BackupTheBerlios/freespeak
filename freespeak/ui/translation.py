@@ -195,13 +195,43 @@ class BaseUITranslation (gtk.VBox, BaseTranslation):
 class TextTranslation (BaseUITranslation):
     capability = TextTranslationRequest
 
+    def translate_buttons (self):
+        box = gtk.HBox (homogeneous=True)
+        # Clear
+        btn = uiutils.TinyButton (gtk.STOCK_CLEAR)
+        btn.connect ('clicked', self.on_tiny_clear)
+        btn.show ()
+        box.pack_start (btn)
+        # Paste
+        btn = uiutils.TinyButton (gtk.STOCK_PASTE)
+        btn.connect ('clicked', self.on_tiny_paste)
+        btn.show ()
+        box.pack_start (btn)
+        box.show ()
+        return box
+
+    def translated_buttons (self):
+        box = gtk.HBox (homogeneous=True)
+        # Copy
+        btn = uiutils.TinyButton (gtk.STOCK_COPY)
+        btn.connect ('clicked', self.on_tiny_copy)
+        btn.show ()
+        box.pack_start (btn)
+        # Swap
+        btn = uiutils.TinyButton (gtk.STOCK_CONVERT)
+        btn.connect ('clicked', self.on_tiny_swap)
+        btn.show ()
+        box.pack_start (btn)
+        box.show ()
+        return box
+
     def setup_ui (self):
         self.source_buffer = gtk.TextBuffer ()
-        view = gtk.TextView (self.source_buffer)
+        view = self.source_view = gtk.TextView (self.source_buffer)
         view.show ()
         scrolled = uiutils.ScrolledWindow (view)
         scrolled.show ()
-        frame = uiutils.Frame (_("Text to translate"))
+        frame = uiutils.Frame (_("Text to translate"), self.translate_buttons ())
         frame.add (scrolled)
         frame.show ()
         self.pack_start (frame)
@@ -213,7 +243,7 @@ class TextTranslation (BaseUITranslation):
         view.show ()
         scrolled = uiutils.ScrolledWindow (view)
         scrolled.show ()
-        frame = uiutils.Frame (_("Translated text"))
+        frame = uiutils.Frame (_("Translated text"), self.translated_buttons ())
         frame.add (scrolled)
         frame.show ()
         self.pack_start (frame)
@@ -232,6 +262,26 @@ class TextTranslation (BaseUITranslation):
         if isinstance (status, StatusTextComplete):
             self.dest_buffer.set_text (status.result)
             self.application.clipboard.set_contents (status.result)
+
+    # Events
+    def on_tiny_clear (self, button):
+        self.source_buffer.set_text ("")
+        self.source_view.grab_focus ()
+
+    def on_tiny_paste (self, button):
+        contents = self.application.clipboard.get_contents (force=True)
+        if contents is not None:
+            self.source_buffer.set_text (contents)
+
+    def on_tiny_copy (self, button):
+        contents = self.dest_buffer.get_text (self.dest_buffer.get_start_iter (),
+                                              self.dest_buffer.get_end_iter ())
+        self.application.clipboard.set_contents (contents, force=True)
+
+    def on_tiny_swap (self, button):
+        contents = self.dest_buffer.get_text (self.dest_buffer.get_start_iter (),
+                                              self.dest_buffer.get_end_iter ())
+        self.source_buffer.set_text (contents)
 
 class WebTranslation (BaseUITranslation):
     capability = WebTranslationRequest

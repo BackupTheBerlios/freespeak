@@ -1,5 +1,13 @@
 2008-11-10  Luca Bruno  <lethalman88@gmail.com>
 
+	* freespeak/ui/translation.py (TextTranslation.translated_buttons)
+	(TextTranslation.translate_buttons): added, small toolbars above the text views
+	(TextTranslation.on_tiny_clear, TextTranslation.on_tiny_paste)
+	(TextTranslation.on_tiny_copy, TextTranslation.on_tiny_swap): added, events for the tiny buttons
+
+	* freespeak/application.py (ClipboardController.__init__): control multiple clipboards
+	(ClipboardController.get_contents, ClipboardController.set_contents): accept 'force' argument
+
 	* freespeak/ui/status_icon.py (StatusIcon.__init__): set the freespeak icon
 
 	* freespeak/ui/translation.py (TranslationLabel.setup_close): use ui.utils.TinyButton

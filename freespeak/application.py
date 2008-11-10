@@ -40,23 +40,26 @@ from freespeak.ui.main_window import MainWindow
 from freespeak.ui import exception_dialog
 from freespeak.ui import style
 
-class ClipboardController (gtk.Clipboard):
+class ClipboardController (object):
+    # Get from PRIMARY, save to both PRIMARY and CLIPBOARD
     def __init__ (self, application):
-        gtk.Clipboard.__init__ (self)
         self.application = application
+        self.clipboard = gtk.clipboard_get ('CLIPBOARD')
+        self.primary = gtk.clipboard_get ('PRIMARY')
         self.cur_contents = None
 
-    def get_contents (self):
-        if self.application.config.get ('get_clipboard') and self.wait_is_text_available ():
-            text = self.wait_for_text ()
-            if text != self.cur_contents:
+    def get_contents (self, force=False):
+        if force or (self.application.config.get ('get_clipboard') and self.primary.wait_is_text_available ()):
+            text = self.primary.wait_for_text ()
+            if force or (text != self.cur_contents):
                 self.cur_contents = text
                 return text
 
-    def set_contents (self, contents):
-        if self.application.config.get ('set_clipboard'):
+    def set_contents (self, contents, force=False):
+        if force or self.application.config.get ('set_clipboard'):
             self.cur_contents = contents
-            self.set_text (contents)
+            self.primary.set_text (contents)
+            self.clipboard.set_text (contents)
 
 class Application (object):
     version = __version__
