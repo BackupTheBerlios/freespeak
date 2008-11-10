@@ -1,12 +1,12 @@
 [encoding: UTF-8]
 data/freespeak.schemas.in
-freespeak/about.py
 freespeak/status.py
 freespeak/translation.py
 freespeak/translators/freetranslation.py
 freespeak/translators/google.py
 freespeak/translators/opentran.py
 freespeak/translators/yahoo.py
+freespeak/ui/about.py
 freespeak/ui/exception_dialog.py
 freespeak/ui/main_window.py
 freespeak/ui/settings.py

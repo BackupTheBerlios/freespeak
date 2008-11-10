@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FreeSpeak 0.1.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-02 16:52+0100\n"
+"POT-Creation-Date: 2008-11-09 14:55+0100\n"
 "PO-Revision-Date: 2008-11-02 16:48+0100\n"
 "Last-Translator: Luca Bruno <lethalman88@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -40,10 +40,6 @@ msgstr ""
 msgid "The name of the translator Python module to use as default."
 msgstr ""
 
-#: ../freespeak/about.py:28
-msgid "A free frontend to online translator engines"
-msgstr ""
-
 #: ../freespeak/status.py:8
 msgid "Translation started"
 msgstr ""
@@ -52,26 +48,30 @@ msgstr ""
 msgid "Translation complete"
 msgstr ""
 
-#: ../freespeak/translation.py:60
+#: ../freespeak/translation.py:64
 #, python-format
 msgid "Retrieving languages from %s"
 msgstr ""
 
-#: ../freespeak/translation.py:62
+#: ../freespeak/translation.py:66
 msgid "Updating the list"
 msgstr ""
 
 #: ../freespeak/translators/freetranslation.py:73
 #: ../freespeak/translators/google.py:83
-#: ../freespeak/translators/opentran.py:84
+#: ../freespeak/translators/opentran.py:85
 #: ../freespeak/translators/yahoo.py:93
 msgid "Connecting to"
 msgstr ""
 
 #: ../freespeak/translators/google.py:88
-#: ../freespeak/translators/opentran.py:89
+#: ../freespeak/translators/opentran.py:90
 #: ../freespeak/translators/yahoo.py:98
 msgid "Parsing result"
+msgstr ""
+
+#: ../freespeak/ui/about.py:30
+msgid "A free frontend to online translator engines"
 msgstr ""
 
 #: ../freespeak/ui/exception_dialog.py:37
@@ -82,31 +82,31 @@ msgstr ""
 msgid "An error has occurred:"
 msgstr ""
 
-#: ../freespeak/ui/main_window.py:78
+#: ../freespeak/ui/main_window.py:77
 msgid "_Text"
 msgstr ""
 
-#: ../freespeak/ui/main_window.py:79
+#: ../freespeak/ui/main_window.py:78
 msgid "New translation"
 msgstr ""
 
-#: ../freespeak/ui/main_window.py:80
+#: ../freespeak/ui/main_window.py:79
 msgid "_Web"
 msgstr ""
 
-#: ../freespeak/ui/main_window.py:81
+#: ../freespeak/ui/main_window.py:80
 msgid "New web page translation"
 msgstr ""
 
-#: ../freespeak/ui/main_window.py:83
+#: ../freespeak/ui/main_window.py:82
 msgid "FreeSpeak preferences"
 msgstr ""
 
-#: ../freespeak/ui/main_window.py:85
+#: ../freespeak/ui/main_window.py:84
 msgid "Quit FreeSpeak"
 msgstr ""
 
-#: ../freespeak/ui/main_window.py:87
+#: ../freespeak/ui/main_window.py:86
 msgid "About FreeSpeak"
 msgstr ""
 
@@ -130,14 +130,14 @@ msgstr ""
 msgid "Translator preferences"
 msgstr ""
 
-#: ../freespeak/ui/translation.py:198
+#: ../freespeak/ui/translation.py:208
 msgid "Text to translate"
 msgstr ""
 
-#: ../freespeak/ui/translation.py:209
+#: ../freespeak/ui/translation.py:220
 msgid "Translated text"
 msgstr ""
 
-#: ../freespeak/ui/translation.py:248
+#: ../freespeak/ui/translation.py:270
 msgid "Please insert an URL"
 msgstr ""
