@@ -1,5 +1,7 @@
 2008-11-10  Luca Bruno  <lethalman88@gmail.com>
 
+	* freespeak/ui/status_icon.py (StatusIcon.__init__): set the freespeak icon
+
 	* freespeak/ui/translation.py (TranslationLabel.setup_close): use ui.utils.TinyButton
 
 	* freespeak/ui/Makefile.am (freespeak_ui_PYTHON): 

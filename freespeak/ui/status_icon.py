@@ -5,7 +5,7 @@ class StatusIcon (gtk.StatusIcon):
         gtk.StatusIcon.__init__ (self)
         self.window = window
 
-        self.set_from_stock (gtk.STOCK_NETWORK)
+        self.set_from_icon_name ('freespeak')
 
         self.connect ('activate', self.on_activate)
         self.connect ('popup-menu', self.on_popup_menu)
