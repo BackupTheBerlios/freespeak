@@ -8,6 +8,7 @@ freespeak_ui_PYTHON =		\
 	settings.py		\
 	spinner.py		\
 	status_icon.py		\
+	style.py		\
 	translation_box.py	\
 	translation.py		\
 	utils.py

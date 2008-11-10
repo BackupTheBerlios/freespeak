@@ -29,13 +29,18 @@ class ScrolledWindow (gtk.ScrolledWindow):
         self.add (child)
 
 class Frame (gtk.Frame):
-    def __init__ (self, label_text):
+    def __init__ (self, label_text, extra_widget=None):
         gtk.Frame.__init__ (self)
-        label = gtk.Label ()
+        widget = label = gtk.Label ()
         label.set_markup ("<b>"+label_text+"</b>")
         label.show ()
+        if extra_widget:
+            widget = gtk.HBox (spacing=6)
+            widget.pack_start (label, False)
+            widget.pack_start (extra_widget, False)
+            widget.show ()
         self.set_property ('label-xalign', 0)
-        self.set_label_widget (label)
+        self.set_label_widget (widget)
         self.set_shadow_type (gtk.SHADOW_NONE)
 
     def add (self, widget):
@@ -65,6 +70,16 @@ class Progress (gtk.ProgressBar):
 
     def stop (self):
         self.running = False
+
+class TinyButton (gtk.Button):
+    def __init__ (self, stock=None, size=gtk.ICON_SIZE_MENU):
+        gtk.Button.__init__ (self)
+        self.set_name ("tiny-button")
+        self.set_relief (gtk.RELIEF_NONE)
+        self.set_property ('can-focus', False)
+        if stock:
+            image = gtk.image_new_from_stock (stock, size)
+            self.set_image (image)
 
 def error (message, parent=None):
     dialog = gtk.MessageDialog(parent,

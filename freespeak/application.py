@@ -38,6 +38,7 @@ from freespeak.translator import TranslatorsManager
 import freespeak.translators
 from freespeak.ui.main_window import MainWindow
 from freespeak.ui import exception_dialog
+from freespeak.ui import style
 
 class ClipboardController (gtk.Clipboard):
     def __init__ (self, application):
@@ -72,6 +73,7 @@ class Application (object):
         self.setup_icons ()
         self.setup_translators_manager ()
         self.setup_clipboard ()
+        self.setup_style ()
 
         self.started = False
 
@@ -98,6 +100,9 @@ class Application (object):
 
     def setup_clipboard (self):
         self.clipboard = ClipboardController (self)
+
+    def setup_style (self):
+        style.setup_rc ()
 
     def start (self):
         gtk.gdk.threads_init()

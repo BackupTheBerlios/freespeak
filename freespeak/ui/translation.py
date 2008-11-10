@@ -50,11 +50,7 @@ class TranslationLabel (gtk.HBox):
         self.event_box.show ()
 
     def setup_close (self):
-        self.close = gtk.Button ()
-        self.close.set_name ("close-button")
-        image = gtk.image_new_from_stock (gtk.STOCK_CLOSE, gtk.ICON_SIZE_MENU)
-        self.close.set_image (image)
-        self.close.set_relief (gtk.RELIEF_NONE)
+        self.close = uiutils.TinyButton (gtk.STOCK_CLOSE)
         self.close.connect ('clicked', self.on_close)
         self.close.show ()
 
