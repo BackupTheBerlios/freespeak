@@ -141,3 +141,7 @@ msgstr "Testo tradotto"
 #: ../freespeak/ui/translation.py:270
 msgid "Please insert an URL"
 msgstr "Inserisci un URL"
+
+#: data/freespeak.desktop.in:11
+msgid "FreeSpeak"
+msgstr "FreeSpeak"
