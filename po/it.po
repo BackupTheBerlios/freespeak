@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FreeSpeak 0.1.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-09 15:14+0100\n"
+"POT-Creation-Date: 2008-11-09 15:32+0100\n"
 "PO-Revision-Date: 2008-11-09 16:48+0100\n"
 "Last-Translator: Luca Bruno <lethalman88@gmail.com>\n"
 "Language-Team: \n"
@@ -40,6 +40,14 @@ msgstr "Trasferisci i dati tradotti nella clipboard"
 msgid "The name of the translator Python module to use by default."
 msgstr "Il nome del modulo Python da usare come traduttore predefinito"
 
+#: ../data/freespeak.desktop.in.h:1 ../freespeak/ui/about.py:30
+msgid "A free frontend to online translator engines"
+msgstr "Un frontend libero ai motori di traduzione online"
+
+#: ../data/freespeak.desktop.in.h:2
+msgid "FreeSpeak"
+msgstr "FreeSpeak"
+
 #: ../freespeak/status.py:8
 msgid "Translation started"
 msgstr "Traduzione avviata"
@@ -69,10 +77,6 @@ msgstr "Connessione a"
 #: ../freespeak/translators/yahoo.py:98
 msgid "Parsing result"
 msgstr "Processo il risultato"
-
-#: ../freespeak/ui/about.py:30
-msgid "A free frontend to online translator engines"
-msgstr "Un frontend libero ai motori di traduzione online"
 
 #: ../freespeak/ui/exception_dialog.py:37
 msgid "Exception"
@@ -141,7 +145,3 @@ msgstr "Testo tradotto"
 #: ../freespeak/ui/translation.py:270
 msgid "Please insert an URL"
 msgstr "Inserisci un URL"
-
-#: data/freespeak.desktop.in:11
-msgid "FreeSpeak"
-msgstr "FreeSpeak"

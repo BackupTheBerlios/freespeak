@@ -95,6 +95,7 @@ freespeak/translators/Makefile
 freespeak/ui/Makefile
 data/Makefile
 data/art/Makefile
+data/freespeak.desktop.in
 po/Makefile.in
 ])
 
