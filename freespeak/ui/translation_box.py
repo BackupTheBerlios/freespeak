@@ -52,7 +52,8 @@ class TranslationBox (gtk.HBox):
         self.setup_to ()
 
     def setup_translator (self):
-        label = gtk.Label ("Translator:")
+        label = gtk.Label ("T_ranslator:")
+        label.set_use_underline (True)
         label.show ()
         self.pack_start (label, False)
         
@@ -61,8 +62,11 @@ class TranslationBox (gtk.HBox):
         combo.show ()
         self.pack_start (combo)
 
+        label.set_mnemonic_widget (combo)
+
     def setup_from (self):
-        label = gtk.Label ("From:")
+        label = gtk.Label ("_From:")
+        label.set_use_underline (True)
         label.show ()
         self.pack_start (label, False)
         
@@ -75,8 +79,11 @@ class TranslationBox (gtk.HBox):
         self.pack_start (self.from_combo)
         self.from_combo.show ()
 
+        label.set_mnemonic_widget (self.from_combo)
+
     def setup_to (self):
-        label = gtk.Label ("To:")
+        label = gtk.Label ("T_o:")
+        label.set_use_underline (True)
         label.show ()
         self.pack_start (label, False)
         
@@ -88,6 +95,8 @@ class TranslationBox (gtk.HBox):
         self.to_combo.connect ('changed', self.on_to_changed)
         self.pack_start (self.to_combo)
         self.to_combo.show ()
+
+        label.set_mnemonic_widget (self.to_combo)
 
     def update_from_langs (self, langs):
         if not langs:
