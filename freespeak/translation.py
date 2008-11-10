@@ -25,8 +25,6 @@ class BaseTranslation (object):
         self.application = application
         self.manager = manager
         self.translator = None
-        self.status = None
-        self.status_text = None
 
         self.setup ()
         self.manager.add_translation (self)
@@ -44,6 +42,7 @@ class BaseTranslation (object):
         self.translator = translator
         if not translator:
             self.update_from_langs (None)
+            self.update_to_langs (None)
         else:
             thread.start_new_thread (self._run_language_table, ())
         self.update_translator (translator)
@@ -65,6 +64,7 @@ class BaseTranslation (object):
         self.language_table = self.translator.get_language_table (self.capability)
         self.update_status (Status (_("Updating the list")))
         self.update_from_langs (sorted (self.language_table.keys ()))
+        self.update_to_langs (None)
         self.update_status (StatusComplete (None))
 
     def _run (self, request):

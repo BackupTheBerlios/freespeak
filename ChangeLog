@@ -1,5 +1,18 @@
 2008-11-10  Luca Bruno  <lethalman88@gmail.com>
 
+	* freespeak/ui/translation_box.py (TranslationBox.set_from_lang)
+	(TranslationBox.set_to_lang): added, set the iter given the language model
+	(TranslationBox.swap_langs): swap from/to languages when possible
+
+	* freespeak/ui/translation.py (TextTranslation.get_source_contents)
+	(TextTranslation.get_dest_contents): added as helpers for other methods
+	(TextTranslation.update_dest_actions): called when the destination text can be used, mostly change tiny buttons sensititivy
+	(TextTranslation.update_can_translate): overridden to call update_dest_actions
+	(TextTranslation.on_tiny_swap): also set translated text and swap languages
+
+	* freespeak/translation.py (BaseTranslation.set_translator)
+	(BaseTranslation._run_language_table): fix UI consistency
+
 	* freespeak/ui/translation.py (TextTranslation.translated_buttons)
 	(TextTranslation.translate_buttons)
 	(TranslationLabel.setup_close): set tooltip texts to tiny buttons

@@ -37,6 +37,9 @@ class Language (object):
             return 1
         return 0
 
+    def __eq__ (self, other):
+        return self.cc == other.cc and self.name == other.name
+
     def __str__ (self):
         return self.name
 
