@@ -51,6 +51,7 @@ class TranslationLabel (gtk.HBox):
 
     def setup_close (self):
         self.close = uiutils.TinyButton (gtk.STOCK_CLOSE)
+        self.close.set_tooltip_text (_("Close this translation"))
         self.close.connect ('clicked', self.on_close)
         self.close.show ()
 
@@ -199,11 +200,13 @@ class TextTranslation (BaseUITranslation):
         box = gtk.HBox (homogeneous=True)
         # Clear
         btn = uiutils.TinyButton (gtk.STOCK_CLEAR)
+        btn.set_tooltip_text (_("Clear the text to translate"))
         btn.connect ('clicked', self.on_tiny_clear)
         btn.show ()
         box.pack_start (btn)
         # Paste
         btn = uiutils.TinyButton (gtk.STOCK_PASTE)
+        btn.set_tooltip_text (_("Paste the text to translate from the clipboard"))
         btn.connect ('clicked', self.on_tiny_paste)
         btn.show ()
         box.pack_start (btn)
@@ -214,11 +217,13 @@ class TextTranslation (BaseUITranslation):
         box = gtk.HBox (homogeneous=True)
         # Copy
         btn = uiutils.TinyButton (gtk.STOCK_COPY)
+        btn.set_tooltip_text (_("Copy translated text to the clipboard"))
         btn.connect ('clicked', self.on_tiny_copy)
         btn.show ()
         box.pack_start (btn)
         # Swap
         btn = uiutils.TinyButton (gtk.STOCK_CONVERT)
+        btn.set_tooltip_text (_("Swap both the source text with the translated text and the languages"))
         btn.connect ('clicked', self.on_tiny_swap)
         btn.show ()
         box.pack_start (btn)
