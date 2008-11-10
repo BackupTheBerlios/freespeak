@@ -9,7 +9,7 @@
       <locale name="C">
         <short>Default translator module</short>
         <long>
-          The name of the translator Python module to use as default.
+          The name of the translator Python module to use by default.
         </long>
       </locale>
     </schema>

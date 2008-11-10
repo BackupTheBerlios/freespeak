@@ -8,136 +8,136 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FreeSpeak 0.1.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-09 14:55+0100\n"
-"PO-Revision-Date: 2008-11-02 16:48+0100\n"
+"POT-Creation-Date: 2008-11-09 15:14+0100\n"
+"PO-Revision-Date: 2008-11-09 16:48+0100\n"
 "Last-Translator: Luca Bruno <lethalman88@gmail.com>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../data/freespeak.schemas.in.h:1
 msgid "Default translator module"
-msgstr ""
+msgstr "Modulo traduttore predefinito"
 
 #: ../data/freespeak.schemas.in.h:2
 msgid "Get text/url from clipboard"
-msgstr ""
+msgstr "Ottieni testo/url dalla clipboard"
 
 #: ../data/freespeak.schemas.in.h:3
 msgid "Obtain the data to translate from the clipboard."
-msgstr ""
+msgstr "Ottieni i dati da tradurre dalla clipboard."
 
 #: ../data/freespeak.schemas.in.h:4
 msgid "Save the translated text or url to the clipboard."
-msgstr ""
+msgstr "Salva il testo o l'url tradotti nella clipboard"
 
 #: ../data/freespeak.schemas.in.h:5
 msgid "Set translated data to clipboard"
-msgstr ""
+msgstr "Trasferisci i dati tradotti nella clipboard"
 
 #: ../data/freespeak.schemas.in.h:6
-msgid "The name of the translator Python module to use as default."
-msgstr ""
+msgid "The name of the translator Python module to use by default."
+msgstr "Il nome del modulo Python da usare come traduttore predefinito"
 
 #: ../freespeak/status.py:8
 msgid "Translation started"
-msgstr ""
+msgstr "Traduzione avviata"
 
 #: ../freespeak/status.py:14
 msgid "Translation complete"
-msgstr ""
+msgstr "Traduzione completata"
 
 #: ../freespeak/translation.py:64
 #, python-format
 msgid "Retrieving languages from %s"
-msgstr ""
+msgstr "Ottenimento linguaggi da %s"
 
 #: ../freespeak/translation.py:66
 msgid "Updating the list"
-msgstr ""
+msgstr "Aggiornamento della lista"
 
 #: ../freespeak/translators/freetranslation.py:73
 #: ../freespeak/translators/google.py:83
 #: ../freespeak/translators/opentran.py:85
 #: ../freespeak/translators/yahoo.py:93
 msgid "Connecting to"
-msgstr ""
+msgstr "Connessione a"
 
 #: ../freespeak/translators/google.py:88
 #: ../freespeak/translators/opentran.py:90
 #: ../freespeak/translators/yahoo.py:98
 msgid "Parsing result"
-msgstr ""
+msgstr "Processo il risultato"
 
 #: ../freespeak/ui/about.py:30
 msgid "A free frontend to online translator engines"
-msgstr ""
+msgstr "Un frontend libero ai motori di traduzione online"
 
 #: ../freespeak/ui/exception_dialog.py:37
 msgid "Exception"
-msgstr ""
+msgstr "Eccezione"
 
 #: ../freespeak/ui/exception_dialog.py:48
 msgid "An error has occurred:"
-msgstr ""
+msgstr "Si è verificato un errore:"
 
 #: ../freespeak/ui/main_window.py:77
 msgid "_Text"
-msgstr ""
+msgstr "_Testo"
 
 #: ../freespeak/ui/main_window.py:78
 msgid "New translation"
-msgstr ""
+msgstr "Nuova traduzione"
 
 #: ../freespeak/ui/main_window.py:79
 msgid "_Web"
-msgstr ""
+msgstr "_Web"
 
 #: ../freespeak/ui/main_window.py:80
 msgid "New web page translation"
-msgstr ""
+msgstr "Nuova traduzione di una pagina web"
 
 #: ../freespeak/ui/main_window.py:82
 msgid "FreeSpeak preferences"
-msgstr ""
+msgstr "Preferenze di FreeSpeak"
 
 #: ../freespeak/ui/main_window.py:84
 msgid "Quit FreeSpeak"
-msgstr ""
+msgstr "Chiudi FreeSpeak"
 
 #: ../freespeak/ui/main_window.py:86
 msgid "About FreeSpeak"
-msgstr ""
+msgstr "Informazioni su FreeSpeak"
 
 #: ../freespeak/ui/settings.py:28
 msgid "Preferences"
-msgstr ""
+msgstr "Preferenze"
 
 #: ../freespeak/ui/settings.py:46
 msgid "Clipboard preferences"
-msgstr ""
+msgstr "Preferenze della clipboard"
 
 #: ../freespeak/ui/settings.py:51
 msgid "_Get text from clipboard automatically"
-msgstr ""
+msgstr "Ottieni testo dalla clipboard automaticamente"
 
 #: ../freespeak/ui/settings.py:56
 msgid "_Save translated text to clipboard"
-msgstr ""
+msgstr "_Salva il testo tradotto nella clipboard"
 
 #: ../freespeak/ui/settings.py:66
 msgid "Translator preferences"
-msgstr ""
+msgstr "Preferenze traduttore"
 
 #: ../freespeak/ui/translation.py:208
 msgid "Text to translate"
-msgstr ""
+msgstr "Testo da tradurre"
 
 #: ../freespeak/ui/translation.py:220
 msgid "Translated text"
-msgstr ""
+msgstr "Testo tradotto"
 
 #: ../freespeak/ui/translation.py:270
 msgid "Please insert an URL"
-msgstr ""
+msgstr "Inserisci un URL"

@@ -1,5 +1,9 @@
 2008-11-09  Luca Bruno  <lethalman88@gmail.com>
 
+	* po/it.po: updated
+
+	* po/POTFILES.in: updated
+
 	* freespeak/ui/spinner.py (Spinner._rotate): less verbose round robin code
 	(Spinner.setup_animation): remove the first frame, it's an idle status
 
