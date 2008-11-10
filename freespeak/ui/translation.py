@@ -266,7 +266,8 @@ class TextTranslation (BaseUITranslation):
 
     def setup_clipboard (self):
         contents = self.application.clipboard.get_contents ()
-        if contents is not None:
+        # Also check it's not an URL
+        if contents is not None and not (contents.startswith ("http") and not ' ' in contents.strip()):
             self.source_buffer.set_text (contents)
 
     def create_request (self):
@@ -313,18 +314,37 @@ class TextTranslation (BaseUITranslation):
 class WebTranslation (BaseUITranslation):
     capability = WebTranslationRequest
 
+    def url_buttons (self):
+        box = gtk.HBox (homogeneous=True)
+        # Clear
+        btn = uiutils.TinyButton (gtk.STOCK_CLEAR)
+        btn.set_tooltip_text (_("Clear the url"))
+        btn.connect ('clicked', self.on_tiny_clear)
+        btn.show ()
+        box.pack_start (btn)
+        # Paste
+        btn = uiutils.TinyButton (gtk.STOCK_PASTE)
+        btn.set_tooltip_text (_("Paste the url from the clipboard"))
+        btn.connect ('clicked', self.on_tiny_paste)
+        btn.show ()
+        box.pack_start (btn)
+        box.show ()
+        return box
+
     def setup_ui (self):
-        hbox = gtk.HBox (spacing=6)
+        hbox = self.url_box = gtk.HBox (spacing=6)
         label = gtk.Label ("URL:")
         label.show ()
         hbox.pack_start (label, False)
 
         self.url = gtk.Entry ()
-        self.url.set_sensitive (False)
         self.url.connect ('changed', self.on_url_changed)
         self.url.show ()
         hbox.pack_start (self.url)
         
+        hbox.pack_start (self.url_buttons (), False)
+
+        hbox.set_sensitive (False)
         hbox.show ()
         self.pack_start (hbox, False)
 
@@ -334,7 +354,7 @@ class WebTranslation (BaseUITranslation):
 
     def setup_clipboard (self):
         contents = self.application.clipboard.get_contents ()
-        if contents is not None:
+        if contents is not None and contents.startswith("http"):
             self.url.set_text (contents)
 
     def create_request (self):
@@ -346,7 +366,7 @@ class WebTranslation (BaseUITranslation):
 
     @utils.syncronized
     def update_can_translate (self, can_translate):
-        self.url.set_sensitive (can_translate)
+        self.url_box.set_sensitive (can_translate)
         self.translate_button.set_sensitive (can_translate and bool (self.url.get_text ()))
 
     @utils.syncronized
@@ -360,5 +380,14 @@ class WebTranslation (BaseUITranslation):
 
     def on_url_changed (self, entry):
         self.translate_button.set_sensitive (bool (entry.get_text ()))
+
+    def on_tiny_clear (self, button):
+        self.url.set_text ("")
+        self.url.grab_focus ()
+
+    def on_tiny_paste (self, button):
+        contents = self.application.clipboard.get_contents (force=True)
+        if contents is not None:
+            self.url.set_text (contents)
 
 __all__ = ['BaseUITranslation', 'TextTranslation', 'WebTranslation']

@@ -1,5 +1,11 @@
 2008-11-10  Luca Bruno  <lethalman88@gmail.com>
 
+	* freespeak/ui/translation.py (WebTranslation.url_buttons)
+	(WebTranslation.on_tiny_clear, WebTranslation.on_tiny_paste): added
+	(WebTranslation.setup_ui, WebTranslation.update_can_translate): set sensitivity to the whole box
+	(WebTranslation.setup_clipboard)
+	(TextTranslation.setup_clipboard): pseudo-intelligent clipboard contents handling
+
 	* freespeak/ui/translation_box.py (TranslationBox.set_from_lang)
 	(TranslationBox.set_to_lang): added, set the iter given the language model
 	(TranslationBox.swap_langs): swap from/to languages when possible
