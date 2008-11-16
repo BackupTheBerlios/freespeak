@@ -251,7 +251,6 @@ class TextTranslation (BaseUITranslation):
         view.set_editable (False)
         view.modify_base (gtk.STATE_NORMAL, gtk.gdk.color_parse ("#fff8ae"))
         view.show ()
-        gtkspell.Spell (view)
         scrolled = uiutils.ScrolledWindow (view)
         scrolled.show ()
         frame = uiutils.Frame (_("Translated text"), self.translated_buttons ())

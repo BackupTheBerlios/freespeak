@@ -1,6 +1,8 @@
 2008-11-16  Luca Bruno  <lethalman88@gmail.com>
 
-	* bin/freespeak: options wasn't a dict, so get its attributes dict
+	* freespeak/ui/translation.py (TextTranslation.setup_ui): added spell checker
+
+	* bin/freespeak: options wasn't a dict, so get its attributes dictg
 
 	* freespeak/application.py (Application.start): fix signature
 
