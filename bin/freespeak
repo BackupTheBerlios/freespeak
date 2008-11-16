@@ -41,6 +41,6 @@ parser.add_option('-c', '--clipboard',
 
 options, args = parser.parse_args()
 
-application.start (options, args, trigger_timestamp)
+application.start (options.__dict__, args, trigger_timestamp)
 if application.is_running ():
     gtk.gdk.notify_startup_complete ()

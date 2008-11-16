@@ -120,7 +120,7 @@ class Application (dbus.service.Object):
         return self.running
 
     @dbus.service.method ("org.gna.FreeSpeak.ApplicationInterface",
-                          in_signature='i', out_signature='')
+                          in_signature='a{sv}asi', out_signature='')
     def start (self, options={}, args=[], timestamp=None):
         if self.running:
             if not timestamp:

@@ -1,5 +1,6 @@
 import gtk
 import gtkmozembed
+import gtkspell
 
 import freespeak.utils as utils
 import freespeak.ui.utils as uiutils
@@ -237,6 +238,7 @@ class TextTranslation (BaseUITranslation):
         self.source_buffer = gtk.TextBuffer ()
         view = self.source_view = gtk.TextView (self.source_buffer)
         view.show ()
+        gtkspell.Spell (view)
         scrolled = uiutils.ScrolledWindow (view)
         scrolled.show ()
         frame = uiutils.Frame (_("Text to translate"), self.translate_buttons ())
@@ -249,6 +251,7 @@ class TextTranslation (BaseUITranslation):
         view.set_editable (False)
         view.modify_base (gtk.STATE_NORMAL, gtk.gdk.color_parse ("#fff8ae"))
         view.show ()
+        gtkspell.Spell (view)
         scrolled = uiutils.ScrolledWindow (view)
         scrolled.show ()
         frame = uiutils.Frame (_("Translated text"), self.translated_buttons ())
