@@ -81,27 +81,19 @@ class TinyButton (gtk.Button):
             image = gtk.image_new_from_stock (stock, size)
             self.set_image (image)
 
+class MessageDialog (gtk.MessageDialog):
+    def __init__ (self, parent, message, type, buttons):
+        gtk.MessageDialog.__init__ (self, parent, gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT,
+                                    type, buttons, message)
+        self.connect ('response', self.on_response)
+
+    def on_response (self, dialog, response):
+        dialog.destroy ()
+
 def error (message, parent=None):
-    dialog = gtk.MessageDialog(parent,
-                               gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT,
-                               gtk.MESSAGE_ERROR, gtk.BUTTONS_OK, message)
-    dialog.run ()
-    dialog.destroy()
+    dialog = MessageDialog (parent, message, gtk.MESSAGE_ERROR, gtk.BUTTONS_OK)
+    dialog.show_all ()
 
 def warning (message, parent=None):
-    dialog = gtk.MessageDialog(parent,
-                               gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT,
-                               gtk.MESSAGE_WARNING, gtk.BUTTONS_OK, message)
-    dialog.run ()
-    dialog.destroy()
-            
-def question(self, message, parent=None):
-    dialog = gtk.MessageDialog(parent,
-                               gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT,
-                               gtk.MESSAGE_QUESTION, gtk.BUTTONS_NONE, msg)
-    dialog.add_buttons(gtk.STOCK_YES, gtk.RESPONSE_YES,
-                       gtk.STOCK_NO, gtk.RESPONSE_NO) 
-    dialog.set_default_response(gtk.RESPONSE_NO)
-    response = dialog.run()
-    dialog.destroy()
-    return response
+    dialog = MessageDialog (parent, message, gtk.MESSAGE_WARNING, gtk.BUTTONS_OK)
+    dialog.show_all ()

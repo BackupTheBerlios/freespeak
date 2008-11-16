@@ -28,9 +28,14 @@ import tempfile
 import sys
 import os
 from optparse import OptionParser
+import time
 
+import gobject
 import gtk
 from gtk import gdk
+import dbus
+import dbus.service
+import dbus.mainloop.glib
 
 from freespeak import defs
 from freespeak.config import Config
@@ -61,10 +66,11 @@ class ClipboardController (object):
             self.primary.set_text (contents)
             self.clipboard.set_text (contents)
 
-class Application (object):
+class Application (dbus.service.Object):
     version = __version__
 
-    def __init__ (self, options={}, args=[]):
+    def __init__ (self, bus, path, name, options={}, args=[]):
+        dbus.service.Object.__init__ (self, bus, path, name)
         self.domain = defs.GETTEXT_PACKAGE
         self.options = options
         self.args = args
@@ -78,13 +84,14 @@ class Application (object):
         self.setup_clipboard ()
         self.setup_style ()
 
-        self.started = False
+        self.running = False
 
     def setup_exception_dialog (self):
         sys.excepthook = exception_dialog.exception_hook
 
-    def setup_l10n (self):
-        gettext.install (self.domain, unicode=True)
+    @staticmethod
+    def setup_l10n ():
+        gettext.install (defs.GETTEXT_PACKAGE, unicode=True)
 
     def setup_config (self):
         self.config = Config ()
@@ -107,17 +114,50 @@ class Application (object):
     def setup_style (self):
         style.setup_rc ()
 
-    def start (self):
+    @dbus.service.method ("org.gna.FreeSpeak.ApplicationInterface",
+                          in_signature='', out_signature='b')
+    def is_running (self):
+        return self.running
+
+    @dbus.service.method ("org.gna.FreeSpeak.ApplicationInterface",
+                          in_signature='i', out_signature='')
+    def start (self, options={}, args=[], timestamp=None):
+        if self.running:
+            if not timestamp:
+                timestamp = int (time.time ())
+            self.main_window.present_with_time (timestamp)
+            return
+
         gtk.gdk.threads_init()
+
         self.main_window = MainWindow (self)
         self.main_window.show ()
 
-        self.started = True
+        self.running = True
 
-        gtk.gdk.threads_enter()
         gtk.main ()
-        gtk.gdk.threads_leave()
 
+        self.running = False
+
+    @dbus.service.method ("org.gna.FreeSpeak.ApplicationInterface",
+                          in_signature='', out_signature='')
     def stop (self):
-        if self.started:
+        if self.running:
             gtk.main_quit ()
+
+def get_instance ():
+    """
+    Get the DBUS instance of the application.
+    org.gna.FreeSpeak at path /Application with interface org.gna.FreeSpeak.ApplicationInterface
+    """
+    dbus.mainloop.glib.DBusGMainLoop (set_as_default=True)
+    bus = dbus.SessionBus ()
+    request = bus.request_name ("org.gna.FreeSpeak", dbus.bus.NAME_FLAG_DO_NOT_QUEUE)
+    if request != dbus.bus.REQUEST_NAME_REPLY_EXISTS:
+        application = Application (bus, '/Application', "org.gna.FreeSpeak")
+    else:
+        object = bus.get_object ("org.gna.FreeSpeak", "/Application")
+        application = dbus.Interface (object, "org.gna.FreeSpeak.ApplicationInterface")
+    return application
+
+__all__ = ['get_instance']

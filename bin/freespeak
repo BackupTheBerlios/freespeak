@@ -20,18 +20,27 @@ freespeak
     Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 """
 
-from optparse import OptionParser
-from freespeak.application import Application
+import time
+trigger_timestamp = int (time.time ())
 
-app = Application ()
+from optparse import OptionParser
+
+import dbus
+import gtk.gdk
+
+import freespeak.application
+
+freespeak.application.Application.setup_l10n ()
+application = freespeak.application.get_instance ()
 
 parser = OptionParser(usage='%prog [-c] [-q] [ module [ from [ to ] ] ]',
-                      version='FreeSpeak %s' % Application.version)
+                      version='FreeSpeak %s' % freespeak.application.__version__)
 parser.add_option('-c', '--clipboard',
                   action='store_true', dest='clipboard', default=False,
                   help=_('use clipboard instead of stdin'))
 
 options, args = parser.parse_args()
 
-app.start ()
-
+application.start (options, args, trigger_timestamp)
+if application.is_running ():
+    gtk.gdk.notify_startup_complete ()
