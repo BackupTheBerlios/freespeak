@@ -70,6 +70,7 @@ PKG_CHECK_MODULES(FREESPEAK,
 	pygtk-2.0			>= 2.12
 	pygobject-2.0			>= 2.12
 	gnome-python-2.0		>= 2.10
+        dbus-python
 )
 AC_SUBST(FREESPEAK_CFLAGS)
 AC_SUBST(FREESPEAK_LIBS)
@@ -77,11 +78,13 @@ AC_SUBST(FREESPEAK_LIBS)
 dnl ******************
 dnl * Python modules
 dnl ******************
+AM_CHECK_PYMOD(dbus)
 AM_CHECK_PYMOD(gconf)
 AM_CHECK_PYMOD(gnome)
 AM_CHECK_PYMOD(gobject)
 AM_CHECK_PYMOD(gtk)
 AM_CHECK_PYMOD(gtk.gdk)
+AM_CHECK_PYMOD(gtkspell)
 
 dnl ****************************************************************************
 dnl * --------------------------------------------------------------------------
