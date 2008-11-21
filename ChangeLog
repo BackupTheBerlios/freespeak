@@ -1,5 +1,10 @@
 2008-11-16  Luca Bruno  <lethalman88@gmail.com>
 
+	* freespeak/ui/translation.py (WebTranslation.dest_url_buttons): added
+	(WebTranslation.setup_ui): created destination box with a LinkButton
+	(WebTranslation.dest_url_hook): added
+	(WebTranslation.on_tiny_copy): added
+
 	* configure.ac: add missing dependencies
 
 	* freespeak/ui/translation.py (TextTranslation.setup_ui): added spell checker

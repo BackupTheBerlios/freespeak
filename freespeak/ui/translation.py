@@ -316,7 +316,7 @@ class TextTranslation (BaseUITranslation):
 class WebTranslation (BaseUITranslation):
     capability = WebTranslationRequest
 
-    def url_buttons (self):
+    def source_url_buttons (self):
         box = gtk.HBox (homogeneous=True)
         # Clear
         btn = uiutils.TinyButton (gtk.STOCK_CLEAR)
@@ -333,63 +333,98 @@ class WebTranslation (BaseUITranslation):
         box.show ()
         return box
 
+    def dest_url_buttons (self):
+        box = gtk.HBox (homogeneous=True)
+        # Copy
+        btn = uiutils.TinyButton (gtk.STOCK_COPY)
+        btn.set_tooltip_text (_("Copy the url"))
+        btn.connect ('clicked', self.on_tiny_copy)
+        btn.show ()
+        box.pack_start (btn)
+
+        box.show ()
+        return box
+
     def setup_ui (self):
-        hbox = self.url_box = gtk.HBox (spacing=6)
+        # Source box
+        hbox = self.source_url_box = gtk.HBox (spacing=6)
         label = gtk.Label ("URL:")
         label.show ()
         hbox.pack_start (label, False)
 
-        self.url = gtk.Entry ()
-        self.url.connect ('changed', self.on_url_changed)
-        self.url.show ()
-        hbox.pack_start (self.url)
+        self.source_url = gtk.Entry ()
+        self.source_url.connect ('changed', self.on_source_url_changed)
+        self.source_url.show ()
+        hbox.pack_start (self.source_url)
         
-        hbox.pack_start (self.url_buttons (), False)
+        hbox.pack_start (self.source_url_buttons (), False)
 
         hbox.set_sensitive (False)
         hbox.show ()
         self.pack_start (hbox, False)
 
+        # Browser
         self.browser = gtkmozembed.MozEmbed ()
         self.browser.show ()
         self.pack_start (self.browser)
 
+        # Destination box
+        hbox = self.dest_url_box = gtk.HBox (spacing=6)
+        self.dest_url = gtk.LinkButton ("", "Translated URL")
+        self.dest_url.show ()
+        gtk.link_button_set_uri_hook (self.dest_url_hook)
+        hbox.pack_start (self.dest_url)
+        
+        hbox.pack_start (self.dest_url_buttons (), False)
+
+        hbox.set_sensitive (False)
+        self.pack_start (hbox, False)
+
     def setup_clipboard (self):
         contents = self.application.clipboard.get_contents ()
         if contents is not None and contents.startswith("http"):
-            self.url.set_text (contents)
+            self.source_url.set_text (contents)
 
     def create_request (self):
-        url = self.url.get_text ()
+        url = self.source_url.get_text ()
         if not url:
             uiutils.warning (_("Please insert an URL"))
         else:
-            return WebTranslationRequest (self.url.get_text ())
+            return WebTranslationRequest (self.source_url.get_text ())
 
     @utils.syncronized
     def update_can_translate (self, can_translate):
-        self.url_box.set_sensitive (can_translate)
-        self.translate_button.set_sensitive (can_translate and bool (self.url.get_text ()))
+        self.source_url_box.set_sensitive (can_translate)
+        self.translate_button.set_sensitive (can_translate and bool (self.source_url.get_text ()))
 
     @utils.syncronized
     def update_status (self, status):
         BaseUITranslation.update_status (self, status)
         if isinstance (status, StatusWebComplete):
+            self.dest_url.set_uri (status.result)
+            self.dest_url_box.set_sensitive (True)
+            self.dest_url_box.show ()
             self.browser.load_url (status.result)
             self.application.clipboard.set_contents (status.result)
 
     # Events
 
-    def on_url_changed (self, entry):
+    def on_source_url_changed (self, entry):
         self.translate_button.set_sensitive (bool (entry.get_text ()))
 
+    def dest_url_hook (self, button, uri):
+        gnome.url_show (uri)
+
     def on_tiny_clear (self, button):
-        self.url.set_text ("")
-        self.url.grab_focus ()
+        self.source_url.set_text ("")
+        self.source_url.grab_focus ()
 
     def on_tiny_paste (self, button):
         contents = self.application.clipboard.get_contents (force=True)
         if contents is not None:
-            self.url.set_text (contents)
+            self.source_url.set_text (contents)
+
+    def on_tiny_copy (self, button):
+        self.application.clipboard.set_contents (self.dest_url.get_uri (), force=True)
 
 __all__ = ['BaseUITranslation', 'TextTranslation', 'WebTranslation']
