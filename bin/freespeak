@@ -25,7 +25,6 @@ trigger_timestamp = int (time.time ())
 
 from optparse import OptionParser
 
-import dbus
 import gtk.gdk
 
 import freespeak.application

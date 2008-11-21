@@ -1,5 +1,7 @@
 2008-11-16  Luca Bruno  <lethalman88@gmail.com>
 
+	* freespeak/application.py: change interface to org.gna.FreeSpeak, change application path to /
+
 	* freespeak/ui/translation.py (WebTranslation.dest_url_buttons): added
 	(WebTranslation.setup_ui): created destination box with a LinkButton
 	created an EventBox to set a background

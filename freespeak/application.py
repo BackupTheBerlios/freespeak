@@ -114,12 +114,12 @@ class Application (dbus.service.Object):
     def setup_style (self):
         style.setup_rc ()
 
-    @dbus.service.method ("org.gna.FreeSpeak.ApplicationInterface",
+    @dbus.service.method ("org.gna.FreeSpeak",
                           in_signature='', out_signature='b')
     def is_running (self):
         return self.running
 
-    @dbus.service.method ("org.gna.FreeSpeak.ApplicationInterface",
+    @dbus.service.method ("org.gna.FreeSpeak",
                           in_signature='a{sv}asi', out_signature='')
     def start (self, options={}, args=[], timestamp=None):
         if self.running:
@@ -139,7 +139,7 @@ class Application (dbus.service.Object):
 
         self.running = False
 
-    @dbus.service.method ("org.gna.FreeSpeak.ApplicationInterface",
+    @dbus.service.method ("org.gna.FreeSpeak",
                           in_signature='', out_signature='')
     def stop (self):
         if self.running:
@@ -148,16 +148,16 @@ class Application (dbus.service.Object):
 def get_instance ():
     """
     Get the DBUS instance of the application.
-    org.gna.FreeSpeak at path /Application with interface org.gna.FreeSpeak.ApplicationInterface
+    org.gna.FreeSpeak at path / with interface org.gna.FreeSpeak
     """
     dbus.mainloop.glib.DBusGMainLoop (set_as_default=True)
     bus = dbus.SessionBus ()
     request = bus.request_name ("org.gna.FreeSpeak", dbus.bus.NAME_FLAG_DO_NOT_QUEUE)
     if request != dbus.bus.REQUEST_NAME_REPLY_EXISTS:
-        application = Application (bus, '/Application', "org.gna.FreeSpeak")
+        application = Application (bus, '/', "org.gna.FreeSpeak")
     else:
-        object = bus.get_object ("org.gna.FreeSpeak", "/Application")
-        application = dbus.Interface (object, "org.gna.FreeSpeak.ApplicationInterface")
+        object = bus.get_object ("org.gna.FreeSpeak", "/")
+        application = dbus.Interface (object, "org.gna.FreeSpeak")
     return application
 
 __all__ = ['get_instance']
