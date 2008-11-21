@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FreeSpeak 0.1.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-09 15:32+0100\n"
-"PO-Revision-Date: 2008-11-09 16:48+0100\n"
+"POT-Creation-Date: 2008-11-21 22:26+0100\n"
+"PO-Revision-Date: 2008-11-21 22:22+0100\n"
 "Last-Translator: Luca Bruno <lethalman88@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -56,25 +56,21 @@ msgstr "Traduzione avviata"
 msgid "Translation complete"
 msgstr "Traduzione completata"
 
-#: ../freespeak/translation.py:64
+#: ../freespeak/translation.py:63
 #, python-format
 msgid "Retrieving languages from %s"
 msgstr "Ottenimento linguaggi da %s"
 
-#: ../freespeak/translation.py:66
+#: ../freespeak/translation.py:65
 msgid "Updating the list"
 msgstr "Aggiornamento della lista"
 
 #: ../freespeak/translators/freetranslation.py:73
-#: ../freespeak/translators/google.py:83
-#: ../freespeak/translators/opentran.py:85
-#: ../freespeak/translators/yahoo.py:93
+#: ../freespeak/translators/google.py:86 ../freespeak/translators/yahoo.py:93
 msgid "Connecting to"
 msgstr "Connessione a"
 
-#: ../freespeak/translators/google.py:88
-#: ../freespeak/translators/opentran.py:90
-#: ../freespeak/translators/yahoo.py:98
+#: ../freespeak/translators/google.py:91 ../freespeak/translators/yahoo.py:98
 msgid "Parsing result"
 msgstr "Processo il risultato"
 
@@ -134,14 +130,51 @@ msgstr "_Salva il testo tradotto nella clipboard"
 msgid "Translator preferences"
 msgstr "Preferenze traduttore"
 
-#: ../freespeak/ui/translation.py:208
+#: ../freespeak/ui/translation.py:56
+#, fuzzy
+msgid "Close this translation"
+msgstr "Nuova traduzione"
+
+#: ../freespeak/ui/translation.py:205
+#, fuzzy
+msgid "Clear the text to translate"
+msgstr "Testo da tradurre"
+
+#: ../freespeak/ui/translation.py:211
+#, fuzzy
+msgid "Paste the text to translate from the clipboard"
+msgstr "Ottieni i dati da tradurre dalla clipboard."
+
+#: ../freespeak/ui/translation.py:222
+#, fuzzy
+msgid "Copy translated text to the clipboard"
+msgstr "_Salva il testo tradotto nella clipboard"
+
+#: ../freespeak/ui/translation.py:229
+msgid "Swap both the source text with the translated text and the languages"
+msgstr "Inverti testo sorgente con quello tradotto e anche le lingue"
+
+#: ../freespeak/ui/translation.py:245
 msgid "Text to translate"
 msgstr "Testo da tradurre"
 
-#: ../freespeak/ui/translation.py:220
+#: ../freespeak/ui/translation.py:257
 msgid "Translated text"
 msgstr "Testo tradotto"
 
-#: ../freespeak/ui/translation.py:270
+#: ../freespeak/ui/translation.py:324
+msgid "Clear the url"
+msgstr "Cancella l'url"
+
+#: ../freespeak/ui/translation.py:330
+#, fuzzy
+msgid "Paste the url from the clipboard"
+msgstr "Ottieni testo/url dalla clipboard"
+
+#: ../freespeak/ui/translation.py:341
+msgid "Copy the url"
+msgstr "Copia l'url"
+
+#: ../freespeak/ui/translation.py:400
 msgid "Please insert an URL"
 msgstr "Inserisci un URL"

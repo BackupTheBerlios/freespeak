@@ -5,7 +5,6 @@ freespeak/status.py
 freespeak/translation.py
 freespeak/translators/freetranslation.py
 freespeak/translators/google.py
-freespeak/translators/opentran.py
 freespeak/translators/yahoo.py
 freespeak/ui/about.py
 freespeak/ui/exception_dialog.py
