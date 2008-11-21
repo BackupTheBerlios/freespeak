@@ -2,6 +2,7 @@
 
 	* freespeak/ui/translation.py (WebTranslation.dest_url_buttons): added
 	(WebTranslation.setup_ui): created destination box with a LinkButton
+	created an EventBox to set a background
 	(WebTranslation.dest_url_hook): added
 	(WebTranslation.on_tiny_copy): added
 

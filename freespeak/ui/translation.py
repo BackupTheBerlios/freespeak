@@ -121,6 +121,7 @@ class BaseUITranslation (gtk.VBox, BaseTranslation):
         self.translation_box.show ()
 
         self.translate_button = gtk.Button ("_Translate")
+        self.translate_button.grab_default ()
         self.translate_button.set_sensitive (False)
         self.translate_button.set_use_underline (True)
         image = gtk.image_new_from_stock (gtk.STOCK_REFRESH, gtk.ICON_SIZE_BUTTON)
@@ -369,7 +370,13 @@ class WebTranslation (BaseUITranslation):
         self.pack_start (self.browser)
 
         # Destination box
-        hbox = self.dest_url_box = gtk.HBox (spacing=6)
+        self.dest_url_box = gtk.EventBox ()
+        self.dest_url_box.set_visible_window (False)
+        self.dest_url_box.modify_bg (gtk.STATE_NORMAL, gtk.gdk.color_parse ("#fff8ae"))
+        self.dest_url_box.set_sensitive (False)
+        hbox = gtk.HBox (spacing=6)
+        self.dest_url_box.add (hbox)
+
         self.dest_url = gtk.LinkButton ("", "Translated URL")
         self.dest_url.show ()
         gtk.link_button_set_uri_hook (self.dest_url_hook)
@@ -377,8 +384,8 @@ class WebTranslation (BaseUITranslation):
         
         hbox.pack_start (self.dest_url_buttons (), False)
 
-        hbox.set_sensitive (False)
-        self.pack_start (hbox, False)
+        hbox.show ()
+        self.pack_start (self.dest_url_box, False)
 
     def setup_clipboard (self):
         contents = self.application.clipboard.get_contents ()
@@ -404,6 +411,7 @@ class WebTranslation (BaseUITranslation):
             self.dest_url.set_uri (status.result)
             self.dest_url_box.set_sensitive (True)
             self.dest_url_box.show ()
+            self.dest_url_box.set_visible_window (True)
             self.browser.load_url (status.result)
             self.application.clipboard.set_contents (status.result)
 
