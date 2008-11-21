@@ -5,12 +5,13 @@
 	created an EventBox to set a background
 	(WebTranslation.dest_url_hook): added
 	(WebTranslation.on_tiny_copy): added
+	(WebTranslation): don't take sensitivity to the source url box
 
 	* configure.ac: add missing dependencies
 
 	* freespeak/ui/translation.py (TextTranslation.setup_ui): added spell checker
 
-	* bin/freespeak: options wasn't a dict, so get its attributes dictg
+	* bin/freespeak: options wasn't a dict, so get its attributes dict
 
 	* freespeak/application.py (Application.start): fix signature
 

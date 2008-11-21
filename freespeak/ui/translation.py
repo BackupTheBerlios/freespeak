@@ -1,6 +1,7 @@
 import gtk
 import gtkmozembed
 import gtkspell
+import gnome
 
 import freespeak.utils as utils
 import freespeak.ui.utils as uiutils
@@ -121,7 +122,6 @@ class BaseUITranslation (gtk.VBox, BaseTranslation):
         self.translation_box.show ()
 
         self.translate_button = gtk.Button ("_Translate")
-        self.translate_button.grab_default ()
         self.translate_button.set_sensitive (False)
         self.translate_button.set_use_underline (True)
         image = gtk.image_new_from_stock (gtk.STOCK_REFRESH, gtk.ICON_SIZE_BUTTON)
@@ -347,20 +347,22 @@ class WebTranslation (BaseUITranslation):
         return box
 
     def setup_ui (self):
+        self.can_translate = False
+
         # Source box
-        hbox = self.source_url_box = gtk.HBox (spacing=6)
+        hbox = gtk.HBox (spacing=6)
         label = gtk.Label ("URL:")
         label.show ()
         hbox.pack_start (label, False)
 
         self.source_url = gtk.Entry ()
         self.source_url.connect ('changed', self.on_source_url_changed)
+        self.source_url.connect ('activate', lambda *args: self.translate_button.clicked ())
         self.source_url.show ()
         hbox.pack_start (self.source_url)
         
         hbox.pack_start (self.source_url_buttons (), False)
 
-        hbox.set_sensitive (False)
         hbox.show ()
         self.pack_start (hbox, False)
 
@@ -401,8 +403,11 @@ class WebTranslation (BaseUITranslation):
 
     @utils.syncronized
     def update_can_translate (self, can_translate):
-        self.source_url_box.set_sensitive (can_translate)
-        self.translate_button.set_sensitive (can_translate and bool (self.source_url.get_text ()))
+        self.can_translate = can_translate
+        self.update_translate_button_sensitivity ()
+
+    def update_translate_button_sensitivity (self):
+        self.translate_button.set_sensitive (self.can_translate and bool (self.source_url.get_text ()))
 
     @utils.syncronized
     def update_status (self, status):
@@ -418,7 +423,7 @@ class WebTranslation (BaseUITranslation):
     # Events
 
     def on_source_url_changed (self, entry):
-        self.translate_button.set_sensitive (bool (entry.get_text ()))
+        self.update_translate_button_sensitivity ()
 
     def dest_url_hook (self, button, uri):
         gnome.url_show (uri)
