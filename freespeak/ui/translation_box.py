@@ -15,7 +15,7 @@ class TranslatorCombo (gtk.ComboBox):
         default_translator = self.application.translators_manager.get_default ()
         default_iter = None
 
-        iter = model.append (['(none)', None])
+        iter = model.append ([_("(none)"), None])
         self.set_active_iter (iter)
         for translator in sorted (self.application.translators_manager):
             if not capability or capability in translator.capabilities:
@@ -52,7 +52,7 @@ class TranslationBox (gtk.HBox):
         self.setup_to ()
 
     def setup_translator (self):
-        label = gtk.Label ("T_ranslator:")
+        label = gtk.Label (_("T_ranslator:"_))
         label.set_use_underline (True)
         label.show ()
         self.pack_start (label, False)
@@ -65,7 +65,7 @@ class TranslationBox (gtk.HBox):
         label.set_mnemonic_widget (combo)
 
     def setup_from (self):
-        label = gtk.Label ("_From:")
+        label = gtk.Label (_("_From:"_))
         label.set_use_underline (True)
         label.show ()
         self.pack_start (label, False)
@@ -82,7 +82,7 @@ class TranslationBox (gtk.HBox):
         label.set_mnemonic_widget (self.from_combo)
 
     def setup_to (self):
-        label = gtk.Label ("T_o:")
+        label = gtk.Label (_("T_o:"))
         label.set_use_underline (True)
         label.show ()
         self.pack_start (label, False)

@@ -1,3 +1,7 @@
+2008-11-22  Luca Bruno  <lethalman88@gmail.com>
+
+	* freespeak/ui/translation_box.py (TranslationBox.setup_translator): localize some strings
+
 2008-11-21  Luca Bruno  <lethalman88@gmail.com>
 
 	* data/freespeak.desktop.in.in: removed Utility as it provided a duplicated entry in the menu

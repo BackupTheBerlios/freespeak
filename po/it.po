@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FreeSpeak 0.1.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-21 22:26+0100\n"
+"POT-Creation-Date: 2008-11-22 14:52+0100\n"
 "PO-Revision-Date: 2008-11-21 22:22+0100\n"
 "Last-Translator: Luca Bruno <lethalman88@gmail.com>\n"
 "Language-Team: \n"
@@ -120,7 +120,7 @@ msgstr "Preferenze della clipboard"
 
 #: ../freespeak/ui/settings.py:51
 msgid "_Get text from clipboard automatically"
-msgstr "Ottieni testo dalla clipboard automaticamente"
+msgstr "_Ottieni testo dalla clipboard automaticamente"
 
 #: ../freespeak/ui/settings.py:56
 msgid "_Save translated text to clipboard"
@@ -131,24 +131,20 @@ msgid "Translator preferences"
 msgstr "Preferenze traduttore"
 
 #: ../freespeak/ui/translation.py:56
-#, fuzzy
 msgid "Close this translation"
-msgstr "Nuova traduzione"
+msgstr "Chiudi questa traduzione"
 
 #: ../freespeak/ui/translation.py:205
-#, fuzzy
 msgid "Clear the text to translate"
-msgstr "Testo da tradurre"
+msgstr "Cancella il testo da tradurre"
 
 #: ../freespeak/ui/translation.py:211
-#, fuzzy
 msgid "Paste the text to translate from the clipboard"
 msgstr "Ottieni i dati da tradurre dalla clipboard."
 
 #: ../freespeak/ui/translation.py:222
-#, fuzzy
 msgid "Copy translated text to the clipboard"
-msgstr "_Salva il testo tradotto nella clipboard"
+msgstr "Salva il testo tradotto nella clipboard"
 
 #: ../freespeak/ui/translation.py:229
 msgid "Swap both the source text with the translated text and the languages"
@@ -167,7 +163,6 @@ msgid "Clear the url"
 msgstr "Cancella l'url"
 
 #: ../freespeak/ui/translation.py:330
-#, fuzzy
 msgid "Paste the url from the clipboard"
 msgstr "Ottieni testo/url dalla clipboard"
 
@@ -178,3 +173,19 @@ msgstr "Copia l'url"
 #: ../freespeak/ui/translation.py:400
 msgid "Please insert an URL"
 msgstr "Inserisci un URL"
+
+#: ../freespeak/ui/translation_box.py:18
+msgid "(none)"
+msgstr "(nessuno)"
+
+#: ../freespeak/ui/translation_box.py:55
+msgid "T_ranslator:"
+msgstr "T_raduttore:"
+
+#: ../freespeak/ui/translation_box.py:68
+msgid "_From:"
+msgstr "_Da:"
+
+#: ../freespeak/ui/translation_box.py:85
+msgid "T_o:"
+msgstr "_A:"

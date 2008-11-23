@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Encoding=UTF-8
+_Name=FreeSpeak
+Categories=Education;Utility;Translation
+Exec=freespeak
+Icon=freespeak
+StartupNotify=true
+Terminal=false
+Type=Application
+_GenericName=A free frontend to online translator engines
+_Comment=A free frontend to online translator engines
