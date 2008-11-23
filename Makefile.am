@@ -7,6 +7,7 @@ DISTCLEANFILES =		\
 
 EXTRA_DIST = \
 	TODO \
+	MAINTAINERS \
 	Guidelines \
 	autogen.sh \
 	gnome-doc-utils.make

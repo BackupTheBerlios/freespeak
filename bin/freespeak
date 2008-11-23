@@ -1,24 +1,24 @@
 #!/usr/bin/env python
-"""
-FreeSpeak - a simple frontend to already existing online translators
-freespeak
-
-    Copyright (C) 2005-2006-2007-2008  Luca Bruno <lethalman88@gmail.com>
-   
-    This program is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; either version 2 of the License, or
-    (at your option) any later version.
-    
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU Library General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program; if not, write to the Free Software
-    Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
-"""
+# FreeSpeak - a GUI frontend to online translator engines
+# bin/freespeak
+#
+## Copyright (C) 2005-2008  Luca Bruno <lethalman88@gmail.com>
+##
+## This file is part of FreeSpeak.
+##
+## FreeSpeak is free software; you can redistribute it and/or modify
+## it under the terms of the GNU General Public License as published by
+## the Free Software Foundation; either version 2 of the License, or
+## (at your option) any later version.
+##    
+## FreeSpeak is distributed in the hope that it will be useful,
+## but WITHOUT ANY WARRANTY; without even the implied warranty of
+## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+## GNU Library General Public License for more details.
+##
+## You should have received a copy of the GNU General Public License
+## along with this program; if not, write to the Free Software
+## Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
 import time
 trigger_timestamp = int (time.time ())
@@ -27,18 +27,23 @@ from optparse import OptionParser
 
 import gtk.gdk
 
-import freespeak.application
+import freespeak.defs
 
+version = """FreeSpeak version %s
+Copyright (C) 2005-2008  Luca Bruno <lethalman88@gmail.com>
+
+FreeSpeak comes with NO WARRANTY, to the extent permitted by law.
+You may redistribute copies of FreeSpeak under the terms of the
+GNU General Public License. For more information, see the file named
+COPYING.""" % freespeak.defs.VERSION
+
+parser = OptionParser(usage='%prog',
+                      version=version)
+options, args = parser.parse_args()
+
+import freespeak.application
 freespeak.application.Application.setup_l10n ()
 application = freespeak.application.get_instance ()
-
-parser = OptionParser(usage='%prog [-c] [-q] [ module [ from [ to ] ] ]',
-                      version='FreeSpeak %s' % freespeak.application.__version__)
-parser.add_option('-c', '--clipboard',
-                  action='store_true', dest='clipboard', default=False,
-                  help=_('use clipboard instead of stdin'))
-
-options, args = parser.parse_args()
 
 application.start (options.__dict__, args, trigger_timestamp)
 if application.is_running ():
