@@ -1,6 +1,7 @@
 [encoding: UTF-8]
 data/freespeak.schemas.in
 data/freespeak.desktop.in
+data/freespeak.desktop.in.in
 freespeak/status.py
 freespeak/translation.py
 freespeak/translators/freetranslation.py

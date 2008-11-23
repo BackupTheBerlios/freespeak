@@ -4,21 +4,17 @@ The installation is described in the INSTALL file.
 
 SYSTEM REQUIRMENTS
 Python 2.4 or higher
-GTK+ 2.6 or higher
-PyGTK 2.6 or higher
-Mechanoid (optional if you don't use certain modules)
+GTK+ 2.12 or higher
+PyGTK 2.12 or higher
+PyGObject 2.12 or higher
+GnomePython 2.10 or higher
+Dbus-Python
+Python LXML
 
-SYSTRAY ICON
-This feature needs gnome-python-extra to be installed on your system. If you 
-don't have it, you can install the trayicon extension contained in this package 
-by reading the INSTALL file.
-
-KEYBOARD SHORTCUT
-Ctrl+N	New translation
-Ctrl+E	Refresh module's list
-Ctrl+R	Reduce/Restore translation window
-Ctrl+S	Shows settings window
-Ctrl+Q	Quit 
+KEYBOARD SHORTCUTS
+Ctrl+T	New text translation
+Ctrl+W	New web translation
+Ctrl+P	Shows preferences dialog
 Ctrl+A	Shows about dialog
+Ctrl+Q	Quit 
 Ctrl+T	Translate
-Ctrl+W	Close current tab's page

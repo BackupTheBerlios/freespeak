@@ -3,5 +3,4 @@ freespeak_translators_PYTHON =	\
 	__init__.py		\
 	freetranslation.py	\
 	google.py		\
-	opentran.py		\
 	yahoo.py

@@ -1,0 +1,20 @@
+Overview of Changes from FreeSpeak 0.1.1 to FreeSpeak 0.2.0
+===========================================================
+
+* Copyright notices have been updated.
+
+* Project code has been reorganized.
+ Code has been separated in non-UI part and UI part.
+ Please read the Guidelines file to have a general overview of the architecture
+
+* Interfaces to online engines have been simplified.
+
+* INI configuration file have been replaced by GConf.
+
+* Socket-based IPC has been replaced by DBus.
+
+* Minimalist/reduced window has been dropped.
+
+* Egg trayicon C extension has been replaced by GtkStatusIcon.
+
+* Desktop files and gconf schemas have been localized.

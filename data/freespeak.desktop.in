@@ -2,7 +2,7 @@
 Version=1.0
 Encoding=UTF-8
 _Name=FreeSpeak
-Categories=Education;Utility;Translation
+Categories=Education;Translation
 Exec=freespeak
 Icon=freespeak
 StartupNotify=true

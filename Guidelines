@@ -1,18 +1,21 @@
 The project:
 - Application. Holds all the necessary information for the application to run, and for other applications to make use of FreeSpeak as a library.
-- A Translation factory, to create pages in the notebook. Mostly, it decides which one to choose if it's a text translation, a web translation or whatelse.
-- The main window holds a Manager, which is the notebook managing the translations. It has only a GUI relevance.
-- Each translation has a translator, which can either be a text or web one. It holds information on the possible "From" and "To" options. Its role is final but fundamental as it translates the text/web.
-
-Window:
-- 4-pixel border 
+- The main window holds a Manager, which is the notebook managing the translations. It has mostly a GUI relevance.
+- There are base classes for creating different kind of Translations. The basic ones currently are Text and Web.
+- To each Translation is assigned a TranslationRequest (Text or Web), to be passed to the Translator.
+- The Translator is the part which effectively does the translation.
+- The TranslatorsManager holds all information about translators and load them.
+- For each response by the translator a Status is yield to the Translation.
 
 Frames:
 - Frames with spacing and bold headers
+- Child widget using an alignment to be more interned
 
-Control's Label:
-- 6-pixel horizontal gap between a control and its label
-- Access key for each control's label
+Boxes:
+- 6-pixel spacing
+
+Labels:
+- Mnemonic for each control's label
 
 Commands:
 - Create a keyboard shortcut for each primary command

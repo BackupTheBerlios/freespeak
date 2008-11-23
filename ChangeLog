@@ -1,5 +1,11 @@
 2008-11-22  Luca Bruno  <lethalman88@gmail.com>
 
+	* MAINTAINERS: added
+
+	* po/ChangeLog: added
+
+	* configure.ac: bump to 0.2.0 version
+
 	* freespeak/ui/translation_box.py (TranslationBox.setup_translator): localize some strings
 
 2008-11-21  Luca Bruno  <lethalman88@gmail.com>
@@ -9,8 +15,6 @@
 	* TODO: 
 
 	* freespeak/translators/opentran.py: removed for next release
-
-	* freespeak/po/it.po: updated
 
 2008-11-16  Luca Bruno  <lethalman88@gmail.com>
 
