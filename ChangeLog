@@ -1,5 +1,8 @@
 2008-11-23  Luca Bruno  <lethalman88@gmail.com>
 
+	* freespeak/ui/spinner.py (Spinner._rotate): explained
+	(Spinner.setup_animation): always use cls.PIXELS
+
 	* bin/freespeak: cleaned up command line options
 
 	* Updated all copyright notices

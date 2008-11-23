@@ -33,9 +33,9 @@ class Spinner (gtk.Image):
 
     @classmethod
     def setup_animation (cls, application):
-        icons = application.icon_theme.load_icon ("process-working", 16, 0)
-        yicons = icons.get_height()/16
-        xicons = icons.get_width()/16
+        icons = application.icon_theme.load_icon ("process-working", cls.PIXELS, 0)
+        yicons = icons.get_height()/cls.PIXELS
+        xicons = icons.get_width()/cls.PIXELS
         for y in range (yicons):
             for x in range (xicons):
                 pixbuf = gtk.gdk.Pixbuf (gtk.gdk.COLORSPACE_RGB, True, 8, cls.PIXELS, cls.PIXELS)
@@ -55,8 +55,12 @@ class Spinner (gtk.Image):
         self.set_from_pixbuf (self.idle_pixbuf)
 
     def _rotate (self):
+        # Do a simple round robin
         self.set_from_pixbuf (self.animation[self.icon_num])
-        self.icon_num = self.icon_num < self.animation_last and self.icon_num + 1 or 0
+        if self.icon_num < self.animation_last:
+            self.icon_num += 1
+        else:
+            self.icon_num = 0
         return True
 
     def set_idle (self, pixbuf):
