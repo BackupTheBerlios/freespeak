@@ -38,6 +38,8 @@ class BaseTranslator (object):
             return self.translate_text (request)
         elif isinstance (request, WebTranslationRequest):
             return self.translate_web (request)
+        elif isinstance (request, TranslationSuggestions):
+            return self.suggest_translations (request)
         else:
             raise RuntimeError ("Unknown translation request: %s" % str (request))
 
@@ -48,6 +50,9 @@ class BaseTranslator (object):
         raise NotImplementedError ()
 
     def translate_web (self, request):
+        raise NotImplementedError ()
+
+    def suggest_translations (self, request):
         raise NotImplementedError ()
 
     def __cmp__ (self, other):

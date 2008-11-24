@@ -131,6 +131,7 @@ class TranslationLabel (gtk.HBox):
         self.translation.close ()
 
 class BaseUITranslation (gtk.VBox, BaseTranslation):
+    capability = None
     DESTINATION_COLOR = gtk.gdk.color_parse ("#fff8ae")
 
     def __init__ (self, *args):

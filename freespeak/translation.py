@@ -39,7 +39,7 @@ class WebTranslationRequest (TranslationRequest):
         TranslationRequest.__init__ (self)
         self.url = url
 
-class TranslationSuggestions (TranslationRequest):
+class TranslationSuggestionsRequest (TranslationRequest):
     def __init__ (self, text):
         TranslationRequest.__init__ (self)
         self.text = text
@@ -121,4 +121,5 @@ class BaseTranslation (object):
     def update_status (self, status, status_text):
         raise NotImplementedError ()
 
-__all__ = ['BaseTranslation', 'TranslationRequest', 'TextTranslationRequest', 'WebTranslationRequest']
+__all__ = ['BaseTranslation', 'TranslationRequest',
+           'TextTranslationRequest', 'WebTranslationRequest', 'TranslationSuggestionsRequest']
