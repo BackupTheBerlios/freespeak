@@ -19,6 +19,7 @@
 ## along with this program; if not, write to the Free Software
 ## Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
+import gobject
 import gtk
 import gtkmozembed
 import gtkspell
@@ -62,7 +63,7 @@ class TranslationLabel (gtk.HBox):
     def setup_entry (self):
         self.entry = gtk.Entry ()
         self.entry_focus_out = self.entry.connect ('focus-out-event', self.on_entry_activate)
-        self.entry.connect ('activate', self.on_entry_activate)
+        self.entry_activate_handler = self.entry.connect ('activate', self.on_entry_activate)
         self.entry.show ()
 
     def setup_event_box (self):
@@ -378,7 +379,8 @@ class WebTranslation (BaseUITranslation):
 
         self.source_url = gtk.Entry ()
         self.source_url.connect ('changed', self.on_source_url_changed)
-        self.source_url.connect ('activate', lambda *args: self.translate_button.clicked ())
+        self.entry_activate_handler = self.source_url.connect ('activate', lambda *args: self.translate_button.clicked ())
+        self.source_url.handler_block (self.entry_activate_handler)
         self.source_url.show ()
         hbox.pack_start (self.source_url)
         
@@ -428,7 +430,12 @@ class WebTranslation (BaseUITranslation):
         self.update_translate_button_sensitivity ()
 
     def update_translate_button_sensitivity (self):
+        sensitivity = self.can_translate and bool (self.source_url.get_text ())
         self.translate_button.set_sensitive (self.can_translate and bool (self.source_url.get_text ()))
+        if sensitivity:
+            self.source_url.handler_unblock (self.entry_activate_handler)
+        else:
+            self.source_url.handler_block (self.entry_activate_handler)
 
     @utils.syncronized
     def update_status (self, status):
