@@ -39,6 +39,11 @@ class WebTranslationRequest (TranslationRequest):
         TranslationRequest.__init__ (self)
         self.url = url
 
+class TranslationSuggestions (TranslationRequest):
+    def __init__ (self, text):
+        TranslationRequest.__init__ (self)
+        self.text = text
+
 class BaseTranslation (object):
     capability = None
 

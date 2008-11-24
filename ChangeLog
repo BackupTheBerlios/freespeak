@@ -1,5 +1,16 @@
 2008-11-24  Luca Bruno  <lethalman88@gmail.com>
 
+	* freespeak/ui/translation.py (BaseUITranslation.DESTINATION_COLOR): share the GDK color used for the destination box among all translation types
+
+	* freespeak/translation.py (TranslationSuggestions): added
+
+	* freespeak/ui/main_window.py (MainWindow.on_new): handle Suggestions translations
+	(MainWindow.setup_layout): add Suggestions item
+
+	* freespeak/ui/suggestion.py (TranslationSuggestions): added
+
+	* freespeak/ui/status_icon.py (StatusIcon.on_popup_menu): add Suggestions item
+
 	* freespeak/ui/translation.py (WebTranslation.setup_ui): block 'activate' handler, unblock only when translate button is sensitive
 
 2008-11-23  Luca Bruno  <lethalman88@gmail.com>

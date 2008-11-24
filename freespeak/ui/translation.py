@@ -131,6 +131,8 @@ class TranslationLabel (gtk.HBox):
         self.translation.close ()
 
 class BaseUITranslation (gtk.VBox, BaseTranslation):
+    DESTINATION_COLOR = gtk.gdk.color_parse ("#fff8ae")
+
     def __init__ (self, *args):
         gtk.VBox.__init__ (self, spacing=12)
         BaseTranslation.__init__ (self, *args)
@@ -272,7 +274,7 @@ class TextTranslation (BaseUITranslation):
         self.dest_buffer = gtk.TextBuffer ()
         view = gtk.TextView (self.dest_buffer)
         view.set_editable (False)
-        view.modify_base (gtk.STATE_NORMAL, gtk.gdk.color_parse ("#fff8ae"))
+        view.modify_base (gtk.STATE_NORMAL, self.DESTIONATION_COLOR)
         view.show ()
         scrolled = uiutils.ScrolledWindow (view)
         scrolled.show ()
@@ -397,7 +399,7 @@ class WebTranslation (BaseUITranslation):
         # Destination box
         self.dest_url_box = gtk.EventBox ()
         self.dest_url_box.set_visible_window (False)
-        self.dest_url_box.modify_bg (gtk.STATE_NORMAL, gtk.gdk.color_parse ("#fff8ae"))
+        self.dest_url_box.modify_bg (gtk.STATE_NORMAL, self.DESTINATION_COLOR)
         self.dest_url_box.set_sensitive (False)
         hbox = gtk.HBox (spacing=6)
         self.dest_url_box.add (hbox)

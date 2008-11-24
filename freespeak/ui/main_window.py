@@ -24,6 +24,7 @@ import os
 
 from freespeak.ui.manager import *
 from freespeak.ui.translation import *
+from freespeak.ui.suggestion import *
 from freespeak.ui.settings import *
 from freespeak.ui.status_icon import StatusIcon
 from freespeak.ui.about import About
@@ -33,6 +34,7 @@ class MainWindow (gtk.Window):
         <toolbar>
             <toolitem action="Text" />
             <toolitem action="Web" />
+            <toolitem action="Suggestions" />
             <separator />
             <toolitem action="Preferences" />
             <separator />
@@ -42,6 +44,7 @@ class MainWindow (gtk.Window):
         </toolbar>
         <accelerator action="Text" />
         <accelerator action="Web" />
+        <accelerator action="Suggestions" />
         <accelerator action="Preferences" />
         <accelerator action="Quit" />
         <accelerator action="About" />
@@ -79,6 +82,8 @@ class MainWindow (gtk.Window):
              _('New translation'), self.on_new),
             ('Web', gtk.STOCK_NETWORK, _('_Web'), "<Control>w",
              _('New web page translation'), self.on_new),
+            ('Suggestions', gtk.STOCK_SELECT_FONT, _('_Suggestions'), "<Control>s",
+             _('New translation suggestions'), self.on_new),
             ('Preferences', gtk.STOCK_PREFERENCES, None,
              "<Control>p", _('FreeSpeak preferences'), self.on_settings),
             ('Quit', gtk.STOCK_QUIT, None, "<Control>q",
@@ -114,15 +119,17 @@ class MainWindow (gtk.Window):
             
     # Events
         
-    def on_new(self, w):
+    def on_new (self, w):
         """
         Open a new tab in the notebook and start a new translation
         """
         type = w.get_name()
         if type == 'Text':
             translation = TextTranslation (self.application, self.manager)
-        else:
+        elif type == 'Web':
             translation = WebTranslation (self.application, self.manager)
+        elif type == 'Suggestions':
+            translation = TranslationSuggestions (self.application, self.manager)
         self.present ()
                 
     def on_settings(self, w):
