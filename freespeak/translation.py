@@ -61,7 +61,7 @@ class BaseTranslation (object):
 
     def set_default_translator (self):
         default_translator = self.application.translators_manager.get_default ()
-        if default_translator:
+        if default_translator and self.capability in default_translator.capabilities:
             self.set_translator (default_translator)
 
     def set_translator (self, translator):

@@ -90,7 +90,8 @@ class Translator (BaseTranslator):
 
         yield Status (_("Parsing result"))
         tree = lxml.html.fromstring (result)
-        result = tree.xpath ("dl/di/dt/strong")
-        print result
+        result = tree.xpath ("dd/ol/li/a")
+        for element in result:
+            print element.text_content ()
 
         yield StatusTextComplete (result)
