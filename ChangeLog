@@ -1,3 +1,7 @@
+2008-11-26  Luca Bruno  <lethalman88@gmail.com>
+
+	* freespeak/translators/opentran.py (Translator.suggest_translations): started work
+
 2008-11-24  Luca Bruno  <lethalman88@gmail.com>
 
 	* freespeak/translation.py (BaseTranslation.set_default_translator): check for capability before setting the translator

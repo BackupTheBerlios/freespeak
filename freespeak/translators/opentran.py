@@ -47,7 +47,7 @@ class Language (object):
 
 class Translator (BaseTranslator):
     name = "OpenTran"
-    capabilities = [TextTranslationRequest]
+    capabilities = [TranslationSuggestionsRequest]
     icon = "opentran"
     
     def __init__ (self):
@@ -78,20 +78,18 @@ class Translator (BaseTranslator):
 
         return self.language_table
         
-    def translate_text (self, request):
-        headers = {'Content-Type': 'application/x-www-form-urlencoded',
-                   'Accept': 'text/plain'}
-        params = urllib.urlencode ({'q': request.text})
+    def suggest_translations (self, request):
+        params = urllib.urlencode ({'q': request.text,
+                                    'src': request.from_lang.cc,
+                                    'dst': request.to_lang.cc})
 
         yield Status (_("Connecting to")+" open-tran.eu")
-        conn = httplib.HTTPConnection ('%s.%s.open-tran.eu' % (request.from_lang.cc, request.to_lang.cc))
-        conn.request ('GET', '/suggest', params, headers)
+        conn = httplib.HTTPConnection ('open-tran.eu')
+        conn.request ('GET', '/suggest?'+params)
         result = conn.getresponse().read ()
 
         yield Status (_("Parsing result"))
         tree = lxml.html.fromstring (result)
-        result = tree.xpath ("dd/ol/li/a")
-        for element in result:
-            print element.text_content ()
+        result = tree.xpath ("//dd/ol/li/a")
 
         yield StatusTextComplete (result)

@@ -24,7 +24,7 @@ import os
 import imp
 
 from freespeak import utils
-from freespeak.translation import TextTranslationRequest, WebTranslationRequest
+from freespeak.translation import TextTranslationRequest, WebTranslationRequest, TranslationSuggestionsRequest
 
 class BaseTranslator (object):
     name = ""
@@ -38,7 +38,7 @@ class BaseTranslator (object):
             return self.translate_text (request)
         elif isinstance (request, WebTranslationRequest):
             return self.translate_web (request)
-        elif isinstance (request, TranslationSuggestions):
+        elif isinstance (request, TranslationSuggestionsRequest):
             return self.suggest_translations (request)
         else:
             raise RuntimeError ("Unknown translation request: %s" % str (request))
