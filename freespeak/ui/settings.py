@@ -72,7 +72,7 @@ class Settings(gtk.Dialog):
         
         hbox = gtk.HBox(spacing=4)
         hbox.show ()
-        label = gtk.Label ("_Preferred Translator")
+        label = gtk.Label (_("_Preferred translator"))
         label.set_use_underline (True)
         label.show ()
         hbox.pack_start (label, False)
