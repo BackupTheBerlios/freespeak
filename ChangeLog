@@ -1,5 +1,7 @@
 2008-11-29  Luca Bruno  <lethalman88@gmail.com>
 
+	* docs/man/freespeak.1: added
+
 	* freespeak/translation.py (BaseTranslation.setup_default_language)
 	(BaseTranslation.set_default_from_lang)
 	(BaseTranslation.set_default_to_lang): added to set the language according to the default locale
