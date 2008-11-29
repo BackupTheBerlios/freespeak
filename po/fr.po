@@ -1,0 +1,198 @@
+# translation of FreeSpeak in French.
+# Copyright (C) 2008 Luca Bruno <lethalman88@gmail.com>
+# This file is distributed under the same license as the PACKAGE package.
+# David Sagnol <David.Sagnol@wanadoo.fr>, 2008.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: freespeak\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-11-29 11:38+0100\n"
+"PO-Revision-Date: 2008-11-29 13:15+0100\n"
+"Last-Translator: David Sagnol <David.Sagnol@wanadoo.fr>\n"
+"Language-Team: david <david.sagnol@wanadoo.fr>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: French\n"
+"X-Poedit-Country: FRANCE\n"
+
+#: ../data/freespeak.schemas.in.h:1
+msgid "Default translator module"
+msgstr "Module de traduction par défaut"
+
+#: ../data/freespeak.schemas.in.h:2
+msgid "Get text/url from clipboard"
+msgstr "Récupérer le texte/l'URL depuis le presse-papiers"
+
+#: ../data/freespeak.schemas.in.h:3
+msgid "Obtain the data to translate from the clipboard."
+msgstr "Obtenir les données à traduire depuis le presse-papiers"
+
+#: ../data/freespeak.schemas.in.h:4
+msgid "Save the translated text or url to the clipboard."
+msgstr "Sauver le texte traduit ou l'URL vers le presse-papiers"
+
+#: ../data/freespeak.schemas.in.h:5
+msgid "Set translated data to clipboard"
+msgstr "Ajouter les données traduites au presse-papiers"
+
+#: ../data/freespeak.schemas.in.h:6
+msgid "The name of the translator Python module to use by default."
+msgstr "Le nom du module de traduction à utiliser par défaut"
+
+#: ../data/freespeak.desktop.in.h:1
+#: ../data/freespeak.desktop.in.in.h:1
+#: ../freespeak/ui/about.py:32
+msgid "A free frontend to online translator engines"
+msgstr "Une interface pour les moteurs de traduction en ligne"
+
+#: ../data/freespeak.desktop.in.h:2
+#: ../data/freespeak.desktop.in.in.h:2
+msgid "FreeSpeak"
+msgstr "FreeSpeak"
+
+#: ../freespeak/status.py:29
+msgid "Translation started"
+msgstr "Traduction démarrée"
+
+#: ../freespeak/status.py:35
+msgid "Translation complete"
+msgstr "Traduction terminée"
+
+#: ../freespeak/translation.py:84
+#, python-format
+msgid "Retrieving languages from %s"
+msgstr "Récupération des langues disponibles depuis %s"
+
+#: ../freespeak/translation.py:86
+msgid "Updating the list"
+msgstr "Mise à jour de la liste"
+
+#: ../freespeak/translators/freetranslation.py:75
+#: ../freespeak/translators/google.py:88
+#: ../freespeak/translators/yahoo.py:95
+msgid "Connecting to"
+msgstr "Connexion à"
+
+#: ../freespeak/translators/google.py:93
+#: ../freespeak/translators/yahoo.py:100
+msgid "Parsing result"
+msgstr "Résultat de l'analyse"
+
+#: ../freespeak/ui/exception_dialog.py:38
+msgid "Exception"
+msgstr "Erreur"
+
+#: ../freespeak/ui/exception_dialog.py:49
+msgid "An error has occurred:"
+msgstr "Une erreur s'est produite :"
+
+#: ../freespeak/ui/main_window.py:78
+msgid "_Text"
+msgstr "_Texte"
+
+#: ../freespeak/ui/main_window.py:79
+msgid "New translation"
+msgstr "Nouvelle traduction"
+
+#: ../freespeak/ui/main_window.py:80
+msgid "_Web"
+msgstr "_Web"
+
+#: ../freespeak/ui/main_window.py:81
+msgid "New web page translation"
+msgstr "Nouvelle traduction d'une page web"
+
+#: ../freespeak/ui/main_window.py:83
+msgid "FreeSpeak preferences"
+msgstr "Préférences de FreeSpeak"
+
+#: ../freespeak/ui/main_window.py:85
+msgid "Quit FreeSpeak"
+msgstr "Quitter FreeSpeak"
+
+#: ../freespeak/ui/main_window.py:87
+msgid "About FreeSpeak"
+msgstr "A propose de FreeSpeak"
+
+#: ../freespeak/ui/settings.py:30
+msgid "Preferences"
+msgstr "Préférences"
+
+#: ../freespeak/ui/settings.py:48
+msgid "Clipboard preferences"
+msgstr "Préférences du presse-papiers"
+
+#: ../freespeak/ui/settings.py:53
+msgid "_Get text from clipboard automatically"
+msgstr "_Obtenir le texte depuis le presse-papiers automatiquement"
+
+#: ../freespeak/ui/settings.py:58
+msgid "_Save translated text to clipboard"
+msgstr "_Sauver le texte traduit dans le presse-papiers"
+
+#: ../freespeak/ui/settings.py:68
+msgid "Translator preferences"
+msgstr "Préférences des moteurs de traduction"
+
+#: ../freespeak/ui/translation.py:77
+msgid "Close this translation"
+msgstr "Ferme cette traduction"
+
+#: ../freespeak/ui/translation.py:226
+msgid "Clear the text to translate"
+msgstr "Effacer le texte à traduire"
+
+#: ../freespeak/ui/translation.py:232
+msgid "Paste the text to translate from the clipboard"
+msgstr "Coller le texte à traduire depuis le presse-papiers"
+
+#: ../freespeak/ui/translation.py:243
+msgid "Copy translated text to the clipboard"
+msgstr "Copier le texte traduit dans le presse-papiers"
+
+#: ../freespeak/ui/translation.py:250
+msgid "Swap both the source text with the translated text and the languages"
+msgstr "Échange le texte source et celui traduit ainsi que les langues de traduction"
+
+#: ../freespeak/ui/translation.py:266
+msgid "Text to translate"
+msgstr "Texte à traduire"
+
+#: ../freespeak/ui/translation.py:278
+msgid "Translated text"
+msgstr "Texte traduit"
+
+#: ../freespeak/ui/translation.py:345
+msgid "Clear the url"
+msgstr "Effacer l'URL"
+
+#: ../freespeak/ui/translation.py:351
+msgid "Paste the url from the clipboard"
+msgstr "Coller l'URL depuis le presse-papiers"
+
+#: ../freespeak/ui/translation.py:362
+msgid "Copy the url"
+msgstr "Copier l'URL"
+
+#: ../freespeak/ui/translation.py:421
+msgid "Please insert an URL"
+msgstr "Merci de saisir une URL"
+
+#: ../freespeak/ui/translation_box.py:39
+msgid "(none)"
+msgstr "(aucun)"
+
+#: ../freespeak/ui/translation_box.py:76
+msgid "T_ranslator:"
+msgstr "T_raducteur:"
+
+#: ../freespeak/ui/translation_box.py:89
+msgid "_From:"
+msgstr "_Depuis"
+
+#: ../freespeak/ui/translation_box.py:106
+msgid "T_o:"
+msgstr "_Vers"
+
