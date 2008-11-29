@@ -42,4 +42,8 @@ class StatusTextComplete (StatusComplete):
 class StatusWebComplete (StatusComplete):
     pass
 
-__all__ = ['Status', 'StatusStarted', 'StatusComplete', 'StatusTextComplete', 'StatusWebComplete']
+class StatusSuggestionComplete (StatusComplete):
+    pass
+
+__all__ = ['Status', 'StatusStarted', 'StatusComplete',
+           'StatusTextComplete', 'StatusWebComplete', 'StatusSuggestionComplete']

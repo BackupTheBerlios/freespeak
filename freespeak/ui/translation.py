@@ -275,7 +275,7 @@ class TextTranslation (BaseUITranslation):
         self.dest_buffer = gtk.TextBuffer ()
         view = gtk.TextView (self.dest_buffer)
         view.set_editable (False)
-        view.modify_base (gtk.STATE_NORMAL, self.DESTIONATION_COLOR)
+        view.modify_base (gtk.STATE_NORMAL, self.DESTINATION_COLOR)
         view.show ()
         scrolled = uiutils.ScrolledWindow (view)
         scrolled.show ()

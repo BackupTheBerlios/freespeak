@@ -22,7 +22,9 @@
 import gtk
 
 from freespeak.ui.translation import BaseUITranslation, TranslationSuggestionsRequest
+import freespeak.utils as utils
 import freespeak.ui.utils as uiutils
+from freespeak.status import *
 
 class TranslationSuggestions (BaseUITranslation):
     capability = TranslationSuggestionsRequest
@@ -58,5 +60,14 @@ class TranslationSuggestions (BaseUITranslation):
 
     def create_request (self):
         return TranslationSuggestionsRequest (self.entry.get_text ())
+
+    @utils.syncronized
+    def update_status (self, status):
+        BaseUITranslation.update_status (self, status)
+        if isinstance (status, StatusSuggestionComplete):
+            for suggestion in status.result:
+                label = gtk.Label (suggestion)
+                label.show ()
+                self.suggestions.pack_start (label)
 
 __all__ = ['TranslationSuggestions']

@@ -48,7 +48,7 @@ class Language (object):
 class Translator (BaseTranslator):
     name = "OpenTran"
     capabilities = [TranslationSuggestionsRequest]
-    icon = "opentran"
+    icon = "google"
     
     def __init__ (self):
         self.language_table = {}
@@ -90,6 +90,11 @@ class Translator (BaseTranslator):
 
         yield Status (_("Parsing result"))
         tree = lxml.html.fromstring (result)
-        result = tree.xpath ("//dd/ol/li/a")
+        elements = tree.xpath ("//dd/ol/li/a")
+        result = []
+        for element in elements:
+            text = element.text_content ()
+            text = text.rsplit('(', 1)[0].strip ()
+            result.append (text)
 
-        yield StatusTextComplete (result)
+        yield StatusSuggestionComplete (result)
