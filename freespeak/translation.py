@@ -94,6 +94,7 @@ class BaseTranslation (object):
         if not translator:
             self.update_from_langs (None)
             self.update_to_langs (None)
+            self.update_can_translate (False)
         else:
             thread.start_new_thread (self._run_language_table, ())
         self.update_translator (translator)
@@ -120,6 +121,9 @@ class BaseTranslation (object):
         self.setup_default_language ()
         self.update_from_langs (sorted (self.language_table.keys ()))
         self.update_to_langs (None)
+        self.update_can_translate (False)
+        self.from_lang = None
+        self.to_lang = None
         self.set_default_from_lang ()
         self.update_status (StatusComplete (None))
 
