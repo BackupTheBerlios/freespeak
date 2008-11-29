@@ -23,9 +23,12 @@ import httplib
 import urllib
 import lxml.html
 
-from freespeak.translator import BaseTranslator
+from freespeak.translator import BaseLanguage, BaseTranslator
 from freespeak.translation import *
 from freespeak.status import *
+
+class Language (str, BaseLanguage):
+    pass
 
 class Translator (BaseTranslator):
     name = 'FreeTranslation'
@@ -56,8 +59,8 @@ class Translator (BaseTranslator):
             fromlang, tolang = name_to_name.split (' to ')
             
             if not fromlang in language_table:
-                language_table[fromlang] = []
-            language_table[fromlang].append (tolang)
+                language_table[Language (fromlang)] = []
+            language_table[Language (fromlang)].append (Language (tolang))
 
         return language_table
 

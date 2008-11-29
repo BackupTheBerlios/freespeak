@@ -19,6 +19,7 @@
 ## along with this program; if not, write to the Free Software
 ## Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
+import locale
 import thread
 import gtk
 
@@ -51,6 +52,10 @@ class BaseTranslation (object):
         self.application = application
         self.manager = manager
         self.translator = None
+        self.language_table = None
+        self.default_lang = None
+        self.from_lang = None
+        self.to_lang = None
 
         self.setup ()
         self.manager.add_translation (self)
@@ -64,6 +69,26 @@ class BaseTranslation (object):
         if default_translator and self.capability in default_translator.capabilities:
             self.set_translator (default_translator)
 
+    def setup_default_language (self):
+        default_locale_language = locale.getdefaultlocale()[0]
+        generic_locale_language = default_locale_language.split('_')[0]
+        other_default_lang = None
+        for language in self.language_table:
+            if language.is_locale_language (default_locale_language):
+                self.default_lang = language
+                return
+            elif language.is_locale_language (generic_locale_language):
+                other_default_lang = language
+        self.default_lang = other_default_lang
+
+    def set_default_from_lang (self):
+        if self.default_lang and not self.from_lang and self.to_lang != self.default_lang:
+            self.set_from_lang (self.default_lang)
+
+    def set_default_to_lang (self):
+        if self.default_lang and not self.to_lang and self.from_lang != self.default_lang:
+            self.set_to_lang (self.default_lang)
+
     def set_translator (self, translator):
         self.translator = translator
         if not translator:
@@ -75,10 +100,13 @@ class BaseTranslation (object):
 
     def set_from_lang (self, lang):
         self.from_lang = lang
+        self.update_from_lang (self.from_lang)
         self.update_to_langs (sorted (self.language_table[self.from_lang]))
+        self.set_default_to_lang ()
 
     def set_to_lang (self, lang):
         self.to_lang = lang
+        self.update_to_lang (self.to_lang)
         self.update_can_translate (True)
 
     def translate (self, request):
@@ -89,8 +117,10 @@ class BaseTranslation (object):
         self.update_status (StatusStarted (_("Retrieving languages from %s") % self.translator.get_name ()))
         self.language_table = self.translator.get_language_table (self.capability)
         self.update_status (Status (_("Updating the list")))
+        self.setup_default_language ()
         self.update_from_langs (sorted (self.language_table.keys ()))
         self.update_to_langs (None)
+        self.set_default_from_lang ()
         self.update_status (StatusComplete (None))
 
     def _run (self, request):
@@ -107,6 +137,12 @@ class BaseTranslation (object):
         pass
 
     def update_translator (self, translator):
+        raise NotImplementedError ()
+
+    def update_from_lang (self, lang):
+        raise NotImplementedError ()
+
+    def update_to_lang (self, lang):
         raise NotImplementedError ()
 
     def update_from_langs (self, langs):

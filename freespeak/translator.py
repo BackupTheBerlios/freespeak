@@ -26,6 +26,12 @@ import imp
 from freespeak import utils
 from freespeak.translation import TextTranslationRequest, WebTranslationRequest, TranslationSuggestionsRequest
 
+class BaseLanguage (object):
+    def is_locale_language (self, cc):
+        if hasattr (self, 'cc'):
+            return self.cc == cc
+        return self == cc
+
 class BaseTranslator (object):
     name = ""
     capabilities = ()
@@ -95,4 +101,4 @@ class TranslatorsManager (set):
                 if translator.module_name == name:
                     return translator
 
-__all__ = ['BaseTranslator', 'TranslatorsManager']
+__all__ = ['BaseLanguage', 'BaseTranslator', 'TranslatorsManager']

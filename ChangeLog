@@ -1,5 +1,15 @@
 2008-11-29  Luca Bruno  <lethalman88@gmail.com>
 
+	* freespeak/translation.py (BaseTranslation.setup_default_language)
+	(BaseTranslation.set_default_from_lang)
+	(BaseTranslation.set_default_to_lang): added to set the language according to the default locale
+	(BaseTranslation.update_from_lang, BaseTranslation.update_to_lang): added
+	(BaseTranslation._run_language_table): set default "from" language
+	(BaseTranslation.set_from_lang): once set, set default "to" language
+
+	* freespeak/translator.py (BaseLanguage): added
+	All translator modules have been updated.
+
 	* freespeak/translators/opentran.py (Translator.suggest_translations): return a suitable result
 
 	* freespeak/ui/suggestion.py (TranslationSuggestions.update_status): added

@@ -23,11 +23,11 @@ import httplib
 import urllib
 import lxml.html
 
-from freespeak.translator import BaseTranslator
+from freespeak.translator import BaseLanguage, BaseTranslator
 from freespeak.translation import *
 from freespeak.status import *
 
-class Language (object):
+class Language (BaseLanguage):
     def __init__ (self, cc, name):
         self.cc = cc # Country Code
         self.name = name

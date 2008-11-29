@@ -191,6 +191,12 @@ class BaseUITranslation (gtk.VBox, BaseTranslation):
             pixbuf = self.application.icon_theme.load_icon (translator.icon, Spinner.PIXELS, 0)
             self.label.icon.set_idle (pixbuf)
 
+    def update_from_lang (self, lang):
+        self.translation_box.set_from_lang (lang)
+
+    def update_to_lang (self, lang):
+        self.translation_box.set_to_lang (lang)
+
     def update_from_langs (self, langs):
         self.translation_box.update_from_langs (langs)
 
