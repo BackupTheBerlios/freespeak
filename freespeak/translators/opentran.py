@@ -1,5 +1,5 @@
 # FreeSpeak - a GUI frontend to online translator engines
-# freespeak/translators/opentran.py - this file is part of FreeSpeak
+# freespeak/translators/opentran.py
 #
 ## Copyright (C) 2005, 2006, 2007, 2008  Luca Bruno <lethalman88@gmail.com>
 ##
@@ -51,7 +51,7 @@ class Language (BaseLanguage):
 class Translator (BaseTranslator):
     name = "OpenTran"
     capabilities = [TranslationSuggestionsRequest]
-    icon = "google"
+    icon = "opentran"
     pixbuf_cache = {}
     
     def __init__ (self):
