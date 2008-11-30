@@ -52,6 +52,8 @@ class StatusIcon (gtk.StatusIcon):
         menu.append (item)
         item = self.window.action_group.get_action("Preferences").create_menu_item ()
         menu.append (item)
+        item = self.window.action_group.get_action("Contents").create_menu_item ()
+        menu.append (item)
         item = self.window.action_group.get_action("About").create_menu_item ()
         menu.append (item)
         item = gtk.SeparatorMenuItem ()

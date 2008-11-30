@@ -31,23 +31,36 @@ from freespeak.ui.about import About
 
 class MainWindow (gtk.Window):
     ui_string = """<ui>
+        <menubar>
+            <menu action="Translation">
+                <menuitem action="Text" />
+                <menuitem action="Web" />
+                <menuitem action="Suggestions" />
+                <separator />
+                <menuitem action="Close" />
+                <menuitem action="Quit" />
+            </menu>
+            <menu action="Edit">
+                <menuitem action="Preferences" />
+            </menu>
+            <menu action="Help">
+                <menuitem action="Contents" />
+                <menuitem action="About" />
+            </menu>
+        </menubar>
         <toolbar>
             <toolitem action="Text" />
             <toolitem action="Web" />
             <toolitem action="Suggestions" />
             <separator />
             <toolitem action="Preferences" />
-            <separator />
-            <toolitem action="About" />
-            <toolitem action="Quit" />
-            <separator />
         </toolbar>
         <accelerator action="Text" />
         <accelerator action="Web" />
         <accelerator action="Suggestions" />
         <accelerator action="Preferences" />
+        <accelerator action="Contents" />
         <accelerator action="Quit" />
-        <accelerator action="About" />
         </ui>"""
                 
     def __init__(self, application):
@@ -78,18 +91,33 @@ class MainWindow (gtk.Window):
 
         self.action_group = gtk.ActionGroup ('WindowActions')
         actions = (
+            ('Translation', None, _("_Translation")),
+            ('Edit', None, _("_Edit")),
+            ('Help', None, _("_Help")),
+
             ('Text', gtk.STOCK_NEW, _('_Text'), "<Control>t",
              _('New translation'), self.on_new),
-            ('Web', gtk.STOCK_NETWORK, _('_Web'), "<Control>w",
+
+            ('Web', gtk.STOCK_NETWORK, _('We_b'), "<Control>b",
              _('New web page translation'), self.on_new),
+
             ('Suggestions', gtk.STOCK_SELECT_FONT, _('_Suggestions'), "<Control>s",
              _('New translation suggestions'), self.on_new),
+
             ('Preferences', gtk.STOCK_PREFERENCES, None,
              "<Control>p", _('FreeSpeak preferences'), self.on_settings),
+
+            ('Close', gtk.STOCK_CLOSE, _("_Close this translation"), None,
+             _("Close the active translation page"), self.on_close),
+
+            ('Contents', gtk.STOCK_HELP, _("_Contents"),
+             "F1", None, self.on_contents),
+
+            ('About', gtk.STOCK_ABOUT, None, None,
+             _('About FreeSpeak'), self.on_about),
+
             ('Quit', gtk.STOCK_QUIT, None, "<Control>q",
              _('Quit FreeSpeak'), self.on_quit),
-            ('About', gtk.STOCK_ABOUT, None, "<Control>a",
-             _('About FreeSpeak'), self.on_about),
             )
         self.action_group.add_actions (actions)
         self.ui = gtk.UIManager ()
@@ -98,11 +126,17 @@ class MainWindow (gtk.Window):
         self.accel_group = self.ui.get_accel_group ()
         self.add_accel_group (self.accel_group)
 
+        self.setup_menubar ()
         self.setup_toolbar ()
         self.setup_manager ()
 
         self.layout.show ()
         self.add (self.layout)
+
+    def setup_menubar (self):
+        self.menubar = self.ui.get_widget ("/menubar")
+        self.menubar.show ()
+        self.layout.pack_start (self.menubar, False)
 
     def setup_toolbar (self):
         self.toolbar = self.ui.get_widget ("/toolbar")
@@ -137,7 +171,19 @@ class MainWindow (gtk.Window):
         FreeSpeak preferences
         """
         Settings (self.application)
+
+    def on_close (self, w):
+        """
+        Close the active translation page
+        """
+        self.manager.close_current_translation ()
                 
+    def on_contents (self, w):
+        """
+        Help contents
+        """
+        gnome.url_show ("ghelp:freespeak")
+
     def on_about(self, w):
         """
         Open an AboutDialog for this software

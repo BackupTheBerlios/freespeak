@@ -26,6 +26,10 @@ class Manager (gtk.Notebook):
         gtk.Notebook.__init__ (self)
         self.application = application
 
+    def close_current_translation (self):
+        page_num = self.get_current_page ()
+        self.remove_page (page_num)
+
     def add_translation (self, translation):
         label = translation.get_label ()
         self.append_page (translation, label)
