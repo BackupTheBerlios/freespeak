@@ -1,5 +1,7 @@
 2008-11-30  Luca Bruno  <lethalman88@gmail.com>
 
+	* TODO: translation suggestions done, add documentation
+
 	* freespeak/ui/translation_box.py (TranslatorCombo): added pixbufs
 
 	* data/art/Makefile.am, data/art/opentran.png: added
