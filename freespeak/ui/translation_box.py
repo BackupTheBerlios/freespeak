@@ -26,26 +26,33 @@ from freespeak import utils
 class TranslatorCombo (gtk.ComboBox):
     COL_TRANSLATOR_TEXT = 0
     COL_TRANSLATOR_TRANSLATOR = 1
+    COL_TRANSLATOR_PIXBUF = 2
 
     def __init__ (self, application, capability=None):
         gtk.ComboBox.__init__ (self)
         self.application = application
 
-        model = gtk.ListStore (str, object)
+        model = gtk.ListStore (str, object, gtk.gdk.Pixbuf)
         self.set_model (model)
         default_translator = self.application.translators_manager.get_default ()
         default_iter = None
 
-        iter = model.append ([_("(none)"), None])
+        iter = model.append ([_("(none)"), None, None])
         self.set_active_iter (iter)
         for translator in sorted (self.application.translators_manager):
             if not capability or capability in translator.capabilities:
-                iter = model.append ([translator.get_name (), translator])
+                pixbuf = self.application.icon_theme.load_icon (translator.icon, 16, 0)
+                iter = model.append ([translator.get_name (), translator, pixbuf])
                 if translator == default_translator:
                     default_iter = iter
 
         if default_iter:
             self.set_active_iter (default_iter)
+
+
+        cell = gtk.CellRendererPixbuf ()
+        self.pack_start (cell, expand=False)
+        self.add_attribute (cell, 'pixbuf', self.COL_TRANSLATOR_PIXBUF)
 
         cell = gtk.CellRendererText ()
         self.pack_start (cell)
