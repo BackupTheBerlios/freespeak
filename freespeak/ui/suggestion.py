@@ -25,10 +25,11 @@ from freespeak.ui.translation import BaseUITranslation, TranslationSuggestionsRe
 import freespeak.utils as utils
 import freespeak.ui.utils as uiutils
 from freespeak.status import *
+import pango
 
 class SuggestionsTreeView (gtk.TreeView):
     def __init__ (self):
-        self.model = gtk.ListStore (str, gtk.gdk.Pixbuf, str, str, str)
+        self.model = gtk.ListStore (str, str, gtk.gdk.Pixbuf, str, str)
         gtk.TreeView.__init__ (self, self.model)
 
         self.setup_options ()
@@ -39,23 +40,23 @@ class SuggestionsTreeView (gtk.TreeView):
 
     def setup_columns (self):
         renderer = gtk.CellRendererText ()
+        attributes = pango.AttrList ()
+        attributes.insert (pango.AttrWeight (pango.WEIGHT_BOLD, 0, -1))
+        renderer.set_property ("attributes", attributes)
         column = gtk.TreeViewColumn (_("Translation"), renderer, text=0)
         self.append_column (column)
 
+        renderer = gtk.CellRendererText ()
+        column = gtk.TreeViewColumn (_("Original"), renderer, text=1)
+        self.append_column (column)
+
         renderer = gtk.CellRendererPixbuf ()
-        column = gtk.TreeViewColumn (_("Image"), renderer, pixbuf=1)
-        self.append_column (column)
-
+        column = gtk.TreeViewColumn (_("Application"), None)
+        column.pack_start (renderer, expand=False)
+        column.add_attribute (renderer, 'pixbuf', 2)
         renderer = gtk.CellRendererText ()
-        column = gtk.TreeViewColumn (_("Application"), renderer, text=2)
-        self.append_column (column)
-
-        renderer = gtk.CellRendererText ()
-        column = gtk.TreeViewColumn (_("Original"), renderer, text=3)
-        self.append_column (column)
-
-        renderer = gtk.CellRendererText ()
-        column = gtk.TreeViewColumn (_("Project URL"), renderer, text=4)
+        column.pack_start (renderer)
+        column.add_attribute (renderer, 'text', 3)
         self.append_column (column)
 
 class TranslationSuggestions (BaseUITranslation):
@@ -96,6 +97,7 @@ class TranslationSuggestions (BaseUITranslation):
         if isinstance (status, StatusSuggestionComplete):
             self.suggestions.modify_base (gtk.STATE_NORMAL, self.DESTINATION_COLOR)
             model = self.suggestions.get_model ()
+            model.clear ()
             for suggestion_result in status.result:
                 model.append (suggestion_result)
 

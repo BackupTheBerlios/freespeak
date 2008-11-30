@@ -106,6 +106,10 @@ class Translator (BaseTranslator):
             text = text.rsplit('(', 1)[0].strip ()
             result.append (text)
 
+            # Original text
+            text = element[1].text_content().split(':', 1)[1].strip()
+            result.append (text)
+
             # Image
             yield Status (_("Fetching image"))
             image_url = element[0][0].get ("src")
@@ -124,10 +128,6 @@ class Translator (BaseTranslator):
             text = element[1][0].text_content().strip ()
             result.append (text)
 
-            # Original text
-            text = element[1].text_content()[1:].strip ()
-            result.append (text)
-
             # Project url
             url = element[1][0].get ("href")
             result.append (url)
@@ -135,5 +135,5 @@ class Translator (BaseTranslator):
             results.append (result)
 
         # Result is a list of suitable lists for ListStore usage
-        # [..., (text, pixbuf, application, original, url), ...]
+        # [..., (text, original, pixbuf, application, url), ...]
         yield StatusSuggestionComplete (results)
