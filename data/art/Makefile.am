@@ -2,7 +2,8 @@ artdir = $(pkgdatadir)/art
 art_DATA = \
 	google.png \
 	yahoo.png \
-	freetranslation.png
+	freetranslation.png \
+	opentran.png
 
 16icondir = $(datadir)/icons/hicolor/16x16/apps
 16icon_DATA = 16x16/freespeak.png
