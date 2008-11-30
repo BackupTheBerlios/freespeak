@@ -22,6 +22,9 @@
 import httplib
 import urllib
 import lxml.html
+import tempfile
+import os
+import gtk
 
 from freespeak.translator import BaseLanguage, BaseTranslator
 from freespeak.translation import *
@@ -49,6 +52,7 @@ class Translator (BaseTranslator):
     name = "OpenTran"
     capabilities = [TranslationSuggestionsRequest]
     icon = "google"
+    pixbuf_cache = {}
     
     def __init__ (self):
         self.language_table = {}
@@ -88,13 +92,48 @@ class Translator (BaseTranslator):
         conn.request ('GET', '/suggest?'+params)
         result = conn.getresponse().read ()
 
-        yield Status (_("Parsing result"))
         tree = lxml.html.fromstring (result)
-        elements = tree.xpath ("//dd/ol/li/a")
-        result = []
+        tree.make_links_absolute ("http://www.open-tran.eu")
+        elements = tree.xpath ("//dd/ol/li")
+        results = []
         for element in elements:
-            text = element.text_content ()
+            yield Status (_("Parsing result"))
+            # <a>Word (N&times;<img src="..."></a><div><a href="...">Application</a>: original</div>
+            result = []
+
+            # Translation
+            text = element[0].text_content ()
             text = text.rsplit('(', 1)[0].strip ()
             result.append (text)
 
-        yield StatusSuggestionComplete (result)
+            # Image
+            yield Status (_("Fetching image"))
+            image_url = element[0][0].get ("src")
+            if image_url in self.pixbuf_cache:
+                pixbuf = self.pixbuf_cache[image_url]
+            else:
+                (fd, filename) = tempfile.mkstemp (suffix="freespeak")
+                os.close (fd)
+                urllib.urlretrieve (image_url, filename)
+                pixbuf = gtk.gdk.pixbuf_new_from_file (filename)
+                os.unlink (filename)
+                self.pixbuf_cache[image_url] = pixbuf
+            result.append (pixbuf)
+
+            # Application
+            text = element[1][0].text_content().strip ()
+            result.append (text)
+
+            # Original text
+            text = element[1].text_content()[1:].strip ()
+            result.append (text)
+
+            # Project url
+            url = element[1][0].get ("href")
+            result.append (url)
+
+            results.append (result)
+
+        # Result is a list of suitable lists for ListStore usage
+        # [..., (text, pixbuf, application, original, url), ...]
+        yield StatusSuggestionComplete (results)

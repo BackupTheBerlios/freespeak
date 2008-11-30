@@ -26,12 +26,44 @@ import freespeak.utils as utils
 import freespeak.ui.utils as uiutils
 from freespeak.status import *
 
+class SuggestionsTreeView (gtk.TreeView):
+    def __init__ (self):
+        self.model = gtk.ListStore (str, gtk.gdk.Pixbuf, str, str, str)
+        gtk.TreeView.__init__ (self, self.model)
+
+        self.setup_options ()
+        self.setup_columns ()
+
+    def setup_options (self):
+        self.set_rules_hint (True)
+
+    def setup_columns (self):
+        renderer = gtk.CellRendererText ()
+        column = gtk.TreeViewColumn (_("Translation"), renderer, text=0)
+        self.append_column (column)
+
+        renderer = gtk.CellRendererPixbuf ()
+        column = gtk.TreeViewColumn (_("Image"), renderer, pixbuf=1)
+        self.append_column (column)
+
+        renderer = gtk.CellRendererText ()
+        column = gtk.TreeViewColumn (_("Application"), renderer, text=2)
+        self.append_column (column)
+
+        renderer = gtk.CellRendererText ()
+        column = gtk.TreeViewColumn (_("Original"), renderer, text=3)
+        self.append_column (column)
+
+        renderer = gtk.CellRendererText ()
+        column = gtk.TreeViewColumn (_("Project URL"), renderer, text=4)
+        self.append_column (column)
+
 class TranslationSuggestions (BaseUITranslation):
     capability = TranslationSuggestionsRequest
 
     def setup_ui (self):
         hbox = gtk.HBox (spacing=6)
-        label = gtk.Label ("Suggest")
+        label = gtk.Label (_("Suggest"))
         label.show ()
         hbox.pack_start (label, False)
 
@@ -42,15 +74,12 @@ class TranslationSuggestions (BaseUITranslation):
         hbox.show ()
         self.pack_start (hbox, False)
 
-        self.suggestions = gtk.VBox (spacing=6)
+        self.suggestions = SuggestionsTreeView ()
         self.suggestions.show ()
-        viewport = gtk.Viewport ()
-        viewport.add (self.suggestions)
-        viewport.modify_bg (gtk.STATE_NORMAL, self.DESTINATION_COLOR)
-        viewport.show ()
-        scrolled = uiutils.ScrolledWindow (viewport)
+        scrolled = uiutils.ScrolledWindow (self.suggestions)
         scrolled.set_shadow_type (gtk.SHADOW_NONE)
         scrolled.show ()
+
         self.pack_start (scrolled)
 
     def setup_clipboard (self):
@@ -65,9 +94,9 @@ class TranslationSuggestions (BaseUITranslation):
     def update_status (self, status):
         BaseUITranslation.update_status (self, status)
         if isinstance (status, StatusSuggestionComplete):
-            for suggestion in status.result:
-                label = gtk.Label (suggestion)
-                label.show ()
-                self.suggestions.pack_start (label)
+            self.suggestions.modify_base (gtk.STATE_NORMAL, self.DESTINATION_COLOR)
+            model = self.suggestions.get_model ()
+            for suggestion_result in status.result:
+                model.append (suggestion_result)
 
 __all__ = ['TranslationSuggestions']

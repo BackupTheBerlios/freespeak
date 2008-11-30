@@ -129,6 +129,7 @@ class TranslationBox (gtk.HBox):
             model.append ([str (lang), lang])
         self.from_combo.set_model (model)
         self.from_combo.set_sensitive (True)
+        self.from_combo.set_active (-1)
 
     def update_to_langs (self, langs):
         if not langs:
@@ -140,6 +141,7 @@ class TranslationBox (gtk.HBox):
             model.append ([str (lang), lang])
         self.to_combo.set_model (model)
         self.to_combo.set_sensitive (True)
+        self.to_combo.set_active (-1)
 
     def set_from_lang (self, lang):
         model = self.from_combo.get_model ()
@@ -177,11 +179,15 @@ class TranslationBox (gtk.HBox):
 
     def on_from_changed (self, combo):
         iter = combo.get_active_iter ()
+        if not iter:
+            return
         lang = combo.get_model().get_value (iter, self.COL_FROM_LANG)
         self.translation.set_from_lang (lang)
 
     def on_to_changed (self, combo):
         iter = combo.get_active_iter ()
+        if not iter:
+            return
         lang = combo.get_model().get_value (iter, self.COL_TO_LANG)
         self.translation.set_to_lang (lang)
 
