@@ -50,12 +50,12 @@ class Settings(gtk.Dialog):
         vbox = gtk.VBox (spacing=6)
         vbox.show ()
 
-        self.w_clipboard_get = gtk.CheckButton (_("_Get text from clipboard automatically"))
+        self.w_clipboard_get = gtk.CheckButton (_("_Get text/url from clipboard automatically"))
         self.w_clipboard_get.set_active (self.application.config.get ('get_clipboard'))
         self.w_clipboard_get.show ()
         vbox.pack_start(self.w_clipboard_get, False)
 
-        self.w_clipboard_set = gtk.CheckButton (_("_Save translated text to clipboard"))
+        self.w_clipboard_set = gtk.CheckButton (_("_Save translated text/url to clipboard"))
         self.w_clipboard_set.set_active (self.application.config.get ('set_clipboard'))
         self.w_clipboard_set.show ()
         vbox.pack_start(self.w_clipboard_set, False)

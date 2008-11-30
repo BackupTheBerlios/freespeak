@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <omf>
   <resource>
-    <subject category="GNOME|Application|Utilities"/>
+    <subject category="Applications|Education|Language"/>
     <type>user's guide</type>
     <relation seriesid="23bb6a7d-cb02-4700-bcda-dc5a9d166f3c"/>
     <rights type="GPL" license.version="2" holder="Luca Bruno"/>

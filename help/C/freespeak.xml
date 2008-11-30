@@ -1,39 +1,39 @@
 <?xml version="1.0"?>
 <!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
-"http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
-  <!ENTITY appname          "FreeSpeak">
-  <!ENTITY app "<application>FreeSpeak</application>">
-  <!ENTITY appversion   "0.2.0">
-  <!ENTITY manrevision  "1.0">
-  <!ENTITY date "November 2008">
-  <!-- Information about the entities
-       Use the app and appname entities to specify the name of the application.  
-       Use the appversion entity to specify the version of the application.
-       Use the manrevision entity to specify the revision number of this manual.
-       Use the date entity to specify the release date of this manual.
--->
-]>
+          "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+          <!ENTITY appname          "FreeSpeak">
+          <!ENTITY app "<application>FreeSpeak</application>">
+          <!ENTITY appversion   "0.2.0">
+          <!ENTITY manrevision  "1.0">
+          <!ENTITY date "November 2008">
+          <!-- Information about the entities
+               Use the app and appname entities to specify the name of the application.  
+               Use the appversion entity to specify the version of the application.
+               Use the manrevision entity to specify the revision number of this manual.
+               Use the date entity to specify the release date of this manual.
+            -->
+          ]>
 <!-- 
-  This is a GNOME documentation template, designed by the GNOME
-  Documentation Project Team. Please use it for writing GNOME
-  documentation, making obvious changes, such as:
-  - all the words written in UPPERCASE (with the exception of GNOME) 
-    should be replaced. As for "legalnotice", please leave the reference
-    unchanged.
-  - all id attributes should have 'myapp' replaced
-
-  Remember that this is a guide, rather than a perfect model to follow
-  slavishly. Make your manual logical and readable: see the GDP Style Guide for
-  more on this.
--->
+     This is a GNOME documentation template, designed by the GNOME
+     Documentation Project Team. Please use it for writing GNOME
+     documentation, making obvious changes, such as:
+     - all the words written in UPPERCASE (with the exception of GNOME) 
+     should be replaced. As for "legalnotice", please leave the reference
+     unchanged.
+     - all id attributes should have 'myapp' replaced
+     
+     Remember that this is a guide, rather than a perfect model to follow
+     slavishly. Make your manual logical and readable: see the GDP Style Guide for
+     more on this.
+  -->
 <!--
-      (Do not remove this comment block.)
-  Maintained by the GNOME Documentation Project
-  http://live.gnome.org/DocumentationProject
-  Template version: 3.0 beta
-  Template last modified 2006-11-21
-
--->
+    (Do not remove this comment block.)
+    Maintained by the GNOME Documentation Project
+    http://live.gnome.org/DocumentationProject
+    Template version: 3.0 beta
+    Template last modified 2006-11-21
+    
+  -->
 <!-- =============Document Header ============================= -->
 <article id="index" lang="en">
   <articleinfo> 
@@ -41,120 +41,107 @@
     <abstract role="description">
       <para>&app; is ... <!-- insert brief description -->.</para>
     </abstract>         
-
+    
     <copyright> 
       <year>2008</year> 
       <holder>Luca Bruno</holder> 
     </copyright> 
-
-	  <xi:include href="legal.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    
+    <xi:include href="legal.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
     <!-- The file legal.xml contains link to license for the documentation, 
-        and other legal stuff such as "NO WARRANTY" statement. 
-        Please do not change any of this. -->
+         and other legal stuff such as "NO WARRANTY" statement. 
+         Please do not change any of this. -->
 
+    <author role="maintainer">
+      <authorname>Luca Bruno</authorname>
+    </author>
+    
     <authorgroup> 
       <author> 
-    		<firstname>Luca</firstname> 
-    		<surname>Bruno</surname> 
-    		<affiliation> 
-    			<address> <email>lethalman88@gmail.com</email> </address> 
-    		</affiliation> 
+    	<firstname>Luca</firstname> 
+    	<surname>Bruno</surname> 
+    	<affiliation> 
+    	  <address> <email>lethalman88@gmail.com</email> </address> 
+    	</affiliation> 
       </author> 
     </authorgroup>
     
-
-<!-- According to GNU FDL, revision history is mandatory if you are -->
-<!-- modifying/reusing someone else's document.  If not, you can omit it. -->
-<!-- Remember to remove the &manrevision; entity from the revision entries other
--->
-<!-- than the current revision. -->
-<!-- The revision numbering system for GNOME manuals is as follows: -->
-<!-- * the revision number consists of two components -->
-<!-- * the first component of the revision number reflects the release version of the GNOME desktop. -->
-<!-- * the second component of the revision number is a decimal unit that is incremented with each revision of the manual. -->
-<!-- For example, if the GNOME desktop release is V2.x, the first version of the manual that -->
-<!-- is written in that desktop timeframe is V2.0, the second version of the manual is V2.1, etc. -->
-<!-- When the desktop release version changes to V3.x, the revision number of the manual changes -->
-<!-- to V3.0, and so on. -->  
+    
+    <!-- According to GNU FDL, revision history is mandatory if you are -->
+    <!-- modifying/reusing someone else's document.  If not, you can omit it. -->
+    <!-- Remember to remove the &manrevision; entity from the revision entries other
+      -->
+    <!-- than the current revision. -->
+    <!-- The revision numbering system for GNOME manuals is as follows: -->
+    <!-- * the revision number consists of two components -->
+    <!-- * the first component of the revision number reflects the release version of the GNOME desktop. -->
+    <!-- * the second component of the revision number is a decimal unit that is incremented with each revision of the manual. -->
+    <!-- For example, if the GNOME desktop release is V2.x, the first version of the manual that -->
+    <!-- is written in that desktop timeframe is V2.0, the second version of the manual is V2.1, etc. -->
+    <!-- When the desktop release version changes to V3.x, the revision number of the manual changes -->
+    <!-- to V3.0, and so on. -->  
     <revhistory>
       <revision> 
-		<revnumber>&appname; Manual V&manrevision;</revnumber> 
-		<date>&date;</date> 
-		<revdescription> 
-	  		<para role="author">Luca Bruno
-	    	          <email>lethalman88@gmail.com</email>
-	  		</para>
-		</revdescription> 
+	<revnumber>&appname; Manual V&manrevision;</revnumber> 
+	<date>&date;</date> 
+	<revdescription> 
+	  <para role="author">Luca Bruno
+	    <email>lethalman88@gmail.com</email>
+	  </para>
+	</revdescription> 
       </revision> 
     </revhistory> 
-
+    
     <releaseinfo>This manual describes version &appversion; of &appname;.
     </releaseinfo> 
     <legalnotice> 
       <title>Feedback</title> 
-      <para>To report a bug or make a suggestion regarding the &app; application or
-      this manual, follow the directions in the 
-      <ulink url="ghelp:user-guide?feedback-bugs" type="help">Feedback section of the GNOME User Guide</ulink>. 
+      <para>
+        To report a bug or make a suggestion regarding this application or
+        this manual, please visit the <ulink url="http://developer.berlios.de/bugs/?group_id=10396">FreeSpeak Bug Tracker</ulink>.
       </para>
-<!-- Translators may also add here feedback address for translations -->
+      <!-- Translators may also add here feedback address for translations -->
     </legalnotice> 
   </articleinfo> 
-
+  
   <indexterm zone="index"> 
     <primary>&appname;</primary> 
   </indexterm> 
   <indexterm zone="index"> 
     <primary>freespeak</primary> 
   </indexterm>
-
-<!-- ============= Document Body ============================= -->
-<!-- ============= Introduction ============================== -->
-<!-- Use the Introduction section to give a brief overview of what
-     the application is and what it does. -->
-  <sect1 id="myapp-introduction"> 
+  
+  <!-- ============= Document Body ============================= -->
+  <!-- ============= Introduction ============================== -->
+  <!-- Use the Introduction section to give a brief overview of what
+       the application is and what it does. -->
+  <sect1 id="freespeak-introduction"> 
     <title>Introduction</title> 
-    <para>Use &app; to view image files. 
-    &app; provides the following features:</para> 
+    <para>Use &app; to translate text, web pages and getting suggestions when developing localized applications. 
+      &app; provides the following features:</para> 
     <itemizedlist> 
       <listitem> 
-		<para>Support for the following image file formats:</para> 
-		<itemizedlist> 
-	  		<listitem> 
-	    	<para>BMP - Windows Bitmap</para> 
-	  		</listitem> 
-	  		<listitem> 
-	    	<para>GIF - Graphics Interchange Format</para> 
-	  		</listitem> 
-	  		<listitem> 
-	    	<para>ICO - Windows Icon</para> 
-	  		</listitem> 
-	  		<listitem> 
-	    	<para>JPEG - Joint Photographic Experts Group</para> 
-	  		</listitem> 
-	  		<listitem> 
-	    	<para>PNG - Portable Network Graphics </para> 
-	  		</listitem> 
-	  		<listitem> 
-	    	<para>PNM - Portable Anymap from the PPM Toolkit</para> 
-	  		</listitem> 
-	  		<listitem> 
-	    	<para>RAS - Sun Raster </para> 
-	  		</listitem> 
-	  		<listitem> 
-	    	<para>TIFF - Tagged Image File Format</para> 
-	  		</listitem> 
-	  		<listitem> 
-	    	<para>XPM - X Pixmap</para> 
-	  		</listitem> 
-		</itemizedlist> 
+	<para>Choose your preferred translator engine such as Google, Yahoo, FreeTranslation or Open-Tran</para>
       </listitem> 
       <listitem> 
-	  <para>A variety of zoom levels and full screen viewing, with low usage
-	  of memory regardless of the zoom level. </para> 
+	<para>Tabbed consulting - open multiple translations in a single window</para>
+      </listitem> 
+      <listitem> 
+	<para>Clipboard integration with the translation data</para> 
+      </listitem> 
+      <listitem> 
+	<para>Request suggestions - see how other projects translated a text</para> 
+      </listitem> 
+      <listitem> 
+	<para>Keeps always opened in the system tray to allow immediate translations</para> 
       </listitem> 
     </itemizedlist> 
+
     <note>
-      <para>This is a note.</para>
+      <para>
+        You can add other translator engines by writing a simple Python module.
+        Some translators don't handle all the available translation modes.
+      </para>
     </note>
   </sect1>
 
@@ -167,10 +154,10 @@
      If the information about how to get started is very short, you can 
      include it in the Introduction and omit this section. -->
 
-  <sect1 id="myapp-getting-started"> 
+  <sect1 id="freespeak-getting-started"> 
     <title>Getting Started</title> 
 
-    <sect2 id="myapp-start">
+    <sect2 id="freespeak-start">
     <title>Starting &app;</title>
     <para>You can start &app; in the following ways:
     </para> 
@@ -180,51 +167,42 @@
     		<listitem>
     		<para>Choose 
     		<menuchoice>
-    		<guisubmenu>Submenu Name </guisubmenu>
+    		<guisubmenu>Education</guisubmenu>
     		<guimenuitem>&appname;</guimenuitem>
     		</menuchoice>. </para>
     		</listitem>
     	</varlistentry>
     	<varlistentry>
-    		<term>Command line</term>
-    		<listitem>
-    		<para>To start &app; from a command line, type the following command, 
-    		then press <keycap>Return</keycap>:</para>
-    		<para> 
-			<command>myapp</command> 
-			<replaceable>filename.jpg</replaceable>
-    		</para> 
-    		<para>where 
-			<replaceable>filename.jpg</replaceable> is the name of the file you
-			want to open.
-    		</para> 
-    		<para>&app; opens each file that you specify in a new window.</para> 
-    		</listitem>
+    	  <term>Command line</term>
+    	  <listitem>
+    	    <para>To start &app; from a command line, type the following command, 
+    	      then press <keycap>Return</keycap>:</para>
+    	    <para> 
+	      <command>freespeak</command> 
+    	    </para> 
+    	  </listitem>
     	</varlistentry>
     </variablelist>
+    <note>
+      <para>&app; is opened only once. If you try to open another instance of &app; the running instance will be raised.</para> 
+    </note>
     </sect2>
 
-    <sect2 id="myapp-when-start">
-    <title>When You Start &app;</title>
-    <para>When you start &app;, the following window is displayed.</para>
+    <sect2 id="freespeak-when-start">
+      <title>When You Start &app;</title>
+      <para>When you start &app;, the following window is displayed.</para>
 
-    <!-- ==== Figure ==== -->
+      <!-- ==== Figure ==== -->
       <figure id="mainwindow-fig"> 
 	<title>&app; Start Up Window</title> 
 	<screenshot> 
 	  <mediaobject> 
 	    <imageobject><imagedata
-		fileref="figures/myapp_start_window.png" format="PNG"/> 
+		            fileref="figures/freespeak_start_window.png" format="PNG"/> 
 	    </imageobject>
-	    <!-- EPS versions of the figures are not required at the moment. -->
-            <!-- 
-		    <imageobject>
-      		<imagedata fileref="figures/image.eps" format="EPS"/>
-    		    </imageobject>
-	    -->
 	    <textobject> 
-	      <phrase>Shows &app; main window. Contains titlebar, menubar, toolbar, display area, and
-	      scrollbars. Menubar contains File, View, Settings, and Help menus. </phrase> 
+	      <phrase>Shows &app; main window. Contains menubar, toolbar and translation area.
+                Menubar contains Translation, Edit, and Help menus. </phrase> 
 	    </textobject> 
 	  </mediaobject> 
 	</screenshot> 
@@ -240,7 +218,7 @@
 	<varlistentry>
 	<term>Menubar. </term>
 	<listitem>
-	<para>The menus on the menubar contain all of the commands you need to work with files in 
+	<para>The menus on the menubar contain all of the commands you need to work with translations in 
 	&app;.</para>
 	</listitem>
 	</varlistentry>
@@ -250,13 +228,6 @@
 	<para> The toolbar contains a subset of the commands that you can access from the menubar.</para>
 	</listitem>
 	</varlistentry>
-	<varlistentry>
-	<term>Statusbar. </term>
-	<listitem>
-	<para>The statusbar displays information about current &app; 
-	activity and contextual information about the menu items. </para>
-	</listitem>
-	</varlistentry>
 	</variablelist>
     </sect2>
   </sect1>
@@ -264,529 +235,186 @@
 <!-- Use this section to describe how to use the application to perform the tasks for which the application is designed.
      If this section runs to more than a few screens in Yelp, consider splitting it into several top-level sections.
   -->
-  <sect1 id="myapp-usage"> 
+  <sect1 id="freespeak-usage"> 
     <title>Usage</title> 
     <para>You can use the &app; application to
       perform the following tasks: 
       <itemizedlist> 
 	<listitem> 
 	  <para> 
-	    <xref linkend="myapp-open-image"/></para> 
+	    <xref linkend="freespeak-translate-text"/></para> 
 	</listitem> 
 	<listitem> 
 	  <para> 
-	    <xref linkend="myapp-manipulate-view"/></para> 
+	    <xref linkend="freespeak-translate-web"/></para> 
 	</listitem> 
 	<listitem> 
 	  <para> 
-	    <xref linkend="myapp-scroll-image"/></para>
+	    <xref linkend="freespeak-translation-suggestions"/></para>
 	</listitem> 
 	<listitem> 
 	  <para> 
-	    <xref linkend="myapp-close-image"/></para> 
+	    <xref linkend="freespeak-close-translation"/></para> 
 	</listitem> 
-      </itemizedlist> </para>
+      </itemizedlist>
+    </para>
     <!-- ================ Usage Subsection ================================ -->
-    <sect2 id="myapp-open-image"> 
-      <title>Opening an Image</title> 
-      <para>To open an image, choose 
+    <sect2 id="freespeak-translate-text"> 
+      <title>Translate text</title> 
+      <para>To translate text, choose 
 	<menuchoice> 
-	  <guimenu>File</guimenu> 
-	  <guimenuitem>Open Image</guimenuitem> 
-	</menuchoice>. The 
-	<guilabel>Open Image</guilabel> dialog is displayed. Select the file
-	that you want to open, then click 
-	<guibutton>OK</guibutton>. To open another image in a new window,
-	choose 
-	<menuchoice> 
-	  <guimenu>File</guimenu> 
-	  <guimenuitem>Create New Window</guimenuitem> 
-	</menuchoice>. Choose 
-	<menuchoice> 
-	  <guimenu>File</guimenu> 
-	  <guimenuitem>Open Image</guimenuitem> 
-	</menuchoice> 
-	to select the file that you want to open. You can also drag an image
-	from another application such as a file manager to the &app;
-	window. If the &app; window is empty, the application displays
-	the image in the window. If the window is not empty, the
-	application starts a new window to display the file. The
-	application displays the name of the image file and the size
-	of the image in pixels in the titlebar of the window. </para>
-      <para>
-	If you try to open an image file format that &app; does
-	not recognize, the application displays an error
-	message.
+	  <guimenu>Translation</guimenu> 
+	  <guimenuitem>Text</guimenuitem> 
+	</menuchoice> or press
+        <keycombo>
+          <keycap>Ctrl</keycap>
+	  <keycap>T</keycap>
+	</keycombo>.
       </para>
-      <caution>
-      <para>This is a caution.</para>
-      </caution>
-    </sect2> 
-    <!-- ================ Usage Subsection ================================ -->
-	 <sect2 id="myapp-manipulate-view"> 
-      <title>Manipulating the View of an Image</title> 
-      <para>You can use the following methods to resize the view of an image in
-	the &app; window:</para> 
-      <itemizedlist> 
-	<listitem> 
-	  <para>To enlarge the view of an image, choose 
-	    <menuchoice> 
-	      <guimenu>View</guimenu> 
-	      <guimenuitem>Zoom In</guimenuitem> 
-	    </menuchoice>.</para> 
-	</listitem> 
-	<listitem> 
-	  <para>To shrink the view of an image, choose 
-	    <menuchoice> 
-	      <guimenu>View</guimenu> 
-	      <guimenuitem>Zoom Out</guimenuitem> 
-	    </menuchoice>.</para> 
-	</listitem> 
-	<listitem> 
-	  <para>To view the image at its actual size, choose 
-	    <menuchoice> 
-	      <guimenu>View</guimenu> 
-	      <guimenuitem>Zoom 1:1</guimenuitem> 
-	    </menuchoice>. </para> 
-	</listitem> 
-	<listitem> 
-	  <para>To enlarge or shrink the view of an image so that the image
-	    fits the &app; window, choose 
-	    <menuchoice> 
-	      <guimenu>View</guimenu> 
-	      <guimenuitem>Fit to Window</guimenuitem> 
-	    </menuchoice>.</para> 
-	</listitem> 
-	<listitem> 
-	  <para>To enlarge or shrink the image to a specific zoom factor,
-	    choose 
-	    <menuchoice> 
-	      <guimenu>View</guimenu> 
-	      <guimenuitem>Zoom factor</guimenuitem> 
-	    </menuchoice>, then choose the appropriate zoom factor from the
-	    drop-down list.</para> 
-	</listitem> 
-	<listitem> 
-	  <para>To display the image in full screen mode, choose 
-	    <menuchoice> 
-	      <guimenu>View</guimenu> 
-	      <guimenuitem>Full Screen</guimenuitem> 
-	    </menuchoice>. Full screen mode displays the image in a window that
-	    fills the full screen. The window does not contain a
-	    window frame, titlebar, 
-	    menubar, or toolbar. To exit from this mode, press the 
-	    <keycap>Esc</keycap> key or 
-	    <keycombo>
-              <keycap>Ctrl</keycap>
-	      <keycap>W</keycap>
-	    </keycombo>.
-	  </para> 
-	</listitem> 
-      </itemizedlist> 
+      <para>
+        The <guilabel>Text Translation</guilabel> page is displayed. Select the translator
+	you want to use, then choose the source and destination languages through which you want to translate your text. 
+        Write the text to translate in the text view below then click <guibutton>Translate</guibutton>.
+        </para>
+      <para>
+        The translated text is shown in the yellow text view.
+      </para>
       <tip>
-      <para>This is a tip.</para>
+        <para>If a default translator was chosen from settings, it's selected in the <guilabel>Translator</guilabel> drop down list.</para>
+        <para>The text to translate can be automatically retrieved from the clipboard, depending on your settings.</para>
+        <para>The translated text can be automatically copied in your clipboard, depending on your settings.</para>
       </tip>
     </sect2> 
     <!-- ================ Usage Subsection ================================ -->
-    <sect2 id="myapp-scroll-image"> 
-      <title>Scrolling an Image</title> 
-      <para>To scroll around an image that is larger than the image window or
-	full screen window, you can use the following methods:</para> 
-      <itemizedlist> 
-	<listitem> 
-	  <para>Use the arrow keys on the keyboard.</para> 
-	</listitem> 
-	<listitem> 
-	  <para>Drag the image in the opposite direction to the direction in
-	    which you want to scroll. For example, if you want to
-	      scroll down the image, 
-	    drag the image upwards in the window.</para> 
-	</listitem> 
-	<listitem> 
-	  <para>Use the scrollbars on the window.</para> 
-	</listitem> 
-      </itemizedlist> 
+    <sect2 id="freespeak-translate-web"> 
+      <title>Translate a web page</title> 
+      <para>To translate text, choose 
+	<menuchoice> 
+	  <guimenu>Translation</guimenu> 
+	  <guimenuitem>Text</guimenuitem> 
+	</menuchoice> or press
+        <keycombo>
+          <keycap>Ctrl</keycap>
+	  <keycap>W</keycap>
+	</keycombo>.
+      </para>
+      <para>
+        The <guilabel>Web Translation</guilabel> page is displayed. Select the translator
+	you want to use, then choose the source and destination languages through which you want to translate the web page. 
+        Write the url to translate in the entry below then click <guibutton>Translate</guibutton>.
+      </para>
+      <para>
+        The <guilabel>Embedded Browser</guilabel> shows the translated web page.
+        Alternatively, if you click the <guilabel>Link button</guilabel> below a browser instance is opened with the translated web page.
+      </para>
+      <tip>
+        <para>If a default translator was chosen from settings, it's selected in the <guilabel>Translator</guilabel> drop down list.</para>
+        <para>If the clipboard contains a valid URL it's copied in the <guilabel>URL Entry</guilabel>, depending on your settings.</para>
+        <para>The URL of the translated web page can be automatically copied in your clipboard, depending on your settings.</para>
+      </tip>
+    </sect2> 
+    <!-- ================ Usage Subsection ================================ -->
+    <sect2 id="freespeak-translation-suggestions"> 
+      <title>Suggestions for translating a phrase</title> 
+      <para>To request translation suggestions, choose 
+	<menuchoice> 
+	  <guimenu>Translation</guimenu> 
+	  <guimenuitem>Suggestions</guimenuitem> 
+	</menuchoice> or press
+        <keycombo>
+          <keycap>Ctrl</keycap>
+	  <keycap>S</keycap>
+	</keycombo>.
+      </para>
+      <para>
+        The <guilabel>Translation Suggestions</guilabel> page is displayed. Select the translator
+	you want to use, then choose the source and destination languages through which you want to translate the web page. 
+        Write the phrase to translate in the entry below then click <guibutton>Translate</guibutton>.
+      </para>
+      <para>
+        The yellow <guilabel>Tree View</guilabel> shows all the possible translation solutions you might to adopt.
+        Right click on a row to open the <guilabel>Popup Menu</guilabel>.
+      </para>
+      <tip>
+        <para>If a default translator was chosen from settings, it's selected in the <guilabel>Translator</guilabel> drop down list.</para>
+        <para>The text to translate can be automatically retrieved from the clipboard, depending on your settings.</para>
+      </tip>
     </sect2>
     <!-- ================ Usage Subsection ================================ -->
-    <sect2 id="myapp-close-image"> 
-      <title>Closing an Image</title> 
-      <para>To close an image, choose 
+    <sect2 id="freespeak-close-translation"> 
+      <title>Closing a Translation</title> 
+      <para>To close a translation page, choose 
 	<menuchoice> 
-	  <guimenu>File</guimenu> 
-	  <guimenuitem>Close This Window</guimenuitem> 
-	</menuchoice>. If the window is the last
-	&app; window open, the application exits. </para> 
+	  <guimenu>Translation</guimenu> 
+	  <guimenuitem>Close This Translation</guimenuitem> 
+	</menuchoice> or click the <guilabel>Close Button</guilabel> in the tab above.
+      </para>
       <para>To quit &app; and close all of the
-	windows that you opened in the current session, choose 
+	tabs that you opened in the current session, choose 
 	<menuchoice> 
-	  <guimenu>File</guimenu> 
-	  <guimenuitem>Exit</guimenuitem> 
-	</menuchoice>. </para> 
-      <warning>
-      <para>This is a warning.</para>
-      </warning>
+	  <guimenu>Translation</guimenu> 
+	  <guimenuitem>Quit</guimenuitem> 
+	</menuchoice> or press
+        <keycombo>
+          <keycap>Ctrl</keycap>
+	  <keycap>Q</keycap>
+	</keycombo>.
+      </para> 
     </sect2> 
   </sect1>
   <!-- ============= Customization ============================= -->
   <!-- Use this section to describe how to customize the application. -->
-  <sect1 id="myapp-prefs"> 
+  <sect1 id="freespeak-prefs"> 
     <title>Preferences</title> 
     <para>To configure &app;, choose 
       <menuchoice> 
 	<guimenu>Edit</guimenu> 
 	<guimenuitem>Preferences</guimenuitem> 
-      </menuchoice>. The 
-      <guilabel>Preferences</guilabel> dialog contains the following tabbed
-      sections:</para> 
-    <itemizedlist> 
-      <listitem> 
-	<para> 
-	  <xref linkend="myapp-prefs-display"/></para> 
-      </listitem> 
-      <listitem> 
-	<para> 
-	  <xref linkend="myapp-prefs-viewers"/></para> 
-      </listitem> 
-    </itemizedlist>
-<!-- =============== Customization Subsection ================ -->
-<!-- Use a new section to describe different tabbed sections on the Preferences
-	     dialog. -->
-    <sect2 id="myapp-prefs-display"> 
-      <title>Display</title> 
-      <variablelist> 
-	<varlistentry> 
-	  <term> 
-	    <guilabel>Interpolation type</guilabel> </term> 
-	  <listitem> 
-	    <para>Use this drop-down list box to specify the
-	      interpolation method that
-	      &app; uses when the
-	      application resizes images. Select one of the following
-	      options:</para>
-	    <itemizedlist> 
-	      <listitem> 
-		<para> 
-		  <guilabel>Nearest neighbor</guilabel> </para> 
-		<para>This method of interpolation takes a location in the
-		  original image and replicates the pixel that is
-		  nearest to this location. When 
-		  you zoom in on an image, the pixels are
-		  replicated. When you zoom out of an 
-		  image, the image loses some of its detail. </para> 
-	      </listitem> 
-	      <listitem> 
-		<para> 
-		  <guilabel>Bilinear</guilabel> </para> 
-		<para>This is a simple and fast method of interpolation. When
-		  you zoom in on an image, &app; uses up to four
-		  adjacent pixels to compute the colors of the new
-		  pixels. When you zoom out of 
-		  an image, &app; averages regions of color in the
-		  existing image to compute the colors of the pixels. </para> 
-	      </listitem> 
-	      <listitem> 
-		<para> 
-		  <guilabel>Hyperbolic</guilabel> </para> 
-		<para>This is a high-quality, slow method of interpolation. The
-		  application performs interpolation on the image in
-		  the manner described in 
-		  Digital Image Warping by George Wolberg.</para> 
-	      </listitem> 
-	    </itemizedlist> 
-	    <para>Default: 
-	      <guilabel>Nearest neighbor</guilabel>.</para> 
-	  </listitem> 
-	</varlistentry> 
-	<varlistentry> 
-	  <term> 
-	    <guilabel>Transparency type</guilabel> </term> 
-	  <listitem> 
-	    <para>Use this drop-down list box to specify how
-	      &app; displays transparent or partially opaque
-	      backgrounds in images. Select one of the following options:</para> 
-	    <itemizedlist> 
-	      <listitem> 
-		<para> 
-		  <guilabel>Dark checks</guilabel> </para> 
-		<para>This option displays black and dark gray checks.</para> 
-	      </listitem> 
-	      <listitem> 
-		<para> 
-		  <guilabel>Midtone checks</guilabel> </para> 
-		<para>This option displays dark gray and light gray
-		  checks.</para> 
-	      </listitem> 
-	      <listitem> 
-		<para> 
-		  <guilabel>Light checks</guilabel> </para> 
-		<para>This option displays light gray and white checks.</para> 
-	      </listitem> 
-	      <listitem> 
-		<para> 
-		  <guilabel>Black only</guilabel> </para> 
-		<para>This option displays solid black.</para> 
-	      </listitem> 
-	      <listitem> 
-		<para> 
-		  <guilabel>Gray only</guilabel> </para> 
-		<para>This option displays solid gray.</para> 
-	      </listitem> 
-	      <listitem> 
-		<para> 
-		  <guilabel>White only</guilabel> </para> 
-		<para>This option displays solid white.</para> 
-	      </listitem> 
-	    </itemizedlist> 
-	    <para>Default: 
-	      <guilabel>Dark checks</guilabel>.</para> 
-	  </listitem> 
-	</varlistentry> 
-	<varlistentry> 
-	  <term> 
-	    <guilabel>Check size</guilabel> </term> 
-	  <listitem> 
-	    <para>Use this drop-down list box to specify the size of the checks
-	      to use to display transparent or partially opaque
-	      backgrounds in images. This 
-	      option is only relevant if you choose 
-	      <guilabel>Dark checks</guilabel>, 
-	      <guilabel>Midtone checks</guilabel>, or 
-	      <guilabel>Light checks</guilabel> from the 
-	      <guilabel>Transparency type</guilabel> drop-down list box.
-	      Select one of the following options:</para> 
-	    <itemizedlist> 
-	      <listitem> 
-		<para> 
-		  <guilabel>Small</guilabel></para> 
-	      </listitem> 
-	      <listitem> 
-		<para> 
-		  <guilabel>Medium</guilabel></para> 
-	      </listitem> 
-	      <listitem> 
-		<para> 
-		  <guilabel>Large</guilabel></para> 
-	      </listitem> 
-	    </itemizedlist> 
-	    <para>Default: 
-	      <guilabel>Small</guilabel>.</para> 
-	  </listitem> 
-	</varlistentry> 
-	<varlistentry> 
-	  <term> 
-	    <guilabel>Dither type</guilabel> </term> 
-	  <listitem> 
-	    <para>Use this drop-down list box to specify the dithering method
-	      to use to display images. Dithering is a technique that
-	      is used to simulate 
-	      colors in the original image file but that your system
-	      can not display. Select 
-	      one of the following options:</para> 
-	    <itemizedlist> 
-	      <listitem> 
-		<para> 
-		  <guilabel>None</guilabel> </para> 
-		<para>This option does not use dithering. </para> 
-	      </listitem> 
-	      <listitem> 
-		<para> 
-		  <guilabel>Normal (pseudocolor)</guilabel> </para> 
-		<para>This option performs dithering on pseudocolor displays,
-		  which use a limited palette of colors. </para> 
-	      </listitem> 
-	      <listitem> 
-		<para> 
-		  <guilabel>Maximum (high color)</guilabel> </para> 
-		<para>This option performs dithering on pseudocolor and high
-		  color displays. </para> 
-	      </listitem> 
-	    </itemizedlist> 
-	    <para>Default: 
-	      <guilabel>None</guilabel>.</para> 
-	  </listitem> 
-	</varlistentry> 
-	<varlistentry> 
-	  <term> 
-	    <guilabel>Two-pass scrolling</guilabel> </term> 
-	  <listitem> 
-	    <para>Select this option to render an image in two passes
-	      when you scroll the image quickly. The first pass
-	      renders a low quality version of the image. The second
-	      pass renders a full quality version of the image over
-	      the low quality version. Two-pass scrolling enables you
-	      to view at least a low quality version of the image at
-	      all times regardless of how quickly you scroll the
-	      image. 
-	    </para>
-	    <para>Default: unselected.</para> 
-	  </listitem> 
-	</varlistentry> 
-      </variablelist> 
-    </sect2>
-    <!-- ============= Customization Subsection ===================== -->
-    <!-- Another tabbed section on the Preferences dialog. -->
-    <sect2 id="myapp-prefs-viewers"> 
-      <title>Viewers</title> 
-      <para>You can set the following viewer preferences: 
-	<itemizedlist> 
-	  <listitem> 
-	    <para> 
-	      <xref linkend="myapp-viewer-prefs-image-window"/></para> 
-	  </listitem> 
-	  <listitem> 
-	    <para> 
-	      <xref linkend="myapp-viewer-prefs-full-screen"/></para> 
-	  </listitem> 
-	</itemizedlist> </para> 
-      <sect3 id="myapp-viewer-prefs-image-window"> 
-	<title>Image Windows</title> 
-	<para>The 
-	  <guilabel>Image Windows</guilabel> group contains the preferences
-	  that you can set to view images in image windows.</para> 
-	<variablelist> 
-	  <varlistentry> 
-	    <term> 
-	      <guilabel>Use scrollbars</guilabel> </term> 
-	    <listitem> 
-	      <para>Use this drop-down list box to specify when to use
-		scrollbars to scroll through an image. Select one of
-		the following options:</para> 
-	      <itemizedlist> 
-		<listitem> 
-		  <para> 
-		    <guilabel>Never</guilabel> </para> 
-		  <para>This option never displays scrollbars. You can use the
-		    arrow keys on the keyboard or the mouse to scroll
-		    through the image. </para>  
-		</listitem> 
-		<listitem> 
-		  <para> 
-		    <guilabel>Only if image does not fit</guilabel> </para> 
-		  <para>This option displays scrollbars when the image is
-		    larger than the image window.</para> 
-		</listitem> 
-	      </itemizedlist> 
-	      <para>Default: 
-		<guilabel>Never</guilabel>.</para> 
-	    </listitem> 
-	  </varlistentry> 
-	  <varlistentry> 
-	    <term> 
-	      <guilabel>Pick window size and zoom factor
-		automatically</guilabel> </term> 
-	    <listitem> 
-	      <para>Select this option to resize the image window to fit the
-		image or to resize the image to fit the image
-		window. If the image is small, 
-		&app; resizes the image window to fit the image. If
-		the image is large, &app; resizes the image to fit
-		the image window. </para> 
-	      <para>Default: unselected.</para> 
-	    </listitem> 
-	  </varlistentry> 
-	  <varlistentry> 
-	    <term> 
-	      <guilabel>Open images in a new window</guilabel> </term> 
-	    <listitem> 
-	      <para>Select this option to open a new
-		&app; window each time you open an image. If you do
-		not select this option, &app; replaces the existing
-		image with the new image when you open an image. </para> 
-	      <para>Default: unselected.</para> 
-	    </listitem> 
-	  </varlistentry> 
-	</variablelist> 
-      </sect3> 
-      <sect3 id="myapp-viewer-prefs-full-screen"> 
-	<title>Full Screen</title> 
-	<para>The 
-	  <guilabel>Full Screen</guilabel> group contains the preferences that
-	  you can set to view images in full screen mode.</para> 
-	<variablelist> 
-	  <varlistentry> 
-	    <term> 
-	      <guilabel>Use scrollbars</guilabel> </term> 
-	    <listitem> 
-	      <para>Use this drop-down list box to specify when to use
-		scrollbars to scroll through an image. Select one of the following
-		options:</para> 
-	      <itemizedlist> 
-		<listitem> 
-		  <para> 
-		    <guilabel>Never</guilabel> </para> 
-		  <para>This option never displays scrollbars. You can use the
-		    arrow keys on the keyboard or the mouse to scroll
-		    through the image. </para>  
-		</listitem> 
-		<listitem> 
-		  <para> 
-		    <guilabel>Only if image does not fit</guilabel> </para> 
-		  <para>This option displays scrollbars when the image is
-		    larger than the full screen. </para> 
-		</listitem> 
-	      </itemizedlist> 
-	      <para>Default: 
-		<guilabel>Never</guilabel>.</para> 
-	    </listitem> 
-	  </varlistentry> 
-	  <varlistentry> 
-	    <term> 
-	      <guilabel>Use 1:1 zoom factor</guilabel> </term> 
-	    <listitem> 
-	      <para>Select this option to use the 1:1 zoom factor when you open
-		an image. The 1:1 zoom factor displays the image at
-		its actual size. </para>  
-	      <para>Default: selected.</para> 
-	    </listitem> 
-	  </varlistentry> 
-	  <varlistentry> 
-	    <term> 
-	      <guilabel>Use same zoom factor as image window</guilabel> </term>
-	    
-	    <listitem> 
-	      <para>Select this option to use the same zoom factor that the
-		application uses to display the image in an image
-	      window. </para>  
-	      <para>Default: unselected.</para> 
-	    </listitem> 
-	  </varlistentry> 
-	  <varlistentry> 
-	    <term> 
-	      <guilabel>Fit all images to screen</guilabel> </term> 
-	    <listitem> 
-	      <para>Select this option to resize images to fill the full screen
-		when you open the images in full screen mode. </para> 
-	      <para>Default: unselected.</para> 
-	    </listitem> 
-	  </varlistentry> 
-	  <varlistentry> 
-	    <term> 
-	      <guilabel>Fit standard-sized images to screen</guilabel> </term> 
-	    <listitem> 
-	      <para>Select this option to automatically resize images
-		that are the same size as standard screens so that the
-		images fill the full screen when you open them in full
-		screen mode. If you select this option, &app; ignores
-		the settings for the previous three options when you
-		open an image that is the same size as a standard
-		screen.  Examples of standard screen sizes are 640 x
-		480 pixels, 1024 x 768 pixels, and so on. </para>
-	      <para>Default: unselected.</para> 
-	    </listitem> 
-	  </varlistentry> 
-	  <varlistentry> 
-	    <term> 
-	      <guilabel>Put a bevel around the edge of the screen</guilabel>
-	    </term> 
-	    <listitem> 
-	      <para>Select this option to display a 3D beveled border around
-		the full screen view of an image. </para> 
-	      <para>Default: unselected.</para> 
-	    </listitem> 
-	  </varlistentry> 
-	</variablelist> 
-      </sect3> 
-    </sect2> 
+      </menuchoice> or press
+      <keycombo>
+        <keycap>Ctrl</keycap>
+	<keycap>P</keycap>
+      </keycombo>.
+      The <guilabel>Preferences</guilabel> dialog contains the following options:
+    </para> 
+    
+    <variablelist> 
+      <varlistentry> 
+	<term> 
+	  <guilabel>Get text/url from clipboard automatically</guilabel>
+        </term> 
+        <listitem>
+	  <para>If this option is set &app; obtains the data to be translated from the clipboard when a new translation page opens.</para>
+	  <para>Default: 
+	    <guilabel>True</guilabel>.
+          </para> 
+        </listitem>
+      </varlistentry> 
+      <varlistentry> 
+	<term> 
+	  <guilabel>Set translated text/url to clipboard</guilabel>
+        </term> 
+        <listitem>
+	  <para>If this option is set &app; saves the translated data in the clipboard when the translation is done.</para>
+	  <para>Default: 
+	    <guilabel>False</guilabel>.
+          </para> 
+        </listitem>
+      </varlistentry>
+      <varlistentry> 
+	<term> 
+	  <guilabel>Preferred translator</guilabel>
+        </term> 
+        <listitem>
+	  <para>Use this drop-down list box to specify the default translator that
+	    &app; uses when translating data.
+          </para> 
+	  <para>Default: 
+	    <guilabel>None</guilabel>.
+          </para> 
+        </listitem>
+      </varlistentry>
+    </variablelist> 
   </sect1>
 <!-- ============= Bugs ================================== -->
 <!-- This section is optional and is commented out by default. 
@@ -805,7 +433,7 @@
       section is optional: primary place for this info is "About.." box of
       the program. However, if you do wish to include this info in the
       manual, this is the place to put it. Alternatively, you can put this information in the title page.-->
-  <sect1 id="myapp-about"> 
+  <sect1 id="freespeak-about"> 
     <title>About &app;</title> 
     <para> &app; was written by Luca Bruno
       (<email>lethalman88@gmail.com</email>). To find more information about
@@ -814,8 +442,7 @@
 	page</ulink>. </para>
     <para>
       To report a bug or make a suggestion regarding this application or
-      this manual, follow the directions in the
-      <ulink url="ghelp:user-guide?feedback-bugs" type="help">Feedback section of the GNOME User Guide</ulink>.
+      this manual, please visit the <ulink url="http://developer.berlios.de/bugs/?group_id=10396">FreeSpeak Bug Tracker</ulink>.
     </para>
 
     <para> This program is distributed under the terms of the GNU
@@ -825,6 +452,5 @@
       <ulink url="ghelp:gpl" type="help">copy of this license</ulink>
       is included with this documentation; another can be found in the file
       COPYING included with the source code of this program. </para>
-
   </sect1> 
 </article>
