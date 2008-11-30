@@ -20,6 +20,7 @@
 ## Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
 import gtk
+import gnome
 
 from freespeak.ui.translation import BaseUITranslation, TranslationSuggestionsRequest
 import freespeak.utils as utils
@@ -28,36 +29,88 @@ from freespeak.status import *
 import pango
 
 class SuggestionsTreeView (gtk.TreeView):
-    def __init__ (self):
+    COL_TRANSLATION = 0
+    COL_ORIGINAL = 1
+    COL_PIXBUF = 2
+    COL_APPLICATION = 3
+    COL_URL = 4
+
+    ui_string = """<ui>
+        <popup name="PopupMenu">
+            <menuitem action="Copy" />
+            <menuitem action="Open" />
+        </popup>
+    </ui>"""
+
+
+    def __init__ (self, application):
         self.model = gtk.ListStore (str, str, gtk.gdk.Pixbuf, str, str)
         gtk.TreeView.__init__ (self, self.model)
+        self.application = application
 
         self.setup_options ()
         self.setup_columns ()
+        self.setup_menu ()
+        self.connect ('button-press-event', self.on_button_press_event, self.menu)
 
     def setup_options (self):
         self.set_rules_hint (True)
+        self.set_reorderable (True)
 
     def setup_columns (self):
         renderer = gtk.CellRendererText ()
         attributes = pango.AttrList ()
         attributes.insert (pango.AttrWeight (pango.WEIGHT_BOLD, 0, -1))
         renderer.set_property ("attributes", attributes)
-        column = gtk.TreeViewColumn (_("Translation"), renderer, text=0)
+        column = gtk.TreeViewColumn (_("Translation"), renderer, text=self.COL_TRANSLATION)
         self.append_column (column)
 
         renderer = gtk.CellRendererText ()
-        column = gtk.TreeViewColumn (_("Original"), renderer, text=1)
+        column = gtk.TreeViewColumn (_("Original"), renderer, text=self.COL_ORIGINAL)
         self.append_column (column)
 
         renderer = gtk.CellRendererPixbuf ()
         column = gtk.TreeViewColumn (_("Application"), None)
         column.pack_start (renderer, expand=False)
-        column.add_attribute (renderer, 'pixbuf', 2)
+        column.add_attribute (renderer, 'pixbuf', self.COL_PIXBUF)
         renderer = gtk.CellRendererText ()
         column.pack_start (renderer)
-        column.add_attribute (renderer, 'text', 3)
+        column.add_attribute (renderer, 'text', self.COL_APPLICATION)
         self.append_column (column)
+
+    def setup_menu (self):
+        self.action_group = gtk.ActionGroup ('PopupActions')
+        actions = (
+            ('Copy', gtk.STOCK_COPY, None, None,
+             _('Copy the suggested translation'), self.on_copy),
+            ('Open', gtk.STOCK_OPEN, _('_Open project page'), "<Control>w",
+             _('Open the translation project web page'), self.on_open),
+            )
+        self.action_group.add_actions (actions)
+        self.ui = gtk.UIManager ()
+        self.ui.insert_action_group (self.action_group, 0)
+        self.ui.add_ui_from_string (self.ui_string)
+        self.menu = self.ui.get_widget ("/PopupMenu")
+
+    def on_button_press_event (self, tree, event, menu):
+        if event.type == gtk.gdk.BUTTON_PRESS and event.button == 3:
+            result = self.get_path_at_pos (int (event.x), int (event.y))
+            if result:
+                self.path = result[0]
+                menu.popup (None, None, None, event.button, event.time, None)
+                return True
+
+    def on_copy (self, action):
+        iter = self.model.get_iter (self.path)
+        if iter:
+            translation = self.model.get_value (iter, self.COL_TRANSLATION)
+            self.application.clipboard.set_contents (translation)
+
+    def on_open (self, action):
+        iter = self.model.get_iter (self.path)
+        if iter:
+            url = self.model.get_value (iter, self.COL_URL)
+            gnome.url_show (url)
 
 class TranslationSuggestions (BaseUITranslation):
     capability = TranslationSuggestionsRequest
@@ -75,7 +128,7 @@ class TranslationSuggestions (BaseUITranslation):
         hbox.show ()
         self.pack_start (hbox, False)
 
-        self.suggestions = SuggestionsTreeView ()
+        self.suggestions = SuggestionsTreeView (self.application)
         self.suggestions.show ()
         scrolled = uiutils.ScrolledWindow (self.suggestions)
         scrolled.set_shadow_type (gtk.SHADOW_NONE)
