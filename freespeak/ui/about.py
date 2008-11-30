@@ -1,7 +1,7 @@
 # FreeSpeak - a GUI frontend to online translator engines
 # freespeak/ui/about.py - this file is part of FreeSpeak
 #
-## Copyright (C) 2005-2008  Luca Bruno <lethalman88@gmail.com>
+## Copyright (C) 2005, 2006, 2007, 2008  Luca Bruno <lethalman88@gmail.com>
 ##
 ## This file is part of FreeSpeak.
 ##   
@@ -17,7 +17,7 @@
 ##
 ## You should have received a copy of the GNU General Public License
 ## along with this program; if not, write to the Free Software
-## Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+## Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
 
 import gtk
 import gnome
@@ -43,7 +43,7 @@ class About (gtk.AboutDialog):
         
         You should have received a copy of the GNU General Public License
         along with this program; if not, write to the Free Software
-        Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+        Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
         """)
         gtk.about_dialog_set_url_hook (self.on_url, "")
         gtk.about_dialog_set_email_hook (self.on_url, "mailto:")
@@ -55,7 +55,7 @@ class About (gtk.AboutDialog):
         self.set_artists (["Coviello Giuseppe\t<immigrant@email.it>"])
         self.set_translator_credits ("Luca Bruno\t<lethalman88@gmail.com>")
                                      
-        self.set_copyright ("Copyright (C) 2005-2008  Luca Bruno <lethalman88@gmail.com>")
+        self.set_copyright ("Copyright (C) 2005, 2006, 2007, 2008  Luca Bruno <lethalman88@gmail.com>")
 
         self.connect ('response', self.on_response)
         self.show_all()
