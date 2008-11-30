@@ -48,8 +48,8 @@ class About (gtk.AboutDialog):
         gtk.about_dialog_set_url_hook (self.on_url, "")
         gtk.about_dialog_set_email_hook (self.on_url, "mailto:")
                           
-        self.set_website_label ("http://home.gna.org/freespeak/")
-        self.set_website ("http://home.gna.org/freespeak/")
+        self.set_website_label ("http://freespeak.berlios.de/")
+        self.set_website ("http://freespeak.berlios.de/")
         self.set_authors (["Luca Bruno\t<lethalman88@gmail.com>"])
         self.set_logo (self.application.icon_theme.load_icon ('freespeak', 64, 0))
         self.set_artists (["Coviello Giuseppe\t<immigrant@email.it>"])

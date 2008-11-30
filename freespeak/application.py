@@ -23,7 +23,7 @@ from freespeak import defs
 
 __author__ = "Luca Bruno <lethalman88@gmail.com>"
 __version__ = defs.VERSION
-__homepage__ = "http://home.gna.org/freespeak"
+__homepage__ = "http://freespeak.berlios.de"
 
 import gettext
 import tempfile
@@ -116,12 +116,12 @@ class Application (dbus.service.Object):
     def setup_style (self):
         style.setup_rc ()
 
-    @dbus.service.method ("org.gna.FreeSpeak",
+    @dbus.service.method ("de.berlios.FreeSpeak",
                           in_signature='', out_signature='b')
     def is_running (self):
         return self.running
 
-    @dbus.service.method ("org.gna.FreeSpeak",
+    @dbus.service.method ("de.berlios.FreeSpeak",
                           in_signature='a{sv}asi', out_signature='')
     def start (self, options={}, args=[], timestamp=None):
         if self.running:
@@ -141,7 +141,7 @@ class Application (dbus.service.Object):
 
         self.running = False
 
-    @dbus.service.method ("org.gna.FreeSpeak",
+    @dbus.service.method ("de.berlios.FreeSpeak",
                           in_signature='', out_signature='')
     def stop (self):
         if self.running:
@@ -150,16 +150,16 @@ class Application (dbus.service.Object):
 def get_instance ():
     """
     Get the DBUS instance of the application.
-    org.gna.FreeSpeak at path / with interface org.gna.FreeSpeak
+    de.berlios.FreeSpeak at path / with interface de.berlios.FreeSpeak
     """
     dbus.mainloop.glib.DBusGMainLoop (set_as_default=True)
     bus = dbus.SessionBus ()
-    request = bus.request_name ("org.gna.FreeSpeak", dbus.bus.NAME_FLAG_DO_NOT_QUEUE)
+    request = bus.request_name ("de.berlios.FreeSpeak", dbus.bus.NAME_FLAG_DO_NOT_QUEUE)
     if request != dbus.bus.REQUEST_NAME_REPLY_EXISTS:
-        application = Application (bus, '/', "org.gna.FreeSpeak")
+        application = Application (bus, '/', "de.berlios.FreeSpeak")
     else:
-        object = bus.get_object ("org.gna.FreeSpeak", "/")
-        application = dbus.Interface (object, "org.gna.FreeSpeak")
+        object = bus.get_object ("de.berlios.FreeSpeak", "/")
+        application = dbus.Interface (object, "de.berlios.FreeSpeak")
     return application
 
 __all__ = ['get_instance']
