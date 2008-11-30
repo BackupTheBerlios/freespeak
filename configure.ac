@@ -99,6 +99,7 @@ freespeak/ui/Makefile
 data/Makefile
 data/art/Makefile
 data/freespeak.desktop.in
+help/Makefile
 po/Makefile.in
 ])
 

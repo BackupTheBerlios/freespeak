@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML 4.1.2//EN" "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
+<article id="freespeak">
+  <articleinfo>
+    <title>FreeSpeak User's Guide</title>
+    <authorgroup>
+      <author>
+	<firstname>Luca</firstname> <surname>Bruno</surname>
+	<affiliation>
+	  <address>
+	    <email>lethalman88@gmail.com</email>
+	  </address>
+	</affiliation>
+      </author>
+    </authorgroup>
+    <copyright>
+      <year>2008</year> <holder>Luca Bruno</holder>
+    </copyright>
+    <publisher>
+      <publishername>Luca Bruno</publishername>
+    </publisher>
+    <include href="legal.xml" xmlns="http://www.w3.org/2001/XInclude"/>
+    <revhistory>
+      <revision>
+        <revnumber>0.1</revnumber>
+        <date>November 2008</date>
+      </revision>
+    </revhistory>
+
+    <abstract role="description">
+      <para>&applet; is a quick access and search applet.</para>
+    </abstract>
+  </articleinfo>
+
+  <section id="intro">
+    <title>Introduction.</title>
+      <para>Foo.</para>
+  </section>
+ 
+   <section id="end">
+      <title>The End.</title> 
+      <para>Bar.</para>
+   </section>
+
+</article>
