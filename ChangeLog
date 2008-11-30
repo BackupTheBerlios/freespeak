@@ -1,3 +1,8 @@
+2008-12-01  Luca Bruno  <lethalman88@gmail.com>
+
+	* freespeak/ui/settings.py (Settings.on_response): handle Help response
+	(Settings.__init__): added Help action
+
 2008-11-30  Luca Bruno  <lethalman88@gmail.com>
 
 	* freespeak/ui/status_icon.py (StatusIcon.on_popup_menu): added Contents action

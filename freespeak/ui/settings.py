@@ -20,6 +20,8 @@
 ## Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
 
 import gtk
+import gnome
+
 from freespeak import utils
 import freespeak.ui.utils as uiutils
 from freespeak.ui.translation_box import TranslatorCombo
@@ -28,7 +30,8 @@ class Settings(gtk.Dialog):
     @utils.syncronized
     def __init__(self, application):
         gtk.Dialog.__init__ (self, _('Preferences'), application.main_window, 0,
-                             (gtk.STOCK_CLOSE, gtk.RESPONSE_CLOSE))
+                             (gtk.STOCK_HELP, gtk.RESPONSE_HELP,
+                              gtk.STOCK_CLOSE, gtk.RESPONSE_CLOSE))
         self.application = application
 
         self.set_border_width (6)
@@ -87,6 +90,10 @@ class Settings(gtk.Dialog):
         self.vbox.pack_start (frame)
 
     def on_response (self, dialog, response):
+        if response == gtk.RESPONSE_HELP:
+            gnome.url_show ("ghelp:freespeak?freespeak-prefs")
+            return
+
         self.application.config.set ('get_clipboard', self.w_clipboard_get.get_active ())
         self.application.config.set ('set_clipboard', self.w_clipboard_set.get_active ())
         translator = self.w_preferred_translator.get_active_translator ()
