@@ -1,9 +1,10 @@
 Not ordered:
+- Cancel operation
 - Session manager
 - Duplicate translations
 - History
 - Timezone world map
-- Documentation
+- Describe default from/to language guess in documentation
 
 * Translate one word to all languages?
 * Clutter?

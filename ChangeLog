@@ -1,5 +1,12 @@
 2008-12-01  Luca Bruno  <lethalman88@gmail.com>
 
+	* freespeak/ui/translation_label.py: added
+
+	* freespeak/ui/translation.py: removed
+	All calls have been updated
+
+	* TODO: Cancel operation, added
+
 	* freespeak/ui/settings.py (Settings.on_response): handle Help response
 	(Settings.__init__): added Help action
 

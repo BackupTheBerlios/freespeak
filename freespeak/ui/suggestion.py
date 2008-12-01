@@ -22,7 +22,9 @@
 import gtk
 import gnome
 
-from freespeak.ui.translation import BaseUITranslation, TranslationSuggestionsRequest
+from freespeak.translation import TranslationSuggestionsRequest
+from freespeak.ui.translation import BaseUITranslation
+
 import freespeak.utils as utils
 import freespeak.ui.utils as uiutils
 from freespeak.status import *
@@ -51,7 +53,6 @@ class SuggestionsTreeView (gtk.TreeView):
         self.setup_options ()
         self.setup_columns ()
         self.setup_menu ()
-        self.connect ('button-press-event', self.on_button_press_event, self.menu)
 
     def setup_options (self):
         self.set_rules_hint (True)
@@ -91,6 +92,7 @@ class SuggestionsTreeView (gtk.TreeView):
         self.ui.insert_action_group (self.action_group, 0)
         self.ui.add_ui_from_string (self.ui_string)
         self.menu = self.ui.get_widget ("/PopupMenu")
+        self.connect ('button-press-event', self.on_button_press_event, self.menu)
 
     def on_button_press_event (self, tree, event, menu):
         if event.type == gtk.gdk.BUTTON_PRESS and event.button == 3:
