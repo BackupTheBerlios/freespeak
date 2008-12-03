@@ -12,14 +12,6 @@ AC_SUBST(ACLOCAL_AMFLAGS, "$ACLOCAL_FLAGS -I m4")
 AC_PROG_CC
 
 dnl ****************************************************************************
-dnl * Pkg-Config
-dnl ****************************************************************************
-AC_CHECK_PROG(HAVE_PKGCONFIG, pkg-config, yes, no)
-if test "x$HAVE_PKGCONFIG" = "xno"; then
-  AC_MSG_ERROR(you need to have pkgconfig installed !)
-fi
-
-dnl ****************************************************************************
 dnl * Translation & i18n
 dnl ****************************************************************************
 
@@ -62,19 +54,6 @@ AC_SUBST(LIBDIR)
 AS_AC_EXPAND(PYTHONDIR, $pythondir)
 AC_SUBST(PYTHONDIR)
 		
-dnl ****************************************************************************
-dnl * PyGTK & co for Gnome Streamer
-dnl ****************************************************************************
-PKG_CHECK_MODULES(FREESPEAK,
-	gtk+-2.0                	>= 2.12
-	pygtk-2.0			>= 2.12
-	pygobject-2.0			>= 2.12
-	gnome-python-2.0		>= 2.10
-        dbus-python
-)
-AC_SUBST(FREESPEAK_CFLAGS)
-AC_SUBST(FREESPEAK_LIBS)
-
 dnl ******************
 dnl * Python modules
 dnl ******************
@@ -85,6 +64,7 @@ AM_CHECK_PYMOD(gobject)
 AM_CHECK_PYMOD(gtk)
 AM_CHECK_PYMOD(gtk.gdk)
 AM_CHECK_PYMOD(gtkspell)
+AM_CHECK_PYMOD(gtkmozembed)
 
 dnl ****************************************************************************
 dnl * --------------------------------------------------------------------------

@@ -1,6 +1,10 @@
+2008-12-03  Luca Bruno  <lethalman88@gmail.com>
+
+	* configure.ac: check for gtkmozembed modules, remove pkgconfig development checks which are not needed for neither building nor installing the project and increases build depends on several binary-based GNU/Linux distributions
+
 2008-12-01  Luca Bruno  <lethalman88@gmail.com>
 
-	* freespeak/ui/translation_label.py: added
+	* freespeak/ui/translation_label.py: added, with contextual menu
 
 	* freespeak/ui/translation.py: removed
 	All calls have been updated
