@@ -59,12 +59,15 @@ dnl * Python modules
 dnl ******************
 AM_CHECK_PYMOD(dbus)
 AM_CHECK_PYMOD(gconf)
+AM_CHECK_PYMOD(gettext)
 AM_CHECK_PYMOD(gnome)
 AM_CHECK_PYMOD(gobject)
 AM_CHECK_PYMOD(gtk)
 AM_CHECK_PYMOD(gtk.gdk)
-AM_CHECK_PYMOD(gtkspell)
 AM_CHECK_PYMOD(gtkmozembed)
+AM_CHECK_PYMOD(gtkspell)
+AM_CHECK_PYMOD(lxml)
+AM_CHECK_PYMOD(pango)
 
 dnl ****************************************************************************
 dnl * --------------------------------------------------------------------------
