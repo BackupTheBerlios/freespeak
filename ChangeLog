@@ -1,3 +1,12 @@
+2008-12-05  Luca Bruno  <lethalman88@gmail.com>
+
+	* freespeak/ui/translation.py (WebTranslation.on_browser_net_stop): added, when browser stops loading data from network
+	(WebTranslation.update_status): override BaseUITranslation to attach the ProgressBar to the real browser job
+	(BaseUITranslation.started)
+	(BaseUITranslation.stopped): added for being called from sub classes
+
+	* freespeak/ui/spinner.py (Spinner.is_running): added
+
 2008-12-04  Luca Bruno  <lethalman88@gmail.com>
 
 	* freespeak/ui/suggestion.py (TranslationSuggestions.setup_ui): updated

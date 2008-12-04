@@ -68,6 +68,9 @@ class Spinner (gtk.Image):
         if self.source:
             self.set_from_pixbuf (pixbuf)
 
+    def is_running (self):
+        return bool (self.source)
+
     @utils.syncronized
     def start (self):
         self.icon_num = 0

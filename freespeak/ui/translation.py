@@ -78,6 +78,18 @@ class BaseUITranslation (gtk.VBox, BaseTranslation):
     def get_label (self):
         return self.label
 
+    def started (self):
+        self.progress.show ()
+        self.progress.start ()
+        self.label.start_loading ()
+        self.layout.set_sensitive (False)
+
+    def stopped (self):
+        self.progress.hide ()
+        self.progress.stop ()
+        self.label.stop_loading ()
+        self.layout.set_sensitive (True)
+
     # Events
 
     def on_translate_clicked (self, button):
@@ -119,15 +131,9 @@ class BaseUITranslation (gtk.VBox, BaseTranslation):
     @utils.syncronized
     def update_status (self, status):
         if isinstance (status, StatusStarted):
-            self.progress.show ()
-            self.progress.start ()
-            self.label.start_loading ()
-            self.layout.set_sensitive (False)
+            self.started ()
         elif isinstance (status, StatusComplete):
-            self.progress.hide ()
-            self.progress.stop ()
-            self.label.stop_loading ()
-            self.layout.set_sensitive (True)
+            self.stopped ()
         self.progress.set_text (status.description)
 
     # Virtual methods
@@ -309,6 +315,7 @@ class WebTranslation (BaseUITranslation):
 
         # Browser
         self.browser = gtkmozembed.MozEmbed ()
+        self.browser.connect ('net-stop', self.on_browser_net_stop)
         self.browser.show ()
         self.layout.pack_start (self.browser)
 
@@ -357,7 +364,6 @@ class WebTranslation (BaseUITranslation):
 
     @utils.syncronized
     def update_status (self, status):
-        BaseUITranslation.update_status (self, status)
         if isinstance (status, StatusWebComplete):
             self.dest_url.set_uri (status.result)
             self.dest_url_box.set_sensitive (True)
@@ -365,6 +371,9 @@ class WebTranslation (BaseUITranslation):
             self.dest_url_box.set_visible_window (True)
             self.browser.load_url (status.result)
             self.application.clipboard.set_contents (status.result)
+            self.progress.set_text (_("Fetching page..."))
+        else:
+            BaseUITranslation.update_status (self, status)
 
     # Events
 
@@ -385,5 +394,9 @@ class WebTranslation (BaseUITranslation):
 
     def on_tiny_copy (self, button):
         self.application.clipboard.set_contents (self.dest_url.get_uri (), force=True)
+
+    def on_browser_net_stop (self, browser):
+        if not self.progress.is_running ():
+            self.stopped ()
 
 __all__ = ['BaseUITranslation', 'TextTranslation', 'WebTranslation']
