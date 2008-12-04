@@ -1,5 +1,14 @@
 2008-12-04  Luca Bruno  <lethalman88@gmail.com>
 
+	* freespeak/ui/suggestion.py (TranslationSuggestions.setup_ui): updated
+
+	* freespeak/ui/utils.py (Progress): switch to HBox to hold a Cancel button
+
+	* freespeak/ui/translation.py (BaseUITranslation)
+	(BaseUITranslation.setup_layout): added to split translatino UI in two parts, a layout for translation widgets and another part for the progress bar, to handle sensitivity
+	(TextTranslation.setup_ui)
+	(WebTranslation.setup_ui): updated
+
 	* configure.ac: check for lxml, pango and gettext
 
 2008-12-03  Luca Bruno  <lethalman88@gmail.com>

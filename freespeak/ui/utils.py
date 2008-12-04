@@ -54,15 +54,38 @@ class Frame (gtk.Frame):
         alignment.show ()
         return gtk.Frame.add (self, alignment)
 
-class Progress (gtk.ProgressBar):
+class Progress (gtk.HBox):
+    __gsignals__ = {
+        'cancelled': (gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE, ()),
+        }
+
     def __init__ (self):
-        gtk.ProgressBar.__init__ (self)
+        gtk.HBox.__init__ (self, spacing=6)
         self.running = False
-        self.set_pulse_step (0.01)
+
+        self.setup_bar ()
+        self.setup_cancel ()
+
+    def setup_bar (self):
+        self.bar = gtk.ProgressBar ()
+        self.bar.set_pulse_step (0.01)
+        self.bar.show ()
+        self.pack_start (self.bar)
+
+    def setup_cancel (self):
+        self.cancel = TinyButton (gtk.STOCK_CANCEL)
+        self.cancel.connect ('clicked', self.on_cancel)
+        self.cancel.show ()
+        self.pack_start (self.cancel, False)
 
     def pulse_idle (self):
-        self.pulse ()
+        self.bar.pulse ()
         return self.running
+
+    # API
+
+    def set_text (self, text):
+        self.bar.set_text (text)
 
     def start (self):
         assert not self.running
@@ -71,6 +94,11 @@ class Progress (gtk.ProgressBar):
 
     def stop (self):
         self.running = False
+
+    # Events
+
+    def on_cancel (self, button):
+        self.emit ('cancelled')
 
 class TinyButton (gtk.Button):
     def __init__ (self, stock=None, size=gtk.ICON_SIZE_MENU):

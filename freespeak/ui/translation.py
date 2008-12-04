@@ -41,6 +41,11 @@ class BaseUITranslation (gtk.VBox, BaseTranslation):
         gtk.VBox.__init__ (self, spacing=12)
         BaseTranslation.__init__ (self, *args)
 
+    def setup_layout (self):
+        self.layout = gtk.VBox (spacing=12)
+        self.layout.show ()
+        self.pack_start (self.layout)
+
     def setup_label (self):
         self.label = TranslationLabel (self.application, self)
         self.label.show ()
@@ -58,7 +63,7 @@ class BaseUITranslation (gtk.VBox, BaseTranslation):
         self.translate_button.show ()
 
         self.translation_box.pack_start (self.translate_button, False)
-        self.pack_start (self.translation_box, False)
+        self.layout.pack_start (self.translation_box, False)
 
     def setup_progress (self):
         self.progress = uiutils.Progress ()
@@ -83,6 +88,7 @@ class BaseUITranslation (gtk.VBox, BaseTranslation):
     # Overrided methods
 
     def setup (self):
+        self.setup_layout ()
         self.setup_translation_box ()
         self.setup_label ()
         self.setup_ui ()
@@ -116,12 +122,12 @@ class BaseUITranslation (gtk.VBox, BaseTranslation):
             self.progress.show ()
             self.progress.start ()
             self.label.start_loading ()
-            self.set_sensitive (False)
+            self.layout.set_sensitive (False)
         elif isinstance (status, StatusComplete):
             self.progress.hide ()
             self.progress.stop ()
             self.label.stop_loading ()
-            self.set_sensitive (True)
+            self.layout.set_sensitive (True)
         self.progress.set_text (status.description)
 
     # Virtual methods
@@ -179,7 +185,7 @@ class TextTranslation (BaseUITranslation):
         frame = uiutils.Frame (_("Text to translate"), self.translate_buttons ())
         frame.add (scrolled)
         frame.show ()
-        self.pack_start (frame)
+        self.layout.pack_start (frame)
 
         self.dest_buffer = gtk.TextBuffer ()
         view = gtk.TextView (self.dest_buffer)
@@ -191,7 +197,7 @@ class TextTranslation (BaseUITranslation):
         frame = uiutils.Frame (_("Translated text"), self.translated_buttons ())
         frame.add (scrolled)
         frame.show ()
-        self.pack_start (frame)
+        self.layout.pack_start (frame)
 
     def get_source_contents (self):
         return self.source_buffer.get_text (self.source_buffer.get_start_iter (),
@@ -299,12 +305,12 @@ class WebTranslation (BaseUITranslation):
         hbox.pack_start (self.source_url_buttons (), False)
 
         hbox.show ()
-        self.pack_start (hbox, False)
+        self.layout.pack_start (hbox, False)
 
         # Browser
         self.browser = gtkmozembed.MozEmbed ()
         self.browser.show ()
-        self.pack_start (self.browser)
+        self.layout.pack_start (self.browser)
 
         # Destination box
         self.dest_url_box = gtk.EventBox ()
@@ -322,7 +328,7 @@ class WebTranslation (BaseUITranslation):
         hbox.pack_start (self.dest_url_buttons (), False)
 
         hbox.show ()
-        self.pack_start (self.dest_url_box, False)
+        self.layout.pack_start (self.dest_url_box, False)
 
     def setup_clipboard (self):
         contents = self.application.clipboard.get_contents ()

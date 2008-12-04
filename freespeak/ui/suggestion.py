@@ -128,7 +128,7 @@ class TranslationSuggestions (BaseUITranslation):
         hbox.pack_start (self.entry)
         
         hbox.show ()
-        self.pack_start (hbox, False)
+        self.layout.pack_start (hbox, False)
 
         self.suggestions = SuggestionsTreeView (self.application)
         self.suggestions.show ()
@@ -136,7 +136,7 @@ class TranslationSuggestions (BaseUITranslation):
         scrolled.set_shadow_type (gtk.SHADOW_NONE)
         scrolled.show ()
 
-        self.pack_start (scrolled)
+        self.layout.pack_start (scrolled)
 
     def setup_clipboard (self):
         contents = self.application.clipboard.get_contents ()
