@@ -1,5 +1,7 @@
 2008-12-05  Luca Bruno  <lethalman88@gmail.com>
 
+	* freespeak/ui/main_window.py (MainWindow.setup_layout): removed accelerator for Translation menu as it conflicts with the Translate button
+
 	* freespeak/ui/translation.py (WebTranslation.on_browser_net_stop): added, when browser stops loading data from network
 	(WebTranslation.update_status): override BaseUITranslation to attach the ProgressBar to the real browser job
 	(BaseUITranslation.started)

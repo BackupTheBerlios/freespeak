@@ -92,7 +92,7 @@ class MainWindow (gtk.Window):
 
         self.action_group = gtk.ActionGroup ('WindowActions')
         actions = (
-            ('Translation', None, _("_Translation")),
+            ('Translation', None, _("Translation")),
             ('Edit', None, _("_Edit")),
             ('Help', None, _("_Help")),
 
