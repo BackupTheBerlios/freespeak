@@ -1,5 +1,9 @@
 2008-12-05  Luca Bruno  <lethalman88@gmail.com>
 
+	* freespeak/ui/suggestion.py (TranslationSuggestions.on_tiny_paste)
+	(TranslationSuggestions.on_tiny_clear)
+	(TranslationSuggestions.entry_buttons): added tiny buttons next to the entry
+
 	* freespeak/ui/translation.py (WebTranslation.setup_clipboard): use get_url_contents()
 	(TextTranslation.setup_clipboard): use get_text_contents()
 

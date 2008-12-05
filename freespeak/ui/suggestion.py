@@ -117,6 +117,23 @@ class SuggestionsTreeView (gtk.TreeView):
 class TranslationSuggestions (BaseUITranslation):
     capability = TranslationSuggestionsRequest
 
+    def entry_buttons (self):
+        box = gtk.HBox (homogeneous=True)
+        # Clear
+        btn = uiutils.TinyButton (gtk.STOCK_CLEAR)
+        btn.set_tooltip_text (_("Clear the phrase"))
+        btn.connect ('clicked', self.on_tiny_clear)
+        btn.show ()
+        box.pack_start (btn)
+        # Paste
+        btn = uiutils.TinyButton (gtk.STOCK_PASTE)
+        btn.set_tooltip_text (_("Paste the phrase from the clipboard"))
+        btn.connect ('clicked', self.on_tiny_paste)
+        btn.show ()
+        box.pack_start (btn)
+        box.show ()
+        return box
+
     def setup_ui (self):
         hbox = gtk.HBox (spacing=6)
         label = gtk.Label (_("Suggest"))
@@ -126,6 +143,8 @@ class TranslationSuggestions (BaseUITranslation):
         self.entry = gtk.Entry ()
         self.entry.show ()
         hbox.pack_start (self.entry)
+
+        hbox.pack_start (self.entry_buttons (), False)
         
         hbox.show ()
         self.layout.pack_start (hbox, False)
@@ -155,5 +174,16 @@ class TranslationSuggestions (BaseUITranslation):
             model.clear ()
             for suggestion_result in status.result:
                 model.append (suggestion_result)
+                
+    # Events
+
+    def on_tiny_clear (self, button):
+        self.entry.set_text ("")
+        self.entry.grab_focus ()
+
+    def on_tiny_paste (self, button):
+        contents = self.application.clipboard.get_contents ()
+        if contents is not None:
+            self.entry.set_text (contents)
 
 __all__ = ['TranslationSuggestions']
