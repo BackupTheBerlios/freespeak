@@ -1,5 +1,8 @@
 2008-12-05  Luca Bruno  <lethalman88@gmail.com>
 
+	* freespeak/ui/translation.py (WebTranslation.update_status): stop loading when cancelled
+	(WebTranslation.on_browser_net_stop): show dest_url only when translation is done
+
 	* freespeak/ui/settings.py (Settings.setup_translator): setup default translator in the combo as the TranslatorCombo class doesn't set it automatically anymore
 
 	Cancellation of tasks has been implemented.

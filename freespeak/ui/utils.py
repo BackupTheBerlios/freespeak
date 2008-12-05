@@ -84,6 +84,9 @@ class Progress (gtk.HBox):
 
     # API
 
+    def is_running (self):
+        return self.running
+
     def set_text (self, text):
         self.bar.set_text (text)
 

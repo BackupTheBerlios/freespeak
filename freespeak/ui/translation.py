@@ -374,14 +374,15 @@ class WebTranslation (BaseUITranslation):
     def update_status (self, status):
         if isinstance (status, StatusWebComplete):
             self.dest_url.set_uri (status.result)
-            self.dest_url_box.set_sensitive (True)
-            self.dest_url_box.show ()
-            self.dest_url_box.set_visible_window (True)
             self.browser.load_url (status.result)
             self.application.clipboard.set_contents (status.result)
             self.progress.set_text (_("Fetching page..."))
-        else:
-            BaseUITranslation.update_status (self, status)
+            return
+
+        if isinstance (status, StatusCancelled):
+            self.browser.stop_load ()
+        
+        BaseUITranslation.update_status (self, status)
 
     # Events
 
@@ -405,6 +406,9 @@ class WebTranslation (BaseUITranslation):
 
     def on_browser_net_stop (self, browser):
         if not self.progress.is_running ():
+            self.dest_url_box.set_sensitive (True)
+            self.dest_url_box.show ()
+            self.dest_url_box.set_visible_window (True)
             self.stopped ()
 
 __all__ = ['BaseUITranslation', 'TextTranslation', 'WebTranslation']
