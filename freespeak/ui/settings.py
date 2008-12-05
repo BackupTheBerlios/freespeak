@@ -80,6 +80,12 @@ class Settings(gtk.Dialog):
         label.show ()
         hbox.pack_start (label, False)
         self.w_preferred_translator = TranslatorCombo (self.application)
+        default_translator = self.application.translators_manager.get_default ()
+        model = self.w_preferred_translator.get_model ()
+        for row in model:
+            if row[TranslatorCombo.COL_TRANSLATOR] == default_translator:
+                self.w_preferred_translator.set_active_iter (row.iter)
+                break
         self.w_preferred_translator.show ()
         label.set_mnemonic_widget (self.w_preferred_translator)
         hbox.pack_start (self.w_preferred_translator)

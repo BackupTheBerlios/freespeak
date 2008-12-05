@@ -1,5 +1,7 @@
 2008-12-05  Luca Bruno  <lethalman88@gmail.com>
 
+	* freespeak/ui/settings.py (Settings.setup_translator): setup default translator in the combo as the TranslatorCombo class doesn't set it automatically anymore
+
 	Cancellation of tasks has been implemented.
 	
 	* freespeak/ui/translation_box.py (ComboChangedSignal): added for delaying UI change
@@ -11,7 +13,7 @@
 	* freespeak/status.py (StatusCancelled): added
 
 	* freespeak/translation.py (TranslateTask)
-	(LanguageTableTask): added to to make cancellable Translation tasks
+	(LanguageTableTask): added to make cancellable Translation tasks
 
 	* freespeak/ui/suggestion.py (TranslationSuggestions.on_tiny_paste)
 	(TranslationSuggestions.on_tiny_clear)
