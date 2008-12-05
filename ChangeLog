@@ -1,5 +1,8 @@
 2008-12-05  Luca Bruno  <lethalman88@gmail.com>
 
+	* freespeak/translation.py (TranslateTask)
+	(LanguageTableTask): added to to make cancellable Translation tasks
+
 	* freespeak/ui/suggestion.py (TranslationSuggestions.on_tiny_paste)
 	(TranslationSuggestions.on_tiny_clear)
 	(TranslationSuggestions.entry_buttons): added tiny buttons next to the entry

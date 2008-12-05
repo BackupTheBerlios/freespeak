@@ -20,7 +20,7 @@
 ## Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
 
 import locale
-import thread
+import threading
 import gtk
 
 from freespeak.status import *
@@ -45,6 +45,58 @@ class TranslationSuggestionsRequest (TranslationRequest):
         TranslationRequest.__init__ (self)
         self.text = text
 
+class Task (threading.Thread):
+    def __init__ (self, translation, *args, **kwargs):
+        threading.Thread.__init__ (self)
+        self.translation = translation
+        self.queued_stop = False
+
+    def stop (self):
+        self.queued_stop = True
+
+    def run_tasks (self, stop):
+        # Must return a generator
+        raise NotImplementedError ()
+
+    def run (self):
+        for done in self.run_tasks (self.queued_stop):
+            if done:
+                return
+
+class LanguageTableTask (Task):
+    def __init__ (self, translation, translator):
+        Task.__init__ (self, translation)
+        self.translator = translator
+
+    def run_tasks (self, stop):
+        self.translation.update_status (StatusStarted (_("Retrieving languages from %s") % self.translation.translator.get_name ()))
+        self.translation.language_table = self.translation.translator.get_language_table (self.translation.capability)
+        yield stop
+        self.translation.update_status (Status (_("Updating the list")))
+        self.translation.setup_default_language ()
+        self.translation.update_from_langs (sorted (self.translation.language_table.keys ()))
+        self.translation.update_to_langs (None)
+        self.translation.update_can_translate (False)
+        self.translation.from_lang = None
+        self.translation.to_lang = None
+        self.translation.set_default_from_lang ()
+        self.translation.update_status (StatusComplete (None))
+        self.translation.update_translator (self.translator)
+
+class TranslateTask (Task):
+    def __init__ (self, translation, request):
+        Task.__init__ (self, translation)
+        self.request = request
+
+    def run_tasks (self, stop):
+        self.request.from_lang = self.translation.from_lang
+        self.request.to_lang = self.translation.to_lang
+        self.translation.update_status (StatusStarted ())
+        for status in self.translation.translator.translate (self.request):
+            yield stop
+            self.translation.update_status (status)
+        self.translation.update_can_translate (True)
+
 class BaseTranslation (object):
     capability = None
 
@@ -56,6 +108,7 @@ class BaseTranslation (object):
         self.default_lang = None
         self.from_lang = None
         self.to_lang = None
+        self.task = None
 
         self.setup ()
         self.manager.add_translation (self)
@@ -96,8 +149,8 @@ class BaseTranslation (object):
             self.update_to_langs (None)
             self.update_can_translate (False)
         else:
-            thread.start_new_thread (self._run_language_table, ())
-        self.update_translator (translator)
+            self.task = LanguageTableTask (self, translator)
+            self.task.start ()
 
     def set_from_lang (self, lang):
         self.from_lang = lang
@@ -112,28 +165,8 @@ class BaseTranslation (object):
 
     def translate (self, request):
         self.update_can_translate (False)
-        thread.start_new_thread (self._run, (request,))
-
-    def _run_language_table (self):
-        self.update_status (StatusStarted (_("Retrieving languages from %s") % self.translator.get_name ()))
-        self.language_table = self.translator.get_language_table (self.capability)
-        self.update_status (Status (_("Updating the list")))
-        self.setup_default_language ()
-        self.update_from_langs (sorted (self.language_table.keys ()))
-        self.update_to_langs (None)
-        self.update_can_translate (False)
-        self.from_lang = None
-        self.to_lang = None
-        self.set_default_from_lang ()
-        self.update_status (StatusComplete (None))
-
-    def _run (self, request):
-        request.from_lang = self.from_lang
-        request.to_lang = self.to_lang
-        self.update_status (StatusStarted ())
-        for status in self.translator.translate (request):
-            self.update_status (status)
-        self.update_can_translate (True)
+        self.task = TranslateTask (self, request)
+        self.task.start ()
         
     # Virtual methods
 
