@@ -23,10 +23,33 @@ import gtk
 
 from freespeak import utils
 
+class ComboChangedSignal (object):
+    def __init__ (self, combo, callback):
+        self.combo = combo
+        self.callback = callback
+        self.signal = self.combo.connect ('changed', self.on_changed)
+        self.active_iter = self.combo.get_active_iter ()
+        self.blocked = False
+
+    def block (self):
+        self.blocked = True
+
+    def unblock (self):
+        self.blocked = False
+
+    def on_changed (self, combo):
+        if self.blocked:
+            self.active_iter = self.combo.get_active_iter ()
+        else:
+            self.callback (combo)
+            self.block ()
+            self.combo.set_active_iter (self.active_iter)
+            self.unblock ()
+
 class TranslatorCombo (gtk.ComboBox):
-    COL_TRANSLATOR_TEXT = 0
-    COL_TRANSLATOR_TRANSLATOR = 1
-    COL_TRANSLATOR_PIXBUF = 2
+    COL_TEXT = 0
+    COL_TRANSLATOR = 1
+    COL_PIXBUF = 2
 
     def __init__ (self, application, capability=None):
         gtk.ComboBox.__init__ (self)
@@ -34,8 +57,6 @@ class TranslatorCombo (gtk.ComboBox):
 
         model = gtk.ListStore (str, object, gtk.gdk.Pixbuf)
         self.set_model (model)
-        default_translator = self.application.translators_manager.get_default ()
-        default_iter = None
 
         iter = model.append ([_("(none)"), None, None])
         self.set_active_iter (iter)
@@ -43,25 +64,19 @@ class TranslatorCombo (gtk.ComboBox):
             if not capability or capability in translator.capabilities:
                 pixbuf = self.application.icon_theme.load_icon (translator.icon, 16, 0)
                 iter = model.append ([translator.get_name (), translator, pixbuf])
-                if translator == default_translator:
-                    default_iter = iter
-
-        if default_iter:
-            self.set_active_iter (default_iter)
-
 
         cell = gtk.CellRendererPixbuf ()
         self.pack_start (cell, expand=False)
-        self.add_attribute (cell, 'pixbuf', self.COL_TRANSLATOR_PIXBUF)
+        self.add_attribute (cell, 'pixbuf', self.COL_PIXBUF)
 
         cell = gtk.CellRendererText ()
         self.pack_start (cell)
-        self.add_attribute (cell, 'text', self.COL_TRANSLATOR_TEXT)
+        self.add_attribute (cell, 'text', self.COL_TEXT)
 
     def get_active_translator (self):
         iter = self.get_active_iter ()
         if iter:
-            translator = self.get_model().get_value (iter, self.COL_TRANSLATOR_TRANSLATOR)
+            translator = self.get_model().get_value (iter, self.COL_TRANSLATOR)
             return translator
 
 class TranslationBox (gtk.HBox):
@@ -85,12 +100,12 @@ class TranslationBox (gtk.HBox):
         label.show ()
         self.pack_start (label, False)
         
-        combo = TranslatorCombo (self.application, self.translation.capability)
-        combo.connect ('changed', self.on_translator_changed)
-        combo.show ()
-        self.pack_start (combo)
+        self.translator_combo = TranslatorCombo (self.application, self.translation.capability)
+        self.translator_combo_signal = ComboChangedSignal (self.translator_combo, self.on_translator_changed)
+        self.translator_combo.show ()
+        self.pack_start (self.translator_combo)
 
-        label.set_mnemonic_widget (combo)
+        label.set_mnemonic_widget (self.translator_combo)
 
     def setup_from (self):
         label = gtk.Label (_("_From:"))
@@ -149,6 +164,15 @@ class TranslationBox (gtk.HBox):
         self.to_combo.set_model (model)
         self.to_combo.set_sensitive (True)
         self.to_combo.set_active (-1)
+
+    def set_translator (self, translator):
+        model = self.translator_combo.get_model ()
+        for row in model:
+            if row[TranslatorCombo.COL_TRANSLATOR] == translator:
+                self.translator_combo_signal.block ()
+                self.translator_combo.set_active_iter (row.iter)
+                self.translator_combo_signal.unblock ()
+                return True
 
     def set_from_lang (self, lang):
         model = self.from_combo.get_model ()

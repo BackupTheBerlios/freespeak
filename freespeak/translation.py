@@ -49,29 +49,30 @@ class Task (threading.Thread):
     def __init__ (self, translation, *args, **kwargs):
         threading.Thread.__init__ (self)
         self.translation = translation
-        self.queued_stop = False
+        self.queued_cancel = False
 
-    def stop (self):
-        self.queued_stop = True
+    def cancel (self):
+        self.queued_cancel = True
 
-    def run_tasks (self, stop):
+    def run_tasks (self):
         # Must return a generator
         raise NotImplementedError ()
 
     def run (self):
-        for done in self.run_tasks (self.queued_stop):
-            if done:
+        for _ in self.run_tasks ():
+            if self.queued_cancel:
                 return
 
-class LanguageTableTask (Task):
+class TranslatorTask (Task):
     def __init__ (self, translation, translator):
         Task.__init__ (self, translation)
         self.translator = translator
 
-    def run_tasks (self, stop):
-        self.translation.update_status (StatusStarted (_("Retrieving languages from %s") % self.translation.translator.get_name ()))
-        self.translation.language_table = self.translation.translator.get_language_table (self.translation.capability)
-        yield stop
+    def run_tasks (self):
+        self.translation.update_status (StatusStarted (_("Retrieving languages from %s") % self.translator.get_name ()))
+        language_table = self.translator.get_language_table (self.translation.capability)
+        yield
+        self.translation.language_table = language_table
         self.translation.update_status (Status (_("Updating the list")))
         self.translation.setup_default_language ()
         self.translation.update_from_langs (sorted (self.translation.language_table.keys ()))
@@ -82,18 +83,19 @@ class LanguageTableTask (Task):
         self.translation.set_default_from_lang ()
         self.translation.update_status (StatusComplete (None))
         self.translation.update_translator (self.translator)
+        self.translation.translator = self.translator
 
 class TranslateTask (Task):
     def __init__ (self, translation, request):
         Task.__init__ (self, translation)
         self.request = request
 
-    def run_tasks (self, stop):
+    def run_tasks (self):
         self.request.from_lang = self.translation.from_lang
         self.request.to_lang = self.translation.to_lang
         self.translation.update_status (StatusStarted ())
         for status in self.translation.translator.translate (self.request):
-            yield stop
+            yield
             self.translation.update_status (status)
         self.translation.update_can_translate (True)
 
@@ -143,13 +145,13 @@ class BaseTranslation (object):
             self.set_to_lang (self.default_lang)
 
     def set_translator (self, translator):
-        self.translator = translator
         if not translator:
+            self.update_translator (None)
             self.update_from_langs (None)
             self.update_to_langs (None)
             self.update_can_translate (False)
         else:
-            self.task = LanguageTableTask (self, translator)
+            self.task = TranslatorTask (self, translator)
             self.task.start ()
 
     def set_from_lang (self, lang):
@@ -167,6 +169,12 @@ class BaseTranslation (object):
         self.update_can_translate (False)
         self.task = TranslateTask (self, request)
         self.task.start ()
+        
+    def cancel (self):
+        self.task.cancel ()
+        self.update_status (StatusCancelled ())
+        if isinstance (self.task, TranslateTask):
+            self.update_can_translate (True)
         
     # Virtual methods
 

@@ -1,5 +1,15 @@
 2008-12-05  Luca Bruno  <lethalman88@gmail.com>
 
+	Cancellation of tasks has been implemented.
+	
+	* freespeak/ui/translation_box.py (ComboChangedSignal): added for delaying UI change
+
+	* freespeak/ui/translation.py (BaseUITranslation.on_cancelled): added, connect to 'cancelled' signal of Progress
+
+	* freespeak/translation.py (Task): renamed stop with cancel
+
+	* freespeak/status.py (StatusCancelled): added
+
 	* freespeak/translation.py (TranslateTask)
 	(LanguageTableTask): added to to make cancellable Translation tasks
 

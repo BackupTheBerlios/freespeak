@@ -67,6 +67,7 @@ class BaseUITranslation (gtk.VBox, BaseTranslation):
 
     def setup_progress (self):
         self.progress = uiutils.Progress ()
+        self.progress.connect ('cancelled', self.on_cancelled)
         self.pack_start (self.progress, False)
 
     def setup_ui (self):
@@ -107,7 +108,9 @@ class BaseUITranslation (gtk.VBox, BaseTranslation):
         self.setup_progress ()
         self.setup_clipboard ()
 
+    @utils.syncronized
     def update_translator (self, translator):
+        self.translation_box.set_translator (translator)
         if translator:
             pixbuf = self.application.icon_theme.load_icon (translator.icon, Spinner.PIXELS, 0)
             self.label.icon.set_idle (pixbuf)
@@ -132,7 +135,7 @@ class BaseUITranslation (gtk.VBox, BaseTranslation):
     def update_status (self, status):
         if isinstance (status, StatusStarted):
             self.started ()
-        elif isinstance (status, StatusComplete):
+        elif isinstance (status, StatusComplete) or isinstance (status, StatusCancelled):
             self.stopped ()
         self.progress.set_text (status.description)
 
@@ -140,6 +143,11 @@ class BaseUITranslation (gtk.VBox, BaseTranslation):
 
     def create_request (self):
         raise NotImplementedError ()
+
+    # Events
+
+    def on_cancelled (self, progress):
+        self.cancel ()
 
 class TextTranslation (BaseUITranslation):
     capability = TextTranslationRequest

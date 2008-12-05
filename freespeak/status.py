@@ -36,6 +36,10 @@ class StatusComplete (Status):
         Status.__init__ (self, description)
         self.result = result
 
+class StatusCancelled (Status):
+    def __init__ (self):
+        Status.__init__ (self, _("Cancellation requested"))
+
 class StatusTextComplete (StatusComplete):
     pass
 
@@ -45,5 +49,5 @@ class StatusWebComplete (StatusComplete):
 class StatusSuggestionComplete (StatusComplete):
     pass
 
-__all__ = ['Status', 'StatusStarted', 'StatusComplete',
+__all__ = ['Status', 'StatusStarted', 'StatusComplete', 'StatusCancelled',
            'StatusTextComplete', 'StatusWebComplete', 'StatusSuggestionComplete']
