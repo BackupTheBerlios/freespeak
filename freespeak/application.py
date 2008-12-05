@@ -55,10 +55,23 @@ class ClipboardController (object):
         self.primary = gtk.clipboard_get ('PRIMARY')
         self.cur_contents = None
 
-    def get_contents (self, force=False):
-        if force or (self.application.config.get ('get_clipboard') and self.primary.wait_is_text_available ()):
+    def get_contents (self):
+        if self.application.config.get ('get_clipboard') and self.primary.wait_is_text_available ():
             text = self.primary.wait_for_text ()
-            if force or (text != self.cur_contents):
+            self.cur_contents = text
+            return text
+
+    def get_text_contents (self):
+        if self.application.config.get ('get_clipboard') and self.primary.wait_is_text_available ():
+            text = self.primary.wait_for_text ()
+            if text != self.cur_contents and not (text.startswith ("http") and not ' ' in text.strip()):
+                self.cur_contents = text
+                return text
+
+    def get_url_contents (self):
+        if self.application.config.get ('get_clipboard') and self.primary.wait_is_text_available ():
+            text = self.primary.wait_for_text ()
+            if text != self.cur_contents and text.startswith ("http"):
                 self.cur_contents = text
                 return text
 

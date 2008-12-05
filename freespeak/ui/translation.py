@@ -214,7 +214,7 @@ class TextTranslation (BaseUITranslation):
                                           self.dest_buffer.get_end_iter ())
 
     def setup_clipboard (self):
-        contents = self.application.clipboard.get_contents ()
+        contents = self.application.clipboard.get_text_contents ()
         # Also check it's not an URL
         if contents is not None and not (contents.startswith ("http") and not ' ' in contents.strip()):
             self.source_buffer.set_text (contents)
@@ -247,7 +247,7 @@ class TextTranslation (BaseUITranslation):
         self.source_view.grab_focus ()
 
     def on_tiny_paste (self, button):
-        contents = self.application.clipboard.get_contents (force=True)
+        contents = self.application.clipboard.get_contents ()
         if contents is not None:
             self.source_buffer.set_text (contents)
 
@@ -338,8 +338,8 @@ class WebTranslation (BaseUITranslation):
         self.layout.pack_start (self.dest_url_box, False)
 
     def setup_clipboard (self):
-        contents = self.application.clipboard.get_contents ()
-        if contents is not None and contents.startswith("http"):
+        contents = self.application.clipboard.get_url_contents ()
+        if contents is not None:
             self.source_url.set_text (contents)
 
     def create_request (self):
@@ -388,7 +388,7 @@ class WebTranslation (BaseUITranslation):
         self.source_url.grab_focus ()
 
     def on_tiny_paste (self, button):
-        contents = self.application.clipboard.get_contents (force=True)
+        contents = self.application.clipboard.get_contents ()
         if contents is not None:
             self.source_url.set_text (contents)
 

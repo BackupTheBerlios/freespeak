@@ -1,5 +1,11 @@
 2008-12-05  Luca Bruno  <lethalman88@gmail.com>
 
+	* freespeak/ui/translation.py (WebTranslation.setup_clipboard): use get_url_contents()
+	(TextTranslation.setup_clipboard): use get_text_contents()
+
+	* freespeak/application.py (ClipboardController.get_url_contents)
+	(ClipboardController.get_text_contents): added
+
 	* freespeak/ui/main_window.py (MainWindow.setup_layout): removed accelerator for Translation menu as it conflicts with the Translate button
 
 	* freespeak/ui/translation.py (WebTranslation.on_browser_net_stop): added, when browser stops loading data from network
