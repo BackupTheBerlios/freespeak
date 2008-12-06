@@ -37,7 +37,6 @@ dnl ****************************************************************************
 dnl * Python 2.4
 dnl ****************************************************************************
 AM_PATH_PYTHON(2.4)
-AM_CHECK_PYTHON_HEADERS(,[AC_MSG_ERROR(could not find Python headers)])
 
 dnl ****************************************************************************
 dnl * Write the values of various paths in defs.py
