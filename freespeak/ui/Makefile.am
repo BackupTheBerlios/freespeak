@@ -11,5 +11,6 @@ freespeak_ui_PYTHON =		\
 	style.py		\
 	suggestion.py		\
 	translation_box.py	\
+	translation_label.py	\
 	translation.py		\
 	utils.py
