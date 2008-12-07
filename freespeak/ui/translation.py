@@ -364,7 +364,7 @@ class WebTranslation (BaseUITranslation):
 
     def update_translate_button_sensitivity (self):
         sensitivity = self.can_translate and bool (self.source_url.get_text ())
-        self.translate_button.set_sensitive (self.can_translate and bool (self.source_url.get_text ()))
+        self.translate_button.set_sensitive (sensitivity)
         if sensitivity:
             self.source_url.handler_unblock (self.entry_activate_handler)
         else:

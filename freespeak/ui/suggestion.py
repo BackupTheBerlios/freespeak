@@ -135,12 +135,17 @@ class TranslationSuggestions (BaseUITranslation):
         return box
 
     def setup_ui (self):
+        self.can_translate = False
+
         hbox = gtk.HBox (spacing=6)
         label = gtk.Label (_("Suggest"))
         label.show ()
         hbox.pack_start (label, False)
 
         self.entry = gtk.Entry ()
+        self.entry.connect ('changed', self.on_entry_changed)
+        self.entry_activate_handler = self.entry.connect ('activate', lambda *args: self.translate_button.clicked ())
+        self.entry.handler_block (self.entry_activate_handler)
         self.entry.show ()
         hbox.pack_start (self.entry)
 
@@ -166,6 +171,19 @@ class TranslationSuggestions (BaseUITranslation):
         return TranslationSuggestionsRequest (self.entry.get_text ())
 
     @utils.syncronized
+    def update_can_translate (self, can_translate):
+        self.can_translate = can_translate
+        self.update_translate_button_sensitivity ()
+
+    def update_translate_button_sensitivity (self):
+        sensitivity = self.can_translate and bool (self.entry.get_text ())
+        self.translate_button.set_sensitive (sensitivity)
+        if sensitivity:
+            self.entry.handler_unblock (self.entry_activate_handler)
+        else:
+            self.entry.handler_block (self.entry_activate_handler)
+
+    @utils.syncronized
     def update_status (self, status):
         BaseUITranslation.update_status (self, status)
         if isinstance (status, StatusSuggestionComplete):
@@ -176,6 +194,9 @@ class TranslationSuggestions (BaseUITranslation):
                 model.append (suggestion_result)
                 
     # Events
+
+    def on_entry_changed (self, entry):
+        self.update_translate_button_sensitivity ()
 
     def on_tiny_clear (self, button):
         self.entry.set_text ("")

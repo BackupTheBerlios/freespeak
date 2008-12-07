@@ -1,6 +1,16 @@
+2008-12-07  Luca Bruno  <lethalman88@gmail.com>
+
+	* freespeak/ui/suggestion.py (TranslationSuggestions.update_translate_button_sensitivity)
+	(TranslationSuggestions.update_can_translate)
+	(TranslationSuggestions.on_entry_changed)
+	(TranslationSuggestions.setup_ui): like with web translations: don't translate if entry is not filled; translate when entry is activated
+
+	* freespeak/ui/translation.py (WebTranslation.update_translate_button_sensitivity): 
+
 2008-12-06  Luca Bruno  <lethalman88@gmail.com>
 
 	* configure.ac: do not check for python headers
+	check for lxml.html
 
 2008-12-05  Luca Bruno  <lethalman88@gmail.com>
 
