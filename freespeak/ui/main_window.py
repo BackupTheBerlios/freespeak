@@ -23,6 +23,7 @@ import os
 import gtk
 import gnome
 
+from freespeak import defs
 from freespeak.ui.manager import *
 from freespeak.ui.translation import *
 from freespeak.ui.suggestion import *
@@ -82,9 +83,9 @@ class MainWindow (gtk.Window):
 
     def setup_window (self):
         self.connect ('delete-event', self.on_delete_event)
-        icon = self.application.icon_theme.load_icon ("freespeak", 64, 0)
+        icon = self.application.icon_theme.load_icon (defs.PACKAGE, 64, 0)
         self.set_icon (icon)
-        self.set_title ('FreeSpeak '+self.application.version)
+        self.set_title ('FreeSpeak')
         self.set_default_size (500, 400)
 
     def setup_layout (self):
