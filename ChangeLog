@@ -1,3 +1,18 @@
+2008-12-17  Luca Bruno  <lethalman88@gmail.com>
+
+	* freespeak/translation.py (BaseTranslation.set_default_to_lang):
+	intelligent choice of the "to language"
+
+2008-12-15  Luca Bruno  <lethalman88@gmail.com>
+
+	* data/Makefile.am:
+
+	* data/freespeak.schemas.in: added schema for metacity window keybindings
+
+	* configure.ac: readd pkg-config and check for gnome-keybindings
+
+	* data/90-freespeak.xml.in: added for gnome-keybindings (gnome-control-center)
+
 2008-12-09  Luca Bruno  <lethalman88@gmail.com>
 
 	* freespeak/ui/main_window.py (MainWindow.setup_window): drop version from window title

@@ -143,6 +143,12 @@ class BaseTranslation (object):
     def set_default_to_lang (self):
         if self.default_lang and not self.to_lang and self.from_lang != self.default_lang:
             self.set_to_lang (self.default_lang)
+        elif self.to_lang and self.to_lang in self.language_table[self.from_lang]:
+            # Set the previous language if it's still available in the new list
+            self.set_to_lang (self.to_lang)
+        elif self.default_lang and self.from_lang != self.default_lang:
+            # Last chance is to set the default language anyway
+            self.set_to_lang (self.default_lang)
 
     def set_translator (self, translator):
         if not translator:
