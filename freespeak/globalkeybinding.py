@@ -50,7 +50,7 @@ class GlobalKeyBinding (gobject.GObject, threading.Thread):
         return self.root.grab_key (self.keycode, X.AnyModifier, True, X.GrabModeAsync, X.GrabModeSync)
 
     def ungrab (self):
-        self.root.ungrab (self.keycode, self.modifiers, self.root)
+        self.root.ungrab_key (self.keycode, X.AnyModifier, self.root)
         
     def idle (self):
         self.emit ("activate")
@@ -82,4 +82,5 @@ class GlobalKeyBinding (gobject.GObject, threading.Thread):
     def stop (self):
         self.running = False
         self.join ()
+        self.ungrab ()
         self.display.close ()
