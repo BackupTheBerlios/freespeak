@@ -2,6 +2,9 @@
 
 	* freespeak/globalkeybinding.py (GlobalKeyBinding.ungrab): fixed
 	(GlobalKeyBinding.stop): ungrab the key
+	(GlobalKeyBinding.on_key_changed): added, regrab the key
+	(GlobalKeyBinding.regrab): added, ungrab then grab the key
+	(GlobalKeyBinding.__init__): notify when the key changes
 
 	* freespeak/application.py (Application.setup_globalkeybinding): added
 	(Application.start): grab the global keybinding and start the X events loop

@@ -31,16 +31,25 @@ class GlobalKeyBinding (gobject.GObject, threading.Thread):
         'activate': (gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE, ()),
         }
 
-    def __init__ (self, gconf_key):
+    def __init__ (self, dir, key):
         gobject.GObject.__init__ (self)
         threading.Thread.__init__ (self)
-        self.gconf_key = gconf_key
+        self.gconf_key = dir+"/"+key
 
         self.gconf = gconf.client_get_default ()
+        self.gconf.add_dir (dir, gconf.CLIENT_PRELOAD_RECURSIVE)
+        self.gconf.notify_add (self.gconf_key, self.on_key_changed)
         self.keymap = gtk.gdk.keymap_get_default ()
         self.display = Display ()
         self.screen = self.display.screen ()
         self.root = self.screen.root
+
+    def on_key_changed (self, *args):
+        self.regrab ()
+
+    def regrab (self):
+        self.ungrab ()
+        self.grab ()
 
     def grab (self):
         accelerator = self.gconf.get_string (self.gconf_key)
