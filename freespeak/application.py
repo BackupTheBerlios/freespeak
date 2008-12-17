@@ -42,6 +42,7 @@ import dbus.mainloop.glib
 from freespeak import defs
 from freespeak.config import Config
 from freespeak.translator import TranslatorsManager
+from freespeak.globalkeybinding import GlobalKeyBinding
 import freespeak.translators
 from freespeak.ui.main_window import MainWindow
 from freespeak.ui import exception_dialog
@@ -98,6 +99,7 @@ class Application (dbus.service.Object):
         self.setup_translators_manager ()
         self.setup_clipboard ()
         self.setup_style ()
+        self.setup_globalkeybinding ()
 
         self.running = False
 
@@ -129,6 +131,9 @@ class Application (dbus.service.Object):
     def setup_style (self):
         style.setup_rc ()
 
+    def setup_globalkeybinding (self):
+        self.globalkeybinding = GlobalKeyBinding ("/apps/metacity/global_keybindings/run_command_translation")
+
     @dbus.service.method ("de.berlios.FreeSpeak",
                           in_signature='', out_signature='b')
     def is_running (self):
@@ -150,6 +155,8 @@ class Application (dbus.service.Object):
 
         self.running = True
 
+        self.globalkeybinding.grab ()
+        self.globalkeybinding.start ()
         gtk.main ()
 
         self.running = False
@@ -158,6 +165,7 @@ class Application (dbus.service.Object):
                           in_signature='', out_signature='')
     def stop (self):
         if self.running:
+            self.globalkeybinding.stop ()
             gtk.main_quit ()
 
 def get_instance ():
