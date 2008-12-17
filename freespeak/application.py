@@ -132,8 +132,7 @@ class Application (dbus.service.Object):
         style.setup_rc ()
 
     def setup_globalkeybinding (self):
-        self.globalkeybinding = GlobalKeyBinding ("/apps/metacity/global_keybindings",
-                                                  "run_command_translation")
+        self.globalkeybinding = GlobalKeyBinding (self, "key_binding")
 
     @dbus.service.method ("de.berlios.FreeSpeak",
                           in_signature='', out_signature='b')

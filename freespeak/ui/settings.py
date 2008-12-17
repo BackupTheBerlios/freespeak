@@ -40,12 +40,15 @@ class Settings(gtk.Dialog):
         self.setup_layout ()
         self.setup_clipboard ()
         self.setup_translator ()
+        self.setup_keybindings ()
 
         self.connect ('response', self.on_response)
         self.show ()
 
     def setup_layout (self):
         self.vbox.set_spacing (6)
+        self.left_group = gtk.SizeGroup (gtk.SIZE_GROUP_HORIZONTAL)
+        self.right_group = gtk.SizeGroup (gtk.SIZE_GROUP_HORIZONTAL)
 
     def setup_clipboard (self):
         frame = uiutils.Frame(_('Clipboard preferences'))
@@ -73,11 +76,13 @@ class Settings(gtk.Dialog):
         vbox = gtk.VBox (spacing=6)
         vbox.show ()
         
-        hbox = gtk.HBox(spacing=4)
+        hbox = gtk.HBox(spacing=12)
         hbox.show ()
         label = gtk.Label (_("_Preferred translator"))
         label.set_use_underline (True)
+        label.set_alignment (0, 0.5)
         label.show ()
+        self.left_group.add_widget (label)
         hbox.pack_start (label, False)
         self.w_preferred_translator = TranslatorCombo (self.application)
         default_translator = self.application.translators_manager.get_default ()
@@ -87,6 +92,7 @@ class Settings(gtk.Dialog):
                 self.w_preferred_translator.set_active_iter (row.iter)
                 break
         self.w_preferred_translator.show ()
+        self.right_group.add_widget (self.w_preferred_translator)
         label.set_mnemonic_widget (self.w_preferred_translator)
         hbox.pack_start (self.w_preferred_translator)
         vbox.pack_start(hbox)
@@ -94,6 +100,60 @@ class Settings(gtk.Dialog):
         frame.add (vbox)
         frame.show ()
         self.vbox.pack_start (frame)
+
+    def setup_keybindings (self):
+        frame = uiutils.Frame(_('Key bindings'))
+        frame.show ()
+        vbox = gtk.VBox (spacing=6)
+        vbox.show ()
+
+        hbox = gtk.HBox(spacing=12)
+        hbox.show ()
+        label = gtk.Label (_("_Translate from clipboard"))
+        label.set_use_underline (True)
+        label.set_alignment (0, 0.5)
+        label.show ()
+        self.left_group.add_widget (label)
+        hbox.pack_start (label, False)
+        model = gtk.ListStore (int, int, bool)
+        accelerator = self.application.config.get ("key_binding")
+        keyval, modifiers = gtk.accelerator_parse (accelerator)
+        model.append ([keyval, modifiers, True])
+        self.w_key_binding = gtk.TreeView ()
+        self.w_key_binding.set_model (model)
+        renderer = gtk.CellRendererAccel ()
+        renderer.connect ('accel-edited', self.on_key_binding_edited)
+        renderer.connect ('accel-cleared', self.on_key_binding_cleared)
+        column = gtk.TreeViewColumn (None, None)
+        column.pack_start (renderer, True)
+        column.set_attributes (renderer, accel_key=0, accel_mods=1, editable=2)
+        self.w_key_binding.append_column (column)
+        self.w_key_binding.set_headers_visible (False)
+        # Having a white background is ugly
+        self.w_key_binding.get_selection().select_iter (model[0].iter)
+        # Grab keyboard focus when clicked, otherwise the user can't set the accel (GTK+ bug?)
+        self.w_key_binding.connect ('button-press-event', lambda *args: self.w_key_binding.grab_focus ())
+        self.w_key_binding.show ()
+        self.right_group.add_widget (self.w_key_binding)
+
+        hbox.pack_start (self.w_key_binding)
+        vbox.pack_start (hbox)
+        
+        frame.add (vbox)
+        frame.show ()
+        self.vbox.pack_start (frame)
+
+    def on_key_binding_edited (self, renderer, path, keyval, modifiers, keycode):
+        row = self.w_key_binding.get_model()[0]
+        row[0] = keyval
+        row[1] = modifiers
+        self.application.config.set ("key_binding", gtk.accelerator_name (keyval, modifiers))
+
+    def on_key_binding_cleared (self, renderer, path):
+        row = self.w_key_binding.get_model()[0]
+        row[0] = 0
+        row[1] = 0
+        self.application.config.set ("key_binding", "disabled")
 
     def on_response (self, dialog, response):
         if response == gtk.RESPONSE_HELP:

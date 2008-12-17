@@ -31,14 +31,14 @@ class GlobalKeyBinding (gobject.GObject, threading.Thread):
         'activate': (gobject.SIGNAL_RUN_LAST, gobject.TYPE_NONE, ()),
         }
 
-    def __init__ (self, dir, key):
+    def __init__ (self, application, key):
         gobject.GObject.__init__ (self)
         threading.Thread.__init__ (self)
-        self.gconf_key = dir+"/"+key
+        self.application = application
+        self.gconf_key = key
 
-        self.gconf = gconf.client_get_default ()
-        self.gconf.add_dir (dir, gconf.CLIENT_PRELOAD_RECURSIVE)
-        self.gconf.notify_add (self.gconf_key, self.on_key_changed)
+        self.application.config.client.notify_add (self.application.config.dir+"/"+self.gconf_key,
+                                                   self.on_key_changed)
         self.keymap = gtk.gdk.keymap_get_default ()
         self.display = Display ()
         self.screen = self.display.screen ()
@@ -52,14 +52,19 @@ class GlobalKeyBinding (gobject.GObject, threading.Thread):
         self.grab ()
 
     def grab (self):
-        accelerator = self.gconf.get_string (self.gconf_key)
+        accelerator = self.application.config.get (self.gconf_key)
         keyval, modifiers = gtk.accelerator_parse (accelerator)
+        if not accelerator or (not keyval and not modifiers):
+            self.keycode = None
+            self.modifiers = None
+            return
         self.keycode = self.keymap.get_entries_for_keyval(keyval)[0][0]
         self.modifiers = int (modifiers)
         return self.root.grab_key (self.keycode, X.AnyModifier, True, X.GrabModeAsync, X.GrabModeSync)
 
     def ungrab (self):
-        self.root.ungrab_key (self.keycode, X.AnyModifier, self.root)
+        if self.keycode:
+            self.root.ungrab_key (self.keycode, X.AnyModifier, self.root)
         
     def idle (self):
         self.emit ("activate")

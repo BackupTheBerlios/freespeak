@@ -41,5 +41,15 @@
         </long>
       </locale>
     </schema>
+
+    <schema>
+      <key>/schemas/apps/freespeak/key_binding</key>
+      <applyto>/apps/freespeak/key_binding</applyto>
+      <type>string</type>
+      <default>&lt;Mod4&gt;t</default>
+      <locale name="C">
+        <short>Translate text/url from clipboard</short>
+      </locale>
+    </schema>
   </schemalist>
 </gconfschemafile>

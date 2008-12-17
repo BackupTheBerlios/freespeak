@@ -24,21 +24,22 @@ import gconf
 class Config (object):
     def __init__(self):
         self.client = gconf.client_get_default ()
-        self.dir = "/apps/freespeak/"
+        self.dir = "/apps/freespeak"
+        self.client.add_dir (self.dir, gconf.CLIENT_PRELOAD_RECURSIVE)
         
     def get (self, key):
-        value = self.client.get (self.dir+key)
+        value = self.client.get (self.dir+"/"+key)
         if value.type == gconf.VALUE_STRING:
             return value.get_string ()
         elif value.type == gconf.VALUE_BOOL:
             return value.get_bool ()
 
     def set (self, key, value):
-        schema = self.client.get_schema ('/schemas'+self.dir+key)
+        schema = self.client.get_schema ('/schemas'+self.dir+"/"+key)
         type = schema.get_type ()
         gvalue = gconf.Value (type)
         if type == gconf.VALUE_STRING:
             gvalue.set_string (value)
         elif type == gconf.VALUE_BOOL:
             gvalue.set_bool (value)
-        self.client.set (self.dir+key, gvalue)
+        self.client.set (self.dir+"/"+key, gvalue)
