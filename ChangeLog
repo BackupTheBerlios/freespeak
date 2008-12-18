@@ -1,3 +1,14 @@
+2008-12-18  Luca Bruno  <lethalman88@gmail.com>
+
+	* freespeak/application.py (ClipboardController.has_text_contents): added
+	(ClipboardController.has_url_contents): added
+
+	* freespeak/ui/main_window.py (MainWindow.on_keybinding_activate): added
+	(MainWindow.__init__): connect to the global keybinding
+	(MainWindow.setup_clipboard): removed unuseful method
+
+	* freespeak/ui/globalkeybinding.py: moved here from freespeak/
+
 2008-12-17  Luca Bruno  <lethalman88@gmail.com>
 
 	* freespeak/config.py (Config.__init__): watch the freespeak dir, remove the trailing slash from dir

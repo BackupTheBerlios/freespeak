@@ -42,8 +42,8 @@ import dbus.mainloop.glib
 from freespeak import defs
 from freespeak.config import Config
 from freespeak.translator import TranslatorsManager
-from freespeak.globalkeybinding import GlobalKeyBinding
 import freespeak.translators
+from freespeak.ui.globalkeybinding import GlobalKeyBinding
 from freespeak.ui.main_window import MainWindow
 from freespeak.ui import exception_dialog
 from freespeak.ui import style
@@ -62,19 +62,31 @@ class ClipboardController (object):
             self.cur_contents = text
             return text
 
-    def get_text_contents (self):
-        if self.application.config.get ('get_clipboard') and self.primary.wait_is_text_available ():
+    def has_text_contents (self):
+        if self.primary.wait_is_text_available ():
             text = self.primary.wait_for_text ()
             if text != self.cur_contents and not (text.startswith ("http") and not ' ' in text.strip()):
-                self.cur_contents = text
-                return text
+                return True
+        return False
 
-    def get_url_contents (self):
-        if self.application.config.get ('get_clipboard') and self.primary.wait_is_text_available ():
+    def get_text_contents (self):
+        if self.application.config.get ('get_clipboard') and self.has_text_contents ():
+            text = self.primary.wait_for_text ()
+            self.cur_contents = self.primary.wait_for_text ()
+            return text
+
+    def has_url_contents (self):
+        if self.primary.wait_is_text_available ():
             text = self.primary.wait_for_text ()
             if text != self.cur_contents and text.startswith ("http"):
-                self.cur_contents = text
-                return text
+                return True
+        return False
+
+    def get_url_contents (self):
+        if self.application.config.get ('get_clipboard') and self.has_url_contents ():
+            text = self.primary.wait_for_text ()
+            self.cur_contents = text
+            return text
 
     def set_contents (self, contents, force=False):
         if force or self.application.config.get ('set_clipboard'):

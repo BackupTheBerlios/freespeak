@@ -69,17 +69,14 @@ class MainWindow (gtk.Window):
         gtk.Window.__init__ (self)
         self.application = application
 
-        self.setup_clipboard ()
         self.setup_window ()
         self.setup_layout ()
         self.setup_status_icon ()
 
+        self.application.globalkeybinding.connect ('activate', self.on_keybinding_activate)
+
     def setup_status_icon (self):
         self.status_icon = StatusIcon (self)
-
-    def setup_clipboard (self):
-        self.clipboard = gtk.Clipboard()
-        self.cur_clipboard = ''
 
     def setup_window (self):
         self.connect ('delete-event', self.on_delete_event)
@@ -155,17 +152,27 @@ class MainWindow (gtk.Window):
             
     # Events
         
+    def on_keybinding_activate (self, keybinding):
+        """
+        Global keybinding has been activated
+        """
+        if self.application.clipboard.has_text_contents ():
+            TextTranslation (self.application, self.manager)
+        else:
+            WebTranslation (self.application, self.manager)
+        self.present ()
+
     def on_new (self, w):
         """
         Open a new tab in the notebook and start a new translation
         """
         type = w.get_name()
         if type == 'Text':
-            translation = TextTranslation (self.application, self.manager)
+            TextTranslation (self.application, self.manager)
         elif type == 'Web':
-            translation = WebTranslation (self.application, self.manager)
+            WebTranslation (self.application, self.manager)
         elif type == 'Suggestions':
-            translation = TranslationSuggestions (self.application, self.manager)
+            TranslationSuggestions (self.application, self.manager)
         self.present ()
                 
     def on_settings(self, w):
