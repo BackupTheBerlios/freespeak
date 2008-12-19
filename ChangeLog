@@ -3,7 +3,49 @@
 	* freespeak/ui/status_icon.py (StatusIcon.setup_menu): added, avoid using accelerators
 	(StatusIcon.on_popup_menu): now popup the new menu, without re-creating it every time
 
+	* freespeak/ui/main_window.py (MainWindow.on_keybinding_activate): do not open a translation if no new data is present in the clipboard
+	Present the window to the user and switch to the latest opened translation.
+
+	* freespeak/ui/globalkeybinding.py (GlobalKeyBinding.idle): lock the GDK thread when emitting "activate"
+	(GlobalKeyBinding.map_modifiers): added, consider only known modifiers
+
+	* freespeak/ui/manager.py (Manager.switch_to_latest): added to force switching to the latest notebook page
+
+2008-12-18  Luca Bruno  <lethalman88@gmail.com>
+
+	* freespeak/application.py (ClipboardController.has_text_contents): added
+	(ClipboardController.has_url_contents): added
+
+	* freespeak/ui/main_window.py (MainWindow.on_keybinding_activate): added
+	(MainWindow.__init__): connect to the global keybinding
+	(MainWindow.setup_clipboard): removed unuseful method
+
+	* freespeak/ui/globalkeybinding.py: moved here from freespeak/
+
 2008-12-17  Luca Bruno  <lethalman88@gmail.com>
+
+	* freespeak/config.py (Config.__init__): watch the freespeak dir, remove the trailing slash from dir
+
+	* freespeak/ui/settings.py (Settings.setup_keybindings): added
+	(Settings.setup_layout): add size groups for keeping columns aligned
+	(Settings.on_key_binding_edited): added
+	(Settings.on_key_binding_cleared): added
+
+	* data/freespeak.schemas.in: added key_binding schema
+
+	* freespeak/globalkeybinding.py (GlobalKeyBinding.ungrab): fixed
+	(GlobalKeyBinding.stop): ungrab the key
+	(GlobalKeyBinding.on_key_changed): added, regrab the key
+	(GlobalKeyBinding.regrab): added, ungrab then grab the key
+	(GlobalKeyBinding.__init__): notify when the key changes
+	(GlobalKeyBinding.grab): don't grab if disabled
+
+	* freespeak/application.py (Application.setup_globalkeybinding): added
+	(Application.start): grab the global keybinding and start the X events loop
+
+	* freespeak/globalkeybindind.py (GlobalKeyBinding): added
+
+	* configure.ac: check for Xlib
 
 	* freespeak/translation.py (BaseTranslation.set_default_to_lang):
 	intelligent choice of the "to language"

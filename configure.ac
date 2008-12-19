@@ -68,6 +68,7 @@ AM_CHECK_PYMOD(gtkspell)
 AM_CHECK_PYMOD(lxml)
 AM_CHECK_PYMOD(lxml.html)
 AM_CHECK_PYMOD(pango)
+AM_CHECK_PYMOD(Xlib)
 
 dnl ****************************************************************************
 dnl * --------------------------------------------------------------------------
