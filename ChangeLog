@@ -1,3 +1,8 @@
+2008-12-19  Luca Bruno  <lethalman88@gmail.com>
+
+	* freespeak/ui/status_icon.py (StatusIcon.setup_menu): added, avoid using accelerators
+	(StatusIcon.on_popup_menu): now popup the new menu, without re-creating it every time
+
 2008-12-17  Luca Bruno  <lethalman88@gmail.com>
 
 	* freespeak/translation.py (BaseTranslation.set_default_to_lang):

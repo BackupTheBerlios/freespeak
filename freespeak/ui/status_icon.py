@@ -22,14 +22,65 @@
 import gtk
 
 class StatusIcon (gtk.StatusIcon):
+    ui_string = """<ui>
+        <menubar>
+        <menu name="Menu" action="PopupMenu">
+            <menuitem action="Text" />
+            <menuitem action="Web" />
+            <menuitem action="Suggestions" />
+            <separator />
+            <menuitem action="Preferences" />
+            <menuitem action="Contents" />
+            <menuitem action="About" />
+            <separator />
+            <menuitem action="Quit" />
+        </menu>
+        </menubar>
+    </ui>"""
+
     def __init__ (self, window):
         gtk.StatusIcon.__init__ (self)
         self.window = window
 
         self.set_from_icon_name ('freespeak')
 
+        self.setup_menu ()
+
         self.connect ('activate', self.on_activate)
         self.connect ('popup-menu', self.on_popup_menu)
+
+    def setup_menu (self):
+        # Re-creating actions from main window is an hack because it's impossible to remove accelerators
+        self.action_group = gtk.ActionGroup ('TrayActions')
+        actions = (
+            ('PopupMenu', None, ''),
+
+            ('Text', gtk.STOCK_NEW, _('_Text'), "",
+             _('New translation'), self.window.on_new),
+
+            ('Web', gtk.STOCK_NETWORK, _('We_b'), "",
+             _('New web page translation'), self.window.on_new),
+
+            ('Suggestions', gtk.STOCK_SELECT_FONT, _('_Suggestions'), "",
+             _('New translation suggestions'), self.window.on_new),
+
+            ('Preferences', gtk.STOCK_PREFERENCES, None, "",
+             _('FreeSpeak preferences'), self.window.on_settings),
+
+            ('Contents', gtk.STOCK_HELP, _("_Contents"), "",
+             None, self.window.on_contents),
+
+            ('About', gtk.STOCK_ABOUT, None, "",
+             _('About FreeSpeak'), self.window.on_about),
+
+            ('Quit', gtk.STOCK_QUIT, None, "",
+             _('Quit FreeSpeak'), self.window.on_quit),
+            )
+        self.action_group.add_actions (actions)
+        self.ui = gtk.UIManager ()
+        self.ui.insert_action_group (self.action_group, 0)
+        self.ui.add_ui_from_string (self.ui_string)
+        self.menu = self.ui.get_widget("/menubar/Menu").get_submenu ()
 
     def on_activate (self, *args):
         if self.window.is_active ():
@@ -38,31 +89,8 @@ class StatusIcon (gtk.StatusIcon):
             self.untray ()
 
     def on_popup_menu (self, status_icon, button, activate_time):
-        menu = gtk.Menu ()
-        menu.set_accel_group (self.window.accel_group)
-
-        item = self.window.action_group.get_action("Text").create_menu_item ()
-        menu.append (item)
-        item = self.window.action_group.get_action("Web").create_menu_item ()
-        menu.append (item)
-        item = self.window.action_group.get_action("Suggestions").create_menu_item ()
-        menu.append (item)
-        item = gtk.SeparatorMenuItem ()
-        item.show ()
-        menu.append (item)
-        item = self.window.action_group.get_action("Preferences").create_menu_item ()
-        menu.append (item)
-        item = self.window.action_group.get_action("Contents").create_menu_item ()
-        menu.append (item)
-        item = self.window.action_group.get_action("About").create_menu_item ()
-        menu.append (item)
-        item = gtk.SeparatorMenuItem ()
-        item.show ()
-        menu.append (item)
-        item = self.window.action_group.get_action("Quit").create_menu_item ()
-        menu.append (item)
-        menu.popup (None, None, gtk.status_icon_position_menu,
-                    button, activate_time, status_icon)
+        self.menu.popup (None, None, gtk.status_icon_position_menu,
+                         button, activate_time, status_icon)
         
     def tray (self):
         self.window.set_skip_taskbar_hint (True)
