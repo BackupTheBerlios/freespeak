@@ -67,7 +67,10 @@ class GlobalKeyBinding (gobject.GObject, threading.Thread):
             self.root.ungrab_key (self.keycode, X.AnyModifier, self.root)
         
     def idle (self):
+        # Clipboard requests will hang without locking the GDK thread
+        gtk.gdk.threads_enter ()
         self.emit ("activate")
+        gtk.gdk.threads_leave ()
         return False
 
     def run (self):

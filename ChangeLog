@@ -1,3 +1,12 @@
+2008-12-19  Luca Bruno  <lethalman88@gmail.com>
+
+	* freespeak/ui/main_window.py (MainWindow.on_keybinding_activate): do not open a translation if no new data is present in the clipboard
+	Present the window to the user and switch to the latest opened translation.
+
+	* freespeak/ui/globalkeybinding.py (GlobalKeyBinding.idle): lock the GDK thread when emitting "activate"
+
+	* freespeak/ui/manager.py (Manager.switch_to_latest): added to force switching to the latest notebook page
+
 2008-12-18  Luca Bruno  <lethalman88@gmail.com>
 
 	* freespeak/application.py (ClipboardController.has_text_contents): added

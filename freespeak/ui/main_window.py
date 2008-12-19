@@ -20,6 +20,7 @@
 ## Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
 
 import os
+import time
 import gtk
 import gnome
 
@@ -158,9 +159,13 @@ class MainWindow (gtk.Window):
         """
         if self.application.clipboard.has_text_contents ():
             TextTranslation (self.application, self.manager)
-        else:
+        elif self.application.clipboard.has_url_contents ():
             WebTranslation (self.application, self.manager)
-        self.present ()
+        else:
+            return
+        self.manager.switch_to_latest ()
+        timestamp = int (time.time ())
+        self.present_with_time (timestamp)
 
     def on_new (self, w):
         """
