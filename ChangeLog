@@ -4,6 +4,7 @@
 	Present the window to the user and switch to the latest opened translation.
 
 	* freespeak/ui/globalkeybinding.py (GlobalKeyBinding.idle): lock the GDK thread when emitting "activate"
+	(GlobalKeyBinding.map_modifiers): added, consider only known modifiers
 
 	* freespeak/ui/manager.py (Manager.switch_to_latest): added to force switching to the latest notebook page
 

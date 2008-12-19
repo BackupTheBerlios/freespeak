@@ -44,6 +44,19 @@ class GlobalKeyBinding (gobject.GObject, threading.Thread):
         self.screen = self.display.screen ()
         self.root = self.screen.root
 
+        self.map_modifiers ()
+
+    def map_modifiers (self):
+        gdk_modifiers = (gtk.gdk.CONTROL_MASK, gtk.gdk.SHIFT_MASK, gtk.gdk.MOD1_MASK,
+                         gtk.gdk.MOD2_MASK, gtk.gdk.MOD3_MASK, gtk.gdk.MOD4_MASK, gtk.gdk.MOD5_MASK,
+                         gtk.gdk.SUPER_MASK, gtk.gdk.HYPER_MASK)
+        self.known_modifiers_mask = 0
+        for modifier in gdk_modifiers:
+            # Do you know how to handle unknown "Mod*" keys?
+            # They are usually Locks and something like that
+            if "Mod" not in gtk.accelerator_name (0, modifier):
+                self.known_modifiers_mask |= modifier
+
     def on_key_changed (self, *args):
         self.regrab ()
 
@@ -80,9 +93,7 @@ class GlobalKeyBinding (gobject.GObject, threading.Thread):
             while self.display.pending_events ():
                 event = self.display.next_event ()
                 if event.detail == self.keycode and event.type == X.KeyPress and not wait_for_release:
-                    modifiers = event.state & (X.ControlMask | X.ShiftMask |
-                                               X.Mod1Mask | X.Mod2Mask | X.Mod3Mask |
-                                               X.Mod4Mask | X.Mod5Mask)
+                    modifiers = event.state & self.known_modifiers_mask
                     if modifiers == self.modifiers:
                         wait_for_release = True
                         self.display.allow_events (X.AsyncKeyboard, event.time)
