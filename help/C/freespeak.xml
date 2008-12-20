@@ -4,8 +4,8 @@
           <!ENTITY appname          "FreeSpeak">
           <!ENTITY app "<application>FreeSpeak</application>">
           <!ENTITY appversion   "0.2.0">
-          <!ENTITY manrevision  "1.0">
-          <!ENTITY date "November 2008">
+          <!ENTITY manrevision  "1.1">
+          <!ENTITY date "December 2008">
           <!-- Information about the entities
                Use the app and appname entities to specify the name of the application.  
                Use the appversion entity to specify the version of the application.
@@ -90,6 +90,15 @@
 	  </para>
 	</revdescription> 
       </revision> 
+      <revision> 
+	<revnumber>&appname; Manual V1.0</revnumber> 
+	<date>November 2008</date> 
+	<revdescription> 
+	  <para role="author">Luca Bruno
+	    <email>lethalman88@gmail.com</email>
+	  </para>
+	</revdescription> 
+      </revision> 
     </revhistory> 
     
     <releaseinfo>This manual describes version &appversion; of &appname;.
@@ -135,6 +144,9 @@
       <listitem> 
 	<para>Keeps always opened in the system tray to allow immediate translations</para> 
       </listitem> 
+      <listitem>
+        <para>Desktop-wide keybinding - select text and press a key to translate</para>
+      </listitem>
     </itemizedlist> 
 
     <note>
@@ -225,7 +237,7 @@
 	<varlistentry>
 	<term>Toolbar. </term>
 	<listitem>
-	<para> The toolbar contains a subset of the commands that you can access from the menubar.</para>
+	<para>The toolbar contains a subset of the commands that you can access from the menubar.</para>
 	</listitem>
 	</varlistentry>
 	</variablelist>
@@ -332,7 +344,7 @@
         Write the phrase to translate in the entry below then click <guibutton>Translate</guibutton>.
       </para>
       <para>
-        The yellow <guilabel>Tree View</guilabel> shows all the possible translation solutions you might to adopt.
+        The yellow <guilabel>Tree View</guilabel> shows all the possible translation solutions you might want to adopt.
         Right click on a row to open the <guilabel>Popup Menu</guilabel>.
       </para>
       <tip>
@@ -411,6 +423,19 @@
           </para> 
 	  <para>Default: 
 	    <guilabel>None</guilabel>.
+          </para> 
+        </listitem>
+      </varlistentry>
+      <varlistentry> 
+	<term> 
+	  <guilabel>Translate from clipboard keybinding</guilabel>
+        </term> 
+        <listitem>
+	  <para>Click on the blue <guibutton>Accel Box</guibutton> to specify the
+            key binding to use when translating the text or url contained in the clipboard.
+          </para> 
+	  <para>Default: 
+	    <guilabel>Super+T</guilabel>.
           </para> 
         </listitem>
       </varlistentry>

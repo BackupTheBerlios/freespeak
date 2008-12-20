@@ -49,6 +49,7 @@ class StatusIcon (gtk.StatusIcon):
 
     def setup_menu (self):
         # Re-creating actions from main window is an hack because it's impossible to remove accelerators
+        # See GTK+ feature request: http://bugzilla.gnome.org/show_bug.cgi?id=516425
         self.action_group = gtk.ActionGroup ('TrayActions')
         actions = (
             ('Text', gtk.STOCK_NEW, _('_Text'), "",
@@ -90,7 +91,7 @@ class StatusIcon (gtk.StatusIcon):
         
     def on_new (self, w):
         """
-        Start a new translation and switch to the latest opened tbat in the notebook
+        Start a new translation and switch to the latest opened tab in the notebook
         """
         self.window.on_new (w)
         self.window.manager.switch_to_latest ()
