@@ -23,8 +23,7 @@ import gtk
 
 class StatusIcon (gtk.StatusIcon):
     ui_string = """<ui>
-        <menubar>
-        <menu name="Menu" action="PopupMenu">
+        <popup>
             <menuitem action="Text" />
             <menuitem action="Web" />
             <menuitem action="Suggestions" />
@@ -34,8 +33,7 @@ class StatusIcon (gtk.StatusIcon):
             <menuitem action="About" />
             <separator />
             <menuitem action="Quit" />
-        </menu>
-        </menubar>
+        </popup>
     </ui>"""
 
     def __init__ (self, window):
@@ -53,8 +51,6 @@ class StatusIcon (gtk.StatusIcon):
         # Re-creating actions from main window is an hack because it's impossible to remove accelerators
         self.action_group = gtk.ActionGroup ('TrayActions')
         actions = (
-            ('PopupMenu', None, ''),
-
             ('Text', gtk.STOCK_NEW, _('_Text'), "",
              _('New translation'), self.window.on_new),
 
@@ -80,7 +76,7 @@ class StatusIcon (gtk.StatusIcon):
         self.ui = gtk.UIManager ()
         self.ui.insert_action_group (self.action_group, 0)
         self.ui.add_ui_from_string (self.ui_string)
-        self.menu = self.ui.get_widget("/menubar/Menu").get_submenu ()
+        self.menu = self.ui.get_widget("/popup")
 
     def on_activate (self, *args):
         if self.window.is_active ():
