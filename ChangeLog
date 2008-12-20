@@ -4,6 +4,7 @@
 	(StatusIcon.setup_menu): change according to the new ui definition
 	(StatusIcon.on_new): added as a wrapper for MainWindow.on_new
 	Manager will switch to the latest opened tab
+	(StatusIcon.tray): hide because iconify does an animation against the task bar
 
 2008-12-19  Luca Bruno  <lethalman88@gmail.com>
 

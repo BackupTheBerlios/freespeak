@@ -97,7 +97,7 @@ class StatusIcon (gtk.StatusIcon):
 
     def tray (self):
         self.window.set_skip_taskbar_hint (True)
-        self.window.iconify ()
+        self.window.hide ()
 
     def untray (self):
         self.window.present ()
