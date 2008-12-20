@@ -52,13 +52,13 @@ class StatusIcon (gtk.StatusIcon):
         self.action_group = gtk.ActionGroup ('TrayActions')
         actions = (
             ('Text', gtk.STOCK_NEW, _('_Text'), "",
-             _('New translation'), self.window.on_new),
+             _('New translation'), self.on_new),
 
             ('Web', gtk.STOCK_NETWORK, _('We_b'), "",
-             _('New web page translation'), self.window.on_new),
+             _('New web page translation'), self.on_new),
 
             ('Suggestions', gtk.STOCK_SELECT_FONT, _('_Suggestions'), "",
-             _('New translation suggestions'), self.window.on_new),
+             _('New translation suggestions'), self.on_new),
 
             ('Preferences', gtk.STOCK_PREFERENCES, None, "",
              _('FreeSpeak preferences'), self.window.on_settings),
@@ -76,7 +76,7 @@ class StatusIcon (gtk.StatusIcon):
         self.ui = gtk.UIManager ()
         self.ui.insert_action_group (self.action_group, 0)
         self.ui.add_ui_from_string (self.ui_string)
-        self.menu = self.ui.get_widget("/popup")
+        self.menu = self.ui.get_widget ("/popup")
 
     def on_activate (self, *args):
         if self.window.is_active ():
@@ -88,6 +88,13 @@ class StatusIcon (gtk.StatusIcon):
         self.menu.popup (None, None, gtk.status_icon_position_menu,
                          button, activate_time, status_icon)
         
+    def on_new (self, w):
+        """
+        Start a new translation and switch to the latest opened tbat in the notebook
+        """
+        self.window.on_new (w)
+        self.window.manager.switch_to_latest ()
+
     def tray (self):
         self.window.set_skip_taskbar_hint (True)
         self.window.iconify ()
