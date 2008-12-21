@@ -34,6 +34,8 @@ class GlobalKeyBinding (gobject.GObject, threading.Thread):
     def __init__ (self, application, key):
         gobject.GObject.__init__ (self)
         threading.Thread.__init__ (self)
+        self.setDaemon (True)
+
         self.application = application
         self.gconf_key = key
 
@@ -90,25 +92,23 @@ class GlobalKeyBinding (gobject.GObject, threading.Thread):
         self.running = True
         wait_for_release = False
         while self.running:
-            while self.display.pending_events ():
-                event = self.display.next_event ()
-                if event.detail == self.keycode and event.type == X.KeyPress and not wait_for_release:
-                    modifiers = event.state & self.known_modifiers_mask
-                    if modifiers == self.modifiers:
-                        wait_for_release = True
-                        self.display.allow_events (X.AsyncKeyboard, event.time)
-                    else:
-                        self.display.allow_events (X.ReplayKeyboard, event.time)
-                elif event.detail == self.keycode and wait_for_release:
-                    if event.type == X.KeyRelease:
-                        wait_for_release = False
-                        gobject.idle_add (self.idle)
+            event = self.display.next_event ()
+            if event.detail == self.keycode and event.type == X.KeyPress and not wait_for_release:
+                modifiers = event.state & self.known_modifiers_mask
+                if modifiers == self.modifiers:
+                    wait_for_release = True
                     self.display.allow_events (X.AsyncKeyboard, event.time)
                 else:
                     self.display.allow_events (X.ReplayKeyboard, event.time)
+            elif event.detail == self.keycode and wait_for_release:
+                if event.type == X.KeyRelease:
+                    wait_for_release = False
+                    gobject.idle_add (self.idle)
+                self.display.allow_events (X.AsyncKeyboard, event.time)
+            else:
+                self.display.allow_events (X.ReplayKeyboard, event.time)
 
     def stop (self):
         self.running = False
-        self.join ()
         self.ungrab ()
         self.display.close ()
