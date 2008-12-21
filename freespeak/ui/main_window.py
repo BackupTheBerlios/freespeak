@@ -26,6 +26,7 @@ import gnome
 
 from freespeak import defs
 from freespeak.ui.manager import *
+from freespeak.ui.intro import *
 from freespeak.ui.translation import *
 from freespeak.ui.suggestion import *
 from freespeak.ui.settings import *
@@ -129,6 +130,7 @@ class MainWindow (gtk.Window):
         self.setup_menubar ()
         self.setup_toolbar ()
         self.setup_manager ()
+        self.setup_intro ()
 
         self.layout.show ()
         self.add (self.layout)
@@ -147,6 +149,11 @@ class MainWindow (gtk.Window):
         self.manager = Manager (self.application)
         self.manager.show ()
         self.layout.pack_start (self.manager)
+
+    def setup_intro (self):
+        self.intro = Intro (self.application, self.manager)
+        self.intro.show ()
+        self.layout.pack_start (self.intro)
 
     def quit (self):
         self.application.stop ()

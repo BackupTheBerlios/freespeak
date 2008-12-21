@@ -4,6 +4,7 @@ freespeak_ui_PYTHON =		\
 	about.py		\
 	globalkeybinding.py	\
 	exception_dialog.py	\
+	intro.py		\
 	main_window.py		\
 	manager.py		\
 	settings.py		\

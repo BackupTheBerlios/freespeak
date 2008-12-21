@@ -1,5 +1,7 @@
 2008-12-21  Luca Bruno  <lethalman88@gmail.com>
 
+	* freespeak/ui/intro.py: added, display something when the notebook is empty
+
 	* freespeak/ui/Makefile.am (freespeak_ui_PYTHON): added globalkeybinding.py, moved from parent Makefile.am
 
 	* freespeak/ui/globalkeybinding.py (GlobalKeyBinding.run): do not use 100% CPU with a loop
