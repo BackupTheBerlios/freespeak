@@ -6,7 +6,6 @@ freespeak_PYTHON =		\
 	__init__.py		\
 	application.py		\
 	config.py		\
-	globalkeybinding.py	\
 	status.py		\
 	translation.py		\
 	translator.py		\
