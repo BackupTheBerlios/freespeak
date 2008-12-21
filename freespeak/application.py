@@ -169,6 +169,7 @@ class Application (dbus.service.Object):
 
         self.globalkeybinding.grab ()
         self.globalkeybinding.start ()
+        gtk.gdk.threads_enter ()
         gtk.main ()
 
         self.running = False

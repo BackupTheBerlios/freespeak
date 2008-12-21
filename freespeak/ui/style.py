@@ -30,4 +30,13 @@ style "tiny-button-style"
   ythickness = 0
 }
 widget "*.tiny-button" style "tiny-button-style"
+
+style "intro-button-style"
+{
+  GtkWidget::focus-padding = 0
+  bg[PRELIGHT] = "#fff8ae"
+  xthickness = 0
+  ythickness = 0
+}
+widget "*.intro-button" style "intro-button-style"
 """)
