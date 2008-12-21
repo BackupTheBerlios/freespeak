@@ -3,6 +3,7 @@
 	* freespeak/ui/globalkeybinding.py (GlobalKeyBinding.run): do not use 100% CPU with a loop
 	(GlobalKeyBinding.__init__): set daemon flag for thread so that the application terminates when exiting the GTK+ mainloop
 	Remove older copyright years
+	Changed license to MIT
 
 2008-12-20  Luca Bruno  <lethalman88@gmail.com>
 
