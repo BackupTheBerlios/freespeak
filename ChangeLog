@@ -1,5 +1,13 @@
 2008-12-22  Luca Bruno  <lethalman88@gmail.com>
 
+	* freespeak/ui/intro.py (Intro.on_expose): draw a box around the intro buttons
+	(Intro.setup_layout): added
+	Be a GtkAlignment the widget in the window
+	(IntroButton.__init__): set a border width
+	Align the text to the left near the image
+	Make the text bold
+	Use a custom child instead of button image/text properties
+
 	* freespeak/ui/spinner.py (Spinner.stop): None check for self.source
 
 2008-12-21  Luca Bruno  <lethalman88@gmail.com>
