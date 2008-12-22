@@ -292,7 +292,7 @@ class WebTranslation (BaseUITranslation):
         box = gtk.HBox (homogeneous=True)
         # Copy
         btn = uiutils.TinyButton (gtk.STOCK_COPY)
-        btn.set_tooltip_text (_("Copy the url"))
+        btn.set_tooltip_text (_("Copy the translated page url"))
         btn.connect ('clicked', self.on_tiny_copy)
         btn.show ()
         box.pack_start (btn)

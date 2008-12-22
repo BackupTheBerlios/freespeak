@@ -64,10 +64,12 @@ class SuggestionsTreeView (gtk.TreeView):
         attributes.insert (pango.AttrWeight (pango.WEIGHT_BOLD, 0, -1))
         renderer.set_property ("attributes", attributes)
         column = gtk.TreeViewColumn (_("Translation"), renderer, text=self.COL_TRANSLATION)
+        column.set_resizable (True)
         self.append_column (column)
 
         renderer = gtk.CellRendererText ()
         column = gtk.TreeViewColumn (_("Original"), renderer, text=self.COL_ORIGINAL)
+        column.set_resizable (True)
         self.append_column (column)
 
         renderer = gtk.CellRendererPixbuf ()

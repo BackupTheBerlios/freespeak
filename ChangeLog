@@ -1,6 +1,9 @@
 2008-12-22  Luca Bruno  <lethalman88@gmail.com>
 
+	* freespeak/ui/suggestion.py (SuggestionsTreeView.setup_columns): set columns resizable
+
 	* freespeak/ui/translation.py (WebTranslation.on_browser_net_stop): wrong condition fixed
+	(WebTranslation.dest_url_buttons): improved tooltip meaning
 
 	* freespeak/ui/intro.py (Intro.on_expose): draw a box around the intro buttons
 	(Intro.setup_layout): added
