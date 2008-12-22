@@ -78,6 +78,7 @@ class Spinner (gtk.Image):
 
     @utils.syncronized
     def stop (self):
-        gobject.source_remove (self.source)
-        self.source = None
+        if self.source:
+            gobject.source_remove (self.source)
+            self.source = None
         self.set_from_pixbuf (self.idle_pixbuf)
