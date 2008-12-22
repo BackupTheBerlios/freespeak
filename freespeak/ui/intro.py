@@ -1,4 +1,29 @@
+# FreeSpeak - a GUI frontend to online translator engines
+# freespeak/ui/intro.py
+#
+## Copyright (C) 2008  Luca Bruno <lethalman88@gmail.com>
+##
+## This file is part of FreeSpeak.
+##   
+## FreeSpeak is free software; you can redistribute it and/or modify
+## it under the terms of the GNU General Public License as published by
+## the Free Software Foundation; either version 2 of the License, or
+## (at your option) any later version.
+##    
+## FreeSpeak is distributed in the hope that it will be useful,
+## but WITHOUT ANY WARRANTY; without even the implied warranty of
+## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+## GNU Library General Public License for more details.
+##
+## You should have received a copy of the GNU General Public License
+## along with this program; if not, write to the Free Software
+## Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
+
 import gtk
+import gnome
+
+from freespeak.ui.translation import *
+from freespeak.ui.suggestion import *
 
 class IntroButton (gtk.Button):
     def __init__ (self, text, description, stock):
@@ -60,24 +85,28 @@ class Intro (gtk.Alignment):
 
     def setup_text (self):
         button = IntroButton ("Make a text translation", "", gtk.STOCK_NEW)
+        button.connect ('clicked', lambda *args: TextTranslation (self.application, self.manager))
         button.show ()
         self.size_group.add_widget (button)
         self.vbox.pack_start (button)
 
     def setup_web (self):
         button = IntroButton ("Make a web page translation", "", gtk.STOCK_NETWORK)
+        button.connect ('clicked', lambda *args: WebTranslation (self.application, self.manager))
         button.show ()
         self.size_group.add_widget (button)
         self.vbox.pack_start (button)
 
     def setup_suggestions (self):
         button = IntroButton ("Request translation suggestions", "", gtk.STOCK_SELECT_FONT)
+        button.connect ('clicked', lambda *args: TranslationSuggestions (self.application, self.manager))
         button.show ()
         self.size_group.add_widget (button)
         self.vbox.pack_start (button)
 
     def setup_help (self):
         button = IntroButton ("Getting started", "Getting started", gtk.STOCK_HELP)
+        button.connect ('clicked', lambda *args: gnome.url_show ("ghelp:freespeak?freespeak-getting-started"))
         button.show ()
         self.size_group.add_widget (button)
         self.vbox.pack_start (button)
