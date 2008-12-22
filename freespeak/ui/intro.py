@@ -40,13 +40,14 @@ class Intro (gtk.Alignment):
     def on_expose (self, widget, event):
         style = self.get_style ()
         allocation = self.vbox.get_allocation ()
-        x, y = allocation.x-12, allocation.y-12
-        width, height = allocation.width+24, allocation.height+24
+        _, _, width, _, _ = event.window.get_geometry ()
+        _, y = 0, allocation.y-12
+        _, height = allocation.width+24, allocation.height+26
         style.paint_box (event.window, gtk.STATE_PRELIGHT, gtk.SHADOW_ETCHED_IN, event.area, self, None,
-                         x, y, width, height)
+                         1, y, width-2, height)
 
     def setup_layout (self):
-        self.set_border_width (12)
+        self.set_border_width (16)
         self.vbox = gtk.VBox (homogeneous=True)
         self.vbox.show ()
         self.add (self.vbox)

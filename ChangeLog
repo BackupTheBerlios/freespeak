@@ -7,6 +7,8 @@
 	Align the text to the left near the image
 	Make the text bold
 	Use a custom child instead of button image/text properties
+	(Intro.on_expose): paint all the horizontal space
+	(Intro.setup_layout): increase border width to achieve a uniform spacing around the box
 
 	* freespeak/ui/spinner.py (Spinner.stop): None check for self.source
 
