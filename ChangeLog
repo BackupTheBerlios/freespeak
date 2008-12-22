@@ -1,5 +1,7 @@
 2008-12-22  Luca Bruno  <lethalman88@gmail.com>
 
+	* freespeak/ui/translation.py (WebTranslation.on_browser_net_stop): wrong condition fixed
+
 	* freespeak/ui/intro.py (Intro.on_expose): draw a box around the intro buttons
 	(Intro.setup_layout): added
 	Be a GtkAlignment the widget in the window

@@ -405,7 +405,7 @@ class WebTranslation (BaseUITranslation):
         self.application.clipboard.set_contents (self.dest_url.get_uri (), force=True)
 
     def on_browser_net_stop (self, browser):
-        if not self.progress.is_running ():
+        if self.progress.is_running ():
             self.dest_url_box.set_sensitive (True)
             self.dest_url_box.show ()
             self.dest_url_box.set_visible_window (True)
