@@ -3,7 +3,7 @@
           "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
           <!ENTITY appname          "FreeSpeak">
           <!ENTITY app "<application>FreeSpeak</application>">
-          <!ENTITY appversion   "0.2.0">
+          <!ENTITY appversion   "0.3.0">
           <!ENTITY manrevision  "1.1">
           <!ENTITY date "December 2008">
           <!-- Information about the entities
@@ -39,7 +39,7 @@
   <articleinfo> 
     <title>&app; Manual</title>
     <abstract role="description">
-      <para>&app; is ... <!-- insert brief description -->.</para>
+      <para>&app; is FreeSpeak is a free GNOME frontend to online translator engines (such as Google, Yahoo, etc.).</para>
     </abstract>         
     
     <copyright> 
