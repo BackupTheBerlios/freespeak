@@ -426,7 +426,7 @@
             key binding to use when translating the text or url contained in the clipboard.
           </para> 
 	  <para>Default: 
-	    <guilabel>Super+T</guilabel>.
+	    <guilabel>Ctrl+Alt+T</guilabel>.
           </para> 
         </listitem>
       </varlistentry>
