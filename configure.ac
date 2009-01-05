@@ -53,9 +53,9 @@ AC_SUBST(LIBDIR)
 AS_AC_EXPAND(PYTHONDIR, $pythondir)
 AC_SUBST(PYTHONDIR)
 		
-dnl ******************
+dnl ****************
 dnl * Python modules
-dnl ******************
+dnl ****************
 AM_CHECK_PYMOD(dbus)
 AM_CHECK_PYMOD(gconf)
 AM_CHECK_PYMOD(gettext)
