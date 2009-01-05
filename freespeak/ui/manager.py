@@ -24,6 +24,7 @@ import gtk
 class Manager (gtk.Notebook):
     def __init__ (self, application):
         gtk.Notebook.__init__ (self)
+        self.set_scrollable (True)
         self.application = application
 
     def switch_to_latest (self):

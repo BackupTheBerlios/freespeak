@@ -1,5 +1,7 @@
 2009-01-05  Luca Bruno  <lethalman88@gmail.com>
 
+	* freespeak/ui/manager.py (Manager.__init__): set scrollable
+
 	* data/freespeak.schemas.in: change default key binding value to Ctrl+Alt+t
 
 	* README: updated
