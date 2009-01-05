@@ -1,20 +1,25 @@
-FreeSpeak is a simple frontend to already existing online translators.
+FreeSpeak is a free (as in freedom, developed and released under the terms of GPL)
+frontend to online translator engines (such as Google, Yahoo, etc.).
+It is written in Python, it uses the GTK toolkit and some GNOME infrastructure features.
 
-The installation is described in the INSTALL file.
+Please read the INSTALL file for installation instructions.
 
 SYSTEM REQUIRMENTS
 Python 2.4 or higher
 GTK+ 2.12 or higher
 PyGTK 2.12 or higher
 PyGObject 2.12 or higher
-GnomePython 2.10 or higher
+GnomePython and extras 2.10 or higher
 Dbus-Python
 Python LXML
+Python-XLib
 
 KEYBOARD SHORTCUTS
 Ctrl+T	New text translation
-Ctrl+W	New web translation
+Ctrl+B	New web translation
+Ctrl+S  New translation suggestions
 Ctrl+P	Shows preferences dialog
 Ctrl+A	Shows about dialog
+Ctrl+W  Close the active translation
 Ctrl+Q	Quit 
 Ctrl+T	Translate
