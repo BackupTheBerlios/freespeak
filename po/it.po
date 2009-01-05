@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FreeSpeak 0.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-05 14:12+0100\n"
-"PO-Revision-Date: 2008-11-22 14:52+0100\n"
+"POT-Creation-Date: 2009-01-05 14:27+0100\n"
+"PO-Revision-Date: 2009-01-05 14:12+0100\n"
 "Last-Translator: Luca Bruno <lethalman88@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -34,16 +34,15 @@ msgstr "Salva il testo o l'url tradotti nella clipboard"
 
 #: ../data/freespeak.schemas.in.h:5
 msgid "Set translated data to clipboard"
-msgstr "Trasferisci i dati tradotti nella clipboard"
+msgstr "Copia i dati tradotti nella clipboard"
 
 #: ../data/freespeak.schemas.in.h:6
 msgid "The name of the translator Python module to use by default."
 msgstr "Il nome del modulo Python da usare come traduttore predefinito"
 
 #: ../data/freespeak.schemas.in.h:7
-#, fuzzy
 msgid "Translate text/url from clipboard"
-msgstr "Ottieni testo/url dalla clipboard"
+msgstr "Traduci il testo/url dalla clipboard"
 
 #: ../data/freespeak.desktop.in.h:1 ../data/freespeak.desktop.in.in.h:1
 #: ../freespeak/ui/about.py:32
@@ -63,14 +62,13 @@ msgid "Translation complete"
 msgstr "Traduzione completata"
 
 #: ../freespeak/status.py:41
-#, fuzzy
 msgid "Cancellation requested"
-msgstr "Traduzione avviata"
+msgstr "Annullamento richiesto"
 
 #: ../freespeak/translation.py:72
 #, python-format
 msgid "Retrieving languages from %s"
-msgstr "Ottenimento linguaggi da %s"
+msgstr "Ricezione lingue da %s"
 
 #: ../freespeak/translation.py:76
 msgid "Updating the list"
@@ -87,12 +85,12 @@ msgstr "Connessione a"
 #: ../freespeak/translators/opentran.py:100
 #: ../freespeak/translators/yahoo.py:100
 msgid "Parsing result"
-msgstr "Processo il risultato"
+msgstr "Elaboro il risultato"
 
 #. Image
 #: ../freespeak/translators/opentran.py:114
 msgid "Fetching image"
-msgstr ""
+msgstr "Scaricamento immagine"
 
 #: ../freespeak/ui/exception_dialog.py:38
 msgid "Exception"
@@ -103,17 +101,16 @@ msgid "An error has occurred:"
 msgstr "Si è verificato un errore:"
 
 #: ../freespeak/ui/main_window.py:95 ../freespeak/ui/suggestion.py:66
-#, fuzzy
 msgid "Translation"
-msgstr "T_raduttore:"
+msgstr "Traduzione"
 
 #: ../freespeak/ui/main_window.py:96
 msgid "_Edit"
-msgstr ""
+msgstr "_Modifica"
 
 #: ../freespeak/ui/main_window.py:97
 msgid "_Help"
-msgstr ""
+msgstr "_Aiuto"
 
 #: ../freespeak/ui/main_window.py:99 ../freespeak/ui/status_icon.py:55
 msgid "_Text"
@@ -124,9 +121,8 @@ msgid "New translation"
 msgstr "Nuova traduzione"
 
 #: ../freespeak/ui/main_window.py:102 ../freespeak/ui/status_icon.py:58
-#, fuzzy
 msgid "We_b"
-msgstr "_Web"
+msgstr "We_b"
 
 #: ../freespeak/ui/main_window.py:103 ../freespeak/ui/status_icon.py:59
 msgid "New web page translation"
@@ -145,18 +141,16 @@ msgid "FreeSpeak preferences"
 msgstr "Preferenze di FreeSpeak"
 
 #: ../freespeak/ui/main_window.py:111
-#, fuzzy
 msgid "_Close this translation"
-msgstr "Chiudi questa traduzione"
+msgstr "_Chiudi questa traduzione"
 
 #: ../freespeak/ui/main_window.py:112
-#, fuzzy
 msgid "Close the active translation page"
-msgstr "Chiudi questa traduzione"
+msgstr "Chiudi la pagina di traduzione corrente"
 
 #: ../freespeak/ui/main_window.py:114 ../freespeak/ui/status_icon.py:67
 msgid "_Contents"
-msgstr ""
+msgstr "_Sommario"
 
 #: ../freespeak/ui/main_window.py:118 ../freespeak/ui/status_icon.py:71
 msgid "About FreeSpeak"
@@ -175,14 +169,12 @@ msgid "Clipboard preferences"
 msgstr "Preferenze della clipboard"
 
 #: ../freespeak/ui/settings.py:59
-#, fuzzy
 msgid "_Get text/url from clipboard automatically"
-msgstr "_Ottieni testo dalla clipboard automaticamente"
+msgstr "_Ottieni testo/url dalla clipboard automaticamente"
 
 #: ../freespeak/ui/settings.py:64
-#, fuzzy
 msgid "_Save translated text/url to clipboard"
-msgstr "_Salva il testo tradotto nella clipboard"
+msgstr "_Salva il testo/url tradotto nella clipboard"
 
 #: ../freespeak/ui/settings.py:74
 msgid "Translator preferences"
@@ -190,53 +182,47 @@ msgstr "Preferenze traduttore"
 
 #: ../freespeak/ui/settings.py:81
 msgid "_Preferred translator"
-msgstr "_Traduttore preferito"
+msgstr "Traduttore _preferito"
 
 #: ../freespeak/ui/settings.py:105
 msgid "Key bindings"
-msgstr ""
+msgstr "Tasti rapidi"
 
 #: ../freespeak/ui/settings.py:112
-#, fuzzy
 msgid "_Translate from clipboard"
-msgstr "Trasferisci i dati tradotti nella clipboard"
+msgstr "_Traduci dalla clipboard"
 
 #: ../freespeak/ui/suggestion.py:71
 msgid "Original"
-msgstr ""
+msgstr "Originale"
 
 #: ../freespeak/ui/suggestion.py:76
 msgid "Application"
-msgstr ""
+msgstr "Applicazione"
 
 #: ../freespeak/ui/suggestion.py:88
-#, fuzzy
 msgid "Copy the suggested translation"
-msgstr "Chiudi questa traduzione"
+msgstr "Copia la traduzione suggerita"
 
 #: ../freespeak/ui/suggestion.py:89
 msgid "_Open project page"
-msgstr ""
+msgstr "_Apri homepage del progetto"
 
 #: ../freespeak/ui/suggestion.py:90
-#, fuzzy
 msgid "Open the translation project web page"
-msgstr "Chiudi questa traduzione"
+msgstr "Apri la pagina web del progetto di traduzione"
 
 #: ../freespeak/ui/suggestion.py:126
-#, fuzzy
 msgid "Clear the phrase"
-msgstr "Cancella l'url"
+msgstr "Cancella la frase"
 
 #: ../freespeak/ui/suggestion.py:132
-#, fuzzy
 msgid "Paste the phrase from the clipboard"
-msgstr "Ottieni testo/url dalla clipboard"
+msgstr "Ottieni la frase dalla clipboard"
 
 #: ../freespeak/ui/suggestion.py:143
-#, fuzzy
 msgid "Suggest"
-msgstr "_Suggerimenti"
+msgstr "Suggerisci"
 
 #: ../freespeak/ui/translation.py:159
 msgid "Clear the text to translate"
@@ -271,9 +257,8 @@ msgid "Paste the url from the clipboard"
 msgstr "Ottieni testo/url dalla clipboard"
 
 #: ../freespeak/ui/translation.py:295
-#, fuzzy
 msgid "Copy the translated page url"
-msgstr "Chiudi questa traduzione"
+msgstr "Copia l'url della pagina tradotta"
 
 #: ../freespeak/ui/translation.py:356
 msgid "Please insert an URL"
@@ -281,7 +266,7 @@ msgstr "Inserisci un URL"
 
 #: ../freespeak/ui/translation.py:379
 msgid "Fetching page..."
-msgstr ""
+msgstr "Scaricamento pagina..."
 
 #: ../freespeak/ui/translation_box.py:61
 msgid "(none)"
@@ -301,7 +286,6 @@ msgstr "_A:"
 
 #: ../freespeak/ui/translation_label.py:79
 #: ../freespeak/ui/translation_label.py:87
-#, fuzzy
 msgid "Close this translation"
 msgstr "Chiudi questa traduzione"
 
