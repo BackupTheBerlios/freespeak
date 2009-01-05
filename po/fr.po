@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: freespeak\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-05 23:32+0100\n"
+"POT-Creation-Date: 2009-01-05 23:36+0100\n"
 "PO-Revision-Date: 2008-11-29 13:15+0100\n"
 "Last-Translator: David Sagnol <David.Sagnol@wanadoo.fr>\n"
 "Language-Team: david <david.sagnol@wanadoo.fr>\n"
@@ -74,6 +74,11 @@ msgstr "Récupération des langues disponibles depuis %s"
 #: ../freespeak/translation.py:76
 msgid "Updating the list"
 msgstr "Mise à jour de la liste"
+
+#: ../freespeak/translator.py:50
+#, python-format
+msgid "Unknown translation request: %s"
+msgstr ""
 
 #: ../freespeak/translators/freetranslation.py:78
 #: ../freespeak/translators/google.py:88

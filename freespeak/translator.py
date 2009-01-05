@@ -47,7 +47,7 @@ class BaseTranslator (object):
         elif isinstance (request, TranslationSuggestionsRequest):
             return self.suggest_translations (request)
         else:
-            raise RuntimeError ("Unknown translation request: %s" % str (request))
+            raise RuntimeError (_("Unknown translation request: %s") % str (request))
 
     def get_language_table (self):
         raise NotImplementedError ()

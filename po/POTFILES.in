@@ -4,6 +4,7 @@ data/freespeak.desktop.in
 data/freespeak.desktop.in.in
 freespeak/status.py
 freespeak/translation.py
+freespeak/translator.py
 freespeak/translators/freetranslation.py
 freespeak/translators/google.py
 freespeak/translators/opentran.py

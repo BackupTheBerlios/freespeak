@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: FreeSpeak 0.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-05 14:27+0100\n"
+"POT-Creation-Date: 2009-01-05 23:37+0100\n"
 "PO-Revision-Date: 2009-01-05 14:12+0100\n"
 "Last-Translator: Luca Bruno <lethalman88@gmail.com>\n"
 "Language-Team: \n"
@@ -73,6 +73,11 @@ msgstr "Ricezione lingue da %s"
 #: ../freespeak/translation.py:76
 msgid "Updating the list"
 msgstr "Aggiornamento della lista"
+
+#: ../freespeak/translator.py:50
+#, python-format
+msgid "Unknown translation request: %s"
+msgstr "Richiesta di traduzione sconosciuta: %s"
 
 #: ../freespeak/translators/freetranslation.py:78
 #: ../freespeak/translators/google.py:88
