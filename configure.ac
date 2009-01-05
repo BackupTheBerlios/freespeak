@@ -1,4 +1,4 @@
-AC_INIT(freespeak, 0.2.99+git, [http://developer.berlios.de/bugs/?group_id=10396])
+AC_INIT(freespeak, 0.3.0, [http://developer.berlios.de/bugs/?group_id=10396])
 AC_CONFIG_SRCDIR(freespeak/__init__.py)
 AC_CONFIG_MACRO_DIR([m4])
 

@@ -1,6 +1,7 @@
 2009-01-05  Luca Bruno  <lethalman88@gmail.com>
 
 	* it.po: updated Italian translation
+	bump to 0.3.0 version
 
 	* POTFILES.in: added missing files
 
