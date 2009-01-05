@@ -2,7 +2,7 @@
 # FreeSpeak - a GUI frontend to online translator engines
 # bin/freespeak
 #
-## Copyright (C) 2005, 2006, 2007, 2008  Luca Bruno <lethalman88@gmail.com>
+## Copyright (C) 2005, 2006, 2007, 2008, 2009  Luca Bruno <lethalman88@gmail.com>
 ##
 ## This file is part of FreeSpeak.
 ##
@@ -30,7 +30,7 @@ import gtk.gdk
 import freespeak.defs
 
 version = """FreeSpeak version %s
-Copyright (C) 2005, 2006, 2007, 2008  Luca Bruno <lethalman88@gmail.com>
+Copyright (C) 2005, 2006, 2007, 2008, 2009  Luca Bruno <lethalman88@gmail.com>
 
 FreeSpeak comes with NO WARRANTY, to the extent permitted by law.
 You may redistribute copies of FreeSpeak under the terms of the

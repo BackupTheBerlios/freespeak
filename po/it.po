@@ -1,5 +1,5 @@
 # translation of FreeSpeak in Italian.
-# Copyright (C) 2008 Luca Bruno
+# Copyright (C) 2008, 2009 Luca Bruno
 # This file is distributed under the same license as the FreeSpeak package.
 # Luca Bruno <lethalman88@gmail.com>, 2008.
 #

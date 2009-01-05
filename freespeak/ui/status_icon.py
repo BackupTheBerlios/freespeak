@@ -1,7 +1,7 @@
 # FreeSpeak - a GUI frontend to online translator engines
 # freespeak/ui/status_icon.py
 #
-## Copyright (C) 2005, 2006, 2007, 2008  Luca Bruno <lethalman88@gmail.com>
+## Copyright (C) 2005, 2006, 2007, 2008, 2009  Luca Bruno <lethalman88@gmail.com>
 ##
 ## This file is part of FreeSpeak.
 ##   

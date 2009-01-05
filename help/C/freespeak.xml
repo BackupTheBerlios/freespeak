@@ -4,8 +4,8 @@
           <!ENTITY appname          "FreeSpeak">
           <!ENTITY app "<application>FreeSpeak</application>">
           <!ENTITY appversion   "0.3.0">
-          <!ENTITY manrevision  "2.0">
-          <!ENTITY date "December 2008">
+          <!ENTITY manrevision  "1.0">
+          <!ENTITY date "January 2009">
           <!-- Information about the entities
                Use the app and appname entities to specify the name of the application.  
                Use the appversion entity to specify the version of the application.
