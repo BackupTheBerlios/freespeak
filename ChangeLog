@@ -1,5 +1,12 @@
 2009-01-06  Luca Bruno  <lethalman88@gmail.com>
 
+	* freespeak/ui/intro.py
+	(Intro.on_text_clicked, on_web_clicked, on_suggestions_clicked, on_help_clicked):
+	added for callback readability
+	(IntroButton.__init__): removed description argument, unused in this release
+	Cut lines to 80 characters.
+	Added docstrings.
+
 	* freespeak/ui/globalkeybinding.py (GlobalKeyBinding.__init__): declare instance variables
 	Cut lines to 80 characters.
 	Removed unused imports.

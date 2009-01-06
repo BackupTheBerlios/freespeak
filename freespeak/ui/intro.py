@@ -19,14 +19,22 @@
 ## along with this program; if not, write to the Free Software
 ## Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
 
+"""
+Introduction widgets
+"""
+
 import gtk
 import gnome
 
-from freespeak.ui.translation import *
-from freespeak.ui.suggestion import *
+from freespeak.ui.translation import TextTranslation, WebTranslation
+from freespeak.ui.suggestion import TranslationSuggestions
 
 class IntroButton (gtk.Button):
-    def __init__ (self, text, description, stock):
+    """
+    Particular button to be displayed in the introduction
+    """
+
+    def __init__ (self, text, stock):
         gtk.Button.__init__ (self)
 
         self.set_name ("intro-button")
@@ -48,6 +56,10 @@ class IntroButton (gtk.Button):
         self.add (hbox)
 
 class Intro (gtk.Alignment):
+    """
+    Introduction widget containing buttons
+    """
+
     def __init__ (self, application, manager):
         gtk.Alignment.__init__ (self, 0.5, 0.5, 0, 0)
         self.application = application
@@ -62,16 +74,11 @@ class Intro (gtk.Alignment):
 
         self.connect ('expose-event', self.on_expose)
 
-    def on_expose (self, widget, event):
-        style = self.get_style ()
-        allocation = self.vbox.get_allocation ()
-        _, _, width, _, _ = event.window.get_geometry ()
-        _, y = 0, allocation.y-12
-        _, height = allocation.width+24, allocation.height+26
-        style.paint_box (event.window, gtk.STATE_PRELIGHT, gtk.SHADOW_ETCHED_IN, event.area, self, None,
-                         1, y, width-2, height)
-
     def setup_layout (self):
+        """
+        Setup the introduction layout and create a size group to ensure
+        widgets have the same horizontal size.
+        """
         self.set_border_width (16)
         self.vbox = gtk.VBox (homogeneous=True)
         self.vbox.show ()
@@ -79,45 +86,106 @@ class Intro (gtk.Alignment):
         self.size_group = gtk.SizeGroup (gtk.SIZE_GROUP_HORIZONTAL)
 
     def setup_manager (self):
+        """
+        Hide the notebook and connect to its signals
+        """
         self.manager.hide ()
         self.manager.connect ('page-added', self.on_page_added)
         self.manager.connect ('page-removed', self.on_page_removed)
 
     def setup_text (self):
-        button = IntroButton ("Make a text translation", "", gtk.STOCK_NEW)
-        button.connect ('clicked', lambda *args: TextTranslation (self.application, self.manager))
+        """
+        Setup the text translation button
+        """
+        button = IntroButton ("Make a text translation",
+                              gtk.STOCK_NEW)
+        button.connect ('clicked', self.on_text_clicked)
         button.show ()
         self.size_group.add_widget (button)
         self.vbox.pack_start (button)
 
     def setup_web (self):
-        button = IntroButton ("Make a web page translation", "", gtk.STOCK_NETWORK)
-        button.connect ('clicked', lambda *args: WebTranslation (self.application, self.manager))
+        """
+        Setup the web translation button
+        """
+        button = IntroButton ("Make a web page translation",
+                              gtk.STOCK_NETWORK)
+        button.connect ('clicked', self.on_web_clicked)
         button.show ()
         self.size_group.add_widget (button)
         self.vbox.pack_start (button)
 
     def setup_suggestions (self):
-        button = IntroButton ("Request translation suggestions", "", gtk.STOCK_SELECT_FONT)
-        button.connect ('clicked', lambda *args: TranslationSuggestions (self.application, self.manager))
+        """
+        Setup the translation suggestions button
+        """
+        button = IntroButton ("Request translation suggestions",
+                              gtk.STOCK_SELECT_FONT)
+        button.connect ('clicked', self.on_suggestions_clicked)
         button.show ()
         self.size_group.add_widget (button)
         self.vbox.pack_start (button)
 
     def setup_help (self):
-        button = IntroButton ("Getting started", "Getting started", gtk.STOCK_HELP)
-        button.connect ('clicked', lambda *args: gnome.url_show ("ghelp:freespeak?freespeak-getting-started"))
+        """
+        Setup the help button
+        """
+        button = IntroButton ("Getting started",
+                              gtk.STOCK_HELP)
+        button.connect ('clicked', self.on_help_clicked)
         button.show ()
         self.size_group.add_widget (button)
         self.vbox.pack_start (button)
 
     # Events
 
+    def on_expose (self, widget, event):
+        """
+        Expose event. This will draw the introduction area to be more eye-candy.
+        """
+        style = self.get_style ()
+        allocation = self.vbox.get_allocation ()
+        _, _, width, _, _ = event.window.get_geometry ()
+        _, y = 0, allocation.y-12
+        _, height = allocation.width+24, allocation.height+26
+        style.paint_box (event.window, gtk.STATE_PRELIGHT, gtk.SHADOW_ETCHED_IN,
+                         event.area, self, None, 1, y, width-2, height)
+
     def on_page_added (self, *args):
+        """
+        Hide the introduction and show the notebook
+        """
         self.hide ()
         self.manager.show ()
 
     def on_page_removed (self, notebook, *args):
+        """
+        When the notebook is empty, show the introduction and hide the notebook
+        """
         if notebook.get_n_pages () == 0:
             self.manager.hide ()
             self.show ()
+
+    def on_text_clicked (self, button):
+        """
+        Open a text translation tab
+        """
+        TextTranslation (self.application, self.manager)
+
+    def on_web_clicked (self, button):
+        """
+        Open a web translation tab
+        """
+        WebTranslation (self.application, self.manager)
+
+    def on_suggestions_clicked (self, button):
+        """
+        Open a translation suggestions tab
+        """
+        TranslationSuggestions (self.application, self.manager)
+
+    def on_help_clicked (self, button):
+        """
+        Open the help at the 'getting-started' topic
+        """
+        gnome.url_show ("ghelp:freespeak?freespeak-getting-started")
