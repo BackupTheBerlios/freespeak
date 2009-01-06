@@ -1,5 +1,9 @@
 2009-01-06  Luca Bruno  <lethalman88@gmail.com>
 
+	* bin/freespeak (main): added to not insert unused variables in the global module scope
+	Added docstrings.
+	Removed unused 'freespeak' import.
+
 	* freespeak/application.py: added docstrings
 	Removed unused imports.
 	Cut lines to 80 characters.
