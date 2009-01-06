@@ -19,15 +19,28 @@
 ## along with this program; if not, write to the Free Software
 ## Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
 
+"""
+Configuration manager for FreeSpeak based on GConf
+"""
+
 import gconf
 
 class Config (object):
+    """
+    This class holds a GConf client and wrapper methds around gconf.
+    Once an instance is created, the /apps/freespeak dir is added to
+    be watched recursively.
+    """
     def __init__(self):
         self.client = gconf.client_get_default ()
         self.dir = "/apps/freespeak"
         self.client.add_dir (self.dir, gconf.CLIENT_PRELOAD_RECURSIVE)
         
     def get (self, key):
+        """
+        Get the value of the given relative key.
+        The value is returned as Python object according to the key schema.
+        """
         value = self.client.get (self.dir+"/"+key)
         if value.type == gconf.VALUE_STRING:
             return value.get_string ()
@@ -35,6 +48,9 @@ class Config (object):
             return value.get_bool ()
 
     def set (self, key, value):
+        """
+        Set the given Python object value to the relative key.
+        """
         schema = self.client.get_schema ('/schemas'+self.dir+"/"+key)
         gtype = schema.get_type ()
         gvalue = gconf.Value (gtype)

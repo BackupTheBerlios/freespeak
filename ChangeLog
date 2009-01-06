@@ -19,6 +19,7 @@
 	* freespeak/ui/main_window.py (MainWindow.on_new): shadowed built-in 'type'
 
 	* freespeak/config.py (Config.set): shadowed built-in 'type'
+	Added docstrings.
 
 2009-01-05  Luca Bruno  <lethalman88@gmail.com>
 
