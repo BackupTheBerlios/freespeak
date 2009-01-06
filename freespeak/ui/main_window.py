@@ -178,12 +178,12 @@ class MainWindow (gtk.Window):
         """
         Open a new tab in the notebook and start a new translation
         """
-        type = w.get_name()
-        if type == 'Text':
+        ttype = w.get_name()
+        if ttype == 'Text':
             TextTranslation (self.application, self.manager)
-        elif type == 'Web':
+        elif ttype == 'Web':
             WebTranslation (self.application, self.manager)
-        elif type == 'Suggestions':
+        elif ttype == 'Suggestions':
             TranslationSuggestions (self.application, self.manager)
         self.present ()
                 

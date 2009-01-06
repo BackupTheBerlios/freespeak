@@ -19,27 +19,27 @@
 ## along with this program; if not, write to the Free Software
 ## Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
 
+"""
+Launch and manage the FreeSpeak Application.
+Application is a singleton and it can be a DBus object.
+For more information please visit the homepage at http://freespeak.berlios.de
+"""
+
 from freespeak import defs
 
 __author__ = "Luca Bruno <lethalman88@gmail.com>"
 __version__ = defs.VERSION
-__homepage__ = "http://freespeak.berlios.de"
 
 import gettext
-import tempfile
 import sys
 import os
-from optparse import OptionParser
 import time
 
-import gobject
 import gtk
-from gtk import gdk
 import dbus
 import dbus.service
 import dbus.mainloop.glib
 
-from freespeak import defs
 from freespeak.config import Config
 from freespeak.translator import TranslatorsManager
 import freespeak.translators
@@ -49,6 +49,10 @@ from freespeak.ui import exception_dialog
 from freespeak.ui import style
 
 class ClipboardController (object):
+    """
+    A higher layer on top of GTK+ clipboards for FreeSpeak usage.
+    """
+
     # Get from PRIMARY, save to both PRIMARY and CLIPBOARD
     def __init__ (self, application):
         self.application = application
@@ -57,25 +61,42 @@ class ClipboardController (object):
         self.cur_contents = None
 
     def get_contents (self):
-        if self.application.config.get ('get_clipboard') and self.primary.wait_is_text_available ():
+        """
+        Get the contents from the primary clipboard if new text is available
+        and if the 'get_clipboard' setting is on.
+        """
+        get_clipboard = self.application.config.get ('get_clipboard')
+        clipboard_text_available = self.primary.wait_is_text_available ()
+        if get_clipboard and clipboard_text_available:
             text = self.primary.wait_for_text ()
             self.cur_contents = text
             return text
 
     def has_text_contents (self):
+        """
+        Check whether the primary clipboard has new valid text available.
+        """
         if self.primary.wait_is_text_available ():
             text = self.primary.wait_for_text ()
-            if text != self.cur_contents and not (text.startswith ("http") and not ' ' in text.strip()):
+            is_text = not (text.startswith ("http") and not ' ' in text.strip())
+            if text != self.cur_contents and is_text:
                 return True
         return False
 
     def get_text_contents (self):
-        if self.application.config.get ('get_clipboard') and self.has_text_contents ():
+        """
+        A wrapper around get_contents() and has_text_contents()
+        """
+        get_clipboard = self.application.config.get ('get_clipboard')
+        if get_clipboard and self.has_text_contents ():
             text = self.primary.wait_for_text ()
             self.cur_contents = self.primary.wait_for_text ()
             return text
 
     def has_url_contents (self):
+        """
+        Check whether the primary clipboard has a new valid url available.
+        """
         if self.primary.wait_is_text_available ():
             text = self.primary.wait_for_text ()
             if text != self.cur_contents and text.startswith ("http"):
@@ -83,18 +104,33 @@ class ClipboardController (object):
         return False
 
     def get_url_contents (self):
-        if self.application.config.get ('get_clipboard') and self.has_url_contents ():
+        """
+        A wrapper around get_contents() and has_url_contents()
+        """
+        get_clipboard = self.application.config.get ('get_clipboard')
+        if get_clipboard and self.has_url_contents ():
             text = self.primary.wait_for_text ()
             self.cur_contents = text
             return text
 
     def set_contents (self, contents, force=False):
+        """
+        Set the contents of the CLIPBOARD clipboard
+        only if the 'set_clipboard' is on or force is True.
+        """
+
         if force or self.application.config.get ('set_clipboard'):
             self.cur_contents = contents
             self.primary.set_text (contents)
             self.clipboard.set_text (contents)
 
 class Application (dbus.service.Object):
+    """
+    An object for managing a FreeSpeak application instance.
+    WARNING: You should create directly an application, please take a look at
+    the get_instance() function to ensure the Application singleton.
+    """
+
     version = __version__
 
     def __init__ (self, bus, path, name, options={}, args=[]):
@@ -116,44 +152,84 @@ class Application (dbus.service.Object):
         self.running = False
 
     def setup_exception_dialog (self):
+        """
+        Setup a Python-wide exception hook
+        """
+        # TODO: must take care if another excepthook had been installed
         sys.excepthook = exception_dialog.exception_hook
 
     @staticmethod
     def setup_l10n ():
+        """
+        Install the _ gettext function
+        """
+        # TODO: must take care if it has been already called then we're
+        #       going to override the _
         gettext.install (defs.GETTEXT_PACKAGE, unicode=True)
 
     def setup_config (self):
+        """
+        Create a configuration object
+        """
         self.config = Config ()
 
     def setup_paths (self):
+        """
+        Setup common paths used for finding FreeSpeak resources
+        """
         self.icons_path = os.path.join (defs.DATA_DIR, defs.PACKAGE, 'art')
         self.translators_path = os.path.dirname (freespeak.translators.__file__)
 
     def setup_icons (self):
+        """
+        Setup the GTK+ icon theme, adding the path for FreeSpeak art.
+        Set the default icon for all windows.
+        """
         self.icon_theme = gtk.icon_theme_get_default ()
         self.icon_theme.append_search_path (self.icons_path)
+        # TODO: must take care if the application was created from another application
         gtk.window_set_default_icon (self.icon_theme.load_icon (defs.PACKAGE, 64, 0))
 
     def setup_translators_manager (self):
+        """
+        Create a TranslatorsManager instance for managing translators/translating engines.
+        """
         self.translators_manager = TranslatorsManager (self)
 
     def setup_clipboard (self):
+        """
+        Create a ClipboardController instance for managing the clipboard
+        """
         self.clipboard = ClipboardController (self)
 
     def setup_style (self):
+        """
+        Tweak the GTK+ widgets style
+        """
         style.setup_rc ()
 
     def setup_globalkeybinding (self):
+        """
+        Create GlobalKeyBinding for the 'key_binding' setting
+        """
         self.globalkeybinding = GlobalKeyBinding (self, "key_binding")
 
     @dbus.service.method ("de.berlios.FreeSpeak",
                           in_signature='', out_signature='b')
     def is_running (self):
+        """
+        Returns True whether the application is running, False otherwise.
+        """
         return self.running
 
     @dbus.service.method ("de.berlios.FreeSpeak",
                           in_signature='a{sv}asi', out_signature='')
     def start (self, options={}, args=[], timestamp=None):
+        """
+        Start the application in blocking mode.
+        If the application is already running, the main window will be presented
+        to the user and the function will return.
+        """
         if self.running:
             if not timestamp:
                 timestamp = int (time.time ())
@@ -177,6 +253,9 @@ class Application (dbus.service.Object):
     @dbus.service.method ("de.berlios.FreeSpeak",
                           in_signature='', out_signature='')
     def stop (self):
+        """
+        Stop the application from running.
+        """
         if self.running:
             self.globalkeybinding.stop ()
             gtk.main_quit ()
@@ -192,8 +271,8 @@ def get_instance ():
     if request != dbus.bus.REQUEST_NAME_REPLY_EXISTS:
         application = Application (bus, '/', "de.berlios.FreeSpeak")
     else:
-        object = bus.get_object ("de.berlios.FreeSpeak", "/")
-        application = dbus.Interface (object, "de.berlios.FreeSpeak")
+        bus_object = bus.get_object ("de.berlios.FreeSpeak", "/")
+        application = dbus.Interface (bus_object, "de.berlios.FreeSpeak")
     return application
 
 __all__ = ['get_instance']

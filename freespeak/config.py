@@ -36,10 +36,10 @@ class Config (object):
 
     def set (self, key, value):
         schema = self.client.get_schema ('/schemas'+self.dir+"/"+key)
-        type = schema.get_type ()
-        gvalue = gconf.Value (type)
-        if type == gconf.VALUE_STRING:
+        gtype = schema.get_type ()
+        gvalue = gconf.Value (gtype)
+        if gtype == gconf.VALUE_STRING:
             gvalue.set_string (value)
-        elif type == gconf.VALUE_BOOL:
+        elif gtype == gconf.VALUE_BOOL:
             gvalue.set_bool (value)
         self.client.set (self.dir+"/"+key, gvalue)
