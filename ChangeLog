@@ -49,6 +49,8 @@
 	Added docstrings.
 
 	* freespeak/ui/about.py (About.__init__): use defs.VERSION
+	Cut lines to 80 characters.
+	Added docstrings.
 
 	* bin/freespeak (main): added to not insert unused variables in the global module scope
 	Added docstrings.
