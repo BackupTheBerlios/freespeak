@@ -71,7 +71,7 @@ class Translator (BaseTranslator):
     
     def get_language_table (self, capability):
         """
-        Overridden. Get the language table depending.
+        Overridden. Get the language table.
         It doesn't depend on the capability as Yahoo has equal languages
         for both text and web.
         """

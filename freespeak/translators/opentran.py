@@ -19,6 +19,10 @@
 ## along with this program; if not, write to the Free Software
 ## Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
 
+"""
+Open-Tran engine
+"""
+
 import httplib
 import urllib
 import lxml.html
@@ -27,11 +31,17 @@ import os
 import gtk
 
 from freespeak.translator import BaseLanguage, BaseTranslator
-from freespeak.translation import *
-from freespeak.status import *
+from freespeak.translation import TranslationSuggestionsRequest
+from freespeak.status import Status, StatusSuggestionsComplete
 
 class Language (BaseLanguage):
+    """
+    OpenTran languages have countrycode and a name.
+    The countrycode is also kept in the name as some languages can't be
+    guessed without it.
+    """
     def __init__ (self, cc, name):
+        BaseLanguage.__init__ (self)
         self.cc = cc # Country Code
         self.name = name
 
@@ -49,15 +59,24 @@ class Language (BaseLanguage):
         return self.name
 
 class Translator (BaseTranslator):
+    """
+    OpenTran translator
+    """
     name = "OpenTran"
     capabilities = [TranslationSuggestionsRequest]
     icon = "opentran"
     pixbuf_cache = {}
     
     def __init__ (self):
+        BaseTranslator.__init__ (self)
         self.language_table = {}
 
     def get_language_table (self, capability):
+        """
+        Overridden. Get the language table.
+        It doesn't depend on the capability as OpenTran can only
+        suggest translations.
+        """
         # OpenTran can handle all language combos
         if self.language_table:
             return self.language_table
@@ -83,6 +102,9 @@ class Translator (BaseTranslator):
         return self.language_table
         
     def suggest_translations (self, request):
+        """
+        Issue a GET to /suggest at open-tran.eu
+        """
         params = urllib.urlencode ({'q': request.text,
                                     'src': request.from_lang.cc,
                                     'dst': request.to_lang.cc})
@@ -98,7 +120,8 @@ class Translator (BaseTranslator):
         results = []
         for element in elements:
             yield Status (_("Parsing result"))
-            # <a>Word (N&times;<img src="..."></a><div><a href="...">Application</a>: original</div>
+            # <a>Word (N&times;<img src="..."></a>
+            # <div><a href="...">Application</a>: original</div>
             result = []
 
             # Translation
@@ -137,3 +160,15 @@ class Translator (BaseTranslator):
         # Result is a list of suitable lists for ListStore usage
         # [..., (text, original, pixbuf, application, url), ...]
         yield StatusSuggestionComplete (results)
+
+    def translate_text (self, request):
+        """
+        OpenTran doesn't support text translations
+        """
+        raise NotImplementedError ()
+
+    def translate_web (self, request):
+        """
+        OpenTran doesn't support web translations
+        """
+        raise NotImplementedError ()
