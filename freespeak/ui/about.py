@@ -21,6 +21,7 @@
 
 import gtk
 import gnome
+from freespeak import defs
 
 class About (gtk.AboutDialog):
     def __init__ (self, application):
@@ -28,7 +29,7 @@ class About (gtk.AboutDialog):
         self.application = application
 
         self.set_name ("FreeSpeak")
-        self.set_version (application.version)
+        self.set_version (defs.VERSION)
         self.set_comments (_("A free frontend to online translator engines")) 
         self.set_license ("""
         FreeSpeak is free software; you can redistribute it and/or modify

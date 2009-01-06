@@ -131,13 +131,17 @@ class Application (dbus.service.Object):
     the get_instance() function to ensure the Application singleton.
     """
 
-    version = __version__
-
-    def __init__ (self, bus, path, name, options={}, args=[]):
+    def __init__ (self, bus, path, name):
         dbus.service.Object.__init__ (self, bus, path, name)
-        self.domain = defs.GETTEXT_PACKAGE
-        self.options = options
-        self.args = args
+
+        self.globalkeybinding = None
+        self.translators_path = None
+        self.icons_path = None
+        self.icon_theme = None
+        self.clipboard = None
+        self.main_window = None
+        self.config = None
+        self.translators_manager = None
 
         self.setup_l10n ()
         self.setup_exception_dialog ()
@@ -187,8 +191,10 @@ class Application (dbus.service.Object):
         """
         self.icon_theme = gtk.icon_theme_get_default ()
         self.icon_theme.append_search_path (self.icons_path)
-        # TODO: must take care if the application was created from another application
-        gtk.window_set_default_icon (self.icon_theme.load_icon (defs.PACKAGE, 64, 0))
+        # TODO: must take care if the application was created from another
+        #       application.
+        window_icon = self.icon_theme.load_icon (defs.PACKAGE, 64, 0)
+        gtk.window_set_default_icon (window_icon)
 
     def setup_translators_manager (self):
         """
@@ -224,7 +230,7 @@ class Application (dbus.service.Object):
 
     @dbus.service.method ("de.berlios.FreeSpeak",
                           in_signature='a{sv}asi', out_signature='')
-    def start (self, options={}, args=[], timestamp=None):
+    def start (self, options=None, args=None, timestamp=None):
         """
         Start the application in blocking mode.
         If the application is already running, the main window will be presented
@@ -267,7 +273,8 @@ def get_instance ():
     """
     dbus.mainloop.glib.DBusGMainLoop (set_as_default=True)
     bus = dbus.SessionBus ()
-    request = bus.request_name ("de.berlios.FreeSpeak", dbus.bus.NAME_FLAG_DO_NOT_QUEUE)
+    request = bus.request_name ("de.berlios.FreeSpeak",
+                                dbus.bus.NAME_FLAG_DO_NOT_QUEUE)
     if request != dbus.bus.REQUEST_NAME_REPLY_EXISTS:
         application = Application (bus, '/', "de.berlios.FreeSpeak")
     else:
