@@ -19,17 +19,37 @@
 ## along with this program; if not, write to the Free Software
 ## Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
 
+"""
+This module contains a set of classes to describe the status of a translation.
+Usually statuses are yield by translators.
+"""
+
 class Status (object):
+    """
+    The base class to describe the most generic translation status
+    """
+
     def __init__ (self, description):
         self.description = description
 
 class StatusStarted (Status):
+    """
+    Translation has been started.
+    Default description is "Translation started".
+    """
+
     def __init__ (self, description=None):
         if not description:
             description = _("Translation started")
         Status.__init__ (self, description)
 
 class StatusComplete (Status):
+    """
+    Translation has been completed.
+    Default description is "Translation complete".
+    The object will hold a 'result' attribute set by the translator.
+    """
+
     def __init__ (self, result, description=None):
         if not description:
             description = _("Translation complete")
@@ -37,17 +57,31 @@ class StatusComplete (Status):
         self.result = result
 
 class StatusCancelled (Status):
+    """
+    Translation has been cancelled.
+    """
+
     def __init__ (self):
         Status.__init__ (self, _("Cancellation requested"))
 
 class StatusTextComplete (StatusComplete):
+    """
+    Text translation has been completed.
+    """
     pass
 
 class StatusWebComplete (StatusComplete):
+    """
+    Web page translation has been completed.
+    """
     pass
 
 class StatusSuggestionComplete (StatusComplete):
+    """
+    Translation suggestions has been completed.
+    """
     pass
 
 __all__ = ['Status', 'StatusStarted', 'StatusComplete', 'StatusCancelled',
-           'StatusTextComplete', 'StatusWebComplete', 'StatusSuggestionComplete']
+           'StatusTextComplete', 'StatusWebComplete',
+           'StatusSuggestionComplete']

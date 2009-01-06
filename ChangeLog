@@ -1,5 +1,8 @@
 2009-01-06  Luca Bruno  <lethalman88@gmail.com>
 
+	* freespeak/status.py (__all__): cut line to 80 characters
+	Added docstrings.
+
 	* freespeak/ui/about.py (About.__init__): use defs.VERSION
 
 	* bin/freespeak (main): added to not insert unused variables in the global module scope
