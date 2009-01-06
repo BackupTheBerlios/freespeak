@@ -1,5 +1,14 @@
 2009-01-06  Luca Bruno  <lethalman88@gmail.com>
 
+	* freespeak/ui/globalkeybinding.py (GlobalKeyBinding.__init__): declare instance variables
+	Cut lines to 80 characters.
+	Removed unused imports.
+	Added docstrings.
+
+	* freespeak/ui/exception_dialog.py:
+	Cut lines to 80 characters.
+	Added docstrings.
+
 	* freespeak/translators/opentran.py:
 	(Language.__init__): call super
 	(Translator.__init__): call super

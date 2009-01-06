@@ -19,6 +19,10 @@
 ## along with this program; if not, write to the Free Software
 ## Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
 
+"""
+FreeSpeak exception handling
+"""
+
 import traceback
 import sys
 
@@ -27,12 +31,16 @@ import gtk
 from freespeak.ui import utils as uiutils
 from freespeak import utils
 
-# FIXME:
+# TODO:
 # 1. Needs HIG pixel fixes
 # 2. Error icon dialog
 # 3. Use an expander to show more details on the traceback
 
 class ExceptionDialog (gtk.Dialog):
+    """
+    Dialog showing an exception
+    """
+
     @utils.syncronized
     def __init__(self, error_string):
         gtk.Dialog.__init__ (self, 'FreeSpeak - '+_('Exception'), None, 0,
@@ -46,7 +54,8 @@ class ExceptionDialog (gtk.Dialog):
         self.vbox.set_spacing (6)
         
         label = gtk.Label()
-        label.set_markup ('<span color="red"><b>'+_('An error has occurred:')+'</b></span>')
+        label.set_markup ('<span color="red"><b>%s</b></span>'
+                          % _('An error has occurred:'))
         label.show()
         self.vbox.pack_start (label, False)
         text = gtk.TextView()
@@ -61,10 +70,19 @@ class ExceptionDialog (gtk.Dialog):
         self.connect ('response', self.on_response)
         self.show_all ()
 
+    # Events
+
     def on_response (self, dialog, *args):
+        """
+        Dialog response
+        """
         dialog.destroy ()
 
 def exception_hook (*tb):
+    """
+    This exception hook will both show the traceback to the output
+    and run the dialog
+    """
     error_string = ''.join (traceback.format_exception (*tb))
     print >> sys.stderr, error_string
     ExceptionDialog (error_string)
