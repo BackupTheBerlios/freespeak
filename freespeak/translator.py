@@ -76,10 +76,12 @@ class BaseTranslator (object):
             raise RuntimeError (_("Unknown translation request: %s")
                                 % str (request))
 
-    def get_language_table (self):
+    def get_language_table (self, capability):
         """
         Virtual method, must be implemented.
-        Returns a dictionary of the type { FromLanguage: [ToLanguageOne, ToLanguageTwo, ...] }.
+        Returns a dictionary of the type
+        { FromLanguage: [ToLanguageOne, ToLanguageTwo, ...] }
+        suitable for the given the capability.
         """
         raise NotImplementedError ()
 

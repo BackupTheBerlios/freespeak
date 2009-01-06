@@ -1,10 +1,17 @@
 2009-01-06  Luca Bruno  <lethalman88@gmail.com>
 
+	* freespeak/translators/freetranslation.py:
+	(Translator.suggest_translations): override
+	removed unused imports
+	Cut lines to 80 characters.
+	Added docstrings
+
 	* freespeak/utils.py (syncronized.closure.idle): added docstrings
 
 	* freespeak/translator.py: removed unused imports
 	Cut lines to 80 characters.
 	Added docstrings.
+	(BaseTranslator.get_language_table): fixed signature
 
 	* freespeak/translation.py: removed unused imports
 	(Task.__init__): removed unused args/kwargs
