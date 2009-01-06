@@ -89,7 +89,7 @@ class Translator (BaseTranslator):
 
     def translate_text (self, request):
         """
-        Issue a POST to /
+        Issue a POST to / at ets.freetranslation.com
         """
         headers = {'Content-Type': 'application/x-www-form-urlencoded',
                    'Accept': 'text/plain'}
@@ -110,7 +110,7 @@ class Translator (BaseTranslator):
 
     def translate_web (self, request):
         """
-        Returns a straight url without doing any request
+        Returns a straight url without doing any HTTP request
         """
         trans = "%s/%s" % (request.from_lang, request.to_lang)
         params = urllib.urlencode ({'sequence': 'core',

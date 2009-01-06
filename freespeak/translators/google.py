@@ -19,16 +19,25 @@
 ## along with this program; if not, write to the Free Software
 ## Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
 
+"""
+Google Language Tools engine
+"""
+
 import httplib
 import urllib
 import lxml.html
 
 from freespeak.translator import BaseLanguage, BaseTranslator
-from freespeak.translation import *
-from freespeak.status import *
+from freespeak.translation import (TextTranslationRequest,
+                                   WebTranslationRequest)
+from freespeak.status import Status, StatusTextComplete, StatusWebComplete
 
 class Language (BaseLanguage):
+    """
+    Google languages have countrycode and a name
+    """
     def __init__ (self, cc, name):
+        BaseLanguage.__init__ (self)
         self.cc = cc # Country Code
         self.name = name
 
@@ -46,15 +55,22 @@ class Language (BaseLanguage):
         return self.name
 
 class Translator (BaseTranslator):
+    """
+    Google translator
+    """
     name = 'Google'
     capabilities = [TextTranslationRequest, WebTranslationRequest]
     icon = "google"
     
     def __init__ (self):
+        BaseTranslator.__init__ (self)
         self.language_table = {}
 
     def get_language_table (self, capability):
-        # Google can handle all language combos
+        """
+        Overridden. Get the language table.
+        It doesn't depend on the capability as Google can handle all language combos.
+        """
         if self.language_table:
             return self.language_table
 
@@ -79,14 +95,17 @@ class Translator (BaseTranslator):
         return self.language_table
 
     def translate_text (self, request):
+        """
+        Issue a POST to /translate_t at translate.google.com
+        """
         headers = {'Content-Type': 'application/x-www-form-urlencoded',
                    'Accept': 'text/plain'}
         params = urllib.urlencode ({'sl': request.from_lang.cc,
                                     'tl': request.to_lang.cc,
                                     'text': request.text})
 
-        yield Status (_("Connecting to")+" translate.google.it")
-        conn = httplib.HTTPConnection ('translate.google.it')
+        yield Status (_("Connecting to")+" translate.google.com")
+        conn = httplib.HTTPConnection ('translate.google.com')
         conn.request ('POST', '/translate_t', params, headers)
         result = conn.getresponse().read ()
 
@@ -97,8 +116,17 @@ class Translator (BaseTranslator):
         yield StatusTextComplete (result)
 
     def translate_web (self, request):
+        """
+        Returns a straight url without doing any HTTP request
+        """
         params = urllib.urlencode ({'sl': request.from_lang.cc,
                                     'tl': request.to_lang.cc,
                                     'u': request.url})
-        yield StatusWebComplete ('http://translate.google.com/translate?'+params)
+        url = 'http://translate.google.com/translate?'+params
+        yield StatusWebComplete (url)
         
+    def suggest_translations (self, request):
+        """
+        Google doesn't support suggestions
+        """
+        raise NotImplementedError ()
