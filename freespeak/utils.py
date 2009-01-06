@@ -19,11 +19,27 @@
 ## along with this program; if not, write to the Free Software
 ## Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
 
+"""
+Internal utilities for FreeSpeak
+"""
+
 import gobject
 
 def syncronized (func):
+    """
+    Returns a closure to be used as decorator for methods.
+    Its purpose is to run the decorated method into the gobject mainloop
+    as an idle once a time.
+    """
     def closure (*args, **kwargs):
+        """
+        Add the 'idle' function as a gobject idle
+        """
         def idle (*aargs, **kkwargs):
+            """
+            Call the decorated function and return False to remove the
+            gobject idle.
+            """
             func (*aargs, **kkwargs)
             return False
         gobject.idle_add (idle, *args, **kwargs)
