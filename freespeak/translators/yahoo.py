@@ -19,16 +19,25 @@
 ## along with this program; if not, write to the Free Software
 ## Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
 
+"""
+Yahoo Babelfish engine
+"""
+
 import httplib
 import urllib
 import lxml.html
 
 from freespeak.translator import BaseLanguage, BaseTranslator
-from freespeak.translation import *
-from freespeak.status import *
+from freespeak.translation import (TextTranslationRequest,
+                                   WebTranslationRequest)
+from freespeak.status import Status, StatusTextComplete, StatusWebComplete
 
 class Language (BaseLanguage):
+    """
+    Yahoo languages have countrycode and a name
+    """
     def __init__ (self, cc, name):
+        BaseLanguage.__init__ (self)
         self.cc = cc # Country Code
         self.name = name
 
@@ -49,14 +58,23 @@ class Language (BaseLanguage):
         return self.name
 
 class Translator (BaseTranslator):
+    """
+    Yahoo translator
+    """
     name = 'Yahoo!'
     capabilities = [TextTranslationRequest, WebTranslationRequest]
     icon = "yahoo"
     
     def __init__ (self):
+        BaseTranslator.__init__ (self)
         self.language_table = {}
     
     def get_language_table (self, capability):
+        """
+        Overridden. Get the language table depending.
+        It doesn't depend on the capability as Yahoo has equal languages
+        for both text and web.
+        """
         if self.language_table:
             return self.language_table
 
@@ -80,6 +98,9 @@ class Translator (BaseTranslator):
         return self.language_table
 
     def translate_text (self, request):
+        """
+        Issue a POST to /translate_txt at babelfish.yahoo.com
+        """
         headers = {'Content-Type': 'application/x-www-form-urlencoded',
                    'Accept': 'text/plain'}
         lp = request.from_lang.cc+'_'+request.to_lang.cc
@@ -104,6 +125,9 @@ class Translator (BaseTranslator):
         yield StatusTextComplete (result)
 
     def translate_web (self, request):
+        """
+        Returns a straight url without doing any HTTP request
+        """
         lp = request.from_lang.cc+'_'+request.to_lang.cc
         params = urllib.urlencode ({'doit': 'done',
                                     'tt': 'url',
@@ -112,4 +136,11 @@ class Translator (BaseTranslator):
 
                                     'lp': lp,
                                     'trurl': request.url})
-        yield StatusWebComplete ('http://babelfish.yahoo.com/translate_url?'+params)
+        url = 'http://babelfish.yahoo.com/translate_url?'+params
+        yield StatusWebComplete (url)
+
+    def suggest_translations (self, request):
+        """
+        Yahoo doesn't support suggestions
+        """
+        raise NotImplementedError ()

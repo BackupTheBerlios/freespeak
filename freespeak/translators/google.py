@@ -90,7 +90,7 @@ class Translator (BaseTranslator):
             cc = element.get("value")
             name = element.text
             language = Language (cc, name)
-            self.language_table [language] = to_languages
+            self.language_table[language] = to_languages
 
         return self.language_table
 

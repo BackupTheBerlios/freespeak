@@ -1,5 +1,13 @@
 2009-01-06  Luca Bruno  <lethalman88@gmail.com>
 
+	* freespeak/translators/yahoo.py (Translator.translate_text): change domain from .it to .com
+	(Language.__init__): call super
+	(Translator.__init__): call super
+	(Translator.suggest_translations): override
+	removed unused imports
+	Cut lines to 80 characters.
+	Added docstrings
+
 	* freespeak/translators/google.py (Translator.translate_text): change domain from .it to .com
 	(Language.__init__): call super
 	(Translator.__init__): call super
