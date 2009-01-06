@@ -19,21 +19,27 @@
 ## along with this program; if not, write to the Free Software
 ## Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
 
-import os
+"""
+Classes for showing the main window of a FreeSpeak application
+"""
+
 import time
 import gtk
 import gnome
 
 from freespeak import defs
-from freespeak.ui.manager import *
-from freespeak.ui.intro import *
-from freespeak.ui.translation import *
-from freespeak.ui.suggestion import *
-from freespeak.ui.settings import *
+from freespeak.ui.manager import Manager
+from freespeak.ui.intro import Intro
+from freespeak.ui.translation import TextTranslation, WebTranslation
+from freespeak.ui.suggestion import TranslationSuggestions
+from freespeak.ui.settings import Settings
 from freespeak.ui.status_icon import StatusIcon
 from freespeak.ui.about import About
 
 class MainWindow (gtk.Window):
+    """
+    The GTK+ main window
+    """
     ui_string = """<ui>
         <menubar>
             <menu action="Translation">
@@ -75,12 +81,19 @@ class MainWindow (gtk.Window):
         self.setup_layout ()
         self.setup_status_icon ()
 
-        self.application.globalkeybinding.connect ('activate', self.on_keybinding_activate)
+        self.application.globalkeybinding.connect ('activate',
+                                                   self.on_keybinding_activate)
 
     def setup_status_icon (self):
+        """
+        Setup the icon in the systray
+        """
         self.status_icon = StatusIcon (self)
 
     def setup_window (self):
+        """
+        Setup the basics of the window, like title and something else
+        """
         self.connect ('delete-event', self.on_delete_event)
         icon = self.application.icon_theme.load_icon (defs.PACKAGE, 64, 0)
         self.set_icon (icon)
@@ -88,6 +101,9 @@ class MainWindow (gtk.Window):
         self.set_default_size (500, 400)
 
     def setup_layout (self):
+        """
+        Setup the layout and the window actions
+        """
         self.layout = gtk.VBox ()
 
         self.action_group = gtk.ActionGroup ('WindowActions')
@@ -101,9 +117,9 @@ class MainWindow (gtk.Window):
 
             ('Web', gtk.STOCK_NETWORK, _('We_b'), "<Control>b",
              _('New web page translation'), self.on_new),
-
-            ('Suggestions', gtk.STOCK_SELECT_FONT, _('_Suggestions'), "<Control>s",
-             _('New translation suggestions'), self.on_new),
+            
+            ('Suggestions', gtk.STOCK_SELECT_FONT, _('_Suggestions'),
+             "<Control>s", _('New translation suggestions'), self.on_new),
 
             ('Preferences', gtk.STOCK_PREFERENCES, None,
              "<Control>p", _('FreeSpeak preferences'), self.on_settings),
@@ -136,26 +152,42 @@ class MainWindow (gtk.Window):
         self.add (self.layout)
 
     def setup_menubar (self):
+        """
+        Add the menubar
+        """
         self.menubar = self.ui.get_widget ("/menubar")
         self.menubar.show ()
         self.layout.pack_start (self.menubar, False)
 
     def setup_toolbar (self):
+        """
+        Add the toolbar
+        """
         self.toolbar = self.ui.get_widget ("/toolbar")
         self.toolbar.show ()
         self.layout.pack_start (self.toolbar, False)
 
     def setup_manager (self):
+        """
+        Create the tabs manager
+        """
         self.manager = Manager (self.application)
         self.manager.show ()
         self.layout.pack_start (self.manager)
 
     def setup_intro (self):
+        """
+        Create the introduction container
+        """
         self.intro = Intro (self.application, self.manager)
         self.intro.show ()
         self.layout.pack_start (self.intro)
 
     def quit (self):
+        """
+        Quit the main window
+        """
+        # Should this really stop the application?
         self.application.stop ()
             
     # Events
