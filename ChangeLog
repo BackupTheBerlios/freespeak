@@ -1,5 +1,11 @@
 2009-01-07  Luca Bruno  <lethalman88@gmail.com>
 
+	* freespeak/ui/suggestion.py: added docstrings
+	Removed wildcard imports.
+	Cut lines to 80 characters.
+	(TranslationSuggestions.on_entry_activate): added for readability
+	(SuggestionsTreeView.on_copy, on_open): shadowed built-in 'iter'
+
 	* freespeak/ui/style.py: added docstrings
 
 	* freespeak/ui/status_icon.py: added docstrings
