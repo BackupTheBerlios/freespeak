@@ -1,5 +1,10 @@
 2009-01-07  Luca Bruno  <lethalman88@gmail.com>
 
+	* freespeak/ui/translation.py: added docstrings
+	Removed wildcard and unused imports.
+	Cut lines to 80 characters.
+	(TextTranslation.setup_clipboard): get_text_contents() already checks for valid text
+
 	* freespeak/ui/translation_label.py: added docstrings
 	Removed unused imports.
 	Cut lines to 80 characters.
