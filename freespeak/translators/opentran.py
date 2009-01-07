@@ -32,7 +32,7 @@ import gtk
 
 from freespeak.translator import BaseLanguage, BaseTranslator
 from freespeak.translation import TranslationSuggestionsRequest
-from freespeak.status import Status, StatusSuggestionsComplete
+from freespeak.status import Status, StatusSuggestionComplete
 
 class Language (BaseLanguage):
     """
