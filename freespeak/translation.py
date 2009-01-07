@@ -182,8 +182,8 @@ class BaseTranslation (object):
         Set the default translator according to the configuration
         """
         default_translator = self.application.translators_manager.get_default ()
-        is_capable = self.capability in default_translator.capabilities
-        if default_translator and is_capable:
+        if (default_translator and
+            self.capability in default_translator.capabilities):
             self.set_translator (default_translator)
 
     def setup_default_language (self):

@@ -321,7 +321,8 @@ class TextTranslation (BaseUITranslation):
         Get the text contents from the clipboard
         """
         contents = self.application.clipboard.get_text_contents ()
-        self.source_buffer.set_text (contents)
+        if contents is not None:
+            self.source_buffer.set_text (contents)
 
     def create_request (self):
         """
