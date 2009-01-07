@@ -1,5 +1,7 @@
 2009-01-07  Luca Bruno  <lethalman88@gmail.com>
 
+	* freespeak/ui/manager.py: added docstrings
+
 	* freespeak/ui/main_window.py: removed wildcard and unused imports
 	Cut lines to 80 characters.
 	Added docstrings.
