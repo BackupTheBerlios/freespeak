@@ -19,11 +19,18 @@
 ## along with this program; if not, write to the Free Software
 ## Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
 
+"""
+Classes for handling a complete box of widgets for running a translation
+"""
+
 import gtk
 
-from freespeak import utils
-
 class ComboChangedSignal (object):
+    """
+    Wrapper for the 'changed' singla of a combobox.
+    Do not really change to the user choice item.
+    """
+
     def __init__ (self, combo, callback):
         self.combo = combo
         self.callback = callback
@@ -32,12 +39,23 @@ class ComboChangedSignal (object):
         self.blocked = False
 
     def block (self):
+        """
+        Soft-block the signal
+        """
         self.blocked = True
 
     def unblock (self):
+        """
+        Soft-unblock the signal
+        """
         self.blocked = False
 
     def on_changed (self, combo):
+        """
+        If blocked, save the selected iter.
+        Otherwise, call the callback just like emitting the 'changed' signal
+        and select the old active item.
+        """
         if self.blocked:
             self.active_iter = self.combo.get_active_iter ()
         else:
@@ -47,6 +65,9 @@ class ComboChangedSignal (object):
             self.unblock ()
 
 class TranslatorCombo (gtk.ComboBox):
+    """
+    ComboBox for the translators
+    """
     COL_TEXT = 0
     COL_TRANSLATOR = 1
     COL_PIXBUF = 2
@@ -58,12 +79,14 @@ class TranslatorCombo (gtk.ComboBox):
         model = gtk.ListStore (str, object, gtk.gdk.Pixbuf)
         self.set_model (model)
 
-        iter = model.append ([_("(none)"), None, None])
-        self.set_active_iter (iter)
+        titer = model.append ([_("(none)"), None, None])
+        self.set_active_iter (titer)
         for translator in sorted (self.application.translators_manager):
             if not capability or capability in translator.capabilities:
-                pixbuf = self.application.icon_theme.load_icon (translator.icon, 16, 0)
-                iter = model.append ([translator.get_name (), translator, pixbuf])
+                pixbuf = self.application.icon_theme.load_icon (translator.icon,
+                                                                16, 0)
+                titer = model.append ([translator.get_name (),
+                                      translator, pixbuf])
 
         cell = gtk.CellRendererPixbuf ()
         self.pack_start (cell, expand=False)
@@ -74,12 +97,22 @@ class TranslatorCombo (gtk.ComboBox):
         self.add_attribute (cell, 'text', self.COL_TEXT)
 
     def get_active_translator (self):
-        iter = self.get_active_iter ()
-        if iter:
-            translator = self.get_model().get_value (iter, self.COL_TRANSLATOR)
+        """
+        Wrapper method to easily get the active selected translator
+        """
+        titer = self.get_active_iter ()
+        if titer:
+            translator = self.get_model().get_value (titer,
+                                                     self.COL_TRANSLATOR)
             return translator
 
 class TranslationBox (gtk.HBox):
+    """
+    This horizontal box contains several combobox:
+    - The translators
+    - The source languages
+    - The destination languages
+    """
     COL_FROM_TEXT = 0
     COL_FROM_LANG = 1
     COL_TO_TEXT = 0
@@ -95,19 +128,28 @@ class TranslationBox (gtk.HBox):
         self.setup_to ()
 
     def setup_translator (self):
+        """
+        Setup the translator combo box
+        """
         label = gtk.Label (_("T_ranslator:"))
         label.set_use_underline (True)
         label.show ()
         self.pack_start (label, False)
         
-        self.translator_combo = TranslatorCombo (self.application, self.translation.capability)
-        self.translator_combo_signal = ComboChangedSignal (self.translator_combo, self.on_translator_changed)
+        self.translator_combo = TranslatorCombo (self.application,
+                                                 self.translation.capability)
+        signal = ComboChangedSignal (self.translator_combo,
+                                     self.on_translator_changed)
+        self.translator_combo_signal = signal
         self.translator_combo.show ()
         self.pack_start (self.translator_combo)
 
         label.set_mnemonic_widget (self.translator_combo)
 
     def setup_from (self):
+        """
+        Setup source languages
+        """
         label = gtk.Label (_("_From:"))
         label.set_use_underline (True)
         label.show ()
@@ -125,6 +167,9 @@ class TranslationBox (gtk.HBox):
         label.set_mnemonic_widget (self.from_combo)
 
     def setup_to (self):
+        """
+        Setup destination languages
+        """
         label = gtk.Label (_("T_o:"))
         label.set_use_underline (True)
         label.show ()
@@ -142,6 +187,9 @@ class TranslationBox (gtk.HBox):
         label.set_mnemonic_widget (self.to_combo)
 
     def update_from_langs (self, langs):
+        """
+        Externally used to notify the list of source languages have been changed
+        """
         if not langs:
             self.from_combo.set_sensitive (False)
             return
@@ -154,6 +202,10 @@ class TranslationBox (gtk.HBox):
         self.from_combo.set_active (-1)
 
     def update_to_langs (self, langs):
+        """
+        Externally used to notify the list of destination languages have
+        been changed
+        """
         if not langs:
             self.to_combo.set_sensitive (False)
             return
@@ -166,6 +218,9 @@ class TranslationBox (gtk.HBox):
         self.to_combo.set_active (-1)
 
     def set_translator (self, translator):
+        """
+        Set the active translator in the combobox
+        """
         model = self.translator_combo.get_model ()
         for row in model:
             if row[TranslatorCombo.COL_TRANSLATOR] == translator:
@@ -175,6 +230,9 @@ class TranslationBox (gtk.HBox):
                 return True
 
     def set_from_lang (self, lang):
+        """
+        Set the source language
+        """
         model = self.from_combo.get_model ()
         for row in model:
             if row[self.COL_FROM_LANG] == lang:
@@ -182,6 +240,9 @@ class TranslationBox (gtk.HBox):
                 return True
 
     def set_to_lang (self, lang):
+        """
+        Set the destination language
+        """
         model = self.to_combo.get_model ()
         for row in model:
             if row[self.COL_TO_LANG] == lang:
@@ -189,13 +250,16 @@ class TranslationBox (gtk.HBox):
                 return True
 
     def swap_langs (self):
-        iter = self.to_combo.get_active_iter ()
+        """
+        Swap the two languages in the comboboxes when possible
+        """
+        titer = self.to_combo.get_active_iter ()
         to_model = self.to_combo.get_model ()
-        to_lang = to_model.get_value (iter, self.COL_TO_LANG)
+        to_lang = to_model.get_value (titer, self.COL_TO_LANG)
 
-        iter = self.from_combo.get_active_iter ()
+        titer = self.from_combo.get_active_iter ()
         from_model = self.from_combo.get_model ()
-        from_lang = from_model.get_value (iter, self.COL_FROM_LANG)
+        from_lang = from_model.get_value (titer, self.COL_FROM_LANG)
 
         if not self.set_from_lang (to_lang):
             self.from_combo.set_active (-1)
@@ -205,21 +269,33 @@ class TranslationBox (gtk.HBox):
     # Events
 
     def on_translator_changed (self, combo):
+        """
+        The user changed the translator. This will notify the translation
+        to change the translator to the selected one.
+        The user won't see any graphical change unless the translation
+        notifies us the translator really changed.
+        """
         translator = combo.get_active_translator ()
         self.translation.set_translator (translator)
 
     def on_from_changed (self, combo):
-        iter = combo.get_active_iter ()
-        if not iter:
+        """
+        The source language has been changed by the user
+        """
+        titer = combo.get_active_iter ()
+        if not titer:
             return
-        lang = combo.get_model().get_value (iter, self.COL_FROM_LANG)
+        lang = combo.get_model().get_value (titer, self.COL_FROM_LANG)
         self.translation.set_from_lang (lang)
 
     def on_to_changed (self, combo):
-        iter = combo.get_active_iter ()
-        if not iter:
+        """
+        The destination language has been changed by the user
+        """
+        titer = combo.get_active_iter ()
+        if not titer:
             return
-        lang = combo.get_model().get_value (iter, self.COL_TO_LANG)
+        lang = combo.get_model().get_value (titer, self.COL_TO_LANG)
         self.translation.set_to_lang (lang)
 
 __all__ = ['TranslationBox']
