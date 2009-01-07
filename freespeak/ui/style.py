@@ -19,9 +19,16 @@
 ## along with this program; if not, write to the Free Software
 ## Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
 
+"""
+Module for modifying the style of GTK+ widgets
+"""
+
 import gtk
 
 def setup_rc ():
+    """
+    Parse an RC style string
+    """
     gtk.rc_parse_string ("""
 style "tiny-button-style"
 {
