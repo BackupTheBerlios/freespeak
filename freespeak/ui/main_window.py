@@ -98,7 +98,6 @@ class MainWindow (gtk.Window):
         icon = self.application.icon_theme.load_icon (defs.PACKAGE, 64, 0)
         self.set_icon (icon)
         self.set_title ('FreeSpeak')
-        self.set_default_size (500, 400)
 
     def setup_layout (self):
         """
