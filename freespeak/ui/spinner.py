@@ -19,12 +19,20 @@
 ## along with this program; if not, write to the Free Software
 ## Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
 
+"""
+Image spinner for indicating a busy process
+"""
+
 import gtk
 import gobject
 
 from freespeak import utils
 
 class Spinner (gtk.Image):
+    """
+    This spinner implementation sets the pixbuf of the image rendering a sort
+    of animation.
+    """
     PIXELS = 16
     TIMEOUT = 80 # ms
 
@@ -33,13 +41,19 @@ class Spinner (gtk.Image):
 
     @classmethod
     def setup_animation (cls, application):
-        icons = application.icon_theme.load_icon ("process-working", cls.PIXELS, 0)
+        """
+        Create a list of frames. Each frame is a pixbuf
+        """
+        icons = application.icon_theme.load_icon ("process-working",
+                                                  cls.PIXELS, 0)
         yicons = icons.get_height()/cls.PIXELS
         xicons = icons.get_width()/cls.PIXELS
         for y in range (yicons):
             for x in range (xicons):
-                pixbuf = gtk.gdk.Pixbuf (gtk.gdk.COLORSPACE_RGB, True, 8, cls.PIXELS, cls.PIXELS)
-                icons.copy_area (x*cls.PIXELS, y*cls.PIXELS, cls.PIXELS, cls.PIXELS,
+                pixbuf = gtk.gdk.Pixbuf (gtk.gdk.COLORSPACE_RGB, True, 8,
+                                         cls.PIXELS, cls.PIXELS)
+                icons.copy_area (x*cls.PIXELS, y*cls.PIXELS,
+                                 cls.PIXELS, cls.PIXELS,
                                  pixbuf, 0, 0)
                 cls.animation.append (pixbuf)
         del cls.animation[0]
@@ -55,7 +69,10 @@ class Spinner (gtk.Image):
         self.set_from_pixbuf (self.idle_pixbuf)
 
     def _rotate (self):
-        # Do a simple round robin
+        """
+        This is a gobject idle doing a simple round robin though the animation
+        frames.
+        """
         self.set_from_pixbuf (self.animation[self.icon_num])
         if self.icon_num < self.animation_last:
             self.icon_num += 1
@@ -64,20 +81,32 @@ class Spinner (gtk.Image):
         return True
 
     def set_idle (self, pixbuf):
+        """
+        Set the non-animated pixbuf
+        """
         self.idle_pixbuf = pixbuf
         if self.source:
             self.set_from_pixbuf (pixbuf)
 
     def is_running (self):
+        """
+        Returns True if the spinner is animated, False otherwise
+        """
         return bool (self.source)
 
     @utils.syncronized
     def start (self):
+        """
+        Start the spinner
+        """
         self.icon_num = 0
         self.source = gobject.timeout_add (self.TIMEOUT, self._rotate)
 
     @utils.syncronized
     def stop (self):
+        """
+        Stop the spinner
+        """
         if self.source:
             gobject.source_remove (self.source)
             self.source = None
