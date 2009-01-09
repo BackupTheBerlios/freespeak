@@ -1,5 +1,7 @@
 2009-01-09  Luca Bruno  <lethalman88@gmail.com>
 
+	* === Released 0.3.0 ===
+
 	* data/freespeak.desktop.in: removed
 
 	* docs/Makefile.am: added to distribute the manpage
