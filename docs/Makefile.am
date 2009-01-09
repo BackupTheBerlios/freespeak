@@ -1,0 +1,1 @@
+man1_MANS = man/freespeak.1

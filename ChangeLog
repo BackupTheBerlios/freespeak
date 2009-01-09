@@ -1,5 +1,13 @@
 2009-01-09  Luca Bruno  <lethalman88@gmail.com>
 
+	* data/freespeak.desktop.in: removed
+
+	* docs/Makefile.am: added to distribute the manpage
+
+	* Makefile.am (SUBDIRS): added docs
+
+	* configure.ac: 
+
 	* NEWS: updated
 
 2009-01-07  Luca Bruno  <lethalman88@gmail.com>

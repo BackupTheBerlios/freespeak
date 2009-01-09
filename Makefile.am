@@ -1,4 +1,4 @@
-SUBDIRS = bin freespeak data help po
+SUBDIRS = bin freespeak data docs help po
 
 DISTCHECK_CONFIGURE_FLAGS = --disable-scrollkeeper
 
