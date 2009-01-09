@@ -1,5 +1,7 @@
 2009-01-09  Luca Bruno  <lethalman88@gmail.com>
 
+	* freespeak.omf.in: changed license to GFDL
+
 	* C/freespeak.xml: removed authorgroup, fixed the only author element
 
 2009-01-05  Luca Bruno  <lethalman88@gmail.com>
