@@ -1,3 +1,24 @@
+Overview of Changes from FreeSpeak 0.2.0 to FreeSpeak 0.3.0
+===========================================================
+
+* Project is now hosted at BerliOS.de: http://freespeak.berlios.de
+
+* Support for cancellating operations has been added
+
+* Translation suggestions (open-tran) have been added
+
+* A menubar has been added and the toolbar has been cleaned up
+
+* The behavior of language/translation selection has been fixed and improved
+
+* GNOME documentation has been added
+
+* Dependencies in the configuration have been cleaned up
+
+* Support for global keybindings has been added through python-xlib
+
+* An introduction widget for the main window has been created
+
 Overview of Changes from FreeSpeak 0.1.1 to FreeSpeak 0.2.0
 ===========================================================
 
