@@ -53,18 +53,12 @@
          Please do not change any of this. -->
 
     <author role="maintainer">
-      <authorname>Luca Bruno</authorname>
+      <firstname>Luca</firstname> 
+      <surname>Bruno</surname> 
+      <affiliation> 
+    	<address><email>lethalman88@gmail.com</email></address> 
+      </affiliation> 
     </author>
-    
-    <authorgroup> 
-      <author> 
-    	<firstname>Luca</firstname> 
-    	<surname>Bruno</surname> 
-    	<affiliation> 
-    	  <address> <email>lethalman88@gmail.com</email> </address> 
-    	</affiliation> 
-      </author> 
-    </authorgroup>
     
     
     <!-- According to GNU FDL, revision history is mandatory if you are -->
