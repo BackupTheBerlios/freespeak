@@ -19,7 +19,7 @@ GETTEXT_PACKAGE="freespeak"
 IT_PROG_INTLTOOL([0.35.0])
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", [The gettext package])
-ALL_LINGUAS="it fr"
+ALL_LINGUAS="it fr sv"
 AM_GLIB_GNU_GETTEXT
 
 dnl ****************************************************************************
