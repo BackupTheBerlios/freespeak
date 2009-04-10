@@ -34,7 +34,7 @@ class IntroButton (gtk.Button):
     Particular button to be displayed in the introduction
     """
 
-    def __init__ (self, text, stock):
+    def __init__ (self, text, icon_name):
         gtk.Button.__init__ (self)
 
         self.set_name ("intro-button")
@@ -42,7 +42,7 @@ class IntroButton (gtk.Button):
         self.set_relief (gtk.RELIEF_NONE)
         self.set_property ('can-focus', False)
 
-        image = gtk.image_new_from_stock (stock, gtk.ICON_SIZE_DIALOG)
+        image = gtk.image_new_from_icon_name (icon_name, gtk.ICON_SIZE_DIALOG)
         image.show ()
         label = gtk.Label ()
         label.set_markup ("<b><u><span color='blue'>%s</span></u></b>" % text)
@@ -64,6 +64,7 @@ class Intro (gtk.Alignment):
         gtk.Alignment.__init__ (self, 0.5, 0.5, 0, 0)
         self.application = application
         self.manager = manager
+        self.main_window = application.main_window
 
         self.setup_layout ()
         self.setup_manager ()
@@ -98,7 +99,7 @@ class Intro (gtk.Alignment):
         Setup the text translation button
         """
         button = IntroButton ("Make a text translation",
-                              gtk.STOCK_NEW)
+                              'text-x-generic')
         button.connect ('clicked', self.on_text_clicked)
         button.show ()
         self.size_group.add_widget (button)
@@ -109,7 +110,7 @@ class Intro (gtk.Alignment):
         Setup the web translation button
         """
         button = IntroButton ("Make a web page translation",
-                              gtk.STOCK_NETWORK)
+                              'web-browser')
         button.connect ('clicked', self.on_web_clicked)
         button.show ()
         self.size_group.add_widget (button)
@@ -120,7 +121,7 @@ class Intro (gtk.Alignment):
         Setup the translation suggestions button
         """
         button = IntroButton ("Request translation suggestions",
-                              gtk.STOCK_SELECT_FONT)
+                              'applications-development')
         button.connect ('clicked', self.on_suggestions_clicked)
         button.show ()
         self.size_group.add_widget (button)

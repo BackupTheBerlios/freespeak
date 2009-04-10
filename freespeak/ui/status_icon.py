@@ -64,13 +64,13 @@ class StatusIcon (gtk.StatusIcon):
         # http://bugzilla.gnome.org/show_bug.cgi?id=516425
         self.action_group = gtk.ActionGroup ('TrayActions')
         actions = (
-            ('Text', gtk.STOCK_NEW, _('_Text'), "",
+            ('Text', None, _('_Text'), "",
              _('New translation'), self.on_new),
 
-            ('Web', gtk.STOCK_NETWORK, _('We_b'), "",
+            ('Web', None, _('We_b'), "",
              _('New web page translation'), self.on_new),
 
-            ('Suggestions', gtk.STOCK_SELECT_FONT, _('_Suggestions'), "",
+            ('Suggestions', None, _('_Suggestions'), "",
              _('New translation suggestions'), self.on_new),
 
             ('Preferences', gtk.STOCK_PREFERENCES, None, "",
@@ -90,6 +90,14 @@ class StatusIcon (gtk.StatusIcon):
         self.ui.insert_action_group (self.action_group, 0)
         self.ui.add_ui_from_string (self.ui_string)
         self.menu = self.ui.get_widget ("/popup")
+
+        action = self.action_group.get_action ("Text")
+        action.set_property ('icon-name', 'document')
+        action = self.action_group.get_action ("Web")
+        action.set_property ('icon-name', 'web-browser')
+        action = self.action_group.get_action ("Suggestions")
+        action.set_property ('icon-name', 'applications-development')
+
 
     # Events
 

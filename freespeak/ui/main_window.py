@@ -111,13 +111,13 @@ class MainWindow (gtk.Window):
             ('Edit', None, _("_Edit")),
             ('Help', None, _("_Help")),
 
-            ('Text', gtk.STOCK_NEW, _('_Text'), "<Control>t",
+            ('Text', None, _('_Text'), "<Control>t",
              _('New translation'), self.on_new),
 
-            ('Web', gtk.STOCK_NETWORK, _('We_b'), "<Control>b",
+            ('Web', None, _('We_b'), "<Control>b",
              _('New web page translation'), self.on_new),
             
-            ('Suggestions', gtk.STOCK_SELECT_FONT, _('_Suggestions'),
+            ('Suggestions', None, _('_Suggestions'),
              "<Control>s", _('New translation suggestions'), self.on_new),
 
             ('Preferences', gtk.STOCK_PREFERENCES, None,
@@ -154,6 +154,12 @@ class MainWindow (gtk.Window):
         """
         Add the menubar
         """
+        action = self.action_group.get_action ("Text")
+        action.set_property ('icon-name', 'document')
+        action = self.action_group.get_action ("Web")
+        action.set_property ('icon-name', 'web-browser')
+        action = self.action_group.get_action ("Suggestions")
+        action.set_property ('icon-name', 'applications-development')
         self.menubar = self.ui.get_widget ("/menubar")
         self.menubar.show ()
         self.layout.pack_start (self.menubar, False)
