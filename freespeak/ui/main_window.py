@@ -155,11 +155,11 @@ class MainWindow (gtk.Window):
         Add the menubar
         """
         action = self.action_group.get_action ("Text")
-        action.set_property ('icon-name', 'document')
+        action.set_property ('icon-name', 'text-x-generic')
         action = self.action_group.get_action ("Web")
-        action.set_property ('icon-name', 'web-browser')
+        action.set_property ('icon-name', 'text-html')
         action = self.action_group.get_action ("Suggestions")
-        action.set_property ('icon-name', 'applications-development')
+        action.set_property ('icon-name', 'package-x-generic')
         self.menubar = self.ui.get_widget ("/menubar")
         self.menubar.show ()
         self.layout.pack_start (self.menubar, False)

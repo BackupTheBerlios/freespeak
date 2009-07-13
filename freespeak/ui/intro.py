@@ -110,7 +110,7 @@ class Intro (gtk.Alignment):
         Setup the web translation button
         """
         button = IntroButton ("Make a web page translation",
-                              'web-browser')
+                              'text-html')
         button.connect ('clicked', self.on_web_clicked)
         button.show ()
         self.size_group.add_widget (button)
@@ -121,7 +121,7 @@ class Intro (gtk.Alignment):
         Setup the translation suggestions button
         """
         button = IntroButton ("Request translation suggestions",
-                              'applications-development')
+                              'package-x-generic')
         button.connect ('clicked', self.on_suggestions_clicked)
         button.show ()
         self.size_group.add_widget (button)

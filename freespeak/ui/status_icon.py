@@ -92,11 +92,11 @@ class StatusIcon (gtk.StatusIcon):
         self.menu = self.ui.get_widget ("/popup")
 
         action = self.action_group.get_action ("Text")
-        action.set_property ('icon-name', 'document')
+        action.set_property ('icon-name', 'text-x-generic')
         action = self.action_group.get_action ("Web")
-        action.set_property ('icon-name', 'web-browser')
+        action.set_property ('icon-name', 'text-html')
         action = self.action_group.get_action ("Suggestions")
-        action.set_property ('icon-name', 'applications-development')
+        action.set_property ('icon-name', 'package-x-generic')
 
 
     # Events
