@@ -53,6 +53,7 @@ class Manager (gtk.Notebook):
         """
         label = translation.get_label ()
         self.append_page (translation, label)
+        translation.set_border_width (6)
         translation.show ()
 
     def remove_translation (self, translation):
