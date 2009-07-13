@@ -62,7 +62,7 @@ class GlobalKeyBinding (gobject.GObject, threading.Thread):
 
         self.modifiers = 0
         self.keycode = 0
-        self.known_modifiers_mask = 0
+        self.unknown_combos = []
 
         self.map_modifiers ()
 
@@ -78,12 +78,30 @@ class GlobalKeyBinding (gobject.GObject, threading.Thread):
                          gtk.gdk.MOD2_MASK, gtk.gdk.MOD3_MASK,
                          gtk.gdk.MOD4_MASK, gtk.gdk.MOD5_MASK,
                          gtk.gdk.SUPER_MASK, gtk.gdk.HYPER_MASK)
-        self.known_modifiers_mask = 0
+        unknown = []
         for modifier in gdk_modifiers:
             # Do you know how to handle unknown "Mod*" keys?
             # They are usually Locks and something like that
-            if "Mod" not in gtk.accelerator_name (0, modifier):
-                self.known_modifiers_mask |= modifier
+            if "Mod" in gtk.accelerator_name (0, modifier):
+                unknown.append ([modifier])
+        combos = self.generate_combos (unknown, unknown, len(unknown))
+        self.unknown_combos = self.flatten_combos (combos)
+
+    @staticmethod
+    def generate_combos (elems, combos, level):
+        if level == 1:
+            return combos
+        res = []
+        for el in elems:
+            for c in combos:
+                res.append (el+c)
+        return GlobalKeyBinding.generate_combos (elems, res, level-1)
+
+    @staticmethod
+    def flatten_combos (combos):
+        ored = map (lambda l: reduce (lambda x, y: x | y, l), combos)
+        ored.append (0)
+        return set (ored)
 
     def on_key_changed (self, *args):
         """
@@ -117,15 +135,17 @@ class GlobalKeyBinding (gobject.GObject, threading.Thread):
             return
         self.keycode = self.keymap.get_entries_for_keyval(keyval)[0][0]
         self.modifiers = int (modifiers)
-        return self.root.grab_key (self.keycode, X.AnyModifier, True,
-                                   X.GrabModeAsync, X.GrabModeSync)
+        for combo in self.unknown_combos:
+            self.root.grab_key (self.keycode, self.modifiers | combo, True,
+                                X.GrabModeAsync, X.GrabModeSync)
 
     def ungrab (self):
         """
         Ungrab the key binding
         """
         if self.keycode:
-            self.root.ungrab_key (self.keycode, X.AnyModifier, self.root)
+            for combo in self.unknown_combos:
+                self.root.ungrab_key (self.keycode, self.modifiers | combo, self.root)
         
     def idle (self):
         """
@@ -145,24 +165,11 @@ class GlobalKeyBinding (gobject.GObject, threading.Thread):
         The loop will run until self.running is True.
         """
         self.running = True
-        wait_for_release = False
         while self.running:
             event = self.display.next_event ()
-            if (event.detail == self.keycode and
-                event.type == X.KeyPress and not wait_for_release):
-                modifiers = event.state & self.known_modifiers_mask
-                if modifiers == self.modifiers:
-                    wait_for_release = True
-                    self.display.allow_events (X.AsyncKeyboard, event.time)
-                else:
-                    self.display.allow_events (X.ReplayKeyboard, event.time)
-            elif event.detail == self.keycode and wait_for_release:
-                if event.type == X.KeyRelease:
-                    wait_for_release = False
-                    gobject.idle_add (self.idle)
-                self.display.allow_events (X.AsyncKeyboard, event.time)
-            else:
-                self.display.allow_events (X.ReplayKeyboard, event.time)
+            self.display.allow_events (X.AsyncKeyboard, event.time)
+            if event.type == X.KeyRelease:
+                gobject.idle_add (self.idle)
 
     def stop (self):
         """
