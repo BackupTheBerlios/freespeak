@@ -106,6 +106,13 @@ class TranslatorCombo (gtk.ComboBox):
                                                      self.COL_TRANSLATOR)
             return translator
 
+    def set_active_translator (self, translator):
+        model = self.get_model ()
+        for row in model:
+            if row[self.COL_TRANSLATOR] == translator:
+                self.set_active_iter (row.iter)
+                break
+
 class TranslationBox (gtk.HBox):
     """
     This horizontal box contains several combobox:

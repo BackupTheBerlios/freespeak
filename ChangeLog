@@ -1,3 +1,15 @@
+2009-07-14  Luca Bruno  <lethalman88@gmail.com>
+
+	* freespeak/ui/suggestion.py (SuggestionsTreeView.setup_columns): ellipsize text renderers
+
+	* freespeak/ui/globalkeybinding.py (GlobalKeyBinding.generate_combos)
+	(GlobalKeyBinding.flatten_combos, GlobalKeyBinding.grab): grab/ungrab all modifiers combo to avoid Sync troubles with keyboard
+
+	* freespeak/ui/settings.py (Settings.write_config)
+	(Settings.read_config): added to separate UI and config logic
+
+	* freespeak/ui/translation_box.py (TranslatorCombo.set_active_translator): added
+
 2009-01-09  Luca Bruno  <lethalman88@gmail.com>
 
 	* === Released 0.3.0 ===
