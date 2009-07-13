@@ -76,12 +76,14 @@ class SuggestionsTreeView (gtk.TreeView):
         attributes = pango.AttrList ()
         attributes.insert (pango.AttrWeight (pango.WEIGHT_BOLD, 0, -1))
         renderer.set_property ("attributes", attributes)
+        renderer.set_property ('ellipsize', pango.ELLIPSIZE_MIDDLE)
         column = gtk.TreeViewColumn (_("Translation"), renderer,
                                      text=self.COL_TRANSLATION)
         column.set_resizable (True)
         self.append_column (column)
 
         renderer = gtk.CellRendererText ()
+        renderer.set_property ('ellipsize', pango.ELLIPSIZE_MIDDLE)
         column = gtk.TreeViewColumn (_("Original"), renderer,
                                      text=self.COL_ORIGINAL)
         column.set_resizable (True)
@@ -92,6 +94,7 @@ class SuggestionsTreeView (gtk.TreeView):
         column.pack_start (renderer, expand=False)
         column.add_attribute (renderer, 'pixbuf', self.COL_PIXBUF)
         renderer = gtk.CellRendererText ()
+        renderer.set_property ('ellipsize', pango.ELLIPSIZE_END)
         column.pack_start (renderer)
         column.add_attribute (renderer, 'text', self.COL_APPLICATION)
         self.append_column (column)
