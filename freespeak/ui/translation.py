@@ -546,7 +546,7 @@ class WebTranslation (BaseUITranslation):
         """
         Open the translated page in a browser
         """
-        gtk.show_uri (None, uri, gtk.gdk.CURRENT_TIME)
+        gtk.show_uri (self.window.get_screen(), uri, 0)
 
     def on_tiny_clear (self, button):
         """

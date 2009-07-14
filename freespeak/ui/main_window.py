@@ -239,7 +239,7 @@ class MainWindow (gtk.Window):
         """
         Help contents
         """
-        gtk.show_uri (None, "ghelp:freespeak", 0)
+        gtk.show_uri (self.window.get_screen(), "ghelp:freespeak", 0)
 
     def on_about(self, w):
         """

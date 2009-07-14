@@ -229,7 +229,7 @@ class Settings (gtk.Dialog):
         configuration.
         """
         if response == gtk.RESPONSE_HELP:
-            gtk.show_uri (None, "ghelp:freespeak?freespeak-prefs", gtk.gdk.CURRENT_TIME)
+            gtk.show_uri (self.window.get_screen(), "ghelp:freespeak?freespeak-prefs", 0)
             return
 
         self.write_config ()

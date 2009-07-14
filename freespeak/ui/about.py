@@ -75,7 +75,7 @@ class About (gtk.AboutDialog):
         """
         URL hook for about dialogs
         """
-        gtk.show_uri (None, data+url, gtk.gdk.CURRENT_TIME)
+        gtk.show_uri (self.window.get_screen(), data+url, 0)
 
     def on_response (self, *w):
         """
