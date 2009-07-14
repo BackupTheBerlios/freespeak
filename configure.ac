@@ -50,6 +50,9 @@ AC_SUBST(DATADIR)
 AS_AC_EXPAND(LIBDIR, $libdir)
 AC_SUBST(LIBDIR)
 
+AS_AC_EXPAND(LIBEXECDIR, $libexecdir)
+AC_SUBST(LIBEXECDIR)
+
 AS_AC_EXPAND(PYTHONDIR, $pythondir)
 AC_SUBST(PYTHONDIR)
 		
@@ -59,7 +62,6 @@ dnl ****************
 AM_CHECK_PYMOD(dbus)
 AM_CHECK_PYMOD(gconf)
 AM_CHECK_PYMOD(gettext)
-AM_CHECK_PYMOD(gnome)
 AM_CHECK_PYMOD(gobject)
 AM_CHECK_PYMOD(gtk)
 AM_CHECK_PYMOD(gtk.gdk)
@@ -83,6 +85,7 @@ freespeak/ui/Makefile
 data/Makefile
 data/art/Makefile
 data/freespeak.desktop.in
+data/Freespeak_Applet.server.in
 docs/Makefile
 help/Makefile
 po/Makefile.in

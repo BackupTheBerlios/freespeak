@@ -127,7 +127,7 @@ class ClipboardController (object):
 class Application (dbus.service.Object):
     """
     An object for managing a FreeSpeak application instance.
-    WARNING: You should create directly an application, please take a look at
+    WARNING: You should NOT create directly an application, please take a look at
     the get_instance() function to ensure the Application singleton.
     """
 
@@ -253,6 +253,7 @@ class Application (dbus.service.Object):
         self.globalkeybinding.start ()
         gtk.gdk.threads_enter ()
         gtk.main ()
+        gtk.gdk.threads_leave ()
 
         self.running = False
 

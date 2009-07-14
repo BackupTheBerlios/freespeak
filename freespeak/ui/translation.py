@@ -26,7 +26,6 @@ Classes for building translation pages
 import gtk
 import gtkmozembed
 import gtkspell
-import gnome
 
 import freespeak.utils as utils
 import freespeak.ui.utils as uiutils
@@ -547,7 +546,7 @@ class WebTranslation (BaseUITranslation):
         """
         Open the translated page in a browser
         """
-        gnome.url_show (uri)
+        gtk.show_uri (None, uri, gtk.gdk.CURRENT_TIME)
 
     def on_tiny_clear (self, button):
         """

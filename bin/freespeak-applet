@@ -1,0 +1,72 @@
+#!/usr/bin/env python
+# FreeSpeak - a GUI frontend to online translator engines
+# bin/freespeak
+#
+## Copyright (C) 2005, 2006, 2007, 2008, 2009  Luca Bruno <lethalman88@gmail.com>
+##
+## This file is part of FreeSpeak.
+##
+## FreeSpeak is free software; you can redistribute it and/or modify
+## it under the terms of the GNU General Public License as published by
+## the Free Software Foundation; either version 2 of the License, or
+## (at your option) any later version.
+##    
+## FreeSpeak is distributed in the hope that it will be useful,
+## but WITHOUT ANY WARRANTY; without even the implied warranty of
+## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+## GNU Library General Public License for more details.
+##
+## You should have received a copy of the GNU General Public License
+## along with this program; if not, write to the Free Software
+## Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
+
+"""
+Script to start the FreeSpeak applet
+(thanks deskbar)
+"""
+
+import gtk
+import gnomeapplet
+from optparse import OptionParser
+
+from freespeak import defs
+from freespeak.applet.main_widget import applet_factory, bonobo_factory
+
+# Return a standalone window that holds the applet
+def build_window():
+    window = gtk.Window ()
+    # translators: This is the window title.
+    window.set_title ("Freespeak Applet")
+    window.connect ("destroy", gtk.main_quit)
+    
+    applet = gnomeapplet.Applet()
+    applet.set_flags (applet.flags() | gnomeapplet.EXPAND_MINOR)
+    applet.get_orient = lambda: gnomeapplet.ORIENT_DOWN
+    applet_factory (applet, None)
+    applet.reparent (window)
+        
+    window.show_all()
+    return window
+
+# Parse commandline options
+usage = "freespeak-applet [OPTIONS]"
+parser = OptionParser(usage=usage)
+parser.add_option("-w", "--window", dest="window", action="store_true", help="Launch the applet in a standalone window for test purposes (default=no)")
+parser.add_option("-v", "--version", dest="version", action="store_true", help="Print version")
+parser.add_option("--oaf-activate-iid")
+parser.add_option("--oaf-ior-fd")
+(options, args) = parser.parse_args()
+
+if options.version:
+    print defs.VERSION
+    sys.exit ()
+
+if options.window:
+    import gnome
+    gnome.init (defs.PACKAGE, defs.VERSION)
+    build_window ()
+    gtk.gdk.threads_enter()
+    gtk.main()
+    gtk.gdk.threads_leave()
+else:
+    bonobo_factory ()

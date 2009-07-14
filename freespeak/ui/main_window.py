@@ -25,7 +25,6 @@ Classes for showing the main window of a FreeSpeak application
 
 import time
 import gtk
-import gnome
 
 from freespeak import defs
 from freespeak.ui.manager import Manager
@@ -240,7 +239,7 @@ class MainWindow (gtk.Window):
         """
         Help contents
         """
-        gnome.url_show ("ghelp:freespeak")
+        gtk.show_uri (None, "ghelp:freespeak", 0)
 
     def on_about(self, w):
         """

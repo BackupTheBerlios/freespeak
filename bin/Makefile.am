@@ -3,8 +3,13 @@ freespeak:
 freespeakbindir = $(bindir)
 freespeakbin_SCRIPTS = freespeak
 
+appletbindir = $(libexecdir)
+appletbin_SCRIPTS = freespeak-applet
+
 BUILT_SOURCES =		\
-	freespeak
+	freespeak	\
+	freespeak-applet
 
 EXTRA_DIST = \
-	freespeak
+	freespeak	\
+	freespeak-applet

@@ -24,7 +24,6 @@ About FreeSpeak
 """
 
 import gtk
-import gnome
 from freespeak import defs
 
 class About (gtk.AboutDialog):
@@ -76,7 +75,7 @@ class About (gtk.AboutDialog):
         """
         URL hook for about dialogs
         """
-        gnome.url_show (data+url)
+        gtk.show_uri (None, data+url, gtk.gdk.CURRENT_TIME)
 
     def on_response (self, *w):
         """

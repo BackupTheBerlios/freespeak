@@ -1,25 +1,24 @@
 SUBDIRS = art
 
-# *****************************************************************************
 # Desktop files
-# *****************************************************************************
 desktopdir = $(datadir)/applications
 desktop_in_files = freespeak.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
-# *****************************************************************************
+# Bonobo files
+serverdir = $(libdir)/bonobo/servers
+server_in_files = Freespeak_Applet.server.in
+server_DATA = $(server_in_files:.server.in=.server)
+@INTLTOOL_SERVER_RULE@
+
 # GConf Schemas
-# *****************************************************************************
 schemadir = $(GCONF_SCHEMA_FILE_DIR)
 schema_in_files = freespeak.schemas.in
 schema_DATA = $(schema_in_files:.schemas.in=.schemas)
 @INTLTOOL_SCHEMAS_RULE@
 
-# *****************************************************************************
 # Build rules
-# *****************************************************************************
-
 if GCONF_SCHEMAS_INSTALL
 install-data-local: install-schemas
 install-schemas:
@@ -31,8 +30,10 @@ endif
 
 DISTCLEANFILES =	\
 	$(schema_DATA) \
+	$(server_DATA) \
 	$(desktop_DATA)
 
 EXTRA_DIST =	\
 	$(desktop_in_files) \
+	$(server_in_files) \
 	$(schema_in_files)

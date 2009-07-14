@@ -24,7 +24,6 @@ Handle configurations the GUI way
 """
 
 import gtk
-import gnome
 
 from freespeak import utils
 import freespeak.ui.utils as uiutils
@@ -84,7 +83,6 @@ class Settings (gtk.Dialog):
         vbox.pack_start (self.w_clipboard_set, False)
         
         frame.add (vbox)
-        frame.show ()
         self.vbox.pack_start (frame)
 
     def setup_translator (self):
@@ -112,7 +110,6 @@ class Settings (gtk.Dialog):
         vbox.pack_start (hbox)
         
         frame.add (vbox)
-        frame.show ()
         self.vbox.pack_start (frame)
 
     def setup_keybindings (self):
@@ -154,7 +151,6 @@ class Settings (gtk.Dialog):
         vbox.pack_start (hbox)
         
         frame.add (vbox)
-        frame.show ()
         self.vbox.pack_start (frame)
 
     # Events
@@ -210,8 +206,6 @@ class Settings (gtk.Dialog):
         self.application.config.set ('set_clipboard',
                                      self.w_clipboard_set.get_active ())
 
-        
-
         # Translator
         translator = self.w_preferred_translator.get_active_translator ()
         if translator:
@@ -235,7 +229,7 @@ class Settings (gtk.Dialog):
         configuration.
         """
         if response == gtk.RESPONSE_HELP:
-            gnome.url_show ("ghelp:freespeak?freespeak-prefs")
+            gtk.show_uri (None, "ghelp:freespeak?freespeak-prefs", gtk.gdk.CURRENT_TIME)
             return
 
         self.write_config ()

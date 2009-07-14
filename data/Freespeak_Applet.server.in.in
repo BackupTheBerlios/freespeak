@@ -1,0 +1,30 @@
+<oaf_info>
+  <oaf_server iid="OAFIID:Freespeak_Applet_Factory" type="exe" location="@LIBEXECDIR@/freespeak-applet">
+    <oaf_attribute name="repo_ids" type="stringv">
+      <item value="IDL:Bonobo/GenericFactory:1.0"/>
+      <item value="IDL:Bonobo/Unknown:1.0"/>
+    </oaf_attribute>
+    <oaf_attribute name="name" type="string" _value="Freespeak"/>
+    <oaf_attribute name="description" type="string" _value="FreeSpeak translation bar"/>
+    <oaf_attribute name="bonobo:environment" type="stringv">
+      <item value="DBUS_SESSION_BUS_ADDRESS"/>
+      <item value="GNOME_KEYRING_SOCKET"/>
+      <item value="GPG_AGENT_INFO"/>
+      <item value="SESSION_MANAGER"/>
+      <item value="SSH_AGENT_PID"/>
+      <item value="SSH_AUTH_SOCK"/>
+    </oaf_attribute>
+  </oaf_server>
+
+  <oaf_server iid="OAFIID:Freespeak_Applet" type="factory" location="OAFIID:Freespeak_Applet_Factory">
+    <oaf_attribute name="repo_ids" type="stringv">
+      <item value="IDL:GNOME/Vertigo/PanelAppletShell:1.0"/>
+      <item value="IDL:Bonobo/Control:1.0"/>
+      <item value="IDL:Bonobo/Unknown:1.0"/>
+    </oaf_attribute>
+    <oaf_attribute name="name" type="string" _value="Freespeak"/>
+    <oaf_attribute name="description" type="string" _value="Freespeak translation bar"/>
+    <oaf_attribute name="panel:category" type="string" value="Education;Translation"/>
+    <oaf_attribute name="panel:icon" type="string" value="freespeak.png"/>
+  </oaf_server>
+</oaf_info>

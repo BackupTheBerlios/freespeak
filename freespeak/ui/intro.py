@@ -24,7 +24,6 @@ Introduction widgets
 """
 
 import gtk
-import gnome
 
 from freespeak.ui.translation import TextTranslation, WebTranslation
 from freespeak.ui.suggestion import TranslationSuggestions
@@ -189,4 +188,4 @@ class Intro (gtk.Alignment):
         """
         Open the help at the 'getting-started' topic
         """
-        gnome.url_show ("ghelp:freespeak?freespeak-getting-started")
+        gtk.show_uri (self.window.get_screen(), "ghelp:freespeak?freespeak-getting-started", 0)

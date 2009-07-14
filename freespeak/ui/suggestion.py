@@ -24,7 +24,6 @@ GUI frontend to the translation suggestions
 """
 
 import gtk
-import gnome
 
 from freespeak.translation import TranslationSuggestionsRequest
 from freespeak.ui.translation import BaseUITranslation
@@ -147,7 +146,7 @@ class SuggestionsTreeView (gtk.TreeView):
         titer = self.model.get_iter (self.path)
         if titer:
             url = self.model.get_value (titer, self.COL_URL)
-            gnome.url_show (url)
+            gtk.show_uri (None, url, gtk.gdk.CURRENT_TIME)
 
 class TranslationSuggestions (BaseUITranslation):
     """
