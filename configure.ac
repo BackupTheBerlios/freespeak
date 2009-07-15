@@ -82,6 +82,7 @@ freespeak/Makefile
 freespeak/defs.py
 freespeak/translators/Makefile
 freespeak/ui/Makefile
+freespeak/applet/Makefile
 data/Makefile
 data/art/Makefile
 data/freespeak.desktop.in

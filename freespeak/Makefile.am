@@ -1,4 +1,4 @@
-SUBDIRS = translators ui
+SUBDIRS = translators ui applet
 
 freespeakdir = $(pythondir)/freespeak
 freespeak_PYTHON =		\
