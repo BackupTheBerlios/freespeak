@@ -154,6 +154,7 @@ class Application (dbus.service.Object):
         self.setup_globalkeybinding ()
 
         self.running = False
+        self.gtkmain = False
 
     def setup_exception_dialog (self):
         """
@@ -229,7 +230,7 @@ class Application (dbus.service.Object):
         return self.running
 
     @dbus.service.method ("de.berlios.FreeSpeak",
-                          in_signature='a{sv}asi', out_signature='')
+                          in_signature='a{sv}asi', out_signature='b')
     def start (self, options=None, args=None, timestamp=None):
         """
         Start the application in blocking mode.
@@ -240,22 +241,18 @@ class Application (dbus.service.Object):
             if not timestamp:
                 timestamp = int (time.time ())
             self.main_window.present_with_time (timestamp)
-            return
+            return False
 
         gtk.gdk.threads_init()
 
         self.main_window = MainWindow (self)
         self.main_window.show ()
 
-        self.running = True
-
         self.globalkeybinding.grab ()
         self.globalkeybinding.start ()
-        gtk.gdk.threads_enter ()
-        gtk.main ()
-        gtk.gdk.threads_leave ()
 
-        self.running = False
+        self.running = True
+        return True
 
     @dbus.service.method ("de.berlios.FreeSpeak",
                           in_signature='', out_signature='')
@@ -265,7 +262,23 @@ class Application (dbus.service.Object):
         """
         if self.running:
             self.globalkeybinding.stop ()
-            gtk.main_quit ()
+            self.main_window.destroy ()
+            self.running = False
+            self.stopped ()
+
+    @dbus.service.signal ("de.berlios.FreeSpeak",
+                          signature="")
+    def stopped (self):
+        """
+        Signal the application has been stopped
+        """
+        pass
+
+global bus
+
+def get_proxy ():
+    bus_object = bus.get_object ("de.berlios.FreeSpeak", "/")
+    return dbus.Interface (bus_object, "de.berlios.FreeSpeak")
 
 def get_instance ():
     """
@@ -273,14 +286,13 @@ def get_instance ():
     de.berlios.FreeSpeak at path / with interface de.berlios.FreeSpeak
     """
     dbus.mainloop.glib.DBusGMainLoop (set_as_default=True)
+    global bus
     bus = dbus.SessionBus ()
     request = bus.request_name ("de.berlios.FreeSpeak",
                                 dbus.bus.NAME_FLAG_DO_NOT_QUEUE)
     if request != dbus.bus.REQUEST_NAME_REPLY_EXISTS:
-        application = Application (bus, '/', "de.berlios.FreeSpeak")
-    else:
-        bus_object = bus.get_object ("de.berlios.FreeSpeak", "/")
-        application = dbus.Interface (bus_object, "de.berlios.FreeSpeak")
-    return application
+        return Application (bus, '/', "de.berlios.FreeSpeak")
 
-__all__ = ['get_instance']
+    return get_proxy ()
+
+__all__ = ['get_proxy', 'get_instance']

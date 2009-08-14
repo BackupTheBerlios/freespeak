@@ -3,7 +3,17 @@ import gtk
 gtk.gdk.threads_init()
 
 from freespeak import defs
+from freespeak import application
 import gnomeapplet
+
+class AppHandler (object):
+    def __init__ (self):
+        self.appinstance = application.get_instance ()
+
+    def start (self):
+        self.owned = self.appinstance.start ()
+
+apphandler = AppHandler ()        
 
 class MainWidget (gtk.EventBox):
     def __init__ (self, applet, iid):
@@ -14,7 +24,9 @@ class MainWidget (gtk.EventBox):
         self.set_visible_window (False)
         self.applet.set_background_widget (self.applet)
         self.applet.connect ('change-size', self.on_change_size)
-        
+
+        apphandler.start ()
+
         self.imagefile = gtk.icon_theme_get_default().lookup_icon("freespeak", 64, 0).get_filename ()
         self.image = gtk.Image ()
         self.image.show ()

@@ -26,7 +26,7 @@ Script to start a FreeSpeak application
 
 import time
 from optparse import OptionParser
-import gtk.gdk
+import gtk
 from freespeak import defs
 
 def main ():
@@ -52,9 +52,15 @@ COPYING.""" % defs.VERSION
     from freespeak import application
     application.Application.setup_l10n ()
     appinstance = application.get_instance ()
-    
-    appinstance.start (options.__dict__, args, trigger_timestamp)
-    if appinstance.is_running ():
+    owned = appinstance.start (options.__dict__, args, trigger_timestamp)
+
+    if not owned:
         gtk.gdk.notify_startup_complete ()
+    else:
+        proxy = application.get_proxy ()
+        proxy.connect_to_signal ('stopped', gtk.main_quit)
+        gtk.gdk.threads_enter ()
+        gtk.main ()
+        gtk.gdk.threads_leave ()
 
 main ()
