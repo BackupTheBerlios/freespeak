@@ -160,7 +160,7 @@ class Application (dbus.service.Object):
         """
         Setup a Python-wide exception hook
         """
-        # TODO: must take care if another excepthook had been installed
+        # FIXME: must take care if another excepthook had been installed
         sys.excepthook = exception_dialog.exception_hook
 
     @staticmethod
@@ -168,7 +168,7 @@ class Application (dbus.service.Object):
         """
         Install the _ gettext function
         """
-        # TODO: must take care if it has been already called then we're
+        # FIXME: must take care if it has been already called then we're
         #       going to override the _
         gettext.install (defs.GETTEXT_PACKAGE, unicode=True)
 
@@ -192,7 +192,7 @@ class Application (dbus.service.Object):
         """
         self.icon_theme = gtk.icon_theme_get_default ()
         self.icon_theme.append_search_path (self.icons_path)
-        # TODO: must take care if the application was created from another
+        # FIXME: must take care if the application was created from another
         #       application.
         window_icon = self.icon_theme.load_icon (defs.PACKAGE, 64, 0)
         gtk.window_set_default_icon (window_icon)
@@ -230,8 +230,8 @@ class Application (dbus.service.Object):
         return self.running
 
     @dbus.service.method ("de.berlios.FreeSpeak",
-                          in_signature='a{sv}asi', out_signature='b')
-    def start (self, options=None, args=None, timestamp=None):
+                          in_signature='a{sv}asib', out_signature='b')
+    def start (self, options=None, args=None, timestamp=None, show_main_window=True):
         """
         Start the application in blocking mode.
         If the application is already running, the main window will be presented
@@ -246,7 +246,8 @@ class Application (dbus.service.Object):
         gtk.gdk.threads_init()
 
         self.main_window = MainWindow (self)
-        self.main_window.show ()
+        if show_main_window:
+            self.main_window.show ()
 
         self.globalkeybinding.grab ()
         self.globalkeybinding.start ()
@@ -265,6 +266,11 @@ class Application (dbus.service.Object):
             self.main_window.destroy ()
             self.running = False
             self.stopped ()
+
+    @dbus.service.method ("de.berlios.FreeSpeak",
+                          in_signature='i', out_signature='b')
+    def open_translation (self, type):
+        return self.main_window.open_translation (type)
 
     @dbus.service.signal ("de.berlios.FreeSpeak",
                           signature="")

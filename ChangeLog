@@ -1,3 +1,11 @@
+2009-08-18  Luca Bruno  <lethalman88@gmail.com>
+
+	* freespeak/ui/main_window.py (MainWindow.open_translation): added, abstracts the translation creation for the dbus interface
+
+	* freespeak/application.py (Application.start): add show_main_window option.
+
+	* freespeak/applet/main_widget.py (AppHandler.start): don't show main window when starting the applet
+
 2009-07-14  Luca Bruno  <lethalman88@gmail.com>
 
 	* freespeak/applet/main_widget.py: added

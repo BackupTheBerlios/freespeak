@@ -39,6 +39,10 @@ class MainWindow (gtk.Window):
     """
     The GTK+ main window
     """
+    TEXT_TRANSLATION = 0
+    WEB_TRANSLATION = 1
+    TRANSLATION_SUGGESTIONS = 2
+
     ui_string = """<ui>
         <menubar>
             <menu action="Translation">
@@ -193,7 +197,23 @@ class MainWindow (gtk.Window):
         """
         # Should this really stop the application?
         self.application.stop ()
-            
+
+    def open_translation (self, type):
+        """
+        Open a new tab in the notebook and start a new translation
+        """
+        if type == self.TEXT_TRANSLATION:
+            TextTranslation (self.application, self.manager)
+        elif type == self.WEB_TRANSLATION:
+            WebTranslation (self.application, self.manager)
+        elif type == self.TRANSLATION_SUGGESTIONS:
+            TranslationSuggestions (self.application, self.manager)
+        else:
+            return False
+
+        self.present ()
+        return True
+
     # Events
         
     def on_keybinding_activate (self, keybinding):
@@ -216,12 +236,12 @@ class MainWindow (gtk.Window):
         """
         ttype = w.get_name()
         if ttype == 'Text':
-            TextTranslation (self.application, self.manager)
+            type = self.TEXT_TRANSLATION
         elif ttype == 'Web':
-            WebTranslation (self.application, self.manager)
+            type = self.WEB_TRANSLATION
         elif ttype == 'Suggestions':
-            TranslationSuggestions (self.application, self.manager)
-        self.present ()
+            type = self.TRANSLATION_SUGGESTIONS
+        self.open_translation (type)
                 
     def on_settings(self, w):
         """

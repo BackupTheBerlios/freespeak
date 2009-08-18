@@ -11,21 +11,27 @@ class AppHandler (object):
         self.appinstance = application.get_instance ()
 
     def start (self):
-        self.owned = self.appinstance.start ()
-
-apphandler = AppHandler ()        
+        self.owned = self.appinstance.start (show_main_window=False)
 
 class MainWidget (gtk.EventBox):
+    """
+    The main applet widget displaying the icon in the panel and listening for
+    mouse events. 
+    It will display translations menu if left-clicked, while preferences and
+    other information when right-clicked.
+    """
+
     def __init__ (self, applet, iid):
         gtk.EventBox.__init__ (self)
         self.applet = applet
         self.iid = iid
 
+        self.apphandler = AppHandler ()
+        self.apphandler.start ()
+
         self.set_visible_window (False)
         self.applet.set_background_widget (self.applet)
         self.applet.connect ('change-size', self.on_change_size)
-
-        apphandler.start ()
 
         self.imagefile = gtk.icon_theme_get_default().lookup_icon("freespeak", 64, 0).get_filename ()
         self.image = gtk.Image ()

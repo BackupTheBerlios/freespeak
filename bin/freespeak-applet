@@ -35,7 +35,6 @@ from freespeak.applet.main_widget import applet_factory, bonobo_factory
 # Return a standalone window that holds the applet
 def build_window():
     window = gtk.Window ()
-    # translators: This is the window title.
     window.set_title ("Freespeak Applet")
     window.connect ("destroy", gtk.main_quit)
     
