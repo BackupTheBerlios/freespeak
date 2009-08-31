@@ -9,7 +9,6 @@ freespeak_ui_PYTHON =		\
 	manager.py		\
 	settings.py		\
 	spinner.py		\
-	status_icon.py		\
 	style.py		\
 	suggestion.py		\
 	translation_box.py	\
