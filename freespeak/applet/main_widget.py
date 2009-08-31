@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 import gtk
-gtk.gdk.threads_init()
 
 from freespeak import defs
 from freespeak import application
@@ -13,6 +12,11 @@ class AppHandler (object):
 
     def start (self):
         self.owned = self.appinstance.start (show_main_window=False)
+        if self.owned:
+            application.get_proxy().connect_to_signal ('closed', self.on_closed)
+
+    def on_closed (self):
+        self.appinstance.main_window.hide ()
 
 class MainWidget (gtk.EventBox):
     """
