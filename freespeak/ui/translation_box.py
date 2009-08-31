@@ -83,8 +83,11 @@ class TranslatorCombo (gtk.ComboBox):
         self.set_active_iter (titer)
         for translator in sorted (self.application.translators_manager):
             if not capability or capability in translator.capabilities:
-                pixbuf = self.application.icon_theme.load_icon (translator.icon,
-                                                                16, 0)
+                try:
+                    pixbuf = self.application.icon_theme.load_icon (translator.icon,
+                                                                    16, 0)
+                except:
+                    pixbuf = None
                 titer = model.append ([translator.get_name (),
                                       translator, pixbuf])
 
