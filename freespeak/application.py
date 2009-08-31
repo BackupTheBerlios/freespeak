@@ -280,6 +280,14 @@ class Application (dbus.service.Object):
         """
         pass
 
+    @dbus.service.signal ("de.berlios.FreeSpeak",
+                          signature="")
+    def closed (self):
+        """
+        Signal the application has been closed but not stopped
+        """
+        pass
+
 global bus
 
 def get_proxy ():

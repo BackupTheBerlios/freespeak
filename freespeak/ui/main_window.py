@@ -261,7 +261,7 @@ class MainWindow (gtk.Window):
         """
         gtk.show_uri (self.window.get_screen(), "ghelp:freespeak", 0)
 
-    def on_about(self, w):
+    def on_about (self, w):
         """
         Open an AboutDialog for this software
         """
@@ -275,7 +275,7 @@ class MainWindow (gtk.Window):
 
     def on_delete_event (self, *w):
         """
-        Put myself in the system tray
+        Let applications decide
         """
-        self.status_icon.tray ()
+        self.application.closed ()
         return True

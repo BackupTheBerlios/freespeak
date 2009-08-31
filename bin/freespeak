@@ -59,6 +59,7 @@ COPYING.""" % defs.VERSION
     else:
         proxy = application.get_proxy ()
         proxy.connect_to_signal ('stopped', gtk.main_quit)
+        proxy.connect_to_signal ('closed', gtk.main_quit)
         gtk.gdk.threads_enter ()
         gtk.main ()
         gtk.gdk.threads_leave ()
