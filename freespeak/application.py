@@ -130,6 +130,9 @@ class Application (dbus.service.Object):
     WARNING: You should NOT create directly an application, please take a look at
     the get_instance() function to ensure the Application singleton.
     """
+    TEXT_TRANSLATION = 0
+    WEB_TRANSLATION = 1
+    TRANSLATION_SUGGESTIONS = 2
 
     def __init__ (self, bus, path, name):
         dbus.service.Object.__init__ (self, bus, path, name)
@@ -220,6 +223,27 @@ class Application (dbus.service.Object):
         Create GlobalKeyBinding for the 'key_binding' setting
         """
         self.globalkeybinding = GlobalKeyBinding (self, "key_binding")
+
+    def configure_actions (self, action_group):
+        action = action_group.get_action ("Text")
+        action.set_property ('icon-name', 'text-x-generic')
+        action.connect ('activate', self.on_action_activate)
+        action = action_group.get_action ("Web")
+        action.set_property ('icon-name', 'text-html')
+        action.connect ('activate', self.on_action_activate)
+        action = action_group.get_action ("Suggestions")
+        action.set_property ('icon-name', 'package-x-generic')
+        action.connect ('activate', self.on_action_activate)
+
+    def on_action_activate (self, action):
+        name= action.get_name()
+        if name == 'Text':
+            type = self.TEXT_TRANSLATION
+        elif name == 'Web':
+            type = self.WEB_TRANSLATION
+        elif name == 'Suggestions':
+            type = self.TRANSLATION_SUGGESTIONS
+        self.open_translation (type)
 
     @dbus.service.method ("de.berlios.FreeSpeak",
                           in_signature='', out_signature='b')

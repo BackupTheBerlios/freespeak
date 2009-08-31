@@ -32,16 +32,12 @@ from freespeak.ui.intro import Intro
 from freespeak.ui.translation import TextTranslation, WebTranslation
 from freespeak.ui.suggestion import TranslationSuggestions
 from freespeak.ui.settings import Settings
-from freespeak.ui.status_icon import StatusIcon
 from freespeak.ui.about import About
 
 class MainWindow (gtk.Window):
     """
     The GTK+ main window
     """
-    TEXT_TRANSLATION = 0
-    WEB_TRANSLATION = 1
-    TRANSLATION_SUGGESTIONS = 2
 
     ui_string = """<ui>
         <menubar>
@@ -82,16 +78,9 @@ class MainWindow (gtk.Window):
 
         self.setup_window ()
         self.setup_layout ()
-        self.setup_status_icon ()
 
         self.application.globalkeybinding.connect ('activate',
                                                    self.on_keybinding_activate)
-
-    def setup_status_icon (self):
-        """
-        Setup the icon in the systray
-        """
-        self.status_icon = StatusIcon (self)
 
     def setup_window (self):
         """
@@ -115,13 +104,13 @@ class MainWindow (gtk.Window):
             ('Help', None, _("_Help")),
 
             ('Text', None, _('_Text'), "<Control>t",
-             _('New translation'), self.on_new),
+             _('New translation'), None),
 
             ('Web', None, _('We_b'), "<Control>b",
-             _('New web page translation'), self.on_new),
+             _('New web page translation'), None),
             
             ('Suggestions', None, _('_Suggestions'),
-             "<Control>s", _('New translation suggestions'), self.on_new),
+             "<Control>s", _('New translation suggestions'), None),
 
             ('Preferences', gtk.STOCK_PREFERENCES, None,
              "<Control>p", _('FreeSpeak preferences'), self.on_settings),
@@ -139,6 +128,7 @@ class MainWindow (gtk.Window):
              _('Quit FreeSpeak'), self.on_quit),
             )
         self.action_group.add_actions (actions)
+        self.application.configure_actions (self.action_group)
         self.ui = gtk.UIManager ()
         self.ui.insert_action_group (self.action_group, 0)
         self.ui.add_ui_from_string (self.ui_string)
@@ -202,11 +192,11 @@ class MainWindow (gtk.Window):
         """
         Open a new tab in the notebook and start a new translation
         """
-        if type == self.TEXT_TRANSLATION:
+        if type == self.application.TEXT_TRANSLATION:
             TextTranslation (self.application, self.manager)
-        elif type == self.WEB_TRANSLATION:
+        elif type == self.application.WEB_TRANSLATION:
             WebTranslation (self.application, self.manager)
-        elif type == self.TRANSLATION_SUGGESTIONS:
+        elif type == self.application.TRANSLATION_SUGGESTIONS:
             TranslationSuggestions (self.application, self.manager)
         else:
             return False
@@ -230,19 +220,6 @@ class MainWindow (gtk.Window):
         timestamp = int (time.time ())
         self.present_with_time (timestamp)
 
-    def on_new (self, w):
-        """
-        Open a new tab in the notebook and start a new translation
-        """
-        ttype = w.get_name()
-        if ttype == 'Text':
-            type = self.TEXT_TRANSLATION
-        elif ttype == 'Web':
-            type = self.WEB_TRANSLATION
-        elif ttype == 'Suggestions':
-            type = self.TRANSLATION_SUGGESTIONS
-        self.open_translation (type)
-                
     def on_settings(self, w):
         """
         FreeSpeak preferences
