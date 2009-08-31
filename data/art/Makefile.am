@@ -1,5 +1,6 @@
 artdir = $(pkgdatadir)/art
 art_DATA = \
+	babylon.png \
 	google.png \
 	yahoo.png \
 	freetranslation.png \
