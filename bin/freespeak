@@ -28,6 +28,11 @@ import time
 from optparse import OptionParser
 import gtk
 from freespeak import defs
+global appinstance
+
+def quit ():
+    appinstance.stop ()
+    gtk.main_quit ()
 
 def main ():
     """
@@ -35,6 +40,7 @@ def main ():
     Take care of command line arguments, the Application singleton
     and the GDK startup notification.
     """
+    global appinstance
 
     trigger_timestamp = int (time.time ())
     version = """FreeSpeak version %s
@@ -58,8 +64,8 @@ COPYING.""" % defs.VERSION
         gtk.gdk.notify_startup_complete ()
     else:
         proxy = application.get_proxy ()
-        proxy.connect_to_signal ('stopped', gtk.main_quit)
-        proxy.connect_to_signal ('closed', gtk.main_quit)
+        proxy.connect_to_signal ('stopped', quit)
+        proxy.connect_to_signal ('closed', quit)
         gtk.gdk.threads_enter ()
         gtk.main ()
         gtk.gdk.threads_leave ()

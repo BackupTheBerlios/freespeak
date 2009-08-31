@@ -47,7 +47,6 @@ class MainWindow (gtk.Window):
                 <menuitem action="Suggestions" />
                 <separator />
                 <menuitem action="Close" />
-                <menuitem action="Quit" />
             </menu>
             <menu action="Edit">
                 <menuitem action="Preferences" />
@@ -69,7 +68,6 @@ class MainWindow (gtk.Window):
         <accelerator action="Suggestions" />
         <accelerator action="Preferences" />
         <accelerator action="Contents" />
-        <accelerator action="Quit" />
         </ui>"""
                 
     def __init__(self, application):
@@ -123,9 +121,6 @@ class MainWindow (gtk.Window):
 
             ('About', gtk.STOCK_ABOUT, None, None,
              _('About FreeSpeak'), self.on_about),
-
-            ('Quit', gtk.STOCK_QUIT, None, "<Control>q",
-             _('Quit FreeSpeak'), self.on_quit),
             )
         self.action_group.add_actions (actions)
         self.application.configure_actions (self.action_group)
@@ -180,13 +175,6 @@ class MainWindow (gtk.Window):
         self.intro = Intro (self.application, self.manager)
         self.intro.show ()
         self.layout.pack_start (self.intro)
-
-    def quit (self):
-        """
-        Quit the main window
-        """
-        # Should this really stop the application?
-        self.application.stop ()
 
     def open_translation (self, type):
         """
@@ -244,12 +232,6 @@ class MainWindow (gtk.Window):
         """
         About (self.application)
                           
-    def on_quit (self, *w):
-        """
-        Quit the application
-        """
-        self.quit ()
-
     def on_delete_event (self, *w):
         """
         Let applications decide
